@@ -1,9 +1,7 @@
-## COMPILER
+### 1. COMPILER
 > https://medium.com/@bdov_/what-happens-when-you-type-gcc-main-c-a4454564e96d#:~:text=The%20C%20programming%20language%20is,compiler%20for%20the%20C%20language.
 
-
-
-![image](https://github.com/minchangggg/AdvancedC/assets/125820144/bce15492-bcab-4c06-aae9-b77140e00075)
+<img width="600" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/bce15492-bcab-4c06-aae9-b77140e00075">
 
 **1, Preprocessor**
 
@@ -34,3 +32,12 @@ Assembles the code into object code
 **4, Linker**
 
 <img width="200" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/7d3880db-b0b7-46e9-8c31-21035966c67e">
+
+### 2. MACRO
+
+> https://www.programiz.com/c-programming/c-preprocessor-macros
+
+There are devided into 3 main groups: 
++ Including Header Files: #include
++ Macros using #define (Function like Macros...)
++ Conditional Compilation: #ifdef, #if, #defined, #else and #elif
