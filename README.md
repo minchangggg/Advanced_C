@@ -91,6 +91,7 @@ b, How to define a macro with #define
             }
 
 c, How to undefine a macro with #undef
+
 => We can remove, or redefine, a macro that we set up previously with the #undef directive.
 Macro definition is typically done at the top of the document, but macro undefining and redefining is done inside the rest of the document.
 
