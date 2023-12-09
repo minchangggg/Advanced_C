@@ -62,10 +62,44 @@ There are devided into 3 main groups:
 + Conditional Compilation: #ifdef, #if, #defined, #else and #elif
 
 a, How to include files with the #include directive
-      #include <stdio.h>
-      #include "myfile.h"
+            
+            #include <stdio.h>
+            #include "myfile.h"
+      
+            int main() {
+            	printf(message);
+            	return 0;
+            }
 
-      int main() {
-      	printf(message);
-      	return 0;
-      }
+b, How to define a macro with #define
+
+            #include <stdio.h>
+            
+            #define MESSAGE "Hello World" // macro definition
+            #define TRUE 1 // macro definition
+            #define FALSE 0 // macro definition
+            #define SUM (3 + 5) // macro definition
+            
+            int main() {
+                printf("String: %s\n", MESSAGE);
+                printf("Custom boolean TRUE: %d\n", TRUE);
+                printf("Custom boolean FALSE: %d\n", FALSE);
+                printf("Arithmetic: 3+5=%d\n", SUM);
+                return 0;
+            }
+
+c, How to undefine a macro with #undef
+=> We can remove, or redefine, a macro that we set up previously with the #undef directive.
+Macro definition is typically done at the top of the document, but macro undefining and redefining is done inside the rest of the document.
+
+            #include <stdio.h>
+            
+            #define MESSAGE "Hello World"
+            
+            int main() {
+                printf("String: %s\n", MESSAGE);
+                #undef MESSAGE // remove macro
+                #define MESSAGE "Hello there" // redefine macro
+                printf("String: %s\n", MESSAGE);
+                return 0;
+            }
