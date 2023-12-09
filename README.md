@@ -1,5 +1,5 @@
 ### A. COMPILER
-> https://medium.com/@bdov_/what-happens-when-you-type-gcc-main-c-a4454564e96d#:~:text=The%20C%20programming%20language%20is,compiler%20for%20the%20C%20language.
+> https://www.geeksforgeeks.org/compiling-a-c-program-behind-the-scenes/
 
 **1, How do we compile and run a C program?**
 
@@ -33,20 +33,22 @@ C is a mid-level language, it needs a compiler to convert it into an executable 
 
 The compiler takes the preprocessed file and uses it to generate corresponding assembly code. 
 
-<img width="200" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/a2a9d35a-b6ab-47d2-b395-87bcc1a5ad32">
+<img width="200" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/cba3c714-7fb1-4289-bf20-b31dedd5950d">
 
-<img width="600" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/dfcbbe33-67d5-4c02-84ef-d328fea74c32">
+<img width="700" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/572bbb3e-4c88-46aa-87b0-b83096c05db3">
 
 => This file is in assembly-level instructions.
 
 **c, Assembler**
 
 Assembles the code into object code 
+
 < Where assembly code represents a correspondence between program and machine code, object code represents pure machine code (ie. binary) >
 
-<img width="200" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/cba3c714-7fb1-4289-bf20-b31dedd5950d">
+<img width="200" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/d5cc0269-704f-47e2-8836-8be945268cd6"> => This file contains machine-level instructions.
 
-=> This file contains machine-level instructions.
+<img width="700" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/d3b1bed3-c128-4302-98ca-402b2cf02bbf">
+
 
 **d, Linker**
 
