@@ -54,6 +54,9 @@ Assembles the code into object code
 
 <img width="200" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/7d3880db-b0b7-46e9-8c31-21035966c67e">
 
+
+<img width="250" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/973c3ae7-18ae-4786-939b-11fa524098ec">
+
 ### B. MACRO
 
 > https://www.programiz.com/c-programming/c-preprocessor-macros
