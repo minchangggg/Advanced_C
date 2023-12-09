@@ -1,3 +1,5 @@
+> https://docs.google.com/document/d/1nV9TDixts6o130T66SCbS2XHGR-Dtiy20Xedag4S62o/edit
+
 ## Đề Bài: Mở Rộng và Tùy Chỉnh Hệ Thống Xử Lý Lỗi trong Lập Trình C
 **Mục Đích Bài Tập**
 
@@ -112,3 +114,5 @@ Tạo File Nguồn (Source File): main.c
 
 Trong file main.c, hàm add được định nghĩa, và sau đó được gọi trong hàm main.
 Giải thích được tại sao phải sử dụng  #ifndef, #define, và #endif
+
+
