@@ -1,3 +1,4 @@
+# Lesson 1: COMPILER and MACRO
 ### A. COMPILER
 > https://www.geeksforgeeks.org/compiling-a-c-program-behind-the-scenes/
 
@@ -109,3 +110,66 @@ Macro definition is typically done at the top of the document, but macro undefin
                 printf("String: %s\n", MESSAGE);
                 return 0;
             }
+# Lesson 2: STDARG and ASSERT
+### A. Library - <stdarg.h>
+*The stdarg.h header defines a variable type va_list and three macros which can be used to get the arguments in a function when the number of arguments are not known i.e. variable number of arguments.*
+
+**1, Library Variables**
+	
+<img width="300" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/4cd3fc83-555d-4b23-b9d7-b6ac2b99a1e5">
+
+**2, Library Macros**
+
+<img width="350" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/d7d6df93-5ca0-4d23-866c-ddbd1fd3a475">
+
+
+**3, Example***
+
+            #include <stdio.h>
+            #include <stdarg.h>
+            
+            typedef enum {
+                TEMPERATURE_SENSOR,
+                PRESSURE_SENSOR
+            } SensorType;
+            
+            void processSensorData(SensorType type, ...) {
+                va_list args;
+                va_start(args, type);
+            
+                switch (type) {
+                    case TEMPERATURE_SENSOR: {
+                        int numArgs = va_arg(args, int);
+                        int sensorId = va_arg(args, int);
+                        float temperature = va_arg(args, double); // float được promote thành double
+                        printf("Temperature Sensor ID: %d, Reading: %.2f degrees\n", sensorId, temperature);
+                        if (numArgs > 2) {
+                            // Xử lý thêm tham số nếu có
+                            char* additionalInfo = va_arg(args, char*);
+                            printf("Additional Info: %s\n", additionalInfo);
+                        }
+                        break;
+                    }
+                    case PRESSURE_SENSOR: {
+                        int numArgs = va_arg(args, int);
+                        int sensorId = va_arg(args, int);
+                        int pressure = va_arg(args, int);
+                        printf("Pressure Sensor ID: %d, Reading: %d Pa\n", sensorId, pressure);
+                        if (numArgs > 2) {
+                            // Xử lý thêm tham số nếu có
+                            char* unit = va_arg(args, char*);
+                            printf("Unit: %s\n", unit);
+                        }
+                        break;
+                    }
+                }
+            
+                va_end(args);
+            }
+            
+            int main() {
+                processSensorData(TEMPERATURE_SENSOR, 3, 1, 36.5, "Room Temperature");
+                processSensorData(PRESSURE_SENSOR, 2, 2, 101325);
+                return 0;
+            }
+
