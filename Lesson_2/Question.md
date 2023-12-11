@@ -29,6 +29,7 @@ Bạn được yêu cầu viết một chương trình mô phỏng hệ thống 
 > Sử dụng switch case để xử lý các loại thiết bị và lệnh khác nhau.
 > Sử dụng stdarg.h để xử lý số lượng và loại tham số đầu vào không xác định.
 + Kiểu dữ liệu các bạn có thể sử dụng
+  
       typedef enum {
           LIGHT,
           AIR_CONDITIONER,
