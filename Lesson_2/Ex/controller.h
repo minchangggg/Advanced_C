@@ -32,10 +32,10 @@ void controlDevice(DeviceType device, ...) {
         case LIGHT:
             switch (command) {
                 case ON:
-                    printf("Light is turned ON\n");
+                    printf("Light is turned ON.\n");
                     break;
                 case OFF:
-                    printf("Light is turned OFF\n");
+                    printf("Light is turned OFF.\n");
                     break;
                 default:
                     printf("The input information for LIGHT is invalid.\n");
@@ -49,18 +49,17 @@ void controlDevice(DeviceType device, ...) {
                     switch (more_command) {
                         case SET_TEMPERATURE:
                             float temperature = va_arg(args, double);
-                            printf("Air Conditioner is turned ON and temperature is set to %.2f degrees\n", temperature);
+                            printf("Air Conditioner is turned ON and temperature is set to %.2f degrees.\n", temperature);
                             break;
                         case SET_MODE:
                             char* mode = va_arg(args, char*);
-                            printf("Air Conditioner is turned ON and set is set with %s mode\n", mode);
+                            printf("Air Conditioner is turned ON and set is set with %s mode.\n", mode);
                             break;
                         default:
                             break;
                     }
-                    break
                 case OFF:
-                    printf("Air Conditioner is turned OFF\n");
+                    printf("Air Conditioner is turned OFF.\n");
                     break;
                 default:
                     printf("The input information for AIR_CONDITIONER is invalid.\n");
@@ -70,10 +69,10 @@ void controlDevice(DeviceType device, ...) {
         case FINGERPRINT_LOCK:
             switch (command) {
                 case LOCK:
-                    printf("FINGERPRINT_LOCK is turned ON\n");
+                    printf("FINGERPRINT_LOCK is turned ON.\n");
                     break;
                 case UNLOCK:
-                    printf("FINGERPRINT_LOCK is turned OFF\n");
+                    printf("FINGERPRINT_LOCK is turned OFF.\n");
                     break;
                 default:
                     printf("The input information for FINGERPRINT_LOCK is invalid.\n");
@@ -84,19 +83,22 @@ void controlDevice(DeviceType device, ...) {
             switch (command) {
                 case ON:
                     CommandType more_command = va_arg(args, CommandType);
-                    switch (more_command)
+                    switch (more_command) {
                         case INCREASE_VOLUME:
                             int volume = va_arg(args, int);
-                            printf("MUSIC_PLAYER is turned ON and volume is increased by %d", volume);
+                            printf("MUSIC_PLAYER is turned ON and volume is increased by %d.\n", volume);
                             break;
                         case DECREASE_VOLUME: 
                             int volume = va_arg(args, int);
-                            printf("MUSIC_PLAYER is turned ON and volume is decreased by %d", volume);
+                            printf("MUSIC_PLAYER is turned ON and volume is decreased by %d.\n", volume);
                             break;
                         case CHANGE_TRACK:
                             char* new_track = va_arg(args, char*);
-                            printf("MUSIC_PLAYER is turned ON and track is turn to %s", new_track);                        
+                            printf("MUSIC_PLAYER is turned ON and track is turn to %s.\n", new_track);                        
                             break;
+                        default:
+                            break;
+                    }
                 case OFF:
                     printf("MUSIC_PLAYER is turned OFF\n");
                     break;
