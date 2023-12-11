@@ -41,6 +41,7 @@ void controlDevice(DeviceType device, ...) {
                     printf("The input information for LIGHT is invalid.\n");
                     break;
             }
+            break;
 
         case AIR_CONDITIONER:
             switch (command) {
@@ -58,6 +59,7 @@ void controlDevice(DeviceType device, ...) {
                         default:
                             break;
                     }
+                    break;
                 case OFF:
                     printf("Air Conditioner is turned OFF.\n");
                     break;
@@ -99,6 +101,7 @@ void controlDevice(DeviceType device, ...) {
                         default:
                             break;
                     }
+                    break;
                 case OFF:
                     printf("MUSIC_PLAYER is turned OFF\n");
                     break;
