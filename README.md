@@ -123,8 +123,32 @@ Macro definition is typically done at the top of the document, but macro undefin
 <img width="350" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/d7d6df93-5ca0-4d23-866c-ddbd1fd3a475">
 
 
-**3, Example***
+**3, Example**
 
+Example 1:
+	#include <stdio.h>
+	#include <stdarg.h>
+	
+	int sum(int count, ...) {
+	    va_list args; // args là 1 con trỏ, dùng để các lưu địa chỉ các tham số truyền vào
+	    va_start(args, count);  // va_start () tạo vùng nhớ, địa chỉ đầu tiên của nó là địa chỉ biến count đc lưu trong args
+	
+	    int result = 0;
+	    for (int i = 0; i < count; i++) {
+		result += va_arg(args, int); // va_arg () dịch chuyển đến địa chỉ tiếp theo, và lấy giá trị tại địa chỉ đó
+	    }
+	
+	    va_end(args); // va_ end () giải phóng vùng nhớ 
+	
+	    return result;
+	}
+	
+	int main() {
+	    printf("Sum: %d\n", sum(4, 1, 2, 3, 4));
+	    return 0;
+	}
+
+Example 2:
             #include <stdio.h>
             #include <stdarg.h>
             
