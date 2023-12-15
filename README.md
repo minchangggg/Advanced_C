@@ -111,7 +111,7 @@ Macro definition is typically done at the top of the document, but macro undefin
                 return 0;
             }
 # Lesson 2: STDARG and ASSERT
-### A. Library - <stdarg.h>
+### A. CC Library - <stdarg.h>
 *The stdarg.h header defines a variable type va_list and three macros which can be used to get the arguments in a function when the number of arguments are not known i.e. variable number of arguments.*
 
 **1, Library Variables**
@@ -196,4 +196,65 @@ Example 2:
                 processSensorData(PRESSURE_SENSOR, 2, 2, 101325);
                 return 0;
             }
+
+### B. C Library - <assert.h>
+
+> - Provides a macro called assert
+> 
+> - This macro can be used to verify assumptions made by the program. 
+> 
+> - If this assumption is false, nothing happens and the program continues to execute.
+> 
+> - If this assumption is false, The program stops to execute and print a diagnostic message.
+> 
+> - Using for debugging, use #define NDEBUG to turn off debug mode.
+
+Ex:
+
+		#include <stdio.h>
+		#include <assert.h>
+		
+		int main() {
+		    int x = 5;
+		    assert(x == 5);  // Chương trình sẽ tiếp tục thực thi nếu điều kiện x = 5 là đúng.
+		    printf("X is: %d", x);
+		    return 0;
+		}
+
+**Macro is used for debugging**
+
+		#define LOG(condition, cmd) assert(condition && #cmd);
+
+Ex1: 
+
+		#include <assert.h>
+		#define ASSERT_IN_RANGE(val, min, max) assert((val) >= (min) && (val) <= (max))
+		
+		void setLevel(int level) {
+		    ASSERT_IN_RANGE(level, 1, 10);
+		    // Thiết lập cấp độ
+		}
+
+Ex2:  
+
+		#include <assert.h>
+		#include <stdint.h>
+		
+		#define ASSERT_SIZE(type, size) assert(sizeof(type) == (size))
+		
+		void checkTypeSizes() {
+		    ASSERT_SIZE(uint32_t, 4);
+		    ASSERT_SIZE(uint16_t, 2);
+		    // Kiểm tra các kích thước kiểu dữ liệu khác
+		}
+
+  
+
+		
+
+
+  
+
+
+
 
