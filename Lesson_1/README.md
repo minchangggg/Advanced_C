@@ -48,23 +48,19 @@ Code mẫu:
       //Bổ sung nội dung vào
       
       // Hành động 3: In thông điệp thông tin
-      void printInfo(const char *message) {
-      }
+      void printInfo(const char *message) { }
       
       // Hành động 4: In thông điệp gỡ lỗi
-      void printDebug(const char *message) {
-      }
+      void printDebug(const char *message) { }
       
       // Hành động 5: In thông điệp khẩn cấp
-      void printCritical(const char *message) {
-      }
+      void printCritical(const char *message) { }
 
       // Hành động 6: In thông điệp thành công
-      void printSuccess(const char *message) {
-      }
-      
+      void printSuccess(const char *message) { }
       
       // Macro xử lý lỗi
+      
       #define HANDLE_ERROR(condition, action, message) do { \
          //Bổ sung nội dung chương trình vào đây
       } while(0)
@@ -84,6 +80,7 @@ Kết quả:
 
 ## Đề bài: Tạo hai file: một file tiêu đề (header) và một file nguồn (source).
 File tiêu đề sẽ chứa khai báo của một hàm, và sử dụng các macro #ifndef, #define, và #endif để ngăn chặn việc bao gồm nó nhiều lần. File nguồn sẽ định nghĩa hàm đó và sử dụng hàm trong hàm main.
+
 Tạo File Tiêu Đề (Header File): math_utils.h
 
       // Kiểm tra xem macro MATH_UTILS_H đã được định nghĩa hay chưa
@@ -97,7 +94,9 @@ Tạo File Tiêu Đề (Header File): math_utils.h
 
 
 Trong đoạn code trên, #ifndef MATH_UTILS_H kiểm tra xem MATH_UTILS_H đã được định nghĩa trước đó hay chưa. Nếu chưa, #define MATH_UTILS_H sẽ được thực thi, ngăn chặn việc bao gồm file này nhiều lần.
+
 Tạo File Nguồn (Source File): main.c
+
       #include <stdio.h>
       #include "math_utils.h" // Bao gồm file tiêu đề
       
@@ -110,7 +109,6 @@ Tạo File Nguồn (Source File): main.c
           printf("Sum of 3 and 5 is %d\n", add(3, 5));
           return 0;
       }
-
 
 Trong file main.c, hàm add được định nghĩa, và sau đó được gọi trong hàm main.
 Giải thích được tại sao phải sử dụng  #ifndef, #define, và #endif
