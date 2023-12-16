@@ -110,6 +110,7 @@ Macro definition is typically done at the top of the document, but macro undefin
                 printf("String: %s\n", MESSAGE);
                 return 0;
             }
+__________________________________________________________________________________________________________________________________________________________________________
 # Lesson 2: STDARG and ASSERT
 ### A. CC Library - <stdarg.h>
 *The stdarg.h header defines a variable type va_list and three macros which can be used to get the arguments in a function when the number of arguments are not known i.e. variable number of arguments.*
@@ -126,6 +127,7 @@ Macro definition is typically done at the top of the document, but macro undefin
 **3, Example**
 
 Example 1:
+
 	#include <stdio.h>
 	#include <stdarg.h>
 	
@@ -149,6 +151,7 @@ Example 1:
 	}
 
 Example 2:
+
             #include <stdio.h>
             #include <stdarg.h>
             
@@ -247,6 +250,19 @@ Ex2:
 		    ASSERT_SIZE(uint16_t, 2);
 		    // Kiểm tra các kích thước kiểu dữ liệu khác
 		}
+
+__________________________________________________________________________________________________________________________________________________________________________
+# Lesson 3: POINTER
+
+__________________________________________________________________________________________________________________________________________________________________________
+# Lesson 4: EXTERN - STATIC - VOLATILE - REGISTER
+
+__________________________________________________________________________________________________________________________________________________________________________
+# Lesson 5: GOTO - setjmp.h
+
+__________________________________________________________________________________________________________________________________________________________________________
+
+
 
   
 
