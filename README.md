@@ -112,7 +112,7 @@ Macro definition is typically done at the top of the document, but macro undefin
             }
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 2: STDARG and ASSERT
-### A. CC Library - <stdarg.h>
+### A. C Library - <stdarg.h>
 *The stdarg.h header defines a variable type va_list and three macros which can be used to get the arguments in a function when the number of arguments are not known i.e. variable number of arguments.*
 
 **1, Library Variables**
@@ -214,15 +214,7 @@ Example 2:
 
 Ex:
 
-		#include <stdio.h>
-		#include <assert.h>
-		
-		int main() {
-		    int x = 5;
-		    assert(x == 5);  // Chương trình sẽ tiếp tục thực thi nếu điều kiện x = 5 là đúng.
-		    printf("X is: %d", x);
-		    return 0;
-		}
+<img width="800" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/ec805091-04c8-4347-9e39-b5b9be87acf6">
 
 **Macro is used for debugging**
 
@@ -250,16 +242,41 @@ Ex2:
 		    ASSERT_SIZE(uint16_t, 2);
 		    // Kiểm tra các kích thước kiểu dữ liệu khác
 		}
-
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 3: POINTER
+### A. Function Pointer
 
+### B. Void Pointer
+
+### C. Pointer to Constant
+
+### D. Constant Pointer
+
+### E. Pointer to Pointer
+
+### F. NULL Pointer
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 4: EXTERN - STATIC - VOLATILE - REGISTER
+### A. Extern
 
+### B. Static
+
+### C. Volatile
+
+### D. Register
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 5: GOTO - setjmp.h
+### A. Goto
+**Ex1**
 
+<img width="700" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/6fcf16fd-b6a3-4a34-b1ab-e45f070bf5ad">
+
+**Ex2**
+
+<img width="800" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/a4a25f0f-f5c9-4816-bba3-a9f5896e5817">
+
+
+### B. C Library - <setjmp.h>
 __________________________________________________________________________________________________________________________________________________________________________
 
 
