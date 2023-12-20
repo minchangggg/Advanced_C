@@ -2,11 +2,11 @@
 #include <setjmp.h>
 
 jmp_buf buf;
-int exception_code;
+int exception_code; 
 char *error_code;
 
 #define TRY if ((exception_code = setjmp(buf)) == 0)
-#define CATCH(x) if (exception_code == (x)) printf("%s\n", error_code);
+#define CATCH(x) else if (exception_code == (x)) {printf("%s\n", error_code);}
 #define THROW(x, ERROR_CODE) do {error_code = #ERROR_CODE; longjmp(buf, (x));} while(0) // oke
 
 double divide(int a, int b) {
@@ -16,12 +16,8 @@ double divide(int a, int b) {
 }
 
 int main() {
-    int a = 31; int b = -12;
-    double result = 0.0;
-
-    TRY {
-        result = divide(a, b);
-        printf("Result is %f\n", result);
-    } CATCH(exception_code); 
+    int a = 31; int b = 2;
+    TRY {printf("Result is %.2f\n", divide(a, b));} 
+    CATCH (exception_code); 
     return 0;
 }
