@@ -16,8 +16,7 @@ double divide(int a, int b) {
 }
 
 int main() {
-    int a = 31;
-    int b = -12;
+    int a = 31; int b = -12;
     double result = 0.0;
 
     TRY {
@@ -26,4 +25,3 @@ int main() {
     } CATCH(exception_code); 
     return 0;
 }
-
