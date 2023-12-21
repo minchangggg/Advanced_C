@@ -4,20 +4,42 @@
 jmp_buf buf;
 int exception_code; 
 char *error_code;
+enum ErrorCodes { NO_ERROR, FILE_ERROR, NETWORK_ERROR, CALCULATION_ERROR };
 
 #define TRY if ((exception_code = setjmp(buf)) == 0)
-#define CATCH(x) else if (exception_code == (x)) {printf("%s\n", error_code);}
-#define THROW(x, ERROR_CODE) do {error_code = #ERROR_CODE; longjmp(buf, (x));} while(0) // oke
+#define CATCH(x) else if (exception_code == x) 
+#define THROW(x, ERROR_CODE) do {error_code = #ERROR_CODE; longjmp(buf, x);} while(0) 
 
-double divide(int a, int b) {
-    if (b == 0) THROW (1, Error: Divide by 0!); 
-    if (a*b < 0) THROW (2, Error: Quotient is less than 0!);  
-    return (double) a/b;
+void readFile() {
+    printf("readFile...\n");
+    THROW(FILE_ERROR, WARNING: FILE_ERROR);
+}
+    
+void networkOperation() {
+    printf("networkOperation...\n");
+    THROW(NETWORK_ERROR, WARNING: NETWORK_ERROR);
+}
+    
+void calculateData() {
+    printf("calculateData...\n");
+    THROW(CALCULATION_ERROR, WARNING: CALCULATION_ERROR);
 }
 
 int main() {
-    int a = 31; int b = 2;
-    TRY {printf("Result is %.2f\n", divide(a, b));} 
-    CATCH (exception_code); 
-    return 0;
+    TRY {
+        readFile();
+        networkOperation();
+        calculateData();
+    } 
+    CATCH(FILE_ERROR) {
+        printf("%s\n", error_code);
+    } 
+    CATCH(NETWORK_ERROR) {
+        printf("%s\n", error_code);
+    }
+    CATCH(CALCULATION_ERROR) {
+        printf("%s\n", error_code);
+    }
 }
+
+    
