@@ -277,6 +277,9 @@ ________________________________________________________________________________
 
 **Ex3**
 
+<img width="600" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/80e7ef78-3e98-4e04-b7d8-012615790033">
+
+
 		#include <stdio.h>
 		
 		void delay() {
@@ -413,20 +416,139 @@ ________________________________________________________________________________
 		    return 0;
 		}
 
-
 ### B. C Library - <setjmp.h>
+ 
 __________________________________________________________________________________________________________________________________________________________________________
-# Lesson 5: BITMASK
+# Lesson 6: BITMASK
+
+<img width="400" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/d7d9f1a0-b842-4d91-b95f-5efdeed6f534">
+<img width="400" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/84a5abe2-3eae-4f1c-b7ef-74cfe5805bac">
+
+__________________________________________________________________________________________________________________________________________________________________________
+# Lesson 7: Struct - Union
+### A. Struct
+
+### B. Union
+_________________________________________________________________________________________________________________________________________________________________________
+# Lesson 8: Memory layout
+
+<img width="385" alt="image" src="https://github.com/minchangggg/Basic_C/assets/125820144/0adf350d-f3aa-4fb0-b846-c3e45045d90b">
+
+[<img src="https://github.com/minchangggg/Basic_C/assets/125820144/444853d4-ceb8-415a-b050-bd8f9b3bc0a9" alt="hehe" width="20" />] How C program structure the memory area?   https://www.scaler.com/topics/c/memory-layout-in-c/
+<img width="600" alt="image" src="https://github.com/minchangggg/Basic_C/assets/125820144/f1df255f-ed94-47f5-8850-9ea39d21bd94">
 
 
-  ![image](https://github.com/minchangggg/Advanced_C/assets/125820144/d7d9f1a0-b842-4d91-b95f-5efdeed6f534)
+<img width="275" alt="image" src="https://github.com/minchangggg/Basic_C/assets/125820144/022c1cb6-ae90-482b-9e93-9e0205e7169e">
 
-  ![image](https://github.com/minchangggg/Advanced_C/assets/125820144/84a5abe2-3eae-4f1c-b7ef-74cfe5805bac)
++ Contains executable instructions 
++ Sharable                         
++ Read-only                        
+
+<img width="275" alt="image" src="https://github.com/minchangggg/Basic_C/assets/125820144/83b76c76-3a89-465b-a3ad-efa4f64a7c28">
+
+| Global variables & Static variables | Initialized (≠0) by programmer |
+
+Ex:
+<img width="555" alt="image" src="https://github.com/minchangggg/Basic_C/assets/125820144/879a182d-4990-42d1-9b13-51686eca892d">
 
 
+<img width="275" alt="image" src="https://github.com/minchangggg/Basic_C/assets/125820144/9b7a668f-bdf8-4ef4-aee0-c54fe0713601">
 
+| Global variables & Static variables | Uninitialized or Initialized (=0) by programmer |
+
+Ex:
+<img width="556" alt="image" src="https://github.com/minchangggg/Basic_C/assets/125820144/300dcabf-ad5f-42fa-b261-cbae175fc4ce">
+
+                                                                                                                                 
+<img width="275" alt="image" src="https://github.com/minchangggg/Basic_C/assets/125820144/41ca0f62-4f37-4a2e-8954-a2656ab66d00"> ***-> Dynamic Memory Allocation***
+
++ malloc/ calloc/ realloc/ free
++ new/ delete
+> Forget to deallocate memory in Heap -> cause Memory leak
+
+Ex 1
+
+		#include <stdlib.h>
+		int main() {
+		    int *arr_malloc, *arr_calloc;
+		    size_t size = 5;
 		
+		    arr_malloc = (int*)malloc(size * sizeof(int)); // Sử dụng malloc
+		    arr_calloc = (int*)calloc(size, sizeof(int)); // Sử dụng calloc
+		    // ...
+		
+		    // Giải phóng bộ nhớ
+		    free(arr_malloc);
+		    free(arr_calloc);
+		    return 0;
+		}
+Ex 2
 
+		#include <stdio.h>
+		#include <stdlib.h>
+		
+		int main(int argc, char const *argv[]) {  
+		    int soluongkytu = 0;
+		    char* ten = (char*) malloc(sizeof(char) * soluongkytu);
+		
+		    for (int i = 0; i < 3; i++) {
+		        printf("Nhap so luong ky tu trong ten: \n");
+		        scanf("%d", &soluongkytu);
+		        ten = realloc(ten, sizeof(char) * soluongkytu);
+		        printf("Nhap ten cua ban: \n");
+		        scanf("%s", ten);
+		
+		        printf("Hello %s\n", ten);
+		    }
+		    return 0;
+		}
+
+  Ex 3
+		#include <stdio.h>
+		#include <stdlib.h>
+		
+		void test1() {
+		    int array[3];
+		    for (int i = 0; i < 3; i++) {
+		        printf("address of array[%d]: %p\n", i, (array+i));
+		    }
+		    printf("----------------------\n");
+		}
+		
+		void test2() {
+		    int *array = (int*)malloc(3*sizeof(int));
+		    for (int i = 0; i < 3; i++) {
+		        printf("address of array[%d]: %p\n", i, (array+i));
+		    }
+		    printf("----------------------\n");
+		    //free(array);
+		}
+		
+		int main(int argc, char const *argv[]) {  
+		    test1(); test1();
+		    test2(); test2();
+		    return 0;
+		}
+
+<img width="275" alt="image" src="https://github.com/minchangggg/Basic_C/assets/125820144/dfab2f7c-6509-497c-939f-5e68f43566af"> ***-> Automatic Variable Storage***
+
+<img src="https://scaler.com/topics/images/stack-segment.webp" alt="meme" width="300" /> 
+
+| LIFO structure (Last In First Out) 
+
+| Grows in the direction opposite to heap
+
+| Function frame  
+
+
+**CONCLUSION**
+
+
+__________________________________________________________________________________________________________________________________________________________________________
+# Lesson 9: 
+__________________________________________________________________________________________________________________________________________________________________________
+# Lesson 10: 
+__________________________________________________________________________________________________________________________________________________________________________
 
   
 
