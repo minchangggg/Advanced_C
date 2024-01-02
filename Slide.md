@@ -19,3 +19,11 @@ https://docs.google.com/presentation/d/1UefvipMD0YtiYfuCK7RSIYNJTY2F3C2fWZmbeqOH
 ### Bài 7: Struct - Union
 https://docs.google.com/presentation/d/1gIkSOpN9eyfSiYzR7r4u38F8IAY9shXsIfiRSHrl85o/edit#slide=id.p
 
+### Bài 8: Memory layout
+https://docs.google.com/presentation/d/1gckJCpVSA6z-ozdJCll69fcJBjdYxNCVF8bsSv0JMmc/edit#slide=id.p
+
+### Bài 9: JSON
+https://docs.google.com/presentation/d/1SkldoAr55T358UnTCT352EVwkzJ0f_aFdNs0tBzIjzI/edit#slide=id.p
+
+### Bài 10: Linked List
+https://docs.google.com/presentation/d/1VxBJQt9WUg9UqE9vgJjWrt8t0n3yIs7_LxiibUt77GI/edit#slide=id.g2ab41e96dc7_0_242
