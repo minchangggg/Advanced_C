@@ -549,7 +549,124 @@ ________________________________________________________________________________
 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 10: Linked List
+> https://www.simplilearn.com/tutorials/data-structure-tutorial/linked-list-in-data-structure#:~:text=A%20linked%20list%20is%20the,reference%20to%20the%20next%20node.
+>
+> https://www.tutorialspoint.com/data_structures_algorithms/linked_list_algorithms.htm
 
+<img width="700" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/ee824eda-c2cd-498d-a35a-f328d0e35802">
+
+**What is a Linked List?** 
+
++ A linked list is a linear data structure that stores a collection of data elements dynamically.
++ Nodes represent those data elements, and links or pointers connect each node.
++ Each node consists of two fields, the information stored in a linked list and a pointer that stores the address of its next node.
++ The last node contains null in its second field because it will point to no node.
++ A linked list can grow and shrink its size, as per the requirement.
++ It does not waste memory space.
+
+		tyedef struct Node { 
+			int value;
+			struct Node* next;
+		} Node;
+		
+		Node* createNode (int value) {
+			Node* ptr = (Node*)malloc(sizeof(Node));
+		 	ptr->value = value;
+		  	ptr->next = NULL;
+		   	return ptr;
+		};
+
+### 1, Insertion at Beginning
+> In this operation, we are adding an element at the beginning of the list.
+
+**a, Algorithm**
+
+> 1. START
+> 2. Create a node to store the data
+> 3. Check if the list is empty
+> 4. If the list is empty, add the data to the node and assign the head pointer to it.
+> 5. If the list is not empty, add the data to a node and link to the current head. Assign the head to the newly added node.
+> 6. END
+
+**b, Example**
+
+		#include <stdio.h>
+		#include <string.h>
+		#include <stdlib.h>
+		struct node {
+		   int data;
+		   struct node *next;
+		};
+		struct node *head = NULL;
+		struct node *current = NULL;
+		
+		// display the list
+		void printList(){
+		   struct node *p = head;
+		   printf("\n[");
+		   
+		   //start from the beginning
+		   while(p != NULL) {
+		      printf(" %d ",p->data);
+		      p = p->next;
+		   }
+		   printf("]");
+		}
+		
+		//insertion at the beginning
+		void insertatbegin(int data){
+		   
+		   //create a link
+		   struct node *ptr = (struct node*) malloc(sizeof(struct node));
+		   ptr->data = data;
+		   
+		   // point it to old first node
+		   ptr->next = head;
+		   
+		   //point first to new first node
+		   head = ptr;
+		}
+		void main(){
+		   int k=0;
+		   insertatbegin(12);
+		   insertatbegin(22);
+		   insertatbegin(30);
+		   insertatbegin(44);
+		   insertatbegin(50);
+		   printf("Linked List: ");
+		   
+		   // print list
+		   printList();
+		}
+  
+<img width="700" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/592effc0-2d14-4b7a-90c2-4d6f5742f9f3">
+
+  
+### 2, Insertion at Ending
+> In this operation, we are adding an element at the ending of the list.
+
+**a, Algorithm**
+
+> 1. START
+> 2. Create a new node and assign the data
+> 3. Find the last node
+> 4. Point the last node to new node
+> 5. END
+
+**b, Example**
+
+### 3, Insertion at a Given Position
+> In this operation, we are adding an element at any position within the list.
+
+**a, Algorithm**
+
+> 1. START
+> 2. Create a new node and assign data to it
+> 3. Iterate until the node at position is found
+> 4. Point first to new first node
+> 5. END
+
+**b, Example**
 
 __________________________________________________________________________________________________________________________________________________________________________
 
