@@ -552,6 +552,8 @@ ________________________________________________________________________________
 > https://www.simplilearn.com/tutorials/data-structure-tutorial/linked-list-in-data-structure#:~:text=A%20linked%20list%20is%20the,reference%20to%20the%20next%20node.
 >
 > https://www.tutorialspoint.com/data_structures_algorithms/linked_list_algorithms.htm
+>
+> https://topdev.vn/blog/danh-sach-lien-ket-don-trong-c/
 
 <img width="700" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/ee824eda-c2cd-498d-a35a-f328d0e35802">
 
@@ -563,6 +565,8 @@ ________________________________________________________________________________
 + The last node contains null in its second field because it will point to no node.
 + A linked list can grow and shrink its size, as per the requirement.
 + It does not waste memory space.
+
+![image](https://github.com/minchangggg/Advanced_C/assets/125820144/979b63f1-cfa0-4070-ace0-37433d0e36ca)
 
 		tyedef struct Node { 
 			int value;
@@ -578,6 +582,7 @@ ________________________________________________________________________________
 
 ### 1, Insertion at Beginning
 > In this operation, we are adding an element at the beginning of the list.
+![image](https://github.com/minchangggg/Advanced_C/assets/125820144/d69d5ce7-5b09-41f9-90e5-3689469f3123)
 
 **a, Algorithm**
 
@@ -644,6 +649,7 @@ ________________________________________________________________________________
   
 ### 2, Insertion at Ending
 > In this operation, we are adding an element at the ending of the list.
+![image](https://github.com/minchangggg/Advanced_C/assets/125820144/f0610056-d3e5-4984-9eb8-b1ef9c95dc04)
 
 **a, Algorithm**
 
@@ -724,6 +730,7 @@ ________________________________________________________________________________
 
 ### 3, Insertion at a Given Position
 > In this operation, we are adding an element at any position within the list.
+![image](https://github.com/minchangggg/Advanced_C/assets/125820144/6c3b2d99-93db-4b78-9c4d-2d99ab5992c5)
 
 **a, Algorithm**
 
@@ -793,20 +800,22 @@ ________________________________________________________________________________
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 11: Stack - Queue
 ### A. Stack
+> https://www.programiz.com/dsa/stack
 
 **I. What is Stack?**
 
-A stack is a linear data structure in which **the insertion of a new element** and **removal of an existing element** takes place at the same end **represented as the top** of the stack.
++ A stack is a linear data structure in which **the insertion of a new element** and **removal of an existing element** takes place at the same end **represented as the top** of the stack.
++  It follows the principle of LIFO (Last In First Out) - This means the last element inserted inside the stack is removed first.
 
-![image](https://github.com/minchangggg/Advanced_C/assets/125820144/ffca7658-eef6-4acc-a88f-58997e7b6aac)
+<img width="350" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/55f10aaa-82e2-4680-8ae4-39c561f2c990">
 
 **II, Basic Operations on Stack**
 
-push() to insert an element into the stack
-pop() to remove an element from the stack
-top() Returns the top element of the stack.
-isEmpty() returns true if stack is empty else false.
-size() returns the size of stack.
++ push() to insert an element into the stack
++ pop() to remove an element from the stack
++ top() Returns the top element of the stack.
++ isEmpty() returns true if stack is empty else false.
++ size() returns the size of stack.
 
 **1, isempty() and isfull()**
 
@@ -1027,7 +1036,23 @@ EX2:
 		}
 
 ### B. Queue
-  
+> https://www.programiz.com/dsa/queue
+**I. What is Queue?**
+
+![image](https://github.com/minchangggg/Advanced_C/assets/125820144/6318de71-e333-4fce-b048-86106e9d205b)
+
++ Queue follows the **First In First Out (FIFO)** rule - the item that goes in first is the item that comes out first.
+<img width="566" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/bf22681b-d389-4fa1-9253-f4b675e67b08">
+
+**II, Basic Operations on Queue**
+
++ Enqueue: Add an element to the end of the queue
++ Dequeue: Remove an element from the front of the queue
++ IsEmpty: Check if the queue is empty
++ IsFull: Check if the queue is full
++ Peek: Get the value of the front of the queue without removing it
+
+<img width="450" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/b505dc7b-f5b8-4c3d-91b9-e9baef1e969f">
 
 
 
