@@ -791,7 +791,242 @@ ________________________________________________________________________________
   <img width="700" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/abd78c80-61bf-480c-9e33-1b3e688b8d2b">
 
 __________________________________________________________________________________________________________________________________________________________________________
+# Lesson 11: Stack - Queue
+### A. Stack
 
+**I. What is Stack?**
+
+A stack is a linear data structure in which **the insertion of a new element** and **removal of an existing element** takes place at the same end **represented as the top** of the stack.
+
+![image](https://github.com/minchangggg/Advanced_C/assets/125820144/ffca7658-eef6-4acc-a88f-58997e7b6aac)
+
+**II, Basic Operations on Stack**
+
+push() to insert an element into the stack
+pop() to remove an element from the stack
+top() Returns the top element of the stack.
+isEmpty() returns true if stack is empty else false.
+size() returns the size of stack.
+
+**1, isempty() and isfull()**
+
+		bool isempty() {
+		   if(top == -1)
+		      return true;
+		   else
+		      return false;
+		}
+		
+		bool isfull() {
+		   if(top == MAXSIZE)
+		      return true;
+		   else
+		      return false;
+		}
+
+**2, push()**
+
+![image](https://github.com/minchangggg/Advanced_C/assets/125820144/e9f2b080-6a10-40c0-a328-86d260fc36eb)
+
+![image](https://github.com/minchangggg/Advanced_C/assets/125820144/cb6720f7-56a7-4fc2-8e89-26bc6251b2d9)
+
+		void push(int data) {
+		   if(!isFull()) {
+		      top = top + 1;   
+		      stack[top] = data;
+		   } else {
+		      printf("Stack overflow\n");
+		   }
+		}
+
+**3, pop()**
+![image](https://github.com/minchangggg/Advanced_C/assets/125820144/74b92116-7d5d-4cb3-9821-1e2125aa4f6a)
+
+		int pop(int data) {
+		   if(!isempty()) {
+		      data = stack[top];
+		      top = top - 1;   
+		      return data;
+		   } else {
+		      printf("Stack underflow\n");
+		   }
+		}
+
+
+**III, Complete Example**
+
+EX1:
+
+		#include <stdio.h>
+		#include <stdlib.h>
+		
+		typedef struct Stack {
+		    int* items;
+		    int size;
+		    int top;
+		} Stack;
+		
+		void initialize( Stack *stack, int size) {
+		    stack->items = (int*) malloc(sizeof(int) * size);
+		    stack->size = size;
+		    stack->top = -1;
+		}
+		
+		int is_empty( Stack stack) {
+		    return stack.top == -1;
+		}
+		
+		int is_full( Stack stack) {
+		    return stack.top == stack.size - 1;
+		}
+		
+		void push( Stack *stack, int value) {
+		    if (!is_full(*stack)) {
+		        stack->items[++stack->top] = value;
+		    } else {
+		        printf("Stack overflow\n");
+		    }
+		}
+		
+		int pop( Stack *stack) {
+		    if (!is_empty(*stack)) {
+		        return stack->items[stack->top--];
+		    } else {
+		        printf("Stack underflow\n");
+		        return -1;
+		    }
+		}
+		
+		int top( Stack stack) {
+		    if (!is_empty(stack)) {
+		        return stack.items[stack.top];
+		    } else {
+		        printf("Stack is empty\n");
+		        return -1;
+		    }
+		}
+		
+		int main() {
+		    Stack stack1;
+		    initialize(&stack1, 5);
+		
+		
+		    push(&stack1, 10);
+		    push(&stack1, 20);
+		    push(&stack1, 30);
+		    push(&stack1, 40);
+		    push(&stack1, 50);
+		    push(&stack1, 60);
+		
+		    printf("Top element: %d\n", top(stack1)); // 50
+		
+		    printf("Pop element: %d\n", pop(&stack1)); // 50
+		    printf("Pop element: %d\n", pop(&stack1)); // 40
+		
+		    printf("Top element: %d\n", top(stack1)); // 30
+		
+		    return 0;
+		}
+
+EX2:
+
+		#include <stdio.h>
+		#include <stdlib.h>
+
+		void push();
+		void pop();
+		void display();
+
+		struct node {
+		    int data;
+		    struct node* next;
+		};
+		
+		struct node* temp; // Variable to store the top of the stack
+		
+		int main() {
+		    printf("LINKED LIST IMPLEMENTATION USING STACKS\n\n");
+		    do {
+		        printf("1. Insert\n2. Delete\n3. Display\n4. Exit\n\n");
+		        printf("Enter your choice:");
+		        int choice; scanf("%d", &choice);
+		        
+		        switch (choice) {
+		            case 1:
+		                push();
+		                break;
+		            case 2:
+		                pop();
+		                break;
+		            case 3:
+		                display();
+		                break;
+		            case 4:
+		                exit(0);
+		                break;
+		            default:
+		                printf("Please re-enter!\n");
+		                break;
+		        }
+		    } while (choice != 4);
+		    return 0;
+		}
+		
+		void push() {
+		    int data;
+		    struct node* pointer = (struct node*)malloc(sizeof(struct node));
+		    
+		    if (pointer == NULL) printf("Stack overflow\n");
+		    else {
+		        printf("Enter the element to be inserted: ");
+		        scanf("%d", &data);
+		        
+		        if (temp == NULL) {
+		            pointer->data = data;
+		            pointer->next = NULL;
+		            temp = pointer;
+		        } else {
+		            pointer->data = data;
+		            pointer->next = temp;
+		            temp = pointer;
+		        }
+		    }
+		}
+		
+		void pop() {
+		    int item;
+		    struct node* pointer;
+		    
+		    if (temp == NULL) {
+		        printf("Stack underflow\n");
+		    }
+		    else {
+		        item = temp->data;
+		        pointer = temp;
+		        temp = temp->next;
+		        free(pointer);
+		        printf("The deleted item is %d\n", item);
+		    }
+		}
+		
+		void display() {
+		    struct node* pointer;
+		    pointer = temp;
+		    
+		    if (pointer == NULL) {
+		        printf("Stack underflow\n");
+		    }
+		    else {
+		        printf("The elements of the stack are:\n");
+		        
+		        while (pointer != NULL) {
+		            printf("%d\n", pointer->data);
+		            pointer = pointer->next;
+		        }
+		    }
+		}
+
+### B. Queue
   
 
 
