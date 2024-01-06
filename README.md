@@ -541,11 +541,71 @@ Ex 2
 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 9: JSON
+> https://www.geeksforgeeks.org/cjson-json-file-write-read-modify-in-c/
+### I, Overview 
+	+ JSON stands for JavaScript Object Notation
+	+ JSON is a text format for storing and transporting data; which is used for data exchange between applications and web services. 
+	+ JSON is "self-describing", easy to read and write for humans and machines alike. 
+a, JSON Values
 
-+ JSON stands for JavaScript Object Notation
-+ JSON is a text format for storing and transporting data
-+ JSON is "self-describing" and easy to understand
+- In JSON, values must be one of the following data types:
+  
+	+ a string (must be written in double quotes) -> Ex: {"name":"John"}
+	+ a number (must be an integer or a floating point) -> Ex: {"age":30}
+	+ an object (Values in JSON can be objects) -> Ex: { "employee":{"name":"John", "age":30, "city":"New York"} }
+	+ an array -> Ex: { "employees":["John", "Anna", "Peter"] }
+	+ a boolean -> Ex: {"sale":true} 
+	+ null -> Ex: {"middlename":null} 
+
+- JSON values cannot be one of the following data types:
+
+	a function
+	a date
+	undefined
+
+b, JSON Objects
+
+		{ "name": "Bob Johnson", "age": 35, "city": "Chicago" },
+		{ "name": "John Doe", "age": 30, "city": "New York", "occupation": "Software Engineer", "isStudent": false },
+		{
+		    "name": "Jane Smith",
+		    "age": null,
+		    "city": "Los Angeles",
+		    "contact": { "email": "jane.smith@example.com", "phone": "555-1234" }
+		}
+
+Ex: 
+
+		#include <stdio.h> 
+		#include <cjson/cJSON.h> 
 		
+		int main() { 
+		// create a cJSON object 
+		cJSON *json = cJSON_CreateObject(); 
+		cJSON_AddStringToObject(json, "name", "John Doe"); 
+		cJSON_AddNumberToObject(json, "age", 30); 
+		cJSON_AddStringToObject(json, "email", "john.doe@example.com"); 
+		
+		// convert the cJSON object to a JSON string 
+		char *json_str = cJSON_Print(json); 
+		
+		// write the JSON string to a file 
+		FILE *fp = fopen("data.json", "w"); 
+		if (fp == NULL) { 
+			printf("Error: Unable to open the file.\n"); 
+			return 1; 
+		} 
+		printf("%s\n", json_str); 
+		fputs(json_str, fp); 
+		fclose
+		// free the JSON string and cJSON object 
+		cJSON_free(json_str); 
+		cJSON_Delete(json); 
+		return 0; 
+		}
+
+ ### II, How does it work? 
+ 
 		#include <stdio.h>
 		#include <string.h>
 		#include <stdlib.h>
@@ -568,12 +628,12 @@ ________________________________________________________________________________
 		        int boolean; double number; char *string;
 		        struct {
 		            struct JsonValue *values;
-		            size_t count;
+		            size_t count; // số lượng element
 		        } array;
 		        struct {
 		            char **keys;
 		            struct JsonValue *values;
-		            size_t count;
+		            size_t count; // số cặp key-value
 		        } object;
 		    } value;
 		} JsonValue;
@@ -590,9 +650,9 @@ ________________________________________________________________________________
 		
 		JsonValue *parse_null(const char **json) {
 		    skip_whitespace(json);
-		    if (strncmp(*json, "null", 4) == 0) {
+		    if (strncmp(*json, "null", 4) == 0) { // khi bắt gặp đc chữ n -> nó lấy thêm 3 phần tử tiếp theo -> so sánh với null
 		        JsonValue *value = (JsonValue *) malloc(sizeof(JsonValue));
-		        value->type = JSON_NULL;
+		        value->type = JSON_NULL; 
 		        *json += 4;
 		        return value;
 		    }
@@ -619,7 +679,7 @@ ________________________________________________________________________________
 		
 		JsonValue *parse_number(const char **json) {
 		    skip_whitespace(json);
-		    char *end;
+		    char *end; //:') 
 		
 		    double num = strtod(*json, &end);
 		    if (end != *json) {
@@ -754,7 +814,7 @@ ________________________________________________________________________________
 		    return NULL;
 		}
 		
-		JsonValue *parse_json(const char **json) { 
+		JsonValue *parse_json(const char **json) { // làm việc với giá trị json_str_value 
 		    while (isspace(**json)) {
 		        (*json)++;
 		    }
@@ -912,6 +972,8 @@ ________________________________________________________________________________
 		    
 		    return 0;
 		}
+
+  **II, Complete Example**
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 10: Linked List
 > https://www.simplilearn.com/tutorials/data-structure-tutorial/linked-list-in-data-structure#:~:text=A%20linked%20list%20is%20the,reference%20to%20the%20next%20node.
