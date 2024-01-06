@@ -123,7 +123,6 @@ ________________________________________________________________________________
 
 <img width="350" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/d7d6df93-5ca0-4d23-866c-ddbd1fd3a475">
 
-
 **3, Example**
 
 Example 1:
@@ -245,25 +244,588 @@ Ex2:
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 3: POINTER
 ### A. Function Pointer
+Ex 1:
+
+		#include <stdio.h>
+		
+		// Hàm mẫu 1
+		void greetEnglish() {
+		    printf("Hello!\n");
+		}
+		
+		// Hàm mẫu 2
+		void greetFrench() {
+		    printf("Bonjour!\n");
+		}
+		
+		int main() {
+		    // Khai báo con trỏ hàm
+		    void (*ptrToGreet)();
+		
+		    // Gán địa chỉ của hàm greetEnglish cho con trỏ hàm
+		    ptrToGreet = greetEnglish;
+		
+		    // Gọi hàm thông qua con trỏ hàm
+		    (*ptrToGreet)();  // In ra: Hello!
+		
+		    // Gán địa chỉ của hàm greetFrench cho con trỏ hàm
+		    ptrToGreet = greetFrench;
+		
+		    // Gọi hàm thông qua con trỏ hàm
+		    (*ptrToGreet)();  // In ra: Bonjour!
+		
+		    return 0;
+		}
+Ex 2:
+
+		#include <stdio.h>
+		
+		void sum(int a, int b) {
+		    printf("Sum of %d and %d is: %d\n",a,b, a+b);
+		}
+		
+		void subtract(int a, int b) {
+		    printf("Subtract of %d by %d is: %d \n",a,b, a-b);
+		}
+		
+		void multiple(int a, int b) {
+		    printf("Multiple of %d and %d is: %d \n",a,b, a*b );
+		}
+		
+		void divide(int a, int b) {
+		    if (b == 0) {
+		        printf("Mau so phai khac 0\n");
+		        return;
+		    }
+		    printf("%d divided by %d is: %f \n",a,b, (double)a / (double)b);
+		}
+		
+		void calculator(void (*ptr)(int, int), int a, int b) {
+		    printf("Program calculate: \n");
+		    ptr(a,b);
+		}
+		
+		int main() {
+		    calculator(sum,5,2);
+		    calculator(subtract,5,2);
+		    calculator(multiple,5,2);
+		    calculator(divide,5,2);
+		
+		    //void (*ptr[])(int, int) = {sum, divide, multiple};
+		    //ptr[0](5,6);
+		
+		    return 0;
+		}
+
+Ex 3:
+
+		#include <stdio.h>
+		#include <string.h>
+		
+		void bubbleSort(int arr[], int n) {
+		    int i, j, temp;
+		    for (i = 0; i < n-1; i++) {    
+		        for (j = i+1; j < n; j++) {
+		            if (arr[i] > arr[j]) {
+		                temp = arr[i];
+		                arr[i] = arr[j];
+		                arr[j] = temp;
+		            }
+	      		}
+	 	    }	
+		}
+		
+		int main() {
+		    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+		    int n = sizeof(arr)/sizeof(arr[0]);
+		    bubbleSort(arr, n);
+		    printf("Sorted array: \n");
+		    for (int i=0; i < n; i++)
+		        printf("%d ", arr[i]);
+		    return 0;
+		}
+
+Ex 4: 
+		
+		#include <stdio.h>
+		#include <string.h>
+		
+		typedef struct {
+		   char ten[50];
+		   float diemTrungBinh;
+		   int id;
+		} SinhVien;
+		
+		int stringCompare(const char *str1, const char *str2) {
+		   while (*str1 && (*str1 == *str2)) {
+		       str1++;
+		       str2++;
+		   }
+		   return *(const unsigned char*)str1 - *(const unsigned char*)str2;
+		}
+		
+		// Hàm so sánh theo tên
+		int compareByName(const void *a, const void *b) {
+		   SinhVien *sv1 = (SinhVien *)a;
+		   SinhVien *sv2 = (SinhVien *)b;
+		   return stringCompare(sv1->ten, sv2->ten);
+		}
+		
+		// Hàm so sánh theo điểm trung bình
+		int compareByDiemTrungBinh(const void *a, const void *b) {
+		   SinhVien *sv1 = (SinhVien *)a;
+		   SinhVien *sv2 = (SinhVien *)b;
+		   if (sv1->diemTrungBinh > sv2->diemTrungBinh) return 1;
+		   return 0;
+		}
+		
+		// Hàm so sánh theo ID
+		int compareByID(const void *a, const void *b) {
+		   SinhVien *sv1 = (SinhVien *)a;
+		   SinhVien *sv2 = (SinhVien *)b;
+		   return sv1->id - sv2->id;
+		}
+		
+		// Hàm sắp xếp chung
+		void sort(SinhVien array[], size_t size, int (*compareFunc)(const void *, const void *)) {
+		   int i, j;
+		   SinhVien temp;
+		   for (i = 0; i < size-1; i++)    
+		       for (j = i+1; j < size; j++)
+		           if (compareFunc(array+i, array+j)>0) {
+		               temp = array[i];
+		               array[i] = array[j];
+		               array[j] = temp;
+		           }
+		}
+		
+		void display(SinhVien *array, size_t size) {
+		   for (size_t i = 0; i < size; i++) {
+		       printf("ID: %d, Ten: %s, Diem Trung Binh: %.2f\n", array[i].id, array[i].ten, array[i].diemTrungBinh);
+		   }
+		   printf("\n");
+		}
+		
+		int main() {
+		   SinhVien danhSachSV[] = {
+		       {  
+		           .ten = "Hoang",
+		           .diemTrungBinh = 7.5,
+		           .id = 100
+		       },
+		       {
+		           .ten = "Tuan",
+		           .diemTrungBinh = 4.5,
+		           .id = 101
+		       },
+		       {
+		           .ten = "Vy",
+		           .diemTrungBinh = 6.8,
+		           .id = 102},
+		       {  
+		           .ten = "Ngan",
+		           .diemTrungBinh = 5.6,
+		           .id = 10
+		       },
+		   };
+		   size_t size = sizeof(danhSachSV) / sizeof(danhSachSV[0]);
+		
+		   // Sắp xếp theo tên
+		   sort(danhSachSV, size, compareByName);
+		   display(danhSachSV, size);
+		
+		   // Sắp xếp theo điểm trung bình
+		   sort(danhSachSV, size, compareByDiemTrungBinh);
+		   display(danhSachSV, size);
+		
+		   // Sắp xếp theo ID
+		   sort(danhSachSV, size, compareByID);
+		   display(danhSachSV, size);
+		
+		   return 0;
+		}
+
+Ex 5: 
+
+		#include <stdio.h>
+		
+		typedef struct {
+		   void (*start)(int gpio);
+		   void (*stop)(int gpio);
+		   void (*changeSpeed)(int gpio, int speed);
+		} MotorController;
+		
+		typedef int PIN;
+		
+		// Các hàm chung
+		void startMotor(PIN pin) {
+		   printf("Start motor at PIN %d\n", pin);
+		}
+		
+		void stopMotor(PIN pin) {
+		   printf("Stop motor at PIN %d\n", pin);
+		}
+		
+		void changeSpeedMotor(PIN pin, int speed) {
+		   printf("Change speed at PIN %d: %d\n", pin, speed);
+		}
+		
+		// Macro để khởi tạo GPIO và MotorController
+		#define INIT_MOTOR(motorName, pinNumber) \
+		   PIN PIN_##motorName = pinNumber; \
+		   MotorController motorName = {startMotor, stopMotor, changeSpeedMotor};
+		
+		int main() {
+		   // Sử dụng macro để khởi tạo
+		   INIT_MOTOR(motorA, 1);
+		   INIT_MOTOR(motorB, 2);
+		
+		   // Sử dụng motorA
+		   motorA.start(g_motorA);
+		   motorA.changeSpeed(g_motorA, 50);
+		   motorA.stop(g_motorA);
+		
+		   // Sử dụng motorB
+		   motorB.start(g_motorB);
+		   motorB.changeSpeed(g_motorB, 75);
+		   motorB.stop(g_motorB);
+		
+		   return 0;
+		}
 
 ### B. Void Pointer
 
-### C. Pointer to Constant
+#### Syntax: void *ptr_void;
+Ex: 
+		
+		#include <stdio.h>
+		#include <stdlib.h>
+		
+		intSyntax: int *const const_ptr = &value;
+
+Ex:
+                     
+		#include <stdio.h>
+		#include <stdlib.h>
+		
+		int main() {
+		    
+		    int value = 5;
+		    int const *ptr_const = &value;
+		
+		    //*ptr_const = 7; // wrong
+		    //ptr_const++; // right
+		    
+		    printf("value: %d\n", *ptr_const);
+		
+		    value = 9;
+		    printf("value: %d\n", *ptr_const);
+		
+		    return 0;
+		}
+
+### . Pointer to Constant
+#### Syntax: int const *ptr_const; 
+#### Syntax: const int *ptr_const;
+
+Ex: 
+
+		#include <stdio.h>
+		#include <stdlib.h>
+		
+		int main() {
+		    
+		    int value = 5;
+		    int const *ptr_const = &value;
+		
+		    //*ptr_const = 7; // wrong
+		    //ptr_const++; // right
+		    
+		    printf("value: %d\n", *ptr_const);
+		
+		    value = 9;
+		    printf("value: %d\n", *ptr_const);
+		
+		    return 0;
+		}
 
 ### D. Constant Pointer
 
+#### Syntax: int *const const_ptr = &value;
+
+Ex:
+
+		#include <stdio.h>
+		#include <stdlib.h>
+		
+		
+		int main() {
+		    
+		    int value = 5;
+		    int test = 15;
+		    int *const const_ptr = &value;
+		
+		    printf("value: %d\n", *const_ptr);
+		
+		    *const_ptr = 7;
+		    printf("value: %d\n", *const_ptr);
+		
+		    //const_ptr = &test; // wrong
+		    
+		    return 0;
+		}
+
 ### E. Pointer to Pointer
 
+Ex:
+
+		#include <stdio.h>
+		
+		int main() {
+		    int value = 42;
+		    int *ptr1 = &value;  // Con trỏ thường trỏ đến một biến
+		
+		    int **ptr2 = &ptr1;  // Con trỏ đến con trỏ
+		
+		    /*
+		        **ptr2 = &ptr1
+		        ptr2 = &ptr1;
+		        *ptr2 = ptr1 = &value;
+		        **ptr2 = *ptr1 = value
+		    */
+		
+		    printf("address of value: %p\n", &value);
+		    printf("value of ptr1: %p\n", ptr1);
+		
+		    printf("address of ptr1: %p\n", &ptr1);
+		    printf("value of ptr2: %p\n", ptr2);
+		
+		    printf("dereference ptr2 first time: %p\n", *ptr2);
+		
+		    printf("dereference ptr2 second time: %d\n", **ptr2);
+		
+		    return 0;
+		}
+
 ### F. NULL Pointer
-__________________________________________________________________________________________________________________________________________________________________________
+
+Ex:
+
+		#include <stdio.h>
+		
+		int main() {
+		    int *ptr = NULL;  // Gán giá trị NULL cho con trỏ 0x0000000
+		
+		    if (ptr == NULL) {
+		        printf("Pointer is NULL\n");
+		    } else {
+		        printf("Pointer is not NULL\n");
+		    }
+		
+		    int score_game = 5;
+		    if (ptr == NULL) {
+		        ptr = &score_game;
+		        *ptr = 30;
+		        ptr = NULL;
+		    }
+		    return 0;
+		}
+________________________________________________________________________________________________________________________________________________________________________
 # Lesson 4: EXTERN - STATIC - VOLATILE - REGISTER
 ### A. Extern
+	- Syntax: extern data_type variable_name;
 
 ### B. Static
+**1. Static local variables**
+
+Ex: 
+
+		#include <stdio.h>
+		
+		void exampleFunction() {
+		    static int count = 0;  // Biến static giữ giá trị qua các lần gọi hàm
+		    count++;
+		    printf("Count: %d\n", count);
+		}
+		
+		int main() {
+		    exampleFunction();  // In ra "Count: 1"
+		    exampleFunction();  // In ra "Count: 2"
+		    exampleFunction();  // In ra "Count: 3"
+		    return 0;
+		}
+
+
+**2. Static global variables**
+
+Ex: 
+
+> File motor.c
+
+		#include <stdio.h>
+		#include "motor.h"
+		
+		void startMotor(PIN pin) {
+		   printf("Start motor at PIN %d\n", pin);
+		}
+		
+		void stopMotor(PIN pin) {
+		   printf("Stop motor at PIN %d\n", pin);
+		}
+		
+		void changeSpeedMotor(PIN pin, int speed) {
+		   printf("Change speed at PIN %d: %d\n", pin, speed);
+		}
+		
+			 
+		void init_motor(MotorController *motorName) {
+			motorName->start = startMotor;
+			motorName->stop = stopMotor;
+			motorName->changeSpeed = changeSpeedMotor;
+		}
+
+> File motor.h
+
+		#ifndef __MOTOR_H
+		#define __MOTOR_H
+		
+		typedef struct {
+			 void (*start)(int gpio);
+		   void (*stop)(int gpio);
+		   void (*changeSpeed)(int gpio, int speed);
+		} MotorController;
+		
+		typedef int PIN;
+		
+		static void startMotor(PIN pin);
+		static void stopMotor(PIN pin);
+		static void changeSpeedMotor(PIN pin, int speed);
+			 
+		void init_motor(MotorController *motorName); 
+		
+		#endif
+
+**3. Static in class**
+
+		#include <iostream>
+		
+		typedef enum {
+		    red = 0,
+		    blue,
+		    green,
+		    purple,
+		    black,
+		    yellow
+		} Pen_Color;
+		
+		void print_color_pen(Pen_Color color) {
+			switch (color) {
+			    case red:
+			        std::cout << "Red\n";
+			        break;
+			    case blue:
+			        std::cout << "Blue\n";
+			        break;
+			    case green:
+			        std::cout << "Green\n";
+			        break;
+			    
+			    default:
+			        break;
+			    }
+			}
+		
+		
+		class PEN {
+			public:
+			    Pen_Color pen_color;
+			    static int pen_length;
+			
+			    PEN(Pen_Color color);
+			    Pen_Color get_color()
+			    {
+			        return pen_color;
+			    }
+			    void set_length(int length)
+			    {
+			        pen_length = length;
+			    }
+			};
+		
+		int PEN::pen_length;
+		
+		PEN::PEN(Pen_Color color) {
+		    pen_color = color;
+		    pen_length = 10;
+		}
+		
+		int main(int argc, char const *argv[]) {
+		    PEN blue_pen(blue);
+		    PEN red_pen(red);
+		    PEN green_pen(green);
+		
+		    blue_pen.set_length(9);
+		
+		    std::cout << "Color: ";
+		    print_color_pen(blue_pen.get_color());
+		    std::cout << "Length: " << blue_pen.pen_length << '\n';
+		
+		    std::cout << "Color: ";
+		    print_color_pen(red_pen.get_color());
+		    std::cout << "Length: " << red_pen.pen_length << '\n';
+		
+		    std::cout << "Color: ";
+		    print_color_pen(green_pen.get_color());
+		    std::cout << "Length: " << green_pen.pen_length << '\n';
+		
+		    return 0;
+		}
 
 ### C. Volatile
+Ex:
+
+		#include "stm32f10x.h"
+		
+		volatile int i = 0;
+		int a = 100;
+		
+		int main() {
+			while(1) {
+				i = *((int*) 0x20000000);
+				if (i > 0) break;	
+			}
+			a = 200;
+		}
 
 ### D. Register
+
+<img width="500" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/8cffd3cf-f6e8-4241-8b92-e126aba8716c">
+
+Ex:
+
+		#include <stdio.h>
+		#include <time.h>
+		
+		int main() {
+		    // Lưu thời điểm bắt đầu
+		    clock_t start_time = clock();
+		    int i;
+		
+		    // Đoạn mã của chương trình
+		    for (i = 0; i < 2000000; ++i) {
+		        // Thực hiện một số công việc bất kỳ
+		    }
+		
+		    // Lưu thời điểm kết thúc
+		    clock_t end_time = clock();
+		
+		    // Tính thời gian chạy bằng miligiây
+		    double time_taken = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
+		
+		    printf("Thoi gian chay cua chuong trinh: %f giay\n", time_taken);
+		
+		    return 0;
+		}
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 5: GOTO - setjmp.h
 ### A. Goto
@@ -541,6 +1103,8 @@ Ex 2
 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 9: JSON
+> https://www.w3schools.com/js/js_json_intro.asp
+>
 > https://www.geeksforgeeks.org/cjson-json-file-write-read-modify-in-c/
 ### I, Overview 
 	+ JSON stands for JavaScript Object Notation
