@@ -30,3 +30,8 @@ https://docs.google.com/presentation/d/1VxBJQt9WUg9UqE9vgJjWrt8t0n3yIs7_LxiibUt7
 
 ### Lesson 11: Stack - Queue
 https://docs.google.com/presentation/d/1UoP83N78YvBCe7uMurYGXMdgVh2l4rG0qnhGwvJmxW0/edit#slide=id.p
+
+### Lesson 12: Binary search - File operations - Code standards
+https://docs.google.com/presentation/d/1tQBZ-HsYGAr4XOLYsSdk872eIDVV3sUTe6weiIRdskA/edit?usp=sharing
+
+
