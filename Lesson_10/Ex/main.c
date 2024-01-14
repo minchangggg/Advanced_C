@@ -2,51 +2,35 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct node
-{
+typedef struct node {
     int value;
     struct node* next;
-}node;
+} node;
 
 
-node* createNode(int value)
-{
+node* createNode(int value) {
     node* ptr = (node*)malloc(sizeof(node));
     ptr->value = value;
     ptr->next = NULL;
     return ptr;
 }
 
-
-void push_back(node** array, int value)
-{
+void push_back(node** array, int value) {
     node* temp;
-    temp = createNode(value); // khoi tao node
-                              // temp = 0xa1
+    temp = createNode(value); 
+    if (*array == NULL) *array = temp; // if array doesn't have any node yet
 
-    
-    if (*array == NULL)   // if array doesn't have any node yet
-    {
-
-        *array = temp;
-    }
-    else                // if array has some node
-    {
-        node* p = *array;          // use p instead of array because we are using pointer, use array will change the structure of linkedlist
+    else { // if array has some node
+        node* p = *array; // use p instead of array because we are using pointer, use array will change the structure of linkedlist
         while (p->next != NULL) // which mean the current node is not the last node
         {
             p = p->next;    // check next node until it a last node
-
         }
-
         p->next = temp;     // change it next member point to address of new node have just create
     }
 }
 
-
-
-void pop_back(node** array)
-{
+void pop_back(node** array) {
     node* p, * temp;
     p = *array;
     int i = 0; // to 
@@ -59,23 +43,17 @@ void pop_back(node** array)
     temp = p->next;
     p->next = NULL;
     free(temp);
-
 }
 
-
-
-int get(node* array, int pos)
-{
+int get(node* array, int pos) {
     int i = 0;
  
-    while (array->next != NULL && pos != i)
-    {
+    while (array->next != NULL && pos != i) {
         array = array->next;
         i++;
     }
 
-    if (pos != i)
-    {
+    if (pos != i) {
         printf("Error: List has less element\n");
         return 0;
     }
@@ -105,7 +83,6 @@ int front(node **array) {
 int back(node** array) {
    node* temp = *array;
    while (temp->next != NULL) temp = temp->next;
-
    return temp->value;
 }
 
