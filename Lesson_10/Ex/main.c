@@ -30,6 +30,12 @@ void push_back(node** array, int value) {
     }
 }
 
+void push_front(node** array, int value) {
+    node* newNode = createMemberNode(value);
+    newNode->next = (*array); // với *head là địa chỉ của head trong dslk
+    (*array) = newNode; // cập nhật node head
+}
+
 void pop_back(node** array) {
     node* p, * temp;
     p = *array;
