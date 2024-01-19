@@ -19,21 +19,17 @@ typedef struct MemberNode {
     struct MemberNode* next;
 } MemberNode;
 
-MemberNode* createMemberNode(Member member) {
-    MemberNode* newNode = (MemberNode*)malloc(sizeof(MemberNode));
-    newNode->data = member;
-    newNode->next = NULL;
-    return newNode;
-}
+MemberNode* createMemberNode(Member member);
 
-int calcPopulation(const char* filename, MemberNode* list);
-void getMember(Member member);
-void printList(const char* filename, MemberNode* list);
-Member input(Member member);
-void addMember(const char* filename, MemberNode* &list, Member member);
-void deleteMember(const char* filename, MemberNode* list, char* uid);
+int calcPopulation(MemberNode* list);
+void getMember(Member &member);
+void printList(MemberNode* list);
+Member input(Member &member);
+void addMember(MemberNode* &list, Member member);
+void addMember(MemberNode* &list);
+void deleteMember(MemberNode* list);
 
 void searchByUID(MemberNode* list, char* uid);
 void searchByLicensePlate(MemberNode* list, char* licensePlate);
-Member searchMember(const char* filename, MemberNode* list, char* searchValue);
-void editMember(const char* filename, MemberNode* list);
+Member searchMember(MemberNode* list);
+void editMember(MemberNode* list);
