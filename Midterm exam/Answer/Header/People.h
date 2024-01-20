@@ -5,24 +5,33 @@
 * Description: This file is a people header file that program is used to store information
 */
 
-Information storage
-
 #ifndef __PEOPLE_H
 #define __PEOPLE_H
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <time.h>
 
 # define SearchByUID 0
 # define SearchByLicensePlate 1
 
+/*
+*Struct: Member
+*Description: This struct contains basic information of a Member object including UID, roomNumber, name, licensePlate 
+*/
+    
 typedef struct Member {
     char uid[20]; // UID của RFID
     char roomNumber[10];
     char name[50];
     char licensePlate[20]; // Biển Số Xe
 } Member;
+
+/*
+*Struct: MemberNode 
+*Description: This struct is the basic information of node which contains information of a Member object in linked list 
+*/
 
 typedef struct MemberNode {
     Member data;
