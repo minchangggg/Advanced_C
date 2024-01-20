@@ -16,11 +16,11 @@ int calcPopulation(MemberNode* list) { // Số lượng Member
     return num;
 }
 
-void getMember(Member &member) {
-    printf("%s là UID của RFID.\n ", member.uid);
-    printf("%s là số phòng.\n ", member.roomNumber);
-    printf("%s là tên của cư dân. \n ", member.name);
-    printf("%s là biển số xe. \n ", member.licensePlate);
+void getMember(Member* member) {
+    printf("%s là UID của RFID.\n ", member->uid);
+    printf("%s là số phòng.\n ", member->roomNumber);
+    printf("%s là tên của cư dân. \n ", member->name);
+    printf("%s là biển số xe. \n ", member->licensePlate);
 }
 
 void printList(MemberNode* list) {
@@ -32,31 +32,31 @@ void printList(MemberNode* list) {
     while (currNode != NULL) {
         printf("\t\tDANH SÁCH TRÊN GỒM %d DÂN CƯ BAO GỒM:\n", num);
         printf("[%i]\n", i); i++;
-        getMember(currNode->data);
+        getMember(&currNode->data);
         printf("______________________________________________________________________________\t");
         currNode = currNode->next;
     }
 }
 
-Member input(Member &member) {
+Member* input(Member* member) {
     printf("Nhập thông tin cư dân\n");
-    printf("Nhập UID\n"); fflush(stdin); scanf("%s", member.uid);
-    printf("Nhập roomNumber\n"); fflush(stdin); scanf("%s", member.roomNumber);
-    printf("Nhập name\n"); fflush(stdin); scanf("%s", member.name);
-    printf("Nhập licensePlate\n"); fflush(stdin); scanf("%s", member.licensePlate);
+    printf("Nhập UID\n"); fflush(stdin); scanf("%s", member->uid);
+    printf("Nhập roomNumber\n"); fflush(stdin); scanf("%s", member->roomNumber);
+    printf("Nhập name\n"); fflush(stdin); scanf("%s", member->name);
+    printf("Nhập licensePlate\n"); fflush(stdin); scanf("%s", member->licensePlate);
     return member;
 }
 
-void addMember(MemberNode* &list, Member member) {
+void createMember(MemberNode* list, Member member) {
     MemberNode* newNode = createMemberNode(member);
     newNode->next = list;
     list = newNode;
 }
 
-void addMember(MemberNode* &list) { // Thêm Member mới 
+void addMember(MemberNode* list) { // Thêm Member mới 
     Member member;
     MemberNode* newNode = createMemberNode(member);
-    input(newNode->data);
+    input(&newNode->data);
     newNode->next = list; // với list là địa chỉ node trong dslk
     list = newNode; // cập nhật node head
 }
@@ -84,19 +84,17 @@ void deleteMember(MemberNode* list) { // Xóa Member
 
 void searchByUID(MemberNode* list, char* uid) {
     for (MemberNode* currNode = list; currNode != NULL; currNode = currNode->next) {
-        if (currNode->data.uid == uid) getMember(currNode->data);
+        if (currNode->data.uid == uid) getMember(&currNode->data);
     }
 }
 
 void searchByLicensePlate(MemberNode* list, char* licensePlate) {
     for (MemberNode* currNode = list; currNode != NULL; currNode = currNode->next) {
-        if (currNode->data.licensePlate == licensePlate) getMember(currNode->data);
+        if (currNode->data.licensePlate == licensePlate) getMember(&currNode->data);
     }
 }
 
 Member searchMember(MemberNode* list) {
-    MemberNode* currNode = list;
-   
     printf("Nhập phương thức muốn tìm kiếm\n");
     printf("1. Search by UID\n");
     printf("2. Search by license plate\n"); 
@@ -118,8 +116,8 @@ void editMember(MemberNode* list) { // Chỉnh sửa thông tin member thông qu
     printf("Nhập UID dân cư cần chỉnh sửa: "); char num_uid[20]; scanf("%s", num_uid);
     for (MemberNode* currNode = list; currNode != NULL; currNode = currNode->next) {
         if (currNode->data.uid == num_uid) {
-            printf("Dưới đây là thông tin cư dân bạn muốn chỉnh sửa.\n"); getMember(currNode->data);
-            printf("Tiến hành chỉnh sửa :\n"); input(currNode->data);
+            printf("Dưới đây là thông tin cư dân bạn muốn chỉnh sửa.\n"); getMember(&currNode->data);
+            printf("Tiến hành chỉnh sửa :\n"); input(&currNode->data);
         }
     }
 }

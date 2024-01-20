@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include <stdbool.h>
 
 void assignString(char* token, char root[]) {
     for (int i = 0; i < strlen(token); ++i) {
@@ -6,9 +7,8 @@ void assignString(char* token, char root[]) {
     }
 }
 
-void readData(const char* filename, MemberNode* &list) {
-    const int MAXCHAR = 1000;
-    char row[MAXCHAR];
+void readData(const char* filename, MemberNode* list) {
+    char row[1000];
 
     FILE* file;
     file = fopen(filename, "r");
@@ -16,7 +16,7 @@ void readData(const char* filename, MemberNode* &list) {
     char *token;
 
     while (!feof(file)) {
-        fgets(row, MAXCHAR, file);
+        fgets(row, 1000, file);
 
         if (!isDataInfo) {
             isDataInfo = true;
@@ -52,7 +52,7 @@ void readData(const char* filename, MemberNode* &list) {
             token = strtok(NULL, ",");
         }
 
-        addMember(list, currMember);
+        createMember(list, currMember);
     }
 
     fclose(file);
@@ -90,9 +90,9 @@ void Menu(const char* filename, MemberNode* list, Member member, char* searchVal
         switch (choice_input) {
         case 1:
             printf("Moi Ban nhap thong tin 1 sinh vien : \n");
-            addMember(list, Member());
+            addMember(list);
         case 2:
-            printf("Số lượng dân cư : %d \n", calcPopulation);
+            printf("Số lượng dân cư : %d \n", calcPopulation(list));
         case 3:
             printf("Danh Sach thông tin dân cư : \n");
             printList(list);

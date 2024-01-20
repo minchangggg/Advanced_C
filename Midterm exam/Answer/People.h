@@ -22,11 +22,11 @@ typedef struct MemberNode {
 MemberNode* createMemberNode(Member member);
 
 int calcPopulation(MemberNode* list);
-void getMember(Member &member);
+void getMember(Member* member);
 void printList(MemberNode* list);
-Member input(Member &member);
-void addMember(MemberNode* &list, Member member);
-void addMember(MemberNode* &list);
+Member* input(Member* member);
+void createMember(MemberNode* list, Member member);
+void addMember(MemberNode* list);
 void deleteMember(MemberNode* list);
 
 void searchByUID(MemberNode* list, char* uid);
