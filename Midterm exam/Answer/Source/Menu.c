@@ -6,6 +6,7 @@
 */
 
 #include "Menu.h"
+#include <stdbool.h>
 
 void assignString(char* token, char root[]) {
     for (int i = 0; i < strlen(token); ++i) {
@@ -13,7 +14,7 @@ void assignString(char* token, char root[]) {
     }
 }
 
-void readData(const char* filename, MemberNode* list) {
+void readData(const char* filename, MemberNode** list) {
     char row[1000];
 
     FILE* file;
@@ -58,17 +59,18 @@ void readData(const char* filename, MemberNode* list) {
             token = strtok(NULL, ",");
         }
 
+        // getMember(&currMember);
         createMember(list, currMember);
     }
 
     fclose(file);
 }
 
-void writeData(const char* filename, MemberNode* list) { 
+void writeData(const char* filename, MemberNode** list) { 
     FILE* file;
     file = fopen(filename, "w");
 
-    MemberNode *currNode = list;
+    MemberNode *currNode = *list;
     printf("uID,roomNumber,name,licensePlates\n");
     while (currNode != NULL) {
         printf("%s,%s,%s,%s\n", currNode->data.uid, currNode->data.roomNumber, currNode->data.name, currNode->data.licensePlate);
@@ -78,9 +80,10 @@ void writeData(const char* filename, MemberNode* list) {
     fclose(file);
 }
 
-void Menu(const char* filename, MemberNode* list, Member member, char* searchValue, char* uid) {
+void Menu(const char* filename, MemberNode** list) {
     int choice_input;
     readData(filename, list);
+
     printf ("======Danh Sach Chuc Nang=========\n");
     printf("1. Thêm 1 dân cư mới .\n");
     printf("2. Số lượng dân cư .\n");
@@ -89,7 +92,9 @@ void Menu(const char* filename, MemberNode* list, Member member, char* searchVal
     printf("5. Sửa thong tin dân cư\n");
     printf("6. Xóa dân cư khỏi danh sach\n");
     printf("0. Thoat chuong trinh\n");
-    while (1) {
+
+    bool ok = true;
+    while (ok) {
         printf("Nhap chuc nang ban  chon : ");
         scanf("%d", &choice_input);
 
@@ -97,24 +102,31 @@ void Menu(const char* filename, MemberNode* list, Member member, char* searchVal
         case 1:
             printf("Moi Ban nhap thong tin 1 sinh vien : \n");
             addMember(list);
+            break;
         case 2:
-            printf("Số lượng dân cư : %d \n", calcPopulation(list));
+            printf("Số lượng dân cư : %d \n", calcPopulation(*list));
+            break;
         case 3:
             printf("Danh Sach thông tin dân cư : \n");
-            printList(list);
+            printList(*list);
+            break;
         case 4:
             printf("Tìm kiếm thông tin dân cư : \n");
-            searchMember(list);
+            searchMember(*list);
+            break;
         case 5:
             printf("Thông tin dân cư cần chỉnh sửa : \n");
-            editMember(list);
+            editMember(*list);
+            break;
         case 6:
             printf("Nhập thông tin dân cư xóa khỏi danh sach : \n");
-            deleteMember(list);
+            deleteMember(*list);
+            break;
         default:
+            ok = false;
             break;
         }
     }
 
-    writeData(filename, list);
+    // writeData(filename, list);
 }

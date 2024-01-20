@@ -4,7 +4,7 @@
 * Date: 15/01/2024
 * Description: This file contains all the functions/methods for information management 
 */
- 
+
 #include "People.h"
 
 MemberNode* createMemberNode(Member member) {
@@ -16,8 +16,9 @@ MemberNode* createMemberNode(Member member) {
 
 int calcPopulation(MemberNode* list) { // Số lượng Member 
     int num = 0;
-    while (list != NULL) {
-        list = list->next;
+    MemberNode* curr = list;
+    while (curr != NULL) {
+        curr = curr->next;
         ++num;
     }
     return num;
@@ -36,11 +37,11 @@ void printList(MemberNode* list) {
     int num = calcPopulation(list);
 
     //start from the beginning
+    printf("\t\tDANH SÁCH TRÊN GỒM %d DÂN CƯ BAO GỒM:\n", num);
     while (currNode != NULL) {
-        printf("\t\tDANH SÁCH TRÊN GỒM %d DÂN CƯ BAO GỒM:\n", num);
         printf("[%i]\n", i); i++;
         getMember(&currNode->data);
-        printf("______________________________________________________________________________\t");
+        printf("______________________________________________________________________________\n");
         currNode = currNode->next;
     }
 }
@@ -54,18 +55,18 @@ Member* input(Member* member) {
     return member;
 }
 
-void createMember(MemberNode* list, Member member) {
+void createMember(MemberNode** list, Member member) {
     MemberNode* newNode = createMemberNode(member);
-    newNode->next = list;
-    list = newNode;
+    newNode->next = (*list);
+    (*list) = newNode;
 }
 
-void addMember(MemberNode* list) { // Thêm Member mới 
+void addMember(MemberNode** list) { // Thêm Member mới 
     Member member;
     MemberNode* newNode = createMemberNode(member);
     input(&newNode->data);
-    newNode->next = list; // với list là địa chỉ node trong dslk
-    list = newNode; // cập nhật node head
+    newNode->next = (*list); // với list là địa chỉ node trong dslk
+    (*list) = newNode; // cập nhật node head
 }
 
 void deleteMember(MemberNode* list) { // Xóa Member
@@ -101,7 +102,7 @@ void searchByLicensePlate(MemberNode* list, char* licensePlate) {
     }
 }
 
-Member searchMember(MemberNode* list) {
+void searchMember(MemberNode* list) {
     printf("Nhập phương thức muốn tìm kiếm\n");
     printf("1. Search by UID\n");
     printf("2. Search by license plate\n"); 
