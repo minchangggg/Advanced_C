@@ -2,8 +2,10 @@
 * File: People.h
 * Author: Ton Nu Minh Trang
 * Date: 15/01/2024
-* Description: This file is a people header file that for Information management  
+* Description: This file is a people header file that program is used to store information
 */
+
+Information storage
 
 #ifndef __PEOPLE_H
 #define __PEOPLE_H
