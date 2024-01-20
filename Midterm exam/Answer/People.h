@@ -1,4 +1,12 @@
-#pragma once
+/*
+* File: People.h
+* Author: Ton Nu Minh Trang
+* Date: 15/01/2023
+* Description: This file is a people header file that for Information management  
+*/
+
+#ifndef __PEOPLE_H
+#define __PEOPLE_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,3 +41,5 @@ void searchByUID(MemberNode* list, char* uid);
 void searchByLicensePlate(MemberNode* list, char* licensePlate);
 Member searchMember(MemberNode* list);
 void editMember(MemberNode* list);
+
+#endif
