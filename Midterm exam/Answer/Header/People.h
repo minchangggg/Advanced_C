@@ -8,9 +8,10 @@
 #ifndef __PEOPLE_H
 #define __PEOPLE_H
 
+#pragma once
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <time.h>
 
 # define SearchByUID 0
@@ -20,7 +21,7 @@
 *Struct: Member
 *Description: This struct contains basic information of a Member object including UID, roomNumber, name, licensePlate 
 */
-    
+
 typedef struct Member {
     char uid[20]; // UID của RFID
     char roomNumber[10];
@@ -44,13 +45,13 @@ int calcPopulation(MemberNode* list);
 void getMember(Member* member);
 void printList(MemberNode* list);
 Member* input(Member* member);
-void createMember(MemberNode* list, Member member);
-void addMember(MemberNode* list);
+void createMember(MemberNode** list, Member member);
+void addMember(MemberNode** list);
 void deleteMember(MemberNode* list);
 
 void searchByUID(MemberNode* list, char* uid);
 void searchByLicensePlate(MemberNode* list, char* licensePlate);
-Member searchMember(MemberNode* list);
+void searchMember(MemberNode* list);
 void editMember(MemberNode* list);
 
 #endif
