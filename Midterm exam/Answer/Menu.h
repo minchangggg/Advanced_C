@@ -2,7 +2,7 @@
 * File: Menu.h
 * Author: Ton Nu Minh Trang
 * Date: 15/01/2023
-* Description: This file is a menu header file that for program management 
+* Description: This file is a menu header file that program is used by building manager
 */
 
 #ifndef __MENU_H
