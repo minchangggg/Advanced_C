@@ -2,7 +2,7 @@
 * File: Menu.c
 * Author: Ton Nu Minh Trang
 * Date: 15/01/2024
-* Description: This file contains all the functions/methods to building management
+* Description: This file contains all the functions/methods for building management
 */
 
 #include "Menu.h"
