@@ -1,7 +1,7 @@
 /*
 * File: People.h
 * Author: Ton Nu Minh Trang
-* Date: 15/01/2023
+* Date: 15/01/2024
 * Description: This file is a people header file that for Information management  
 */
 
