@@ -34,4 +34,17 @@ https://docs.google.com/presentation/d/1UoP83N78YvBCe7uMurYGXMdgVh2l4rG0qnhGwvJm
 ### Lesson 12: Binary search - File operations - Code standards
 https://docs.google.com/presentation/d/1tQBZ-HsYGAr4XOLYsSdk872eIDVV3sUTe6weiIRdskA/edit?usp=sharing
 
+### Lesson 13: Class
+https://docs.google.com/presentation/d/1QV4bUPIX-76SSI0cjWVFMUTwVALlcgnKDhKFvO1vDBo/edit#slide=id.p
 
+### Lesson 14: OOP
+https://docs.google.com/presentation/d/1Qh394PWoN-GY2FCUTni-jHXE9NO4TO6RbW30xiRrOzk/edit?usp=sharing
+
+### Lesson 15: Standard template library
+https://docs.google.com/presentation/d/1tAOZCf-cb28spb-LhswbwH1Vk39ZR-tazPhvVzqj2P4/edit
+
+### Lesson 16: Generic Programming
+https://docs.google.com/presentation/d/1aR-B9TufMyuQZY8ivHZoUpvy0l-HkwXd4I0ZZV8yXE8/edit#slide=id.p
+
+### Lesson 17: Smart Pointer - Lambda
+https://docs.google.com/presentation/d/1B9iMPLqZ2U0OITUFsZ0Wxq6xzCVdUcnruPUYMxLLu6Q/edit#slide=id.p
