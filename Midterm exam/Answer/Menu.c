@@ -1,5 +1,11 @@
+/*
+* File: Menu.
+* Author: Ton Nu Minh Trang
+* Date: 15/01/2024
+* Description: This file contains all the functions/methods to building management
+*/
+
 #include "Menu.h"
-#include <stdbool.h>
 
 void assignString(char* token, char root[]) {
     for (int i = 0; i < strlen(token); ++i) {
