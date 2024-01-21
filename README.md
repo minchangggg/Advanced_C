@@ -1540,6 +1540,8 @@ Ex:
   **II, Complete Example**
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 10: Linked List
+> https://techacademy.edu.vn/danh-sach-lien-ket-don-c/
+>
 > https://www.simplilearn.com/tutorials/data-structure-tutorial/linked-list-in-data-structure#:~:text=A%20linked%20list%20is%20the,reference%20to%20the%20next%20node.
 >
 > https://www.tutorialspoint.com/data_structures_algorithms/linked_list_algorithms.htm
@@ -2167,3 +2169,135 @@ Ex:
 		
 		    return 0;
 		}
+__________________________________________________________________________________________________________________________________________________________________________
+# Lesson 12: Binary search - File operations - Code standards
+> https://www.geeksforgeeks.org/binary-search/
+
+### A. Binary search
+**1. How does Binary Search work?**
+
+![Bản sao của Blue-Pink Cute Class Schedule](https://github.com/minchangggg/Advanced_C/assets/125820144/9cf16d9e-cb4a-4bbc-abef-0d8088dcae9d)
+
+
+<img width="200" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/9cf16d9e-cb4a-4bbc-abef-0d8088dcae9d">
+
+
+**1. Iterative Method**
+
+**Ex 1:**
+		#include <stdio.h>
+		 
+		int binarySearch(int arr[], int l, int r, int x) {
+		    while (l <= r) {
+		        int m = l + (r - l) / 2;
+		 
+		        if (arr[m] == x) return m; // If found at mid, then return it
+		        if (arr[m] < x) l = m + 1; // If x greater, ignore left half
+		        else r = m - 1; // If x is smaller, ignore right half
+		    }
+		    // If we reach here, then element was not present
+		    return -1;
+		}
+		
+		int main(void) {
+		    int arr[] = { 2, 3, 4, 10, 40 };
+		    int n = sizeof(arr) / sizeof(arr[0]);
+		    int x = 10;
+		    int result = binarySearch(arr, 0, n - 1, x);
+		    (result == -1) ? printf("Element is not present in array")
+		                   : printf("Element is present at index %d", result);
+		    return 0;
+		}
+
+**2. Recursive Method**
+
+**Ex 1:**
+		#include <stdio.h>
+		
+		int binarySearch(int array[], int x, int low, int high) {
+		  if (high >= low) {
+		    int mid = low + (high - low) / 2;
+	
+		    if (array[mid] == x) return mid; // If found at mid, then return it
+		    if (array[mid] > x) return binarySearch(array, x, low, mid - 1); // Search the left half
+		    return binarySearch(array, x, mid + 1, high); // Search the right half
+		  }
+		  return -1;
+		}
+		
+		int main(void) {
+		  int array[] = {3, 4, 5, 6, 7, 8, 9};
+		  int n = sizeof(array) / sizeof(array[0]);
+		  int x = 4;
+		  int result = binarySearch(array, x, 0, n - 1);
+		  if (result == -1) printf("Not found");
+		  else printf("Element is found at index %d", result);
+		}
+
+**Ex 2:** 
+
+		#include <stdio.h>
+		#include <stdlib.h>
+		
+		int binarySearch(int* arr, int l, int r, int x) {
+		    if (r >= l) {
+		        int mid = l + (r - l) / 2;
+		        if (arr[mid] == x)  return mid;
+		        if (arr[mid] > x) return binarySearch(arr, l, mid - 1, x);
+		        return binarySearch(arr, mid + 1, r, x);
+		    }
+		    return -1;
+		}
+		
+		void swap(int* a, int* b) {
+		    int temp = *a;
+		    *a = *b;
+		    *b = temp;
+		}
+		
+		void bubbleSort(int arr[], int n) {
+		    int i, j;
+		    for (i = 0; i < n - 1; i++) {
+		        for (j = 0; j < n - i - 1; j++) { 
+		            if (arr[j] > arr[j + 1])
+		                swap(&arr[j], &arr[j + 1]);
+		        }
+		    }
+		}
+		
+		int main() {
+		    int n, x, i;
+		    printf("Nhap so phan tu cua mang: "); scanf("%d", &n);
+		    int* arr = (int*)malloc(n * sizeof(int));
+		    printf("Nhap cac phan tu cua mang: ");
+		    for (i = 0; i < n; i++) { scanf("%d", &arr[i]); }
+		    bubbleSort(arr, n);
+		    for (int i = 0; i < n; i++) { printf("i = %d\n", arr[i]); }
+		    printf("Nhap gia tri can tim: "); scanf("%d", &x);
+		    int result = binarySearch(arr, 0, n - 1, x);
+		    if (result == -1) printf("Khong tim thay %d trong mang.\n", x);
+		    else printf("Tim thay %d tai vi tri %d trong mang.\n", x, result);
+		    free(arr);
+		    return 0;
+		}
+
+### B. File operations
+
+__________________________________________________________________________________________________________________________________________________________________________
+# Lesson 13: Class
+
+__________________________________________________________________________________________________________________________________________________________________________
+# Lesson 14: OOP
+
+__________________________________________________________________________________________________________________________________________________________________________
+# Lesson 15: Standard template library
+
+__________________________________________________________________________________________________________________________________________________________________________
+# Lesson 16: Generic Programming
+
+__________________________________________________________________________________________________________________________________________________________________________
+# Lesson 17: Smart Pointer - Lambda
+
+__________________________________________________________________________________________________________________________________________________________________________
+# Lesson 18: 
+
