@@ -9,7 +9,7 @@
 
 /*
 * Description: Create MemberNode with the Member data which is used in linked list
-* Input: member: Member data to be stored in the node
+* Input: member is Member data used to stored informatin member in every node
 * Output: Return MemberNode pointer
 */
 
@@ -70,6 +70,12 @@ void printList(MemberNode* list) {
     }
 }
 
+/*
+* Description: Enter the information of new member.
+* Input: MemberNode* list
+* Output: None
+*/
+
 Member* input(Member* member) {
     printf("Nhập thông tin cư dân\n");
     printf("Nhập UID\n"); fflush(stdin); scanf("%s", member->uid);
@@ -92,6 +98,12 @@ void addMember(MemberNode** list) { // Thêm Member mới
     newNode->next = (*list); // với list là địa chỉ node trong dslk
     (*list) = newNode; // cập nhật node head
 }
+
+/*
+* Description: Delete member with the given UID.
+* Input: MemberNode* list
+* Output: None
+*/
 
 void deleteMember(MemberNode* list) { // Xóa Member
     MemberNode* currNode = list;
@@ -161,7 +173,6 @@ void searchMember(MemberNode* list) {
     switch (searchFunc) {
     case SearchByUID:
         searchByUID(list, searchValue);
-
     case SearchByLicensePlate:
         searchByLicensePlate(list, searchValue);
     }
