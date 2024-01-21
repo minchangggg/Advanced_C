@@ -81,20 +81,19 @@ void writeData(const char* filename, MemberNode** list) {
 }
 
 void Menu(const char* filename, MemberNode** list) {
-    int choice_input;
     readData(filename, list);
+    int choice_input = 0;
+    
+    printf ("=========Danh Sach Chuc Nang=========\n");
+    printf("1. Them 1 dan cu moi.\n");
+    printf("2. So luong dan cu.\n");
+    printf("3. In ra toan bo thong tin dan cu sinh song.\n");
+    printf("4. Tim kiem thong tin dan cu theo UID.\n");
+    printf("5. Chinh sua thong tin dan cu.\n");
+    printf("6. Xoa dan cu ra khoi danh sach.\n");
+    printf("7. Thoat chuong trinh.\n");
 
-    printf ("======Danh Sach Chuc Nang=========\n");
-    printf("1. Thêm 1 dân cư mới .\n");
-    printf("2. Số lượng dân cư .\n");
-    printf("3. In ra toàn bộ thông tin dân cư .\n");
-    printf("4. Tìm kiếm thông tin dân cư .\n");
-    printf("5. Sửa thong tin dân cư\n");
-    printf("6. Xóa dân cư khỏi danh sach\n");
-    printf("0. Thoat chuong trinh\n");
-
-    bool ok = true;
-    while (ok) {
+    while (choice_input != 7) {
         printf("Nhap chuc nang ban  chon : ");
         scanf("%d", &choice_input);
 
@@ -123,7 +122,6 @@ void Menu(const char* filename, MemberNode** list) {
             deleteMember(*list);
             break;
         default:
-            ok = false;
             break;
         }
     }
