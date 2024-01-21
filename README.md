@@ -2176,11 +2176,7 @@ ________________________________________________________________________________
 ### A. Binary search
 **1. How does Binary Search work?**
 
-![Bản sao của Blue-Pink Cute Class Schedule](https://github.com/minchangggg/Advanced_C/assets/125820144/9cf16d9e-cb4a-4bbc-abef-0d8088dcae9d)
-
-
-<img width="200" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/9cf16d9e-cb4a-4bbc-abef-0d8088dcae9d">
-
+<img width="500" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/9cf16d9e-cb4a-4bbc-abef-0d8088dcae9d">
 
 **1. Iterative Method**
 
@@ -2282,6 +2278,11 @@ ________________________________________________________________________________
 		}
 
 ### B. File operations
+> https://www.geeksforgeeks.org/basics-file-handling-c/
+>
+> https://www.programiz.com/c-programming/c-file-input-output#google_vignette
+
+<img width="500" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/120c94d0-fddd-40f4-bbcc-b85de5967903">
 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 13: Class
