@@ -7,12 +7,24 @@
 
 #include "People.h"
 
+/*
+* Description: Create MemberNode with the Member data which is used in linked list
+* Input: member: Member data to be stored in the node
+* Output: Return MemberNode pointer
+*/
+
 MemberNode* createMemberNode(Member member) {
     MemberNode* newNode = (MemberNode*)malloc(sizeof(MemberNode));
     newNode->data = member;
     newNode->next = NULL;
     return newNode;
 }
+
+/*
+* Description: Calculate population in the given file. 
+* Input: MemberNode* list
+* Output: Return the Population
+*/
 
 int calcPopulation(MemberNode* list) { // Số lượng Member 
     int num = 0;
@@ -24,12 +36,24 @@ int calcPopulation(MemberNode* list) { // Số lượng Member
     return num;
 }
 
+/*
+* Description: Search information of every member in the given file. 
+* Input: MemberNode* list
+* Output: Give detail information of every member
+*/
+
 void getMember(Member* member) {
     printf("%s là UID của RFID.\n ", member->uid);
     printf("%s là số phòng.\n ", member->roomNumber);
     printf("%s là tên của cư dân. \n ", member->name);
     printf("%s là biển số xe. \n ", member->licensePlate);
 }
+
+/*
+* Description: Show the information of list's members stored in the given file.
+* Input: MemberNode* list
+* Output: information of members
+*/
 
 void printList(MemberNode* list) {
     MemberNode* currNode = list;
@@ -39,7 +63,7 @@ void printList(MemberNode* list) {
     //start from the beginning
     printf("\t\tDANH SÁCH TRÊN GỒM %d DÂN CƯ BAO GỒM:\n", num);
     while (currNode != NULL) {
-        printf("[%i]\n", i); i++;
+        i++; printf("[%i]\n", i); 
         getMember(&currNode->data);
         printf("______________________________________________________________________________\n");
         currNode = currNode->next;
@@ -81,7 +105,7 @@ void deleteMember(MemberNode* list) { // Xóa Member
     }
 
     if (cnt < uid - 1) {
-        printf("Linked list has less elements than pos\n");
+        printf("No information\n");
         return;
     }
 
@@ -90,17 +114,40 @@ void deleteMember(MemberNode* list) { // Xóa Member
     free(temp);
 }
 
+/*
+* Description: Search member by UID number in the given file.
+* Input:
+*   - list: MemberNode pointer.
+*   - uid:  The UID number.
+* Output: Give member information when the given UID is found.
+*/
+
 void searchByUID(MemberNode* list, char* uid) {
     for (MemberNode* currNode = list; currNode != NULL; currNode = currNode->next) {
         if (currNode->data.uid == uid) getMember(&currNode->data);
     }
 }
 
+/*
+* Description: Search member by licensePlate number in the given file.
+* Input:
+*   - list: MemberNode pointer.
+*   - licensePlate: The licensePlate number.
+* Output:
+*   - Give member information when the given UID is found.
+*/
+
 void searchByLicensePlate(MemberNode* list, char* licensePlate) {
     for (MemberNode* currNode = list; currNode != NULL; currNode = currNode->next) {
         if (currNode->data.licensePlate == licensePlate) getMember(&currNode->data);
     }
 }
+
+/*
+* Description: Search member by UID / licensePlate number in the given file. 
+* Input: MemberNode* list
+* Output: Give member information when the given UID / licensePlate number is found.
+*/
 
 void searchMember(MemberNode* list) {
     printf("Nhập phương thức muốn tìm kiếm\n");
@@ -119,6 +166,12 @@ void searchMember(MemberNode* list) {
         searchByLicensePlate(list, searchValue);
     }
 }
+
+/*
+* Description: Edit the member information with the given UID.
+* Input: MemberNode* list.
+* Output: Give member information and allow to edit information when the given UID is found.
+*/
 
 void editMember(MemberNode* list) { // Chỉnh sửa thông tin member thông qua uid
     printf("Nhập UID dân cư cần chỉnh sửa: "); char num_uid[20]; scanf("%s", num_uid);
