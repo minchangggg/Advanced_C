@@ -75,7 +75,7 @@ void deleteMember(MemberNode* list) { // Xóa Member
     printf("Nhập id"); fflush(stdin); scanf("%d", &uid);
       
     int cnt = 0;
-    while (cnt < uid - 1) {
+    while ((currNode != NULL) && (cnt < uid - 1)) {
         currNode = currNode->next;
         ++cnt;
     }
