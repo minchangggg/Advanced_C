@@ -48,3 +48,6 @@ https://docs.google.com/presentation/d/1aR-B9TufMyuQZY8ivHZoUpvy0l-HkwXd4I0ZZV8y
 
 ### Lesson 17: Smart Pointer - Lambda
 https://docs.google.com/presentation/d/1B9iMPLqZ2U0OITUFsZ0Wxq6xzCVdUcnruPUYMxLLu6Q/edit#slide=id.p
+
+### Lesson: Review OOP (C++)
+https://docs.google.com/presentation/d/1EaX9KoSMOxsm0eW6sey0JVqRIrxGNGJrJ2ZFO_xeblw/edit
