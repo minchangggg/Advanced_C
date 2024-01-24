@@ -2286,9 +2286,142 @@ ________________________________________________________________________________
 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 13: Class
+Declaring Object
+
+Constructor
+
+Destructor
+
+Static keyword
 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 14: OOP
+### 1. Encapsulation
+Ex: 
+
+		#include <iostream>
+		#include <string>
+  
+		using namespace std;
+		
+		class Student {
+		    private:
+		        string Name;
+		        double GPA;
+		        int StudentID;
+		    public:
+		    Student(string name);
+		    string getName() { return Name; }
+		    void setGPA(double gpa) { GPA = gpa; }
+		    double getGPA() { return GPA; }
+		    int getID() { return StudentID; }
+		};
+		
+		Student::Student(string name) {
+		    Name = name;
+		    static int id = 1000;
+		    StudentID = id;
+		    ++id;
+		}
+		
+		int main() {
+		    Student student1("Trung");
+		    Student student2("Thai");
+		    Student student3("Thao");
+		
+		    cout << "ID: " << student1.getID() << endl;
+		    cout << "Name: " << student1.getName() << endl;
+		
+		    cout << "ID: " << student2.getID() << endl;
+		    cout << "Name: " << student2.getName() << endl;
+		
+		    cout << "ID: " << student3.getID() << endl;
+		    cout << "Name: " << student3.getName() << endl;
+		    
+		    return 0;
+		}
+
+### 2. Inheritance
+Ex:
+
+		#include <iostream>
+		#include <string>
+		
+		
+		using namespace std;
+		
+		class Person
+		{
+		protected:
+		  string Name;
+		  int Age;
+		  string Home_Address;
+		
+		public:
+		  string getName() { return Name; }
+		  void setName(string name) { Name = name; }
+		  int getAge() { return Age; }
+		  void setAge(int age) { Age = age; }
+		  string getAddress() { return Home_Address; }
+		  void setAddress(string address) { Home_Address = address; }
+		  void displayInfo() {
+		    cout << "Name: " << Name << endl;
+		    cout << "Age: " << Age << endl;
+		    cout << "Address: " << Home_Address << endl;
+		  }
+		};
+		
+		class Student : public Person {
+		private:
+		  string School_Name;
+		  double GPA;
+		  int StudentID;
+		public:
+		  Student() {
+		    static int id = 1000;
+		    StudentID = id;
+		    id++;
+		  }
+		
+		  string getSchoolName() { return School_Name; }
+		  void setSchoolName(string school_name) { School_Name = school_name; }
+		  double getGPA() { return GPA; }
+		  void setGPA(double gpa) { GPA = gpa; }
+		  int getID() { return StudentID; }
+		  void displayInfo() { // overriding
+		    cout << "Name: " << Name << endl;
+		    cout << "Age: " << Age << endl;
+		    cout << "Address: " << Home_Address << endl;
+		    cout << "School name: " << School_Name << endl;
+		    cout << "GPA: " << GPA << endl;
+		  }
+		};
+		
+		int main() {
+		  Person person1;
+		  person1.setName("Trung");
+		  person1.setAge(20);
+		  person1.setAddress("HCM");
+		  person1.displayInfo();
+		  
+		  cout << "-----------------------" << endl;
+		  
+		  Student student1;
+		  student1.setName("Trungg");
+		  student1.setAge(24);
+		  student1.setAddress("HCMM");
+		  student1.setGPA(8.1);
+		  student1.setSchoolName("DinhTienHoang");
+		  student1.displayInfo();
+		
+		  return 0;
+		}
+
+### 3. Polymorphism
+
+
+### 4. Abstraction
+
 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 15: Standard template library
