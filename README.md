@@ -2425,6 +2425,55 @@ Ex:
 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 15: Standard template library
+## A. Container
+### I. Vector
+Vectors are the same as dynamic arrays with the ability to resize itself automatically when an element is inserted or deleted
+
+Ex: 
+
+		#include <iostream>
+		#include <vector>
+		
+		using namespace std;
+		
+		
+		int main() {
+		  
+		    vector <int> arr1 = {2,5,7,4,9};
+		
+		    arr1.at(0) = 3; // 3 5 7 4 9
+		    arr1.resize(7);  // 3 5 7 4 9 0 0 
+		
+		    for (const int& i : arr1) {
+		    cout << "Value: " << i << endl;
+		    }
+		
+		    // for (int i = 0; i < arr1.size(); i++) {
+		    //     cout << "Value: " << arr1.at(i) << endl;
+		    // }
+		    
+		    arr1.push_back(10); // 3 5 7 4 9 0 0 10
+		
+		    cout << "-----------" << endl;
+		    for (int i = 0; i < arr1.size(); i++) {
+		        cout << "Value: " << arr1.at(i) << endl;
+		    }
+		    
+		    return 0;
+		}
+
+
+### II. List
+
+### III. Map
+
+### IV. Array
+
+## B. Iterator
+
+## C. Algorithms
+
+## D. Functor
 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 16: Generic Programming
