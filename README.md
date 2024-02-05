@@ -2734,6 +2734,10 @@ Cách 2:
 		}
   
 ### II. List
+> https://www.programiz.com/cpp-programming/list
+
+![image](https://github.com/minchangggg/Advanced_C/assets/125820144/e2695ead-47bf-4d44-bbdd-8a45c1d53bdc)
+
 
 
 
