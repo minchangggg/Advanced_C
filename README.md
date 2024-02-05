@@ -2427,42 +2427,161 @@ ________________________________________________________________________________
 # Lesson 15: Standard template library
 ## A. Container
 ### I. Vector
+> https://www.geeksforgeeks.org/vector-in-cpp-stl/
+> 
+> https://www.programiz.com/cpp-programming/vectors
+
 Vectors are the same as dynamic arrays with the ability to resize itself automatically when an element is inserted or deleted
 
+**1, Declaration and Initialization**
+
+		vector<data_type> vector_name;
+  
 Ex: 
+		#include <iostream>
+		#include <vector>
+		using namespace std;
+		
+		int main(){
+			vector<int> vector1; // Khai báo vector rỗng
+			
+			// Method 1: Create and Initialize a Vector
+			vector<int> vector2 = {1, 2, 3, 4, 5}; // Initializer list
+			vector<int> vector3 {1, 2, 3, 4, 5}; // Uniform initialization
+			
+			// Method 2: Create a Vector with Size
+			int n = 20; 
+			vector<int> v3(n); 
+			
+			int val = 10; 
+			vector<int> v4(m, val); //Khai báo vector có sẵn m phần tử có cùng giá trị val
+			
+			return 0;
+		}
+  
+**2, Basic Vector Operations**
+1. Add Elements to a Vector: 
+
+a, .push_back(): This method pushes elements to the back of a vector
+
+		vector<int> v = {1,2,3,4};
+		v.push_back(5);
+		int n = v.size();
+  
+		cout << "The last element is: " << v[n - 1];
+		// Output: The last element is: 5 
+  
+b, .insert(): This method inserts new elements before the element at the specified position.
+
+		std::vector<int> v = {1,2,3,4};
+		v.insert(v.begin(),0); // Insert at beginning
+		v.insert(v.end(),6); // Insert at end
+		
+		cout << "The first element is: " << v[0] << "\n";
+		// Output: The first element is: 0
+		
+		std::cout << "The last element is: " << v[5] << "\n";
+		// Output: The last element is: 6
+
+2. Access Elements of a Vector:
+a, 
+4. Change Vector Element: at()
+5. Delete Elements from C++ Vectors: pop_back()
+
+Ex 1: 
 
 		#include <iostream>
 		#include <vector>
+		using namespace std;
+		
+		int main() {
+			vector <int> arr1 = {2,5,7,4,9};
+			
+			arr1.at(0) = 3; // 3 5 7 4 9
+			arr1.resize(7);  // 3 5 7 4 9 0 0 	    
+			arr1.push_back(10); // 3 5 7 4 9 0 0 10
+			
+			// Duyet vector bang chi so 
+			for (int i = 0; i < arr1.size(); i++) { 
+			cout << "Value: " << arr1.at(i) << endl;
+			}
+			
+			cout << "-----------" << endl;
+			// Duyet vector bang ranged-base for loop
+			for (const int& i : arr1) { 
+			cout << "Value: " << i << endl;
+			}
+			for (int i : arr1) {
+			cout << "Value: " << i << endl;
+			}
+			
+			return 0;
+		}
+
+Ex 2: 
+
+		#include <iostream>
+		#include <vector>
+		using namespace std;
+		
+		int main(){
+			vector<string> v = {"Da Nang", "Ngay 5"};
+			cout << "Size of vector : " << v.size() << endl;
+			v.push_back("Thang 2");
+			v.push_back("Nam 2024");
+			cout << "Size of vector : " << v.size() << endl;
+			cout << "Access vector : ";
+   
+			for(int i = 0; i < v.size(); i++){
+				cout << v[i] << ", ";
+			}
+   
+			v.pop_back(); 
+			cout << "\nSize of vector : " << v.size() << endl;
+			}
+
+**2, C++ Vector Functions**
+
+Function	Description
+size()	returns the number of elements present in the vector
+clear()	removes all the elements of the vector
+front()	returns the first element of the vector
+back()	returns the last element of the vector
+empty()	returns 1 (true) if the vector is empty
+capacity()	check the overall size of a vector
+
+**3, C++ Vector Iterators**
+Vector iterators are used to point to the memory address of a vector element. In some ways, they act like pointers in C++.
+
+**4, Vector Và Mảng 1 Chiều**
+
+**5, Vector Và Mảng 2 Chiều**
+   
+		#include <iostream>
+		#include <vector>
+		#define row 2
+		#define col 3
 		
 		using namespace std;
 		
-		
-		int main() {
-		  
-		    vector <int> arr1 = {2,5,7,4,9};
-		
-		    arr1.at(0) = 3; // 3 5 7 4 9
-		    arr1.resize(7);  // 3 5 7 4 9 0 0 
-		
-		    for (const int& i : arr1) {
-		    cout << "Value: " << i << endl;
+		int main(){
+		    vector<vector<int>> v(row, vector<int>(col));
+		    for(int i = 0; i < row; i++){
+		        for(int j = 0; j < col; j++){
+		            cout << "Nhap phan tu hang " << i + 1 << ", cot " << j + 1 << " : ";
+		            cin >> v[i][j];
+		        }   
 		    }
-		
-		    // for (int i = 0; i < arr1.size(); i++) {
-		    //     cout << "Value: " << arr1.at(i) << endl;
-		    // }
-		    
-		    arr1.push_back(10); // 3 5 7 4 9 0 0 10
-		
-		    cout << "-----------" << endl;
-		    for (int i = 0; i < arr1.size(); i++) {
-		        cout << "Value: " << arr1.at(i) << endl;
+		    cout << "\nMang 2 chieu vua nhap : \n";
+		    for(int i = 0; i < row; i++){
+		        for(int j = 0; j < col; j++){
+		            cout << v[i][j] << " ";
+		        }
+		        cout << endl;
 		    }
-		    
 		    return 0;
 		}
-
-
+  
 ### II. List
 
 ### III. Map
