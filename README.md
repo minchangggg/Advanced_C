@@ -2350,8 +2350,7 @@ Ex:
 		
 		using namespace std;
 		
-		class Person
-		{
+		class Person {
 		protected:
 		  string Name;
 		  int Age;
@@ -2430,6 +2429,8 @@ ________________________________________________________________________________
 > https://www.geeksforgeeks.org/vector-in-cpp-stl/
 > 
 > https://www.programiz.com/cpp-programming/vectors
+>
+> https://topdev.vn/blog/vector-trong-c/
 
 Vectors are the same as dynamic arrays with the ability to resize itself automatically when an element is inserted or deleted
 
@@ -2442,7 +2443,7 @@ Ex:
 		#include <vector>
 		using namespace std;
 		
-		int main(){
+		int main() {
 			vector<int> vector1; // Khai báo vector rỗng
 			
 			// Method 1: Create and Initialize a Vector
@@ -2459,10 +2460,29 @@ Ex:
 			return 0;
 		}
   
-**2, Basic Vector Operations**
-1. Add Elements to a Vector: 
+**2, C++ Vector Functions**
 
-a, .push_back(): This method pushes elements to the back of a vector
+a. Capacity__________________________________________________________________________________________________________________________
+
+`.size(): returns the number of elements present in the vector // số phần tử ĐANG ĐƯỢC SỬ DỤNG trong vector`
+
+`.capacity(): check the overall size of a vector // số phần tử ĐƯỢC CẤP PHÁT cho vector nằm TRONG BỘ NHỚ`
+
+`.empty(): returns 1 (true) if the vector is empty`
+
+`.resize(n): change the number of elements present in the vector`
+   
+b. Access Elements of a Vector_______________________________________________________________________________________________________
+   
+`.at(): access the element from the specified index`
+
+`.front(): returns the first element of the vector`
+
+`.back(): returns the last element of the vector`
+
+c. Add Elements to a Vector___________________________________________________________________________________________________________
+
+`.push_back(): This method pushes elements to the back of a vector.`
 
 		vector<int> v = {1,2,3,4};
 		v.push_back(5);
@@ -2471,7 +2491,7 @@ a, .push_back(): This method pushes elements to the back of a vector
 		cout << "The last element is: " << v[n - 1];
 		// Output: The last element is: 5 
   
-b, .insert(): This method inserts new elements before the element at the specified position.
+`.insert(): This method inserts new elements before the element at the specified position.`
 
 		std::vector<int> v = {1,2,3,4};
 		v.insert(v.begin(),0); // Insert at beginning
@@ -2482,13 +2502,8 @@ b, .insert(): This method inserts new elements before the element at the specifi
 		
 		std::cout << "The last element is: " << v[5] << "\n";
 		// Output: The last element is: 6
-
-2. Access Elements of a Vector:
-a, 
-4. Change Vector Element: at()
-5. Delete Elements from C++ Vectors: pop_back()
-
-Ex 1: 
+  
+Ex: 
 
 		#include <iostream>
 		#include <vector>
@@ -2503,52 +2518,52 @@ Ex 1:
 			
 			// Duyet vector bang chi so 
 			for (int i = 0; i < arr1.size(); i++) { 
-			cout << "Value: " << arr1.at(i) << endl;
+				cout << "Value: " << arr1.at(i) << endl;
 			}
 			
 			cout << "-----------" << endl;
+   
 			// Duyet vector bang ranged-base for loop
 			for (const int& i : arr1) { 
-			cout << "Value: " << i << endl;
+				cout << "Value: " << i << endl;
 			}
 			for (int i : arr1) {
-			cout << "Value: " << i << endl;
+				cout << "Value: " << i << endl;
 			}
 			
 			return 0;
 		}
 
-Ex 2: 
 
-		#include <iostream>
-		#include <vector>
-		using namespace std;
-		
-		int main(){
-			vector<string> v = {"Da Nang", "Ngay 5"};
-			cout << "Size of vector : " << v.size() << endl;
-			v.push_back("Thang 2");
-			v.push_back("Nam 2024");
-			cout << "Size of vector : " << v.size() << endl;
-			cout << "Access vector : ";
-   
-			for(int i = 0; i < v.size(); i++){
-				cout << v[i] << ", ";
-			}
-   
-			v.pop_back(); 
-			cout << "\nSize of vector : " << v.size() << endl;
-			}
+d. Delete Elements from C++ Vectors
 
-**2, C++ Vector Functions**
+`.pop_back()`
 
-Function	Description
-size()	returns the number of elements present in the vector
-clear()	removes all the elements of the vector
-front()	returns the first element of the vector
-back()	returns the last element of the vector
-empty()	returns 1 (true) if the vector is empty
-capacity()	check the overall size of a vector
+`.erase()`
+
+`.clear(): removes all the elements of the vector`
+
+Ex: 
+
+	#include <iostream>
+	#include <vector>
+	using namespace std;
+	
+	int main(){
+		vector<string> v = {"Da Nang", "Ngay 5"};
+		cout << "Size of vector : " << v.size() << endl;
+		v.push_back("Thang 2");
+		v.push_back("Nam 2024");
+		cout << "Size of vector : " << v.size() << endl;
+		cout << "Access vector : ";
+
+		for(int i = 0; i < v.size(); i++){
+			cout << v[i] << ", ";
+		}
+
+		v.pop_back(); 
+		cout << "\nSize of vector : " << v.size() << endl;
+		}
 
 **3, C++ Vector Iterators**
 Vector iterators are used to point to the memory address of a vector element. In some ways, they act like pointers in C++.
