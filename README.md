@@ -2431,6 +2431,10 @@ ________________________________________________________________________________
 > https://www.programiz.com/cpp-programming/vectors
 >
 > https://topdev.vn/blog/vector-trong-c/
+>
+> https://blog.28tech.com.vn/stl-vector-trong-c
+>
+> https://www.programiz.com/cpp-programming/algorithm
 
 Vectors are the same as dynamic arrays with the ability to resize itself automatically when an element is inserted or deleted
 
@@ -2464,14 +2468,43 @@ Ex:
 
 a. Capacity__________________________________________________________________________________________________________________________
 
-`.size(): returns the number of elements present in the vector // số phần tử ĐANG ĐƯỢC SỬ DỤNG trong vector`
+`.size(): returns the number of elements present in the vector // kích thước - trả về số lượng phần tử ĐANG ĐƯỢC SỬ DỤNG trong vector`
 
-`.capacity(): check the overall size of a vector // số phần tử ĐƯỢC CẤP PHÁT cho vector nằm TRONG BỘ NHỚ`
+`.capacity(): check the overall size of a vector // dung lượng - trả về số lượng phần tử ĐƯỢC CẤP PHÁT cho vector nằm TRONG BỘ NHỚ`
 
 `.empty(): returns 1 (true) if the vector is empty`
 
 `.resize(n): change the number of elements present in the vector`
-   
+
+Ex: 
+
+		#include <iostream> 
+		#include <vector>  
+		using namespace std; 
+		   
+		int main() { 
+		    vector<int> vec1; 
+		   
+		    for (int i = 1; i <= 10; i++) 
+		        vec1.push_back(i); 
+		   
+		    cout << "Size of our vector: " << vec1.size() << endl; 
+		    cout << "nCapacity of our vector: " << vec1.capacity() << endl; 
+		    cout << "nMax_Size of our vector: " << vec1.max_size() << endl; 
+		   
+		    // resizes the vector size to 4 
+		    vec1.resize(4); 
+		   
+		    // prints the vector size after resize() 
+		    cout << "nSize of our vector after resize: " << vec1.size() << endl;  
+		   
+		    // checks if the vector is empty or not 
+		    if (vec1.empty() == false) cout << "nVector is not empty"; 
+		    else cout << "nVector is empty"; 
+		   
+		    return 0; 
+		}
+
 b. Access Elements of a Vector_______________________________________________________________________________________________________
    
 `.at(): access the element from the specified index`
@@ -2493,14 +2526,14 @@ c. Add Elements to a Vector_____________________________________________________
   
 `.insert(): This method inserts new elements before the element at the specified position.`
 
-		std::vector<int> v = {1,2,3,4};
+		vector<int> v = {1,2,3,4};
 		v.insert(v.begin(),0); // Insert at beginning
 		v.insert(v.end(),6); // Insert at end
 		
 		cout << "The first element is: " << v[0] << "\n";
 		// Output: The first element is: 0
 		
-		std::cout << "The last element is: " << v[5] << "\n";
+		cout << "The last element is: " << v[5] << "\n";
 		// Output: The last element is: 6
   
 Ex: 
@@ -2568,28 +2601,131 @@ Ex:
 **3, C++ Vector Iterators**
 Vector iterators are used to point to the memory address of a vector element. In some ways, they act like pointers in C++.
 
-**4, Vector Và Mảng 1 Chiều**
+Syntax: `vector<T>::iterator iteratorName;`
 
-**5, Vector Và Mảng 2 Chiều**
-   
+a. begin() function
+
+		vector<int> num = {1, 2, 3};
+		vector<int>::iterator iter;
+		
+		// iter points to num[0]
+		iter = num.begin();
+  
+b. end() function
+
+		vector<int> num = {1, 2, 3};
+		vector<int>::iterator iter;
+		
+		// iter points to the last element of num
+		iter = num.end() - 1;
+c. Ex
 		#include <iostream>
 		#include <vector>
-		#define row 2
-		#define col 3
+		using namespace std;
+		
+		int main() {
+			vector<int> num {1, 2, 3, 4, 5};
+			vector<int>::iterator iter;
+			
+			// use iterator with for loop
+			for (iter = num.begin(); iter != num.end(); ++iter) {
+				cout << *iter << "  ";
+			}
+			
+			return 0;
+		}
+
+		#include <iostream> 
+		#include <vector> 
+		using namespace std; 
+		   
+		int main() { 
+		    vector<int> vec1; 
+		   
+		    for (int i = 1; i <= 10; i++) 
+		        vec1.push_back(i); 
+		   
+		    cout << "Understanding begin() and end() function: " << endl; 
+		    for (auto i = vec1.begin(); i != vec1.end(); ++i) 
+		        cout << *i << " "; 
+		 
+		    return 0; 
+		}
+
+**4, Vector Và Mảng 1 Chiều**
+
+		#include <iostream>
+		#include <vector>
 		
 		using namespace std;
 		
 		int main(){
-		    vector<vector<int>> v(row, vector<int>(col));
-		    for(int i = 0; i < row; i++){
-		        for(int j = 0; j < col; j++){
+		    int n, tmp; cout << "Nhap so luong phan tu : ";
+		    cin >> n;
+		    vector<int> v(n);
+		    for(int i = 0; i < n; i++){
+		        cout << "Nhap phan tu thu " << i + 1 << " : ";
+		        cin >> v[i];
+		    }
+		    cout << "Day so vua nhap : \n";
+		    for(int i = 0; i < v.size(); i++){
+		        cout << v[i] << " ";
+		    }
+		    return 0;
+		}
+
+**5, Vector Và Mảng 2 Chiều**
+
+Cách 1: 
+
+		#include <iostream>
+		#include <vector>
+		using namespace std;
+		
+		int main(){
+		    int n, m;
+		    cout << "Nhap hang, cot : ";
+		    cin >> n >> m;
+		    vector<vector<int>> v;
+		    for(int i = 0; i < n; i++){
+		        vector<int> row;
+		        for(int j = 0; j < m; j++){
+		            cout << "Nhap phan tu hang " << i + 1 << ", cot " << j + 1 << " : ";
+		            int tmp; cin >> tmp;
+		            row.push_back(tmp);
+		        }   
+		        v.push_back(row);
+		    }
+		    cout << "\nMang 2 chieu vua nhap : \n";
+		    for(int i = 0; i < n; i++){
+		        for(int j = 0; j < m; j++){
+		            cout << v[i][j] << " ";
+		        }
+		        cout << endl;
+		    }
+		    return 0;
+		}
+
+Cách 2:
+
+		#include <iostream>
+		#include <vector>
+		using namespace std;
+		
+		int main(){
+		    int n, m;
+		    cout << "Nhap hang, cot : ";
+		    cin >> n >> m;
+		    vector<vector<int>> v(n, vector<int>(m));
+		    for(int i = 0; i < n; i++){
+		        for(int j = 0; j < m; j++){
 		            cout << "Nhap phan tu hang " << i + 1 << ", cot " << j + 1 << " : ";
 		            cin >> v[i][j];
 		        }   
 		    }
 		    cout << "\nMang 2 chieu vua nhap : \n";
-		    for(int i = 0; i < row; i++){
-		        for(int j = 0; j < col; j++){
+		    for(int i = 0; i < n; i++){
+		        for(int j = 0; j < m; j++){
 		            cout << v[i][j] << " ";
 		        }
 		        cout << endl;
@@ -2598,6 +2734,8 @@ Vector iterators are used to point to the memory address of a vector element. In
 		}
   
 ### II. List
+
+
 
 ### III. Map
 
