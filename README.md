@@ -2753,7 +2753,208 @@ Cách 2:
 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 16: Generic Programming
+> https://www.startertutorials.com/blog/generic-programming-cpp.html
+> 
+> https://www.scaler.com/topics/cpp/generic-programming-in-cpp/
+>
+> https://albertoferrari.github.io/generics/cpp_generic_programming.pdf
+> 
+## A. Generic Functions using Template
+Ex 1:
 
+		#include <iostream> 
+		using namespace std; 
+		  
+		// One function works for all data types. 
+		// This would work even for user defined types 
+		// if operator '>' is overloaded 
+		template <typename T> 
+		  
+		T myMax(T x, T y) { 
+		    return (x > y) ? x : y; 
+		} 
+		  
+		int main() {  
+		    cout << myMax<int>(3, 7) << endl; // call myMax for int
+		    cout << myMax<double>(3.5, 7.5) << endl; // call myMax for double  
+		    cout << myMax<char>('g', 'e') << endl; // call myMax for char 
+		    return 0; 
+		} 
+
+Ex 2: 
+
+		#include <iostream>
+		using namespace std;
+  
+		class Person {
+		    private:
+		        int age;
+		        string name;
+		    public:
+		        Person(string _name, int _age) {
+		            age = _age;
+		            name = _name;
+		        }
+		        void toString() {
+		            cout << name << " is " << age << " years old."<< endl;
+		        }
+		};
+		
+		template < class T > 
+		void printTheData(T &obj) {
+			obj.toString();
+		}
+		
+		int main() {
+		    Person p1 = Person("Tommy Vercetti", 21);
+		    printTheData(p1);
+		    return 0;
+		}
+
+
+## B. Generic Class using Template
+Ex 1: 
+
+		#include <iostream>
+		using namespace std;
+		
+		template < class T >
+		  class Container {
+		    private:
+		      T data;
+		    public:
+		      static int count;
+		    Container() {
+		      count++;
+		    }
+		
+		    static void displayStaticVariable() {
+		      cout << count << endl;
+		    }
+		  };
+		
+		template < class T >
+		  int Container < T > ::count = 0;
+		
+		int main() {
+		  Container < int > obj1;
+		  Container < float > obj2;
+		  Container < int > obj3;
+		  Container < int > ::displayStaticVariable();
+		  Container < float > ::displayStaticVariable();
+		
+		  return 0;
+		}
+
+Ex 2:
+
+		#include <iostream> 
+		using namespace std; 
+		
+		template <typename T> 
+		class Array { 
+		    private: 
+		    	T* ptr; 
+		    	int size; 
+		    
+		    public: 
+		    	Array(T arr[], int s); 
+		    	void print(); 
+		}; 
+		
+		template <typename T> 
+		Array<T>::Array(T arr[], int s) { 
+			ptr = new T[s]; 
+			size = s; 
+			for (int i = 0; i < size; i++) 
+				ptr[i] = arr[i]; 
+		} 
+		
+		template <typename T> 
+		void Array<T>::print() { 
+			for (int i = 0; i < size; i++) 
+				cout << " " << *(ptr + i); 
+			cout << endl; 
+		} 
+		
+		int main() { 
+			int arr[5] = { 1, 2, 3, 4, 5 }; 
+			Array<int> a(arr, 5); 
+			a.print(); 
+			return 0; 
+		} 
+
+Ex 3: 
+
+		#include <iostream>
+		using namespace std;
+		
+		template <typename E>class MyStack{
+		private:
+		   int SIZE;
+		   int tos;
+		   E *items;
+		public:
+		   MyStack(int=10);
+		   ~MyStack(){ delete[] items;}
+		   void push(const E&);
+		   E pop();
+		};
+		
+		template<typename E>MyStack<E>::
+		   MyStack(int s):SIZE(s>0?s:10),tos(-1),items(new E[SIZE]){}
+		
+		template<typename E> void MyStack<E>::push(const E &value){
+		   if (tos == SIZE - 1)
+		      cout<<"Stack is full"<<endl;
+		   else
+		      items[++tos] = value;
+		}
+		
+		template<typename E> E MyStack<E>::pop() {
+		   E item;
+		   if (tos == -1)
+		      cout<<"Stack is empty"<<endl;
+		   else
+		      item = items[tos--];
+		      return item;
+		}
+		
+		int main() {
+		   MyStack<string> strStack(4);
+		   strStack.push("January");
+		   strStack.push("February");
+		   strStack.push("March");
+		   strStack.push("April");
+		   cout<<strStack.pop()<<endl;
+		   cout<<strStack.pop()<<endl;
+		   cout<<strStack.pop()<<endl;
+		   cout<<strStack.pop()<<endl;
+		   cout<<strStack.pop()<<endl;   // stack is empty now
+		   return 0;
+		}
+
+## C. Working with multi-type Generics
+
+		#include <iostream> 
+		using namespace std; 
+		  
+		template <class T, class U> 
+		class A { 
+		    T x; 
+		    U y; 
+		  
+		public: 
+		    A() { 
+		        cout << "Constructor Called" << endl; 
+		    } 
+		}; 
+		  
+		int main() { 
+		    A<char, char> a; 
+		    A<int, double> b; 
+		    return 0; 
+		} 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 17: Smart Pointer - Lambda
 
