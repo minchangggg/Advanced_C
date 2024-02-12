@@ -2982,6 +2982,14 @@ ________________________________________________________________________________
 `+ Dynamic memory allocation // Cấp phát bộ nhớ động`
 
 ## A. new and delete Operators
+a. The "new" operator in C++
+
+Syntax: `data_type* ptr_var = new data_type;`
+
+b. The "delete" Operator in C++
+
+Syntax: `delete ptr_var;`
+
 **Example 1: C++ Dynamic Memory Allocation**
 
 		#include <iostream>
@@ -3093,9 +3101,9 @@ ________________________________________________________________________________
 > https://techacademy.edu.vn/smartpointer-trong-c/
 
 ### I. auto_ptr
-### I. unique_ptr
-### I. shared_ptr
-### I. weak_ptr
+### II. unique_ptr
+### III. shared_ptr
+### IV. weak_ptr
 
 ## B. Lambda
 __________________________________________________________________________________________________________________________________________________________________________
