@@ -2957,7 +2957,46 @@ Ex 3:
 		} 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 17: Smart Pointer - Lambda
+## A. new and delete Operators
+> https://www.geeksforgeeks.org/new-and-delete-operators-in-cpp-for-dynamic-memory/
+>
+> https://daynhauhoc.com/t/cap-phat-dong-dynamic-memory-allocation/31145
+>
+> https://howkteam.vn/course/khoa-hoc-lap-trinh-c-can-ban/cap-phat-dong-trong-c-dynamic-memory-allocation-2734
 
+`+ Static memory allocation // Cấp phát bộ nhớ tĩnh`
+
+		Xảy ra trên các biến tĩnh và biến toàn cục.
+		Vùng nhớ của các loại biến này được cấp phát một lần khi chương trình bắt đầu chạy và vẫn tồn tại trong suốt thời gian tồn tại của chương trình.
+		Kích thước của biến/mảng phải được biết tại thời điểm biên dịch chương trình.
+  
+`+ Automatic memory allocation // Cấp phát bộ nhớ tự động`
+
+		Xảy ra trên các tham số hàm và biến cục bộ.
+		Vùng nhớ của các loại biến này được cấp phát khi chương trình đi vào khối lệnh và được giải phóng khi khối lệnh bị thoát.
+		Kích thước của biến/mảng phải được biết tại thời điểm biên dịch chương trình.
+
+`+ Dynamic memory allocation // Cấp phát bộ nhớ động`
+
+
+
+## B. Smart Pointer
+> https://www.geeksforgeeks.org/smart-pointers-cpp/
+>
+> https://www.geeksforgeeks.org/auto_ptr-unique_ptr-shared_ptr-weak_ptr-in-cpp/
+>
+> https://viblo.asia/p/cc-smart-pointer-MG24BKzBJz3
+>
+> https://viblo.asia/p/tim-hieu-smartpointer-trong-c-phan-1-4dbZND8Q5YM
+>
+> https://techacademy.edu.vn/smartpointer-trong-c/
+
+### I. auto_ptr
+### I. unique_ptr
+### I. shared_ptr
+### I. weak_ptr
+
+## B. Lambda
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 18: 
 
