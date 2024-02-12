@@ -2957,20 +2957,23 @@ Ex 3:
 		} 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 17: Smart Pointer - Lambda
-## A. new and delete Operators
+<img width="350" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/d7568942-e7a3-432c-85a1-d5d279ccc919">
+
+> https://www.scaler.com/topics/cpp/dynamic-memory-allocation-in-cpp/
+>
 > https://www.geeksforgeeks.org/new-and-delete-operators-in-cpp-for-dynamic-memory/
 >
 > https://daynhauhoc.com/t/cap-phat-dong-dynamic-memory-allocation/31145
 >
 > https://howkteam.vn/course/khoa-hoc-lap-trinh-c-can-ban/cap-phat-dong-trong-c-dynamic-memory-allocation-2734
 
-`+ Static memory allocation // Cấp phát bộ nhớ tĩnh`
+`+ Static memory allocation (Compile-time Memory Allocation) // Cấp phát bộ nhớ tĩnh`
 
 		Xảy ra trên các biến tĩnh và biến toàn cục.
 		Vùng nhớ của các loại biến này được cấp phát một lần khi chương trình bắt đầu chạy và vẫn tồn tại trong suốt thời gian tồn tại của chương trình.
 		Kích thước của biến/mảng phải được biết tại thời điểm biên dịch chương trình.
   
-`+ Automatic memory allocation // Cấp phát bộ nhớ tự động`
+`+ Automatic memory allocation (Run-time Memory Allocation) // Cấp phát bộ nhớ tự động`
 
 		Xảy ra trên các tham số hàm và biến cục bộ.
 		Vùng nhớ của các loại biến này được cấp phát khi chương trình đi vào khối lệnh và được giải phóng khi khối lệnh bị thoát.
@@ -2978,7 +2981,105 @@ ________________________________________________________________________________
 
 `+ Dynamic memory allocation // Cấp phát bộ nhớ động`
 
+## A. new and delete Operators
+**Example 1: C++ Dynamic Memory Allocation**
 
+		#include <iostream>
+		using namespace std;
+		
+		int main() {
+		
+		  // declare an int pointer
+		  int* pointInt;
+		
+		  // declare a float pointer
+		  float* pointFloat;
+		
+		  // dynamically allocate memory
+		  pointInt = new int;
+		  pointFloat = new float;
+		
+		  // assigning value to the memory
+		  *pointInt = 45;
+		  *pointFloat = 45.45f;
+		
+		  cout << *pointInt << endl;
+		  cout << *pointFloat << endl;
+		
+		  // deallocate the memory
+		  delete pointInt;
+		  delete pointFloat;
+		
+		  return 0;
+		}
+
+**Example 2: C++ new and delete Operator for Arrays**
+
+		// C++ Program to store GPA of n number of students and display it
+		// where n is the number of students entered by the user
+		
+		#include <iostream>
+		using namespace std;
+		
+		int main() {
+		
+		  int num;
+		  cout << "Enter total number of students: ";
+		  cin >> num;
+		  float* ptr;
+		    
+		  // memory allocation of num number of floats
+		  ptr = new float[num];
+		
+		  cout << "Enter GPA of students." << endl;
+		  for (int i = 0; i < num; ++i) {
+		    cout << "Student" << i + 1 << ": ";
+		    cin >> *(ptr + i);
+		  }
+		
+		  cout << "\nDisplaying GPA of students." << endl;
+		  for (int i = 0; i < num; ++i) {
+		    cout << "Student" << i + 1 << ": " << *(ptr + i) << endl;
+		  }
+		
+		  // ptr memory is released
+		  delete[] ptr;
+		
+		  return 0;
+		}
+
+**Example 3: C++ new and delete Operator for Objects**
+		
+		#include <iostream>
+		using namespace std;
+		
+		class Student {
+		  private:
+		    int age;
+		
+		  public:
+		
+		    // constructor initializes age to 12
+		    Student() : age(12) {}
+		
+		    void getAge() {
+		      cout << "Age = " << age << endl;
+		    }
+		};
+		
+		int main() {
+		
+		  // dynamically declare Student object
+		  Student* ptr = new Student();
+		
+		  // call getAge() function
+		  ptr->getAge();
+		
+		  // ptr memory is released
+		  delete ptr;
+		
+		  return 0;
+		}
 
 ## B. Smart Pointer
 > https://www.geeksforgeeks.org/smart-pointers-cpp/
