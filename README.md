@@ -2735,6 +2735,12 @@ Cách 2:
   
 ### II. List
 > https://www.programiz.com/cpp-programming/list
+>
+> https://websitehcm.com/list-trong-c/
+>
+> https://laptrinhcanban.com/cpp/lap-trinh-cpp-co-ban/list-trong-cpp/list-trong-cpp-la-gi/
+>
+> https://viblo.asia/p/cau-truc-du-lieu-va-giai-thuat-danh-sach-lien-ket-doi-doubly-linked-list-924lJ82WKPM
 
 ![image](https://github.com/minchangggg/Advanced_C/assets/125820144/e2695ead-47bf-4d44-bbdd-8a45c1d53bdc)
 
@@ -2758,9 +2764,11 @@ ________________________________________________________________________________
 > https://www.scaler.com/topics/cpp/generic-programming-in-cpp/
 >
 > https://albertoferrari.github.io/generics/cpp_generic_programming.pdf
-> 
+>
+> https://www.codeguru.com/cplusplus/exploring-the-c-generics-programming-model/
+>
 ## A. Generic Functions using Template
-Ex 1:
+**Ex 1:**
 
 		#include <iostream> 
 		using namespace std; 
@@ -2781,7 +2789,7 @@ Ex 1:
 		    return 0; 
 		} 
 
-Ex 2: 
+**Ex 2:** 
 
 		#include <iostream>
 		using namespace std;
@@ -2813,7 +2821,7 @@ Ex 2:
 
 
 ## B. Generic Class using Template
-Ex 1: 
+**Ex 1:**
 
 		#include <iostream>
 		using namespace std;
@@ -2846,7 +2854,7 @@ Ex 1:
 		  return 0;
 		}
 
-Ex 2:
+**Ex 2:**
 
 		#include <iostream> 
 		using namespace std; 
@@ -2884,7 +2892,7 @@ Ex 2:
 			return 0; 
 		} 
 
-Ex 3: 
+**Ex 3:** 
 
 		#include <iostream>
 		using namespace std;
@@ -3066,7 +3074,6 @@ Syntax: `delete ptr_var;`
 		    int age;
 		
 		  public:
-		
 		    // constructor initializes age to 12
 		    Student() : age(12) {}
 		
@@ -3076,7 +3083,6 @@ Syntax: `delete ptr_var;`
 		};
 		
 		int main() {
-		
 		  // dynamically declare Student object
 		  Student* ptr = new Student();
 		
@@ -3102,10 +3108,168 @@ Syntax: `delete ptr_var;`
 
 ### I. auto_ptr
 ### II. unique_ptr
+
+		#include <iostream>
+		#include <memory>
+		
+		using namespace std;
+		
+		class HinhChuNhat {
+		private:
+		    int ChieuDai;
+		    int ChieuRong;
+		
+		public:
+		    HinhChuNhat(int dai, int rong){
+		        ChieuDai = dai;
+		        ChieuRong = rong;
+		        cout << "Constructor called. "  << endl;
+		    }
+		
+		    void tinhDienTich() {
+		        cout << "Dien tich: " << ChieuDai * ChieuRong << endl;
+		    }
+		
+		    ~HinhChuNhat() {
+		        cout << "Destructor called " << endl;
+		    }
+		};
+		
+		int main() {
+		
+		    unique_ptr <HinhChuNhat> ptr1(new HinhChuNhat(10,5));
+		    
+		    (*ptr1).tinhDienTich();
+		
+		    //unique_ptr <HinhChuNhat> ptr2(ptr1); // Khong cho phep
+		
+		    unique_ptr <HinhChuNhat> ptr2 = move(ptr1); // gan object HinhChuNhat(10,5) cho ptr2, sau do remove ptr1
+		    (*ptr2).tinhDienTich();
+		    (*ptr1).tinhDienTich();
+		
+		    return 0;
+		}
+
 ### III. shared_ptr
+
+		#include <iostream>
+		#include <memory>
+		
+		using namespace std;
+		
+		class HinhChuNhat {
+		private:
+		    int ChieuDai;
+		    int ChieuRong;
+		
+		public:
+		    HinhChuNhat(int dai, int rong){
+		        ChieuDai = dai;
+		        ChieuRong = rong;
+		        cout << "Constructor called. "  << endl;
+		    }
+		
+		    void tinhDienTich() {
+		        cout << "Dien tich: " << ChieuDai * ChieuRong << endl;
+		    }
+		
+		    ~HinhChuNhat() {
+		        cout << "Destructor called " << endl;
+		    }
+		};
+		
+		int main() {
+		    shared_ptr <HinhChuNhat> ptr1 (new HinhChuNhat(40,10));
+		    (*ptr1).tinhDienTich();
+		    shared_ptr <HinhChuNhat> ptr2 (ptr1);
+		    shared_ptr <HinhChuNhat> ptr3;
+		    ptr3 = ptr2;
+		
+		    (*ptr2).tinhDienTich();
+		    (*ptr1).tinhDienTich();
+		    (*ptr3).tinhDienTich();
+		    
+		    cout << "Count: " << ptr1.use_count() << endl;
+		    cout << "Count: " << ptr2.use_count() << endl;
+		    cout << "Count: " << ptr3.use_count() << endl;
+		
+		    return 0;
+		}
+
 ### IV. weak_ptr
 
-## B. Lambda
-__________________________________________________________________________________________________________________________________________________________________________
-# Lesson 18: 
+		#include <iostream>
+		#include <memory>
+		
+		using namespace std;
+		
+		class HinhChuNhat {
+		private:
+		    int ChieuDai;
+		    int ChieuRong;
+		
+		public:
+		    HinhChuNhat(int dai, int rong){
+		        ChieuDai = dai;
+		        ChieuRong = rong;
+		        cout << "Constructor called. "  << endl;
+		    }
+		
+		    void tinhDienTich() {
+		        cout << "Dien tich: " << ChieuDai * ChieuRong << endl;
+		    }
+		    ~HinhChuNhat() {
+		        cout << "Destructor called " << endl;
+		    }
+		};
+		
+		int main() {
+		    shared_ptr <HinhChuNhat> ptr1 (new HinhChuNhat(40,10));
+		    shared_ptr <HinhChuNhat> ptr3(ptr1);
+		    weak_ptr <HinhChuNhat> ptr2;
+		    ptr2 = ptr1;
+		   
+		    ptr1.reset();
+		    ptr3.reset();
+		 
+		    if (auto ptr_lock = ptr2.lock()) ptr_lock->tinhDienTich();
+		    else cout << "Object has been deallocated" << endl;
+		    
+		    cout << "Count: " <<ptr2.use_count() << endl;
+		    return 0;
+		}
 
+## B. Lambda
+
+		#include <iostream>
+		#include <functional>
+		
+		#define PI 3.14
+		
+		using namespace std;
+		
+		void processFunction(int a, int b, const function<void(int, int)>& func) {
+		    cout << "Processing numbers: " << a << " and " << b << endl;
+		    func(a, b);
+		}
+		
+		int main() {
+		    int a = 10;
+		    const double g = 9.8;
+		
+		    processFunction(7, 9, [a](int x, int y) {
+		        cout << "Product: " << x * y + a << endl;
+		    });
+		
+		    processFunction(7, 9, [g](int x, int y) {
+		        cout << "Product: " << x + y + g << endl;
+		    });
+		
+		    processFunction(7, 9, [](int x, int y) {
+		        cout << "Product: " << x - y + PI << endl;
+		    });
+		
+		    return 0;
+		}
+
+__________________________________________________________________________________________________________________________________________________________________________
