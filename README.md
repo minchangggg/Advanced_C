@@ -3106,6 +3106,36 @@ Syntax: `delete ptr_var;`
 >
 > https://techacademy.edu.vn/smartpointer-trong-c/
 
+		#include <iostream>
+		using namespace std;
+		 
+		class SmartPtr {
+		private:
+		    int* ptr; 
+		public:
+		    SmartPtr(int* p = NULL) { ptr = p; }
+		    ~SmartPtr() { delete (ptr); }
+		 
+		    int& operator*() { return *ptr; } // Overloading dereferencing operator
+		    int getValue() { return *ptr; }
+		    void setValue(int value) { *ptr = value; }
+		};
+		 
+		int main() {
+		   SmartPtr ptr1(new int);
+		   ptr1.setValue(50);
+		   cout << "Value: " << ptr1.getValue() << endl;
+		   cout << "Value: " << *ptr1 << endl;
+		
+		   cout << "_____________________________" << endl;
+		   SmartPtr ptr2(new int);
+		   *ptr2 = 20;
+		   cout << "Value: " << ptr2.getValue() << endl;
+		   cout << "Value: " << *ptr2 << endl;
+		
+		    return 0;
+		}
+
 ### I. auto_ptr
 ### II. unique_ptr
 
@@ -3114,13 +3144,13 @@ Syntax: `delete ptr_var;`
 		
 		using namespace std;
 		
+		template < typename T >
 		class HinhChuNhat {
 		private:
-		    int ChieuDai;
-		    int ChieuRong;
+		    T ChieuDai, ChieuRong;
 		
 		public:
-		    HinhChuNhat(int dai, int rong){
+		    HinhChuNhat(T dai, T rong){
 		        ChieuDai = dai;
 		        ChieuRong = rong;
 		        cout << "Constructor called. "  << endl;
@@ -3137,15 +3167,14 @@ Syntax: `delete ptr_var;`
 		
 		int main() {
 		
-		    unique_ptr <HinhChuNhat> ptr1(new HinhChuNhat(10,5));
-		    
-		    (*ptr1).tinhDienTich();
+		    unique_ptr <HinhChuNhat<float>> ptr1(new HinhChuNhat<float>(10.5,5.2));
+		    (*ptr1).tinhDienTich(); // Dien tich: 54.6
 		
 		    //unique_ptr <HinhChuNhat> ptr2(ptr1); // Khong cho phep
-		
-		    unique_ptr <HinhChuNhat> ptr2 = move(ptr1); // gan object HinhChuNhat(10,5) cho ptr2, sau do remove ptr1
-		    (*ptr2).tinhDienTich();
-		    (*ptr1).tinhDienTich();
+      
+		    unique_ptr <HinhChuNhat<float>> ptr2 = move(ptr1); // gan object HinhChuNhat(10,5) cho ptr2, sau do remove ptr1
+		    (*ptr2).tinhDienTich(); // Dien tich: 54.6
+		    // (*ptr1).tinhDienTich(); -> lỗi, 1 unique chỉ đi 1 object, ptr1 đã bị remove
 		
 		    return 0;
 		}
