@@ -2574,8 +2574,78 @@ Ex 3:
 		Hello Young Buffalo
 
 ### 4. Abstraction // Tính trừu tượng 
+Ex: 
 
+> Input
 
+		#include <iostream>
+		#include <string>
+		#include <cmath>
+		
+		using namespace std;
+		
+		class GiaiPhuongTrinh {
+		    private:
+		        double a, b, c;
+		        int x1, x2;
+		
+		        double delta;
+		
+		        void tinhNghiem() {
+		            delta = b*b - 4*a*c;
+		            if (delta < 0) {
+		                delta = -1; 
+		            }
+		            else if (delta == 0)  {
+		                x1 = x2 = -b/ (2*a);  
+		            }    
+		            else if (delta > 0) {
+		                delta = 1;
+		                x1 = (-b + sqrt(delta))/(2*a);
+		                x2 = (-b - sqrt(delta))/(2*a);
+		            }
+		        }
+		     
+		    public:
+		        void enterNumber(double num_a, double num_b, double num_c);
+		        void printResult();
+		
+		};
+		
+		void GiaiPhuongTrinh::enterNumber(double num_a, double num_b, double num_c) {
+		    a = num_a;
+		    b = num_b;
+		    c = num_c;
+		}
+		
+		void GiaiPhuongTrinh::printResult() {
+		    tinhNghiem();
+		    switch ((int)delta) {
+		        case -1:
+		            cout << "PT vo nghiem" << endl;
+		            break;
+		        case 0:
+		            cout << "PT co nghiem kep: " << x1 << endl;
+		            break;
+		        default: 
+		            cout << "PT co 2 nghiem phan biet:" << endl; 
+		            cout << "x1 = " << x1 << "\tx2 = " << x2 << endl; 
+		            break;
+		    }
+		}
+		
+		int main() {
+		    GiaiPhuongTrinh phuongtrinh1;
+		    phuongtrinh1.enterNumber(1,-3,2);
+		    phuongtrinh1.printResult();
+		
+		    return 0;
+		}
+
+> Output
+
+		PT co 2 nghiem phan biet:
+		x1 = 2  x2 = 1
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 15: Standard template library
 ## A. Container
