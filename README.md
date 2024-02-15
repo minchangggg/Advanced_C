@@ -540,6 +540,8 @@ Ex 5:
 		}
 
 ### B. Void Pointer
+> https://www.scaler.com/topics/void-pointer/
+
 `Syntax: void *ptr_void;`
 
 Ex:
@@ -548,7 +550,7 @@ Ex:
 
 		#include <stdio.h>
 		#include <stdlib.h>
-		
+
 		int sum(int a, int b) {
 		    return a+b;
 		}
@@ -558,19 +560,37 @@ Ex:
 		    int value = 5;
 		    double test = 15.7;
 		    char letter = 'A';
-
-     		    void *ptr = NULL;
-		    ptr = &value; printf("value is: %d\n", *(int*)(ptr));
-		    ptr = &test; printf("value is: %f\n", *(double*)(ptr));
-		    ptr = &letter; printf("value is: %c\n", *(char*)(ptr));
-		    ptr = sum; printf("sum: %d\n", ((int (*)(int,int))ptr)(5,6));
+		   
+		    void *ptr = &value;
+		    printf("value is: %d\n", *(int*)(ptr));
 		
-		    void *ptr2[] = {&value, &test, &letter , sum, array};
-		    printf("value: %d\n", *(int*)ptr2[0]);
-		    printf("value: %c\n", *((char*)ptr2[4]+1));
+		    ptr = &test;
+		    printf("value is: %f\n", *(double*)(ptr));
+		
+		    ptr = &letter;
+		    printf("value is: %c\n", *(char*)(ptr));
+		
+		    ptr = (void*)sum;
+		    printf("sum: %d\n", ((int (*)(int,int))ptr)(5,6));
+		
+		
+		    void *ptr1[] = {&value, &test, &letter , (void*)sum, array};
+		    printf("value: %d\n", *(int*)ptr1[0]);
+		    printf("value: %s\n", ((char*)ptr1[4]));
 		
 		    return 0;
 		}
+
+> Output
+
+		value is: 5
+		value is: 15.700000
+		value is: A
+		sum: 11
+		________________________________
+		
+		value: 5
+		value: Hello
 
 ### C. Pointer to Constant
 #### Syntax: int const *ptr_const; 
