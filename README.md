@@ -3170,7 +3170,7 @@ Syntax: `delete ptr_var;`
 		    unique_ptr <HinhChuNhat<float>> ptr1(new HinhChuNhat<float>(10.5,5.2));
 		    (*ptr1).tinhDienTich(); // Dien tich: 54.6
 		
-		    //unique_ptr <HinhChuNhat> ptr2(ptr1); // Khong cho phep
+		    //unique_ptr <HinhChuNhat> ptr2(ptr1); // Khong cho phep vì giát trị ptr1 thực chất là địa chỉ của object HinhChuNhat<float>(10.5,5.2) mà mỗi unique ptr chỉ đc trỏ đến 1 object 
       
 		    unique_ptr <HinhChuNhat<float>> ptr2 = move(ptr1); // gan object HinhChuNhat(10,5) cho ptr2, sau do remove ptr1
 		    (*ptr2).tinhDienTich(); // Dien tich: 54.6
@@ -3181,92 +3181,120 @@ Syntax: `delete ptr_var;`
 
 ### III. shared_ptr
 
-		#include <iostream>
-		#include <memory>
-		
-		using namespace std;
-		
-		class HinhChuNhat {
-		private:
-		    int ChieuDai;
-		    int ChieuRong;
-		
-		public:
-		    HinhChuNhat(int dai, int rong){
-		        ChieuDai = dai;
-		        ChieuRong = rong;
-		        cout << "Constructor called. "  << endl;
-		    }
-		
-		    void tinhDienTich() {
-		        cout << "Dien tich: " << ChieuDai * ChieuRong << endl;
-		    }
-		
-		    ~HinhChuNhat() {
-		        cout << "Destructor called " << endl;
-		    }
-		};
-		
-		int main() {
-		    shared_ptr <HinhChuNhat> ptr1 (new HinhChuNhat(40,10));
-		    (*ptr1).tinhDienTich();
-		    shared_ptr <HinhChuNhat> ptr2 (ptr1);
-		    shared_ptr <HinhChuNhat> ptr3;
-		    ptr3 = ptr2;
-		
-		    (*ptr2).tinhDienTich();
-		    (*ptr1).tinhDienTich();
-		    (*ptr3).tinhDienTich();
+		    #include <iostream>
+		    #include <memory>
 		    
-		    cout << "Count: " << ptr1.use_count() << endl;
-		    cout << "Count: " << ptr2.use_count() << endl;
-		    cout << "Count: " << ptr3.use_count() << endl;
+		    using namespace std;
+		    
+		    class HinhChuNhat {
+		    private:
+		        int ChieuDai;
+		        int ChieuRong;
+		    
+		    public:
+		        HinhChuNhat(int dai, int rong){
+		            ChieuDai = dai;
+		            ChieuRong = rong;
+		            cout << "Constructor called. "  << endl;
+		        }
+		    
+		        void tinhDienTich() {
+		            cout << "Dien tich: " << ChieuDai * ChieuRong << endl;
+		        }
+		    
+		        ~HinhChuNhat() {
+		            cout << "Destructor called " << endl;
+		        }
+		    };
+		    
+		    int main() {
+		        shared_ptr <HinhChuNhat> ptr1 (new HinhChuNhat(40,10));
+		        (*ptr1).tinhDienTich();
+		        shared_ptr <HinhChuNhat> ptr2 (ptr1);
+		        shared_ptr <HinhChuNhat> ptr3;
+		        ptr3 = ptr2;
+		    
+		        (*ptr2).tinhDienTich();
+		        (*ptr1).tinhDienTich();
+		        (*ptr3).tinhDienTich();
+		        
+		        cout << "Count: " << ptr1.use_count() << endl; // số con trỏ, trỏ đến địa chỉ object HinhChuNhat(40,10)
+		        cout << "Count: " << ptr2.use_count() << endl; // số con trỏ, trỏ đến địa chỉ object HinhChuNhat(40,10)
+		        cout << "Count: " << ptr3.use_count() << endl; // số con trỏ, trỏ đến địa chỉ object HinhChuNhat(40,10)
 		
-		    return 0;
-		}
+		        ptr3.reset();
+		        // (*ptr3).tinhDienTich(); -> không hợp lệ, ctr bị lỗi
+		        cout << "Count: " << ptr1.use_count() << endl;
+		        cout << "Count: " << ptr3.use_count() << endl; // ptr3 đang không trỏ đến 1 object nào cả 
+		
+		        return 0;
+		    }
 
 ### IV. weak_ptr
 
-		#include <iostream>
-		#include <memory>
+			#include <iostream>
+			#include <memory>
+			
+			using namespace std;
+			
+			class HinhChuNhat {
+			private:
+			    int ChieuDai;
+			    int ChieuRong;
+			
+			public:
+			    HinhChuNhat(int dai, int rong){
+			        ChieuDai = dai;
+			        ChieuRong = rong;
+			        cout << "Constructor called. "  << endl;
+			    }
+			
+			    void tinhDienTich() {
+			        cout << "Dien tich: " << ChieuDai * ChieuRong << endl;
+			    }
+			    ~HinhChuNhat() {
+			        cout << "Destructor called " << endl;
+			    }
+			};
+			
+			int main() {
+			    shared_ptr <HinhChuNhat> ptr1 (new HinhChuNhat(40,10));
+			    shared_ptr <HinhChuNhat> ptr2(ptr1);
+			    weak_ptr <HinhChuNhat> ptr3 (ptr1);
+		            weak_ptr <HinhChuNhat> ptr4 (ptr2);
+				    
+		            // ________________________________________________________________________________________________________________________________________ 
+		            cout << "\nCase 1" << endl; // Khi chưa reset, giá trị của ptr1 và ptr2 vẫn còn.
+		            
+		            if (auto ptr_lock = ptr3.lock()) ptr_lock->tinhDienTich(); // diện tích = 400
+				    else cout << "Object has been deallocated" << endl;
+				    
+		            if (auto ptr_lock = ptr4.lock()) ptr_lock->tinhDienTich();  // diện tích = 400
+				    else cout << "Object has been deallocated" << endl;
 		
-		using namespace std;
+		            cout << "Count: " <<ptr1.use_count() << endl;
+		            cout << "Count: " <<ptr2.use_count() << endl;
 		
-		class HinhChuNhat {
-		private:
-		    int ChieuDai;
-		    int ChieuRong;
+		            // ________________________________________________________________________________________________________________________________________ 
+		            cout << "\nCase 2" << endl; // Khi chỉ reset giá trị ptr1 -> vẫn còn tồn tại 1 share pointer là ptr2 trỏ đến object -> lock() vẫn sẽ trả về một shared_ptr hợp lệ có thể sử dụng để truy cập đối tượng.
+				    
+		            ptr1.reset(); 
+				    if (auto ptr_lock = ptr3.lock()) ptr_lock->tinhDienTich(); // diện tích = 400
+				    else cout << "Object has been deallocated" << endl;
+		            cout << "Count: " <<ptr1.use_count() << endl; // tuy nhiên count ở đây đã = 0
+		            cout << "Count: " <<ptr2.use_count() << endl;
 		
-		public:
-		    HinhChuNhat(int dai, int rong){
-		        ChieuDai = dai;
-		        ChieuRong = rong;
-		        cout << "Constructor called. "  << endl;
-		    }
+		            // ________________________________________________________________________________________________________________________________________ 
+		            cout << "\nCase 3 " << endl; // Cả ptr1 và ptr2 đã bị reset-> shared_ptr đã bị giải phóng -> lock() sẽ trả về một shared_ptr rỗng. 
+		            
+		            ptr2.reset(); 
+		            if (auto ptr_lock = ptr4.lock()) ptr_lock->tinhDienTich();
+				    else cout << "Object has been deallocated" << endl; // "Object has been deallocated"
+		            cout << "Count: " <<ptr1.use_count() << endl; // count = 0
+		            cout << "Count: " <<ptr2.use_count() << endl; // count = 0
 		
-		    void tinhDienTich() {
-		        cout << "Dien tich: " << ChieuDai * ChieuRong << endl;
-		    }
-		    ~HinhChuNhat() {
-		        cout << "Destructor called " << endl;
-		    }
-		};
-		
-		int main() {
-		    shared_ptr <HinhChuNhat> ptr1 (new HinhChuNhat(40,10));
-		    shared_ptr <HinhChuNhat> ptr3(ptr1);
-		    weak_ptr <HinhChuNhat> ptr2;
-		    ptr2 = ptr1;
-		   
-		    ptr1.reset();
-		    ptr3.reset();
-		 
-		    if (auto ptr_lock = ptr2.lock()) ptr_lock->tinhDienTich();
-		    else cout << "Object has been deallocated" << endl;
-		    
-		    cout << "Count: " <<ptr2.use_count() << endl;
-		    return 0;
-		}
+			    return 0;
+			}
 
 ## B. Lambda
 
