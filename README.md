@@ -127,78 +127,89 @@ ________________________________________________________________________________
 
 Example 1:
 
-	#include <stdio.h>
-	#include <stdarg.h>
-	
-	int sum(int count, ...) {
-	    va_list args; // args là 1 con trỏ, dùng để các lưu địa chỉ các tham số truyền vào
-	    va_start(args, count);  // va_start () tạo vùng nhớ, địa chỉ đầu tiên của nó là địa chỉ biến count đc lưu trong args
-	
-	    int result = 0;
-	    for (int i = 0; i < count; i++) {
-		result += va_arg(args, int); // va_arg () dịch chuyển đến địa chỉ tiếp theo, và lấy giá trị tại địa chỉ đó
-	    }
-	
-	    va_end(args); // va_ end () giải phóng vùng nhớ 
-	
-	    return result;
-	}
-	
-	int main() {
-	    printf("Sum: %d\n", sum(4, 1, 2, 3, 4));
-	    return 0;
-	}
+> Input
 
+		#include <stdio.h>
+		#include <stdarg.h>
+		
+		int sum(int count, ...) {
+		    va_list args; // args là 1 con trỏ, dùng để các lưu địa chỉ các tham số truyền vào
+		    va_start(args, count);  // va_start () tạo vùng nhớ, địa chỉ đầu tiên của nó là địa chỉ biến count đc lưu trong args
+		
+		    int result = 0;
+		    for (int i = 0; i < count; i++) {
+			result += va_arg(args, int); // va_arg () dịch chuyển đến địa chỉ tiếp theo, và lấy giá trị tại địa chỉ đó
+		    }
+		
+		    va_end(args); // va_ end () giải phóng vùng nhớ 
+		
+		    return result;
+		}
+		
+		int main() {
+		    printf("Sum: %d\n", sum(4, 1, 2, 3, 4));
+		    return 0;
+		}
+
+> Output
+
+		Sum: 10
+  
 Example 2:
 
-            #include <stdio.h>
-            #include <stdarg.h>
-            
-            typedef enum {
-                TEMPERATURE_SENSOR,
-                PRESSURE_SENSOR
-            } SensorType;
-            
-            void processSensorData(SensorType type, ...) {
-                va_list args;
-                va_start(args, type);
-            
-                switch (type) {
-                    case TEMPERATURE_SENSOR: {
-                        int numArgs = va_arg(args, int);
-                        int sensorId = va_arg(args, int);
-                        float temperature = va_arg(args, double); // float được promote thành double
-                        printf("Temperature Sensor ID: %d, Reading: %.2f degrees\n", sensorId, temperature);
-                        if (numArgs > 2) {
-                            // Xử lý thêm tham số nếu có
-                            char* additionalInfo = va_arg(args, char*);
-                            printf("Additional Info: %s\n", additionalInfo);
-                        }
-                        break;
-                    }
-                    case PRESSURE_SENSOR: {
-                        int numArgs = va_arg(args, int);
-                        int sensorId = va_arg(args, int);
-                        int pressure = va_arg(args, int);
-                        printf("Pressure Sensor ID: %d, Reading: %d Pa\n", sensorId, pressure);
-                        if (numArgs > 2) {
-                            // Xử lý thêm tham số nếu có
-                            char* unit = va_arg(args, char*);
-                            printf("Unit: %s\n", unit);
-                        }
-                        break;
-                    }
-                }
-            
-                va_end(args);
-            }
-            
-            int main() {
-                processSensorData(TEMPERATURE_SENSOR, 3, 1, 36.5, "Room Temperature");
-                processSensorData(PRESSURE_SENSOR, 2, 2, 101325);
-                return 0;
-            }
+> Input
 
+		#include <stdio.h>
+		#include <stdarg.h>
+		
+		typedef enum { TEMPERATURE_SENSOR, PRESSURE_SENSOR } SensorType;
+		
+		void processSensorData(SensorType type, ...) {
+			va_list args;
+			va_start(args, type);
+		
+			switch (type) {
+			    case TEMPERATURE_SENSOR: {
+				int numArgs = va_arg(args, int);
+				int sensorId = va_arg(args, int);
+				float temperature = va_arg(args, double); // float được promote thành double
+				printf("Temperature Sensor ID: %d, Reading: %.2f degrees\n", sensorId, temperature);
+				if (numArgs > 2) {
+				    // Xử lý thêm tham số nếu có
+				    char* additionalInfo = va_arg(args, char*);
+				    printf("Additional Info: %s\n", additionalInfo);
+				}
+				break;
+			    }
+			    case PRESSURE_SENSOR: {
+				int numArgs = va_arg(args, int);
+				int sensorId = va_arg(args, int);
+				int pressure = va_arg(args, int);
+				printf("Pressure Sensor ID: %d, Reading: %d Pa\n", sensorId, pressure);
+				if (numArgs > 2) {
+				    // Xử lý thêm tham số nếu có
+				    char* unit = va_arg(args, char*);
+				    printf("Unit: %s\n", unit);
+				}
+				break;
+			    }
+			}
+		
+			va_end(args);
+		}
+		
+		int main() {
+			processSensorData(TEMPERATURE_SENSOR, 3, 1, 36.5, "Room Temperature");
+			processSensorData(PRESSURE_SENSOR, 2, 2, 101325);
+			return 0;
+		}
+
+> Output
+
+		Temperature Sensor ID: 1, Reading: 36.50 degrees
+		Additional Info: Room Temperature
+		Pressure Sensor ID: 2, Reading: 101325 Pa
+  
 ### B. C Library - <assert.h>
 
 > - Provides a macro called assert
@@ -243,40 +254,49 @@ Ex2:
 		}
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 3: POINTER
+
 ### A. Function Pointer
 Ex 1:
 
+> Input
+
 		#include <stdio.h>
 		
-		// Hàm mẫu 1
 		void greetEnglish() {
 		    printf("Hello!\n");
 		}
 		
-		// Hàm mẫu 2
 		void greetFrench() {
 		    printf("Bonjour!\n");
 		}
 		
 		int main() {
-		    // Khai báo con trỏ hàm
-		    void (*ptrToGreet)();
+		    void (*ptrToFunc)(); // Khai báo con trỏ hàm
 		
-		    // Gán địa chỉ của hàm greetEnglish cho con trỏ hàm
-		    ptrToGreet = greetEnglish;
+		    ptrToFunc = greetEnglish; // Gán địa chỉ của hàm greetEnglish cho con trỏ hàm
+		    // Gọi hàm thông qua con trỏ hàm -> In ra: Hello!
+      		    (*ptrToFunc)();// cách 1
+	 	    ptrToFunc();// cách 2
+	 
 		
-		    // Gọi hàm thông qua con trỏ hàm
-		    (*ptrToGreet)();  // In ra: Hello!
-		
-		    // Gán địa chỉ của hàm greetFrench cho con trỏ hàm
-		    ptrToGreet = greetFrench;
-		
-		    // Gọi hàm thông qua con trỏ hàm
-		    (*ptrToGreet)();  // In ra: Bonjour!
+		    ptrToFunc = greetFrench; // Gán địa chỉ của hàm greetFrench cho con trỏ hàm
+		    // Gọi hàm thông qua con trỏ hàm -> In ra: Bonjour!
+      		    (*ptrToFunc)(); // cách 1
+	    	    ptrToFunc(); // cách 2
 		
 		    return 0;
 		}
+
+> Output
+
+		Hello!
+		Hello!
+		Bonjour!
+		Bonjour!
+  
 Ex 2:
+
+> Input
 
 		#include <stdio.h>
 		
@@ -285,11 +305,11 @@ Ex 2:
 		}
 		
 		void subtract(int a, int b) {
-		    printf("Subtract of %d by %d is: %d \n",a,b, a-b);
+		    printf("Subtract of %d by %d is: %d \n", a, b, a-b);
 		}
 		
 		void multiple(int a, int b) {
-		    printf("Multiple of %d and %d is: %d \n",a,b, a*b );
+		    printf("Multiple of %d and %d is: %d \n", a, b, a*b );
 		}
 		
 		void divide(int a, int b) {
@@ -301,23 +321,47 @@ Ex 2:
 		}
 		
 		void calculator(void (*ptr)(int, int), int a, int b) {
-		    printf("Program calculate: \n");
 		    ptr(a,b);
 		}
 		
 		int main() {
-		    calculator(sum,5,2);
-		    calculator(subtract,5,2);
-		    calculator(multiple,5,2);
-		    calculator(divide,5,2);
-		
-		    //void (*ptr[])(int, int) = {sum, divide, multiple};
-		    //ptr[0](5,6);
-		
+	            // Cách 1: dùng hàm calculator thay địa chỉ hàm cần tính cho con trỏ hàm
+	            printf("\tProgram calculate: \n");
+			    calculator(sum,5,2);
+			    calculator(subtract,5,2);
+			    calculator(multiple,5,2);
+			    calculator(divide,5,2);
+	
+	            printf ("______________________________\n");
+	
+	            // Cách 2: tạo 1 mảng chứa các con trỏ hàm cho từng hàm riêng biệt
+	            printf("\tProgram calculate: \n");
+			    void (*ptr[])(int, int) = {sum, subtract, multiple, divide};
+			    ptr[0](5,2);
+	            ptr[1](5,2);
+	            ptr[2](5,2);
+	            ptr[3](5,2);
+			
 		    return 0;
 		}
 
+> Output
+
+		        Program calculate: 
+		Sum of 5 and 2 is: 7
+		Subtract of 5 by 2 is: 3 
+		Multiple of 5 and 2 is: 10 
+		5 divided by 2 is: 2.500000 
+		______________________________
+		        Program calculate: 
+		Sum of 5 and 2 is: 7
+		Subtract of 5 by 2 is: 3 
+		Multiple of 5 and 2 is: 10 
+		5 divided by 2 is: 2.500000 
+
 Ex 3:
+
+> Input
 
 		#include <stdio.h>
 		#include <string.h>
@@ -346,6 +390,8 @@ Ex 3:
 		}
 
 Ex 4: 
+
+> Input
 		
 		#include <stdio.h>
 		#include <string.h>
@@ -494,37 +540,39 @@ Ex 5:
 		}
 
 ### B. Void Pointer
-
-#### Syntax: void *ptr_void;
-Ex: 
-		
-		#include <stdio.h>
-		#include <stdlib.h>
-		
-		intSyntax: int *const const_ptr = &value;
+`Syntax: void *ptr_void;`
 
 Ex:
-                     
+
+> Input
+
 		#include <stdio.h>
 		#include <stdlib.h>
 		
+		int sum(int a, int b) {
+		    return a+b;
+		}
+		
 		int main() {
-		    
+		    char array[] = "Hello";
 		    int value = 5;
-		    int const *ptr_const = &value;
+		    double test = 15.7;
+		    char letter = 'A';
+
+     		    void *ptr = NULL;
+		    ptr = &value; printf("value is: %d\n", *(int*)(ptr));
+		    ptr = &test; printf("value is: %f\n", *(double*)(ptr));
+		    ptr = &letter; printf("value is: %c\n", *(char*)(ptr));
+		    ptr = sum; printf("sum: %d\n", ((int (*)(int,int))ptr)(5,6));
 		
-		    //*ptr_const = 7; // wrong
-		    //ptr_const++; // right
-		    
-		    printf("value: %d\n", *ptr_const);
-		
-		    value = 9;
-		    printf("value: %d\n", *ptr_const);
+		    void *ptr2[] = {&value, &test, &letter , sum, array};
+		    printf("value: %d\n", *(int*)ptr2[0]);
+		    printf("value: %c\n", *((char*)ptr2[4]+1));
 		
 		    return 0;
 		}
 
-### . Pointer to Constant
+### C. Pointer to Constant
 #### Syntax: int const *ptr_const; 
 #### Syntax: const int *ptr_const;
 
