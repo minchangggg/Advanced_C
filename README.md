@@ -2296,130 +2296,284 @@ Static keyword
 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 14: OOP
-### 1. Encapsulation
+### 1. Encapsulation // tính đóng gói
 Ex: 
 
 		#include <iostream>
 		#include <string>
-  
+		
 		using namespace std;
 		
 		class Student {
-		    private:
-		        string Name;
-		        double GPA;
-		        int StudentID;
-		    public:
-		    Student(string name);
-		    string getName() { return Name; }
-		    void setGPA(double gpa) { GPA = gpa; }
-		    double getGPA() { return GPA; }
-		    int getID() { return StudentID; }
+		private:
+			string Name;
+			double GPA;
+			int StudentID;
+		
+		public:
+			Student(string name) {
+				Name = name;
+				static int id = 1000;
+				StudentID = id;
+				++id;
+			}
+		
+			string getName() { return Name; }
+			double getGPA() { return GPA; }
+			int getID() { return StudentID; }
+			
+			void setName(string name) { Name = name; };
+			void setGPA(double gpa) { GPA = gpa; };
+			void setStudentID(int studentID) { StudentID = studentID; }
 		};
 		
-		Student::Student(string name) {
-		    Name = name;
-		    static int id = 1000;
-		    StudentID = id;
-		    ++id;
-		}
-		
 		int main() {
-		    Student student1("Trung");
-		    Student student2("Thai");
-		    Student student3("Thao");
-		
-		    cout << "ID: " << student1.getID() << endl;
-		    cout << "Name: " << student1.getName() << endl;
-		
-		    cout << "ID: " << student2.getID() << endl;
-		    cout << "Name: " << student2.getName() << endl;
-		
-		    cout << "ID: " << student3.getID() << endl;
-		    cout << "Name: " << student3.getName() << endl;
-		    
-		    return 0;
+			Student student1("Trung"); student1.setGPA(8);
+			Student student2("Thai"); student2.setGPA(9);
+			Student student3("Thao"); student3.setGPA(10);
+			
+			cout << "Name: " << student1.getName() << "\tGPA: " << student1.getGPA() << "\tID: " << student1.getID() << endl;
+			cout << "Name: " << student2.getName() << "\tGPA: " << student2.getGPA() << "\tID: " << student2.getID() << endl;
+			cout << "Name: " << student3.getName() << "\tGPA: " << student3.getGPA() << "\tID: " << student3.getID() << endl;
+			
+			return 0;
 		}
 
-### 2. Inheritance
+### 2. Inheritance // tính kế thừa 
 Ex:
 
 		#include <iostream>
 		#include <string>
 		
-		
 		using namespace std;
 		
 		class Person {
 		protected:
-		  string Name;
-		  int Age;
-		  string Home_Address;
+		    string Name;
+		    int Age;
+		    string Home_Address;
 		
 		public:
-		  string getName() { return Name; }
-		  void setName(string name) { Name = name; }
-		  int getAge() { return Age; }
-		  void setAge(int age) { Age = age; }
-		  string getAddress() { return Home_Address; }
-		  void setAddress(string address) { Home_Address = address; }
-		  void displayInfo() {
-		    cout << "Name: " << Name << endl;
-		    cout << "Age: " << Age << endl;
-		    cout << "Address: " << Home_Address << endl;
-		  }
+		    string getName() { return Name; }
+		    void setName(string name) { Name = name; }
+		
+		    int getAge() { return Age; }
+		    void setAge(int age) { Age = age; }
+		
+		    string getAddress() { return Home_Address; }
+		    void setAddress(string address) { Home_Address = address; }
+		
+		    void displayInfo() { 
+		        cout << "Name: " << Name << "\tAge: " << Age << "\tAddress: " << Home_Address << endl; 
+		    }
 		};
 		
 		class Student : public Person {
 		private:
-		  string School_Name;
-		  double GPA;
-		  int StudentID;
-		public:
-		  Student() {
-		    static int id = 1000;
-		    StudentID = id;
-		    id++;
-		  }
+		    string School_Name;
+		    double GPA;
+		    int StudentID;
 		
-		  string getSchoolName() { return School_Name; }
-		  void setSchoolName(string school_name) { School_Name = school_name; }
-		  double getGPA() { return GPA; }
-		  void setGPA(double gpa) { GPA = gpa; }
-		  int getID() { return StudentID; }
-		  void displayInfo() { // overriding
-		    cout << "Name: " << Name << endl;
-		    cout << "Age: " << Age << endl;
-		    cout << "Address: " << Home_Address << endl;
-		    cout << "School name: " << School_Name << endl;
-		    cout << "GPA: " << GPA << endl;
-		  }
+		public:
+		    Student() {
+		        static int id = 1000;
+		        StudentID = id;
+		        ++id;
+		    }
+		
+			string getSchoolName() { return School_Name; }
+		    void setSchoolName(string school_name) { School_Name = school_name; }
+		
+		    double getGPA() { return GPA; }
+		    void setGPA(double gpa) { GPA = gpa; }
+		
+		    int getID() { return StudentID; }
+		
+		    void displayInfo() { // overriding
+		        cout << "Name: " << Name << "\tAge: " << Age << "\tAddress: " << Home_Address << "\tSchool name: " << School_Name << "\tGPA: " << GPA << endl;
+		    }
 		};
 		
 		int main() {
-		  Person person1;
-		  person1.setName("Trung");
-		  person1.setAge(20);
-		  person1.setAddress("HCM");
-		  person1.displayInfo();
-		  
-		  cout << "-----------------------" << endl;
-		  
+		    Person person1;
+		    person1.setName("Trung");
+		    person1.setAge(20);
+		    person1.setAddress("HCM");
+		    person1.displayInfo();
+		
+		    Student student1;
+		    student1.setName("Trunggg");
+		    student1.setAge(24);
+		    student1.setAddress("HCMM");
+		    student1.setGPA(8.1);
+		    student1.setSchoolName("DinhTienHoang");
+		    student1.displayInfo();
+		
+		    return 0;
+		}
+
+### 3. Polymorphism
+**a, Function overriding**
+
+Ex: 
+
+> Input
+
+		#include <iostream>
+		#include <string>
+		
+		using namespace std;
+		
+		class Calc {
+		public:
+		    int sum(int a, int b) {
+		        return a+b;
+		    }
+		    int sum(int a, int b, int c) {
+		        return a+b+c;
+		    }
+		    double sum(double a, double b) {
+		        return a+b;
+		    }
+		};
+		
+		int main() {
+		    Calc* ptr = new Calc();
+		    cout << "Sum: " << ptr->sum(1,2) << endl;
+		    cout << "Sum: " << ptr->sum(2.5,3.7) << endl;
+		    cout << "Sum: " << ptr->sum(1,2,3) << endl;
+		
+		    return 0;
+		}
+
+> Output
+
+		Sum: 3
+		Sum: 6.2
+		Sum: 6
+
+**b, Virtual fuction**
+
+Ex 1:
+
+> Input
+
+		#include <iostream>
+		#include <string>
+		
+		using namespace std;
+		
+		class Person {
+		public:
+		  void show() { cout << "hello person" << endl; } 
+		  virtual void displayInfo() { cout << "HELLO PERSON"<< endl; } // thêm virtual vào chỗ này
+		};
+		
+		class Student : public Person {
+		public:
+		  void show() { cout << "hello student" << endl; } 
+		  void displayInfo() { cout << "HELLO STUDENT"<< endl; }
+		};
+		
+		int main() {
+		  Person *ptr = NULL; 
+		  Person person1;   
 		  Student student1;
-		  student1.setName("Trungg");
-		  student1.setAge(24);
-		  student1.setAddress("HCMM");
-		  student1.setGPA(8.1);
-		  student1.setSchoolName("DinhTienHoang");
-		  student1.displayInfo();
+		  
+		  ptr = &person1;
+		  ptr->show(); 
+		  ptr->displayInfo();  
+
+    	          cout << "-----------------------" << endl;
+	       
+		  ptr = &student1;
+		  ptr->show();
+		  ptr->displayInfo();
 		
 		  return 0;
 		}
 
-### 3. Polymorphism
+> Output
 
+		hello person
+		HELLO PERSON
+		
+		hello person
+		HELLO STUDENT
 
-### 4. Abstraction
+Ex 2: 
+
+> Input
+
+		#include <iostream>
+		#include <string>
+		
+		using namespace std;
+		
+		class Parent {
+		public:
+		  virtual string test() { return "Hello Parent"; } // thêm virtual vào chỗ này
+		  void displayInfo() {cout << test() << endl; }
+		};
+		
+		class Baby : public Parent {
+		public:
+		  string test() { return "Hello Baby"; }
+		};
+		
+		int main() {
+		  Parent parent;
+		  parent.displayInfo();
+		  
+		  cout << "-----------------------" << endl;
+		  
+		  Baby baby;
+		  baby.displayInfo();
+		  return 0;
+		}
+  
+> Output
+
+		Hello Parent
+		-----------------------
+		Hello Baby
+
+Ex 3: 
+
+> Input
+
+		#include <iostream>
+		#include <string>
+		
+		using namespace std;
+		
+		class Buffalo {
+		public:
+		    virtual void  action(){cout << "Hello Buffalo\n";}; // thêm virtual vào chỗ này
+		}; 
+		class YoungBuffalo : public Buffalo {
+		public:
+		    void action(){ cout << "Hello Young Buffalo\n";};
+		};
+		void takeAnBuffalo(Buffalo* buffalo){
+		    buffalo->action();
+		}
+		int main() {
+		  Buffalo *buffalo = new Buffalo();
+		  Buffalo *youngBuffalo = new YoungBuffalo();
+    
+		  takeAnBuffalo(buffalo);
+    		  cout << "-----------------------" << endl;
+		  takeAnBuffalo(youngBuffalo);
+		}
+
+> Output
+
+		Hello Buffalo
+		-----------------------
+		Hello Young Buffalo
+
+### 4. Abstraction // Tính trừu tượng 
 
 
 __________________________________________________________________________________________________________________________________________________________________________
