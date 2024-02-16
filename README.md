@@ -254,8 +254,67 @@ Ex2:
 		}
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 3: POINTER
+### . Void Pointer
+> https://www.scaler.com/topics/void-pointer/
 
-### A. Function Pointer
+`Syntax: void *ptr_void;`
+
+Ex:
+
+> Input
+
+		#include <stdio.h>
+		#include <stdlib.h>
+
+		int sum(int a, int b) {
+		    return a+b;
+		}
+		
+		int main() {
+		    char array[] = "Hello";
+		    int value = 5;
+		    double test = 15.7;
+		    char letter = 'A';
+		   
+		    void *ptr = &value;
+		    printf("value is: %d\n", *(int*)(ptr));
+		
+		    ptr = &test;
+		    printf("value is: %f\n", *(double*)(ptr));
+		
+		    ptr = &letter;
+		    printf("value is: %c\n", *(char*)(ptr));
+		
+		    ptr = (void*)sum;
+		    printf("sum: %d\n", ((int (*)(int,int))ptr)(5,6));
+		
+		    void *ptr1[] = {&value, &test, &letter , (void*)sum, array};
+		    printf("value: %d\n", *(int*)ptr1[0]);
+		    printf("value: %s\n", ((char*)ptr1[4]));
+		
+		    return 0;
+		}
+
+> Output
+
+		value is: 5
+		value is: 15.700000
+		value is: A
+		sum: 11
+		________________________________
+		
+		value: 5
+		value: Hello
+
+### B. Function Pointer
+> https://daynhauhoc.com/t/con-tro-ham-function-pointers/31959
+
+Function pointer is a pointer that points to a function.
+
+(vì function nằm ở code segment - vùng nhớ read-only khi thực thi chương trình -> Function pointer là 1 pointer to const)
+
+Function pointers syntax  `<return_type> (*<name_of_pointer>)( <data_type_of_parameters> );`
+
 Ex 1:
 
 > Input
@@ -277,7 +336,6 @@ Ex 1:
 		    // Gọi hàm thông qua con trỏ hàm -> In ra: Hello!
       		    (*ptrToFunc)();// cách 1
 	 	    ptrToFunc();// cách 2
-	 
 		
 		    ptrToFunc = greetFrench; // Gán địa chỉ của hàm greetFrench cho con trỏ hàm
 		    // Gọi hàm thông qua con trỏ hàm -> In ra: Bonjour!
@@ -539,58 +597,6 @@ Ex 5:
 		   return 0;
 		}
 
-### B. Void Pointer
-> https://www.scaler.com/topics/void-pointer/
-
-`Syntax: void *ptr_void;`
-
-Ex:
-
-> Input
-
-		#include <stdio.h>
-		#include <stdlib.h>
-
-		int sum(int a, int b) {
-		    return a+b;
-		}
-		
-		int main() {
-		    char array[] = "Hello";
-		    int value = 5;
-		    double test = 15.7;
-		    char letter = 'A';
-		   
-		    void *ptr = &value;
-		    printf("value is: %d\n", *(int*)(ptr));
-		
-		    ptr = &test;
-		    printf("value is: %f\n", *(double*)(ptr));
-		
-		    ptr = &letter;
-		    printf("value is: %c\n", *(char*)(ptr));
-		
-		    ptr = (void*)sum;
-		    printf("sum: %d\n", ((int (*)(int,int))ptr)(5,6));
-		
-		
-		    void *ptr1[] = {&value, &test, &letter , (void*)sum, array};
-		    printf("value: %d\n", *(int*)ptr1[0]);
-		    printf("value: %s\n", ((char*)ptr1[4]));
-		
-		    return 0;
-		}
-
-> Output
-
-		value is: 5
-		value is: 15.700000
-		value is: A
-		sum: 11
-		________________________________
-		
-		value: 5
-		value: Hello
 
 ### C. Pointer to Constant
 #### Syntax: int const *ptr_const; 
