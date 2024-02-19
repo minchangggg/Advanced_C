@@ -1,4 +1,4 @@
-#include <"Student.h>
+#include "Student.h
 
 void Student::setData() {
     cout << "\t\t\tEnter Name: ";
@@ -61,10 +61,10 @@ void Student::getData() {
     cout << "Rank: " << getRank() << endl;
 }
 
-Rank Student::getRank(); {
+Rank Student::getRank() {
         if (getAverScore() >= 8.5 && getAverScore() <= 10) return Excellent;
         else if (getAverScore() >= 7 && getAverScore() <= 8.4) return Good;
         else if (getAverScore() >= 5.5 && getAverScore() <= 6.9) return Average;
         else if (getAverScore() >= 4 && getAverScore() <= 5.4) return BelowAverage;
         else return Weak;
-    }
+}
