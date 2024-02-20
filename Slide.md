@@ -49,5 +49,11 @@ https://docs.google.com/presentation/d/1aR-B9TufMyuQZY8ivHZoUpvy0l-HkwXd4I0ZZV8y
 ### Lesson 17: Smart Pointer - Lambda
 https://docs.google.com/presentation/d/1B9iMPLqZ2U0OITUFsZ0Wxq6xzCVdUcnruPUYMxLLu6Q/edit#slide=id.p
 
-### Lesson: Review OOP (C++)
+### Lesson: Review OOP (C++) - [Ex1: Student Management]
 https://docs.google.com/presentation/d/1EaX9KoSMOxsm0eW6sey0JVqRIrxGNGJrJ2ZFO_xeblw/edit
+
+### Lesson: Review OOP (C++) - [Ex2: Restaurant Management]
+https://docs.google.com/presentation/d/1UKhNoLblHNoy3PHfKk7ZFKADzA2XFRU4V3KQyewSlKw/edit#slide=id.g2b2f442098e_0_0
+
+### Lesson: Review OOP (C++) - [Ex3: Worker Management]
+https://docs.google.com/presentation/d/15c3qCLn2WzvYvV_ro_3L_FFwRjPETcnqnP6NbMUrq0E/edit#slide=id.p
