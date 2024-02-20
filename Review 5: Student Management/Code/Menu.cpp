@@ -14,7 +14,7 @@ menustart:
     cout << "\t\t\t 4. Search Student" << endl;
     cout << "\t\t\t 5. Sort Student" << endl;
     cout << "\t\t\t 6. Print Student List" << endl;
-    cout << "\t\t\t 7. Save into database_sv.csv" << endl;
+    cout << "\t\t\t 7. Save into database_sv.csv " << endl;
     cout << "\t\t\t 8. Exit" << endl;
     cout << "\t\t\t............................" << endl;
     cout << "\t\t\tPlease Enter Your Choice: ";
@@ -22,7 +22,8 @@ menustart:
     cin >> choice;
 
     switch (choice) {
-    case 1: // 1. Them sinh vien
+    case 1: // 1. Add New Student
+    {
     insert_student:
         cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
         cout << "------------------------------------- Add Student Details ---------------------------------------------" << endl;
@@ -38,8 +39,10 @@ menustart:
         if (choice == 1) goto insert_student;
 
         break;
+    }
 
-    case 2: // 2. Sua thong tin sinh vien
+    case 2: // 2. Modify Student Information
+    {
     modify_student:
         cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
         cout << "------------------------------------- Student Search Table --------------------------------------------" << endl;
@@ -60,14 +63,16 @@ menustart:
         if (choice == 1) goto modify_student;
 
         break;
+    }
 
-    case 3: // 3. Xoa sinh vien
+    case 3: // 3. Delete Student
+    {
     delete_student:
         cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
         cout << "------------------------------------- Delete Student Details ------------------------------------------" << endl;
         cout << "\nEnter ID of Student which you want to delete: ";
         short int ID_input = 0; cin >> ID_input;
-        deletee (database, ID_input);
+        deletee(database, ID_input);
 
         do {
             cout << "\n\n\t\t\t 1. Continue Deleting Another Student Information " << endl;
@@ -79,8 +84,10 @@ menustart:
         if (choice == 1) goto delete_student;
 
         break;
+    }
 
-    case 4: // 4. Tim kiem sinh vien
+    case 4: // 4. Search Student
+    {
     search_student:
         cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
         cout << "------------------------------------- Student Search Table --------------------------------------------" << endl;
@@ -132,8 +139,10 @@ menustart:
 
         if (choice == 1) goto search_student;
         break;
+    }
 
-    case 5: // 5. Sap xep sinh vien
+    case 5: // 5. Sort Student
+    {
     sort_student:
         cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
         cout << "------------------------------------- Student Rank Table --------------------------------------------" << endl;
@@ -161,8 +170,10 @@ menustart:
 
         if (choice == 1) goto search_student;
         break;
+    }
 
-    case 6: // 6. In ra danh sach sinh vien
+    case 6: // 6. Print Student List
+    {
         print_list(database);
 
         do {
@@ -172,13 +183,15 @@ menustart:
         } while (choice != 0);
 
         break;
+    }
 
-    case 7: // 7. Luu vao file “database_sv.csv”
+    case 7: //7. Save into database_sv.csv
+    {
         cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
         // save_data();
         saveCSV(database);
         cout << "------------------------------------- Successfully Save Data --------------------------------------------" << endl;
-        
+
         do {
             cout << "\n\n\t\t\tPress 0 if you want to exit" << endl;
             cout << "\t\t\tPlease Enter Your Choice: ";
@@ -186,16 +199,19 @@ menustart:
         } while (choice != 0);
 
         break;
+    }
 
-    case 8: // 8. thoát
+    case 8: // 8. Exit
+    {
         cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
         cout << "------------------------------------- Program Is Exit --------------------------------------------" << endl;
         exit(0);
+    }
 
     default:
+    {
         cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
         cout << "-------------------------------- Invalid Choice... Please Try Again... --------------------------------" << endl;
-        getch();
         goto menustart;
     }
 }
