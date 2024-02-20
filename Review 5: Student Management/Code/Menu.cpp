@@ -13,9 +13,9 @@ menustart:
     cout << "\t\t\t 3. Delete Student" << endl;
     cout << "\t\t\t 4. Search Student" << endl;
     cout << "\t\t\t 5. Sort Student" << endl;
-    cout << "\t\t\t 6. Print Student List\n" << endl;
-    cout << "\t\t\t 7. Save into database_sv.csv \n" << endl;
-    cout << "\t\t\t 8. Exit\n" << endl;
+    cout << "\t\t\t 6. Print Student List" << endl;
+    cout << "\t\t\t 7. Save into database_sv.csv" << endl;
+    cout << "\t\t\t 8. Exit" << endl;
     cout << "\t\t\t............................" << endl;
     cout << "\t\t\tPlease Enter Your Choice: ";
     static int choice = 0;
