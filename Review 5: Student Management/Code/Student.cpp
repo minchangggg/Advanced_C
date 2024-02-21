@@ -1,4 +1,5 @@
-#include "Student.h
+#include "Student.h"
+using namespace std;
 
 void Student::setData() {
     cout << "\t\t\tEnter Name: ";
