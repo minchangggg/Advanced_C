@@ -60,6 +60,25 @@ void Student::getData() {
     cout << "Average_score: " << getAverScore() << endl;
 
     cout << "Rank: " << getRank() << endl;
+    switch(getRank()) {
+        case Excellent:
+            cout << "Excellent" << endl;
+            break;
+        case Good:
+            cout << "Good" << endl;
+            break;
+        case Average:
+            cout << "Average" << endl;
+            break;
+        case BelowAverage:
+            cout << "BelowAverage" << endl;
+            break;
+        case Weak: 
+            cout << "Weak" << endl;
+            break;
+        default:
+            break;
+    }
 }
 
 Rank Student::getRank() {
