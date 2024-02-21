@@ -43,7 +43,6 @@ void Student::setData() {
 }
 
 void Student::getData() {
-    cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
     cout << "ID: " << getID() << endl;
 
     cout << "Name: " << getName() << endl;
