@@ -1,5 +1,4 @@
 #include "Menu.h"
-using namespace std;
 
 void menu(list <Student>& database) {
 menustart:
@@ -22,197 +21,198 @@ menustart:
     cin >> choice;
 
     switch (choice) {
-    case 1: // 1. Add New Student
-    {
-    insert_student:
-        cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
-        cout << "------------------------------------- Add Student Details ---------------------------------------------" << endl;
-        insert(database);
-
-        do {
-            cout << "\n\n\t\t\t 1. Continue Adding Another Student Information " << endl;
-            cout << "\t\t\t 2. Exit " << endl;
-            cout << "\t\t\tPlease Enter Your Choice: ";
-            cin >> choice;
-        } while (choice != 1 && choice != 2);
-
-        if (choice == 1) goto insert_student;
-
-        break;
-    }
-
-    case 2: // 2. Modify Student Information
-    {
-    modify_student:
-        cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
-        cout << "------------------------------------- Student Search Table --------------------------------------------" << endl;
-        cout << "\nEnter ID of Student which you want to modify: ";
-        short int ID_input = 0; cin >> ID_input;
-
-        cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
-        modify(database, ID_input);
-        cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
-
-        do {
-            cout << "\n\n\t\t\t 1. Continue Modifying Another Student Information " << endl;
-            cout << "\t\t\t 2. Exit " << endl;
-            cout << "\t\t\tPlease Enter Your Choice: ";
-            cin >> choice;
-        } while (choice != 1 && choice != 2);
-
-        if (choice == 1) goto modify_student;
-
-        break;
-    }
-
-    case 3: // 3. Delete Student
-    {
-    delete_student:
-        cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
-        cout << "------------------------------------- Delete Student Details ------------------------------------------" << endl;
-        cout << "\nEnter ID of Student which you want to delete: ";
-        short int ID_input = 0; cin >> ID_input;
-        deletee(database, ID_input);
-
-        do {
-            cout << "\n\n\t\t\t 1. Continue Deleting Another Student Information " << endl;
-            cout << "\t\t\t 2. Exit " << endl;
-            cout << "Please Enter Your Choice: ";
-            cin >> choice;
-        } while (choice != 1 && choice != 2);
-
-        if (choice == 1) goto delete_student;
-
-        break;
-    }
-
-    case 4: // 4. Search Student
-    {
-    search_student:
-        cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
-        cout << "------------------------------------- Student Search Table --------------------------------------------" << endl;
-
-        do {
-            cout << "1, Search By Name" << endl;
-            cout << "2, Search By ID" << endl;
-            cout << "3, Exit" << endl;
-            cout << "Please Enter Your Choice: ";
-            cin >> choice;
-        } while (choice < 1 && choice >3);
-
-        switch (choice) {
-        case 1:
+        case 1: // 1. Add New Student
         {
-            cout << "\nEnter Name of Student which you want to search: ";
-            string name_input; cin >> name_input;
-
+        insert_student:
             cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
-            search_by_name(database, name_input);
+            cout << "------------------------------------- Add Student Details ---------------------------------------------" << endl;
+            insert(database);
+
+            do {
+                cout << "\n\n\t\t\t 1. Continue Adding Another Student Information " << endl;
+                cout << "\t\t\t 2. Exit " << endl;
+                cout << "\t\t\tPlease Enter Your Choice: ";
+                cin >> choice;
+            } while (choice != 1 && choice != 2);
+
+            if (choice == 1) goto insert_student;
 
             break;
         }
 
-        case 2:
+        case 2: // 2. Modify Student Information
         {
-            cout << "\nEnter ID of Student which you want to search: ";
+        modify_student:
+            cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+            cout << "------------------------------------- Student Search Table --------------------------------------------" << endl;
+            cout << "\nEnter ID of Student which you want to modify: ";
             short int ID_input = 0; cin >> ID_input;
 
             cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
-            search_by_id(database, ID_input);
+            modify(database, ID_input);
+            cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+
+            do {
+                cout << "\n\n\t\t\t 1. Continue Modifying Another Student Information " << endl;
+                cout << "\t\t\t 2. Exit " << endl;
+                cout << "\t\t\tPlease Enter Your Choice: ";
+                cin >> choice;
+            } while (choice != 1 && choice != 2);
+
+            if (choice == 1) goto modify_student;
 
             break;
         }
 
-        case 3:
-            return; // Thoát chương trình 
+        case 3: // 3. Delete Student
+        {
+        delete_student:
+            cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+            cout << "------------------------------------- Delete Student Details ------------------------------------------" << endl;
+            cout << "\nEnter ID of Student which you want to delete: ";
+            short int ID_input = 0; cin >> ID_input;
+            deletee(database, ID_input);
+
+            do {
+                cout << "\n\n\t\t\t 1. Continue Deleting Another Student Information " << endl;
+                cout << "\t\t\t 2. Exit " << endl;
+                cout << "Please Enter Your Choice: ";
+                cin >> choice;
+            } while (choice != 1 && choice != 2);
+
+            if (choice == 1) goto delete_student;
+
+            break;
+        }
+
+        case 4: // 4. Search Student
+        {
+        search_student:
+            cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+            cout << "------------------------------------- Student Search Table --------------------------------------------" << endl;
+
+            do {
+                cout << "1, Search By Name" << endl;
+                cout << "2, Search By ID" << endl;
+                cout << "3, Exit" << endl;
+                cout << "Please Enter Your Choice: ";
+                cin >> choice;
+            } while (choice < 1 && choice >3);
+
+            switch (choice) {
+            case 1:
+            {
+                cout << "\nEnter Name of Student which you want to search: ";
+                string name_input; cin >> name_input;
+
+                cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+                search_by_name(database, name_input);
+
+                break;
+            }
+
+            case 2:
+            {
+                cout << "\nEnter ID of Student which you want to search: ";
+                short int ID_input = 0; cin >> ID_input;
+
+                cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+                search_by_id(database, ID_input);
+
+                break;
+            }
+
+            case 3:
+                return; // Thoát chương trình 
+
+            default:
+                break;
+            }
+
+            do {
+                cout << "\n\n\t\t\t 1. Continue Searching Another Student Information " << endl;
+                cout << "\t\t\t 2. Exit " << endl;
+                cout << "\t\t\tPlease Enter Your Choice: ";
+                cin >> choice;
+            } while (choice != 1 && choice != 2);
+
+            if (choice == 1) goto search_student;
+            break;
+        }
+
+        case 5: // 5. Sort Student
+        {
+        sort_student:
+            cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+            cout << "------------------------------------- Student Rank Table --------------------------------------------" << endl;
+
+            do {
+                cout << "\n\n\t\t\t 1, Sort by name" << endl;
+                cout << "\t\t\t2, Sort by math score" << endl;
+                cout << "\t\t\t3, Sort by physic score" << endl;
+                cout << "\t\t\t4, Sort by chemical score" << endl;
+                cout << "\t\t\t5, Sort by average score" << endl;
+                cout << "\t\t\t6, Exit" << endl;
+                cout << "\t\t\tPlease Enter Your Choice: ";
+                cin >> choice;
+            } while (choice < 1 || choice > 6);
+
+            if (choice == 6) break;
+            // sort();
+
+            do {
+                cout << "\n\n\t\t\t 1. Continue To Sorting Student Information " << endl;
+                cout << "\t\t\t 2. Exit " << endl;
+                cout << "\t\t\tPlease Enter Your Choice: ";
+                cin >> choice;
+            } while (choice != 1 && choice != 2);
+
+            if (choice == 1) goto search_student;
+            break;
+        }
+
+        case 6: // 6. Print Student List
+        {
+            print_list(database);
+
+            do {
+                cout << "\n\n\t\t\tPress 0 if you want to exit" << endl;
+                cout << "\t\t\tPlease Enter Your Choice: ";
+                cin >> choice;
+            } while (choice != 0);
+
+            break;
+        }
+
+        case 7: //7. Save into database_sv.csv
+        {
+            cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+            // save_data();
+            saveCSV(database);
+            cout << "------------------------------------- Successfully Save Data --------------------------------------------" << endl;
+
+            do {
+                cout << "\n\n\t\t\tPress 0 if you want to exit" << endl;
+                cout << "\t\t\tPlease Enter Your Choice: ";
+                cin >> choice;
+            } while (choice != 0);
+
+            break;
+        }
+
+        case 8: // 8. Exit
+        {
+            cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+            cout << "------------------------------------- Program Is Exit --------------------------------------------" << endl;
+            exit(0);
+        }
 
         default:
-            break;
+        {
+            cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+            cout << "-------------------------------- Invalid Choice... Please Try Again... --------------------------------" << endl;
+            goto menustart;
         }
-
-        do {
-            cout << "\n\n\t\t\t 1. Continue Searching Another Student Information " << endl;
-            cout << "\t\t\t 2. Exit " << endl;
-            cout << "\t\t\tPlease Enter Your Choice: ";
-            cin >> choice;
-        } while (choice != 1 && choice != 2);
-
-        if (choice == 1) goto search_student;
-        break;
-    }
-
-    case 5: // 5. Sort Student
-    {
-    sort_student:
-        cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
-        cout << "------------------------------------- Student Rank Table --------------------------------------------" << endl;
-
-        do {
-            cout << "\n\n\t\t\t 1, Sort by name" << endl;
-            cout << "\t\t\t2, Sort by math score" << endl;
-            cout << "\t\t\t3, Sort by physic score" << endl;
-            cout << "\t\t\t4, Sort by chemical score" << endl;
-            cout << "\t\t\t5, Sort by average score" << endl;
-            cout << "\t\t\t6, Exit" << endl;
-            cout << "\t\t\tPlease Enter Your Choice: ";
-            cin >> choice;
-        } while (choice < 1 || choice > 6);
-
-        if (choice == 6) break;
-        // sort();
-
-        do {
-            cout << "\n\n\t\t\t 1. Continue To Sorting Student Information " << endl;
-            cout << "\t\t\t 2. Exit " << endl;
-            cout << "\t\t\tPlease Enter Your Choice: ";
-            cin >> choice;
-        } while (choice != 1 && choice != 2);
-
-        if (choice == 1) goto search_student;
-        break;
-    }
-
-    case 6: // 6. Print Student List
-    {
-        print_list(database);
-
-        do {
-            cout << "\n\n\t\t\tPress 0 if you want to exit" << endl;
-            cout << "\t\t\tPlease Enter Your Choice: ";
-            cin >> choice;
-        } while (choice != 0);
-
-        break;
-    }
-
-    case 7: //7. Save into database_sv.csv
-    {
-        cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
-        // save_data();
-        saveCSV(database);
-        cout << "------------------------------------- Successfully Save Data --------------------------------------------" << endl;
-
-        do {
-            cout << "\n\n\t\t\tPress 0 if you want to exit" << endl;
-            cout << "\t\t\tPlease Enter Your Choice: ";
-            cin >> choice;
-        } while (choice != 0);
-
-        break;
-    }
-
-    case 8: // 8. Exit
-    {
-        cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
-        cout << "------------------------------------- Program Is Exit --------------------------------------------" << endl;
-        exit(0);
-    }
-
-    default:
-    {
-        cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
-        cout << "-------------------------------- Invalid Choice... Please Try Again... --------------------------------" << endl;
-        goto menustart;
     }
 }
 
@@ -451,4 +451,3 @@ void saveCSV(list <Student> &database) {
         file << it.getName() << ',' << it.getMath() << "," << it.getPhysic() << ',' << it.getChemical() << ',' << it.getAverScore() << endl;
     }
 }
-
