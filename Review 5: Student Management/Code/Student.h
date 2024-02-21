@@ -85,7 +85,7 @@ public:
     Student(float _Math_score, float _Physic_score, float _Chemical_score, float _Average_score, Rank _rank) : Person() {
         this->Math_score = 0;
         this->Physic_score = 0;
-        this->Chemical_score = Male;
+        this->Chemical_score = 0;
         this->Average_score = 0;
         this->rank = Excellent;
     }
@@ -110,7 +110,7 @@ public:
     }
 
     void setChemical(float _Chemical_score) {
-        Math_score = _Chemical_score;
+        Chemical_score = _Chemical_score;
     }
     float getChemical() {
         return Chemical_score;
