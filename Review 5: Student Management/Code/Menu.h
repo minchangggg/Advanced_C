@@ -1,7 +1,7 @@
 #ifndef MENU.H
 #define MENU.H
 
-#include "list.h"
+#include "Student.h"
 using namespace std;
 
 void menu(list <Student>& database);
