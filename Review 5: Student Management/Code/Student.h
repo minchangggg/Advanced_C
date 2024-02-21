@@ -46,7 +46,7 @@ public:
     void setName(string _name) {
         name = _name;
     }
-    string getName() {
+    string getName() const {
         return name;
     }
 
@@ -82,7 +82,7 @@ private:
     Rank rank;
 
 public:
-    Student(float _Math_score, float _Physic_score, float _Chemical_score, float _Average_score, Rank _rank) : Person() {
+    Student() : Person() {
         this->Math_score = 0;
         this->Physic_score = 0;
         this->Chemical_score = 0;
@@ -98,25 +98,28 @@ public:
     void setMath(float _Math_score) {
         Math_score = _Math_score;
     }
-    float getMath() {
+
+    float getMath() const {
         return Math_score;
     }
 
     void setPhysic(float _Physic_score) {
         Physic_score = _Physic_score;
     }
-    float getPhysic() {
+
+    float getPhysic() const {
         return Physic_score;
     }
 
     void setChemical(float _Chemical_score) {
         Chemical_score = _Chemical_score;
     }
-    float getChemical() {
+
+    float getChemical() const {
         return Chemical_score;
     }
 
-    float getAverScore() {
+    float getAverScore() const {
         return (Math_score + Physic_score + Chemical_score) / 3;
     }
 
