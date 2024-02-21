@@ -1,10 +1,12 @@
-#ifndef MENU.H
-#define MENU.H
+#ifndef _MENU_H
+#define _MENU_H
 
 #include "Student.h"
+
 using namespace std;
 
 void menu(list <Student>& database);
+
 // 1.	Them sinh vien
 void insert(list <Student>& database);
 
