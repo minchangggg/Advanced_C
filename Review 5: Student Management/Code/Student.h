@@ -1,5 +1,5 @@
-#ifndef STUDENT.H
-#define STUDENT.H
+#ifndef _STUDENT_H
+#define _STUDENT_H
 
 #include <iostream>
 #include <stdint.h>
@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <cstdlib>
 #include <list>
+
 using namespace std;
 
 typedef enum Gender {
