@@ -395,10 +395,6 @@ void search_by_name(list <Student> database, string name_input) {
 }
 
 // 5. Sap xep sinh vien
-void sort_by_name() {
-
-}
-
 bool cmpName(const Student &a, const Student &b) {
     return a.getName() < b.getName();
 }
