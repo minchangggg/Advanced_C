@@ -25,7 +25,7 @@ void Student::setData() {
 
     cout << "\t\t\tEnter ID: ";
     short int _ID; cin >> _ID;
-    setAge(_age);
+    setAge(_ID);
 
     cout << "\t\t\tEnter Student Score: " << endl;
 
