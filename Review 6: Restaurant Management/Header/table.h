@@ -15,7 +15,8 @@ class Table {
 private:
     int tableID;
     Status status;
-    list <Order> dish_order;
+    list <Dish> menu;
+    list <Order> orderList;
     int totalBill;
 
 public:
@@ -34,11 +35,21 @@ public:
     void setStatus(Status _status);
     Status getStatus(); 
 
-    void orderDish(); // 1. gọi món
-    void cancelDish(); // 2. hủy món
-    void changeOrder(); // 3. đổi món
-    list <Order> getOrderList (); // 4. danh sách món đã đặt 
-    void getBill(); // 5. tính bill 
+    // 1. gọi món
+    void orderDish(); 
+    
+    // 2. hủy món 
+    void cancelDish(int ID_input); 
+
+    // 3. đổi số lượng món đã đặt
+    void changeNum(int ID_input); 
+
+    // 4. danh sách món đã đặt 
+    void getOrderList (); 
+
+    // 5. tính bill
+    int getBill(); 
+    bool payBill();
 };
 
 #endif
