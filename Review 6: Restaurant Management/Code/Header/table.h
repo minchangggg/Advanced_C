@@ -29,11 +29,11 @@ public:
         this->totalBill = 0;
     }
 
+    void setStatus(Status _status); // if (payBill()) -> status = Free;
+    Status getStatus();  
+
     void setTableID(int _tableID);
     int getTableID();
-
-    void setStatus(Status _status);
-    Status getStatus(); 
 
     // 1. gọi món
     void orderDish(); 
@@ -50,6 +50,7 @@ public:
     // 5. tính bill
     int getBill(); 
     bool payBill();
+
 };
 
 #endif
