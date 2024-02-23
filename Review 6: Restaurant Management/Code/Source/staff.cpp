@@ -24,6 +24,4 @@ bool Staff::isFull() {
     return false;
 }
 
-void Staff::chooseTable() {}
-
-void Staff::menuStaff() {}
+void Staff::chooseTable(int _tableID) {}
