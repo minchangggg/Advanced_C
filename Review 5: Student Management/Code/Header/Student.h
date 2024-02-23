@@ -2,14 +2,7 @@
 #define _STUDENT_H
 
 #include <iostream>
-#include <stdint.h>
 #include <string>
-#include <math.h>
-#include <conio.h>
-#include <stdio.h>
-#include <fstream>
-#include <stdlib.h>
-#include <cstdlib>
 #include <list>
 
 using namespace std;
