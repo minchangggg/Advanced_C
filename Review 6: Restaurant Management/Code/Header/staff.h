@@ -21,7 +21,6 @@ class Staff {
     void displayTable(); // hiển thị tất cả table đc set up 
     bool isFull (); // kiểm tra có full bàn không 
     void chooseTable (int _tableID); // chọn bàn nếu còn dư hơn 1 bàn 
-    void menuStaff();
 };
 
 #endif
