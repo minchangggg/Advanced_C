@@ -14,7 +14,7 @@ private:
 
 public:
     Dish() {
-        static int _ID = 0;
+        static int _ID = 1;
         this->ID = _ID;
         _ID++;
 
