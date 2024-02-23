@@ -28,7 +28,7 @@ public:
         this->totalBill = 0;
     }
 
-    void setTableID(int _ID);
+    void setTableID(int _tableID);
     int getTableID();
 
     void setStatus(Status _status);
