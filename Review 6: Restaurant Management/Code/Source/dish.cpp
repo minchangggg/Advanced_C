@@ -8,6 +8,7 @@ int Dish::getID() {
 void Dish::setName(string _name) {
     name = _name;
 }
+
 string Dish::getName() {
     return name;
 }
