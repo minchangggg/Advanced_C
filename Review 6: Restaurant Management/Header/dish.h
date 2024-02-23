@@ -8,19 +8,21 @@ using namespace std;
 
 class Dish {
 private:
-    short int ID;
+    int ID;
     string name;
     int price;
 
 public:
     Dish() {
-        this->ID = 0;
+        static int _ID = 0;
+        this->ID = _ID;
+        _ID++;
+
         this->name = "";
         this->price= 0;
     }
-
-    void setID(short int _ID);
-    short int getID();
+    
+    int getID();
 
     void setName(string _name);
     string getName();
