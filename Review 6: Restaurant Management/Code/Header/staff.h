@@ -7,20 +7,18 @@
 using namespace std;
 
 class Staff {
-    private:
-        vector<Table> tableList;
     public:
-        Staff() {}
-        Staff (int _numTable) {
-            for (int i = 0; i < (_numTable); i++) {
-                Table newTable;
-                tableList.push_back(newTable);  
-            }
-        }
+        vector<Table> tableList;
     
-    void displayTable(); // hiển thị tất cả table đc set up 
-    bool isFull (); // kiểm tra có full bàn không 
-    void chooseTable (int _tableID); // chọn bàn nếu còn dư hơn 1 bàn 
+        Staff() {}
+    
+        void getNumTable(int _numTable);
+
+        void displayTable(); // hiển thị tất cả table đc set up 
+        bool isFull (); // kiểm tra có full bàn không 
+
+        void chooseTable (int _tableID); // hiện ra những bàn còn trống, sẽ đc lựa id bàn
+        void getTableInfo (int _tableID, int type, list <Dish> menu);
 };
 
 #endif
