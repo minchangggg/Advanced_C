@@ -18,7 +18,6 @@ typedef struct {
 } Database;
 
 static int choice;
-static int quantity;
 
 void mainMenu (Database &database);
 
