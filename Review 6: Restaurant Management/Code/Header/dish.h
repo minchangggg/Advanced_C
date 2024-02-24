@@ -21,7 +21,8 @@ public:
         this->name = "";
         this->price= 0;
     }
-    
+
+    void setID (int _ID);
     int getID();
 
     void setName(string _name);
