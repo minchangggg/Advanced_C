@@ -1,6 +1,10 @@
 #include "dish.h"
 using namespace std;
 
+void Dish::setID (int _ID) {
+    ID = _ID;
+}
+
 int Dish::getID() {
     return ID;
 }
