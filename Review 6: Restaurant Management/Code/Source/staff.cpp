@@ -1,6 +1,13 @@
 #include "staff.h"
 using namespace std;
 
+void Staff::getNumTable(int _numTable) {
+    for (int i = 0; i < (_numTable); i++) {
+        Table newTable;
+            tableList.push_back(newTable);  
+    }
+}
+
 void Staff::displayTable() {
     cout << "Table ID" << "\t\t";
     for (int i = 0; i < tableList.size(); i++) {
@@ -24,4 +31,36 @@ bool Staff::isFull() {
     return false;
 }
 
-void Staff::chooseTable(int _tableID) {}
+void Staff::chooseTable(int _tableID) {
+    for (auto &i : tableList) {
+        if (i.getTableID() == _tableID) {
+            i.setStatus(Booked);
+        }
+    }
+}
+
+void Staff::getTableInfo (int _tableID, int type, list <Dish> menu) {
+    for (auto &it : tableList) {
+        if (it.getTableID() == _tableID) {
+            switch(type) {
+                case 1: // gọi
+                    it.orderDish(_tableID, menu);
+                    break;
+                case 2: // hủy
+                    it.cancelDish(_tableID);
+                    break;
+                case 3: // thay đổi
+                    it.changeNum(_tableID);
+                    break;
+                case 4: // in ra danh sách 
+                    it.getOrderList(_tableID);
+                    break;
+                case 5:
+                    it.getBill(_tableID);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}
