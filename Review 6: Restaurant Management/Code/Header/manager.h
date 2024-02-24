@@ -9,7 +9,9 @@ private:
     list <Dish> menu;
     int numTable; // số lượng bàn set up
 public:
-    Manager() {}
+    Manager(int _numTable) {
+        this-> numTable = _numTable;
+    }
 
     // 1. Set up số bàn    
     void setNumTable (int _numTable);
