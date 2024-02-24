@@ -12,6 +12,7 @@ typedef enum {
 } Title;
 
 typedef struct {
+    int numTable;
     Manager managerData;
     Staff staffaData;
 } Database;
@@ -19,10 +20,10 @@ typedef struct {
 static int choice;
 static int quantity;
 
-void mainMenu (Database database);
+void mainMenu (Database &database);
 
-void menuStaff (Database database);
+void menuStaff (Database &database);
 
-void menuManager (Database database); 
+void menuManager (Database &database); 
 
 #endif
