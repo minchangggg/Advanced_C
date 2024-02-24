@@ -1,6 +1,11 @@
 #include "table.h"
 using namespace std;
 
+void Table::resetTable () {
+    setStatus(Free);
+    orderList.clear();
+}
+
 void Table::setTableID(int _tableID) {
     tableID = _tableID;
 }
@@ -17,17 +22,24 @@ Status Table::getStatus() {
     return status;
 }
 
-void Table::orderDish() {
+void Table::orderDish(int ID_input, list <Dish> menu) {
     Order newOrder;
 
-    cout << "Enter name of dish you want: ";
-    string _name; 
-    cin.ignore(); cin >> _name;
-    newOrder.dish.setName(_name);
+    cout << "Enter ID of dish you want: ";
+    int _ID; cin >> _ID;
 
+    list<Dish>::iterator it;
+    for (it = menu.begin(); it != menu.end(); ++it) {
+        if (it->getID() == _ID) {
+            newOrder.dish.setID(it->getID());
+            newOrder.dish.setName(it->getName());
+            newOrder.dish.setPrice(it->getPrice());
+            break;
+        }
+    }
+    
     cout << "Enter quantity of dish you want: ";
-    int _num; 
-    cin >> _num;
+    int _num; cin >> _num;
     newOrder.num = _num;  
 
     orderList.push_back(newOrder);
@@ -77,7 +89,7 @@ void Table::changeNum(int ID_input) {
     }
 }
 
-void Table::getOrderList() {
+void Table::getOrderList(int ID_input) {
     int count = 0;
     cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
     cout << "\t\t\t\t\tList of your ordered dishes" << endl << endl;
@@ -88,21 +100,17 @@ void Table::getOrderList() {
     }
 } 
 
-int Table::getBill() {
+void Table::getBill(int ID_input) {
     int _totalBill = 0;
     for (auto i : orderList) {
         _totalBill += i.dish.getPrice() * i.num;
     }
-    return _totalBill;
-} 
-
-bool Table::payBill() {
-    getOrderList();
-
+    
+    getOrderList(ID_input);
     cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
-    cout << "\t\t\tTotal" << endl; // thành tiền
+    cout << "\t\t\tTotal: " << _totalBill << endl; // thành tiền
     cout << "\t\t\tVAT: 10%" << endl;
-    cout << "\t\t\tGrand total" << endl; // tổng tiền thanh toán
+    cout << "\t\t\tGrand total: " << 110/100 * _totalBill << endl; // tổng tiền thanh toán
     cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
 
     int ans = 0;
@@ -113,6 +121,5 @@ bool Table::payBill() {
         cin >> ans;
     } while (ans != 1);
 
-    if (ans==1) return true;
-    else return false;
-}
+    resetTable();
+} 
