@@ -7,14 +7,12 @@
 
 using namespace std;
 
-typedef enum {
-    Morning,
-    Afternoon,
-    Evening
-} Time;
+typedef enum { Mon, Tue, Wed, Thur, Fri } Day;
+
+typedef enum { Morning, Afternoon, Evening } Time;
 
 typedef struct {
-    int Day;
+    Day day;
     Time time;
 } Shift;
 
