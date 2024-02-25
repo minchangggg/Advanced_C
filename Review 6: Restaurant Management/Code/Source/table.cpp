@@ -1,4 +1,4 @@
-#include "table.h"
+#include "../Header/table.h"
 using namespace std;
 
 void Table::resetTable () {

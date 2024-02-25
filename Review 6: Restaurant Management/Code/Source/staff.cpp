@@ -1,4 +1,4 @@
-#include "staff.h"
+#include "../Header/staff.h"
 using namespace std;
 
 void Staff::getNumTable(int _numTable) {

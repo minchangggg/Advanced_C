@@ -1,4 +1,4 @@
-#include "menu.h"
+#include "../Header/menu.h"
 using namespace std;
 
 void mainMenu (Database &database) {
@@ -108,7 +108,7 @@ menuManager_start:
             else goto menuManager_start;
             break;
 
-        case 3:
+        case 3: {
         edit_menu:
             cout << "--------------------------------------------- Menu ----------------------------------------------------" << endl;
             database.managerData.showMenu();
@@ -143,8 +143,9 @@ menuManager_start:
             if (choice == 1) goto edit_menu;
             else goto menuManager_start;
             break;
+        }
 
-        case 4:
+        case 4: {
         delete_menu:
             cout << "--------------------------------------------- Menu ----------------------------------------------------" << endl;
             database.managerData.showMenu();
@@ -171,8 +172,9 @@ menuManager_start:
             if (choice == 1) goto delete_menu;
             else goto menuManager_start;
             break;
+        }
 
-        case 5:
+        case 5: {
             cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
             cout << "--------------------------------------------- Menu ----------------------------------------------------" << endl;
             database.managerData.showMenu();
@@ -189,6 +191,7 @@ menuManager_start:
 
             goto menuManager_start;
             break;
+        }
 
         case 6:
             goto menuManager_start; 
@@ -286,7 +289,7 @@ menuStaff_start:
                 else goto menuStaff_start;
                 break;
 
-            case 2: // 2. Hủy món
+            case 2: { // 2. Hủy món
             delete_order:
                 cout << "--------------------------------------------- Order ----------------------------------------------------" << endl;
                 database.managerData.showMenu();
@@ -315,8 +318,9 @@ menuStaff_start:
                 else if (choice == 2) goto orderMenu_start;
                 else goto menuStaff_start;
                 break;
+            }
 
-            case 3: // 3. thay đổi (số lượng) món
+            case 3: { // 3. thay đổi (số lượng) món
             edit_order:
                 cout << "--------------------------------------------- Order ----------------------------------------------------" << endl;
                 database.managerData.showMenu();
@@ -345,6 +349,7 @@ menuStaff_start:
                 else if (choice == 2) goto orderMenu_start;
                 else goto menuStaff_start;
                 break;
+            }
 
             case 4: // 4. Danh sách món đã đặt
                 cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
