@@ -20,6 +20,7 @@ typedef struct {
 
 class Employee {
 private:
+    int ID;
     string name;
     string title;
     int phone;
@@ -27,19 +28,28 @@ private:
 
 public:
     Employee() {
+        static int _ID = 1;
+        this->ID = _ID;
+        _ID++;
+
         this->name = "";
         this->title = "";
         this->phone= 0;
     }
 
+    void setID (int _ID);
+    int getID();
+
     void setName(string _name);
     string getName();
 
     void setTitle(string _title);
-    string setTitle();
+    string getTitle();
 
     void setPhone(int _phone);
     int getPhone();
+
+    void setData();
 
     void setShift(Shift _shift);
     Shift getShift();
@@ -52,10 +62,10 @@ public:
     ManageEmployee() {}
 
     void addEmployee(); // 1. Thêm nhân viên
-    void editEmployee(); // 2. Sửa thông tin nhân viên
-    void deleteEmployee(); // 3. Xóa nhân viên
+    void editEmployee(int _ID); // 2. Sửa thông tin nhân viên
+    void deleteEmployee(int _ID); // 3. Xóa nhân viên
 
-    void setShift(); // 4. Set ca làm cho nhân viên
+    void setShift(int _ID); // 4. Set ca làm cho nhân viên
     void showEmployeeList(); // 5. Danh sách thông tin nhân viên
     void tableShift(); // 6. Thời gian làm việc
 
