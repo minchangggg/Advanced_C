@@ -49,49 +49,7 @@ void ManageService::addService(string _name, int _price, list <Service> &service
     newService.setName(_name);
     newService.setPrice(_price);
     service.push_back(newService);
-}
-
-
-//     case 2: // pool
-//         cout << "\t\t\tEnter name for new type of pool service you want: ";
-//         cin.ignore(); cin >> _name;
-//         newService.setName(_name);
-
-//         cout << "Enter price for new type of pool service you want: ";
-//         cin >> _price;
-//         newService.setPrice(_price);
-
-//         pool.push_back(newService);
-//         break;
-
-//     case 3: // gym
-//         cout << "\t\t\tEnter name for new type of gym service you want: ";
-//         cin.ignore(); cin >> _name;
-//         newService.setName(_name);
-
-//         cout << "Enter price for new type of gym service you want: ";
-//         cin >> _price;
-//         newService.setPrice(_price);
-
-//         gym.push_back(newService);
-//         break;
-
-//     case 4: // laundry
-//         cout << "\t\t\tEnter name for new type of laundry service you want: ";
-//         cin.ignore(); cin >> _name;
-//         newService.setName(_name);
-
-//         cout << "Enter price for new type of laundry service you want: ";
-//         cin >> _price;
-//         newService.setPrice(_price);
-
-//         laundry.push_back(newService);
-//         break;
-
-//     default:
-//         break;
-//     }    
-// } 
+}     
 
 void ManageService::deleteService(int ID_input, list <Service> &service) {
     list<Service>::iterator it;
@@ -116,32 +74,6 @@ void ManageService::deleteService(int ID_input, list <Service> &service) {
             dish.erase(it);
         }
     }
-
-    // switch (typeService) {
-    // case 1: // dish
-    //     for (it = dish.begin(); it != dish.end(); ++it) {
-    //         if (it->getID() == ID_input) {
-    //             cout << "\n-----------------------------------------Data is founded-----------------------------------------------" << endl << endl;
-    //             cout << "\t\t\tID" << "\t\t\tName" << "\t\t\tPrice" << endl;
-    //             cout << "\t\t\t" << it->getID() << "\t\t\t" << it->getName() << "\t\t\t" << it->getPrice();
-    //             cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
-
-    //             cout << "\n\t\t\tAre you sure you want to delete this item?" << endl;
-    //             int ans = 0;
-    //             do {
-    //                 cout << "\t\t\t1. Yes" << endl;
-    //                 cout << "2. No" << endl;
-    //                 cout << "\t\t\tPlease Enter Your Choice: " << endl;
-    //                 cin >> ans;
-    //                 if (ans == 2) return;
-
-    //             } while (ans != 1);
-                
-    //             dish.erase(it);
-    //         }
-    //     }
-    //     break;
-
 }
 
 void ManageService::showService(list <Service> &service) {
@@ -165,7 +97,7 @@ void ManageService::editService(int ID_input, list <Service> &service) {
             cout << "\t\t\t" << it->getID() << "\t\t\t" << it->getName() << "\t\t\t" << it->getPrice();
             cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
 
-            cout << "\n\t\t\tPlease re-enter Price of service you want to change: " << endl;
+            cout << "\n\t\t\tPlease re-enter Price of services you want to change: " << endl;
             int _price = 0; cin >> _price; 
             it->setPrice(_price);
             return;
@@ -193,7 +125,7 @@ menuManageService_start:
     switch (_choice) {
         case 1: // 1. Đồ ăn, thức uống
         food_and_beverage_start:
-            cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+            cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
             cout << "-------------------------------------Food and Beverage-------------------------------------------------" << endl;
             do { 
                 cout << "\t\t\t 1. Add dish" << endl; // 1. Thêm món
@@ -210,22 +142,21 @@ menuManageService_start:
             switch (_choice) {
             case 1:
             {
-            add_menu:
-                cout << "--------------------------------------------- Menu ----------------------------------------------------" << endl;
+            add_dish:
+                cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
                 showService(dish);
-                cout << endl << endl;
 
-                cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
-                cout << "----------------------------------------- Add dish ------------------------------------------------" << endl;
-                cout << "\t\t\tEnter name of dish you want: ";
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "------------------------------------------- Add -------------------------------------------------------" << endl;
+                cout << "\t\t\tEnter name of Dish you want: ";
                 string _name = ""; cin.ignore(); cin >> _name;
 
-                cout << "Enter price of dish you want: ";
+                cout << "\t\t\tEnter price of dish you want: ";
                 int _price = 0; cin >> _price;
                 addService(_name, _price, dish); 
 
                 do {
-                    cout << "\n\n\t\t\t 1. Continue Adding Another Dish " << endl;
+                    cout << "\n\n\t\t\t 1. Continue adding another Dish " << endl;
                     cout << "\n\t\t\t 2. Turn back Food and Beverage menu" << endl;
                     cout << "\t\t\t 3. Exit program" << endl;
                     cout << "\t\t\tPlease Enter Your Choice: ";
@@ -235,27 +166,26 @@ menuManageService_start:
 
                 } while (_choice != 1 && _choice != 2);
 
-                if (_choice == 1) goto add_menu;
+                if (_choice == 1) goto add_dish;
                 else goto food_and_beverage_start;
                 break;
             }
 
             case 2: {
-            delete_menu:
-                cout << "--------------------------------------------- Menu ----------------------------------------------------" << endl;
+            delete_dish:
+                cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
                 showService(dish);
-                cout << endl << endl;
 
-                cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
-                cout << "----------------------------------------- Delete dish -------------------------------------------------" << endl;
+                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "------------------------------------------- Delete ----------------------------------------------------" << endl;
                 cout << "\nEnter ID of Dish you want to delete: ";
                 int ID_input = 0; cin >> ID_input;
 
                 deleteService(ID_input, dish);
 
                 do {
-                    cout << "\n\n\t\t\t 1. Continue Deleting Another Dish " << endl;
-                    cout << "\n\t\t\t 2. Turn back manager menu" << endl;
+                    cout << "\n\n\t\t\t 1. Continue deleting another Dish " << endl;
+                    cout << "\n\t\t\t 2. Turn back Food and Beverage menu" << endl;
                     cout << "\t\t\t 3. Exit program" << endl;
                     cout << "\t\t\tPlease Enter Your Choice: ";
                     cin >> _choice;
@@ -264,18 +194,18 @@ menuManageService_start:
 
                 } while (_choice != 1 && _choice != 2);
 
-                if (_choice == 1) goto delete_menu;
+                if (_choice == 1) goto delete_dish;
                 else goto food_and_beverage_start;
                 break;
             }
 
             case 3: {
-                cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
                 cout << "--------------------------------------------- Menu ----------------------------------------------------" << endl;
                 showService(dish);
                 
                 do {
-                    cout << "\n\t\t\t 1. Turn back manager menu" << endl;
+                    cout << "\n\n\n\t\t\t 1. Turn back Food and Beverage menu" << endl;
                     cout << "\t\t\t 2. Exit program" << endl;
                     cout << "\t\t\tPlease Enter Your Choice: ";
                     cin >> _choice;   
@@ -289,29 +219,20 @@ menuManageService_start:
             }
 
             case 4: {
-            edit_menu:
-                cout << "--------------------------------------------- Menu ----------------------------------------------------" << endl;
+            edit_dish:
+                cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
                 showService(dish);
-                cout << endl << endl;
 
-                cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
-                cout << "------------------------------------------ Edit dish --------------------------------------------------" << endl;
+                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "--------------------------------------------- Edit ----------------------------------------------------" << endl;
                 cout << "\nEnter ID of Dish you want to edit: ";
                 int ID_input = 0; cin >> ID_input;
-
-                do {
-                    cout << "1, Edit Name" << endl;
-                    cout << "2, Edit ID" << endl;
-                    cout << "3, Edit Price" << endl;
-                    cout << "Please Enter Your Choice: ";
-                    cin >> _choice;
-                } while (_choice < 1 && _choice >3);
 
                 editService(ID_input, dish);
 
                 do {
-                    cout << "\n\n\t\t\t 1. Continue Editing Another Dish " << endl;
-                    cout << "\n\t\t\t 2. Turn back manager menu" << endl;
+                    cout << "\n\n\t\t\t 1. Continue editing another Dish " << endl;
+                    cout << "\n\t\t\t 2. Turn back Food and Beverage menu" << endl;
                     cout << "\t\t\t 3. Exit program" << endl;
                     cout << "\t\t\tPlease Enter Your Choice: ";
                     cin >> _choice;
@@ -320,16 +241,17 @@ menuManageService_start:
 
                 } while (_choice != 1 && _choice != 2);
 
-                if (_choice == 1) goto edit_menu;
+                if (_choice == 1) goto edit_dish;
                 else goto food_and_beverage_start;
                 break;
             }
             
-            case 5: 
-                cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+            case 5: {
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
                 cout << "------------------------------------- Program Is Exit --------------------------------------------" << endl;
                 exit(0);
                 break;
+            }
 
             default:
                 break;  
@@ -339,31 +261,150 @@ menuManageService_start:
 
         case 2: // 2. Bể bơi
         pool_start:
-            cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+            cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
             cout << "------------------------------------------Pool---------------------------------------------------------" << endl;
             do { 
-                cout << "\t\t\t 1. Add type of pool service" << endl; // 1. Thêm món
-                cout << "\t\t\t 2. Delete type of pool service" << endl; // 2. Xóa món
-                cout << "\t\t\t 3. Types of pool service" << endl; // 3. Danh sách món
-                cout << "\t\t\t 4. Edit type of pool service" << endl; // 4. Sửa món
+                cout << "\t\t\t 1. Add type of pool services" << endl; // 1. Thêm 
+                cout << "\t\t\t 2. Delete type of pool services" << endl; // 2. Xóa 
+                cout << "\t\t\t 3. Types of pool services" << endl; // 3. Danh sách 
+                cout << "\t\t\t 4. Edit type of pool services" << endl; // 4. Sửa 
                 cout << "\t\t\t 5. Turn back main menu" << endl; // 5. 	Quay lại
                 cout << "\t\t\t 6. Exit program" << endl;
                 cout << "\t\t\t............................" << endl;
                 cout << "\t\t\tPlease Enter Your Choice: ";
                 cin >> _choice;
             } while (_choice < 1 || _choice > 6);
+
+
+            switch (_choice) { 
+            case 1:
+            {
+            add_pool:
+                cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
+                showService(pool);
+
+                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "------------------------------------------- Add -------------------------------------------------------" << endl;
+                cout << "\t\t\tEnter name for new type of pool services you want: ";
+                string _name = ""; cin.ignore(); cin >> _name;
+
+                cout << "\t\t\tEnter price for new type of pool services you want: ";
+                int _price = 0; cin >> _price;
+                addService(_name, _price, pool); 
+
+                do {
+                    cout << "\n\n\n\t\t\t 1. Continue adding another type of Pool services " << endl;
+                    cout << "\n\t\t\t 2. Turn back Pool services menu" << endl;
+                    cout << "\t\t\t 3. Exit program" << endl;
+                    cout << "\t\t\tPlease Enter Your Choice: ";
+                    cin >> _choice;
+
+                    if (_choice == 3) exit(0);
+
+                } while (_choice != 1 && _choice != 2);
+
+                if (_choice == 1) goto add_pool;
+                else goto pool_start;
+                break;
+            }
+
+            case 2: {
+            delete_pool:
+                cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
+                showService(pool);
+
+                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "--------------------------------------------Delete-----------------------------------------------------" << endl;
+                cout << "\nEnter ID's type of pool services you want to delete: ";
+                int ID_input = 0; cin >> ID_input;
+
+                deleteService(ID_input, pool);
+
+                do {
+                    cout << "\n\n\t\t\t 1. Continue deleting another type of Pool services " << endl;
+                    cout << "\n\t\t\t 2. Turn back Pool services menu" << endl;
+                    cout << "\t\t\t 3. Exit program" << endl;
+                    cout << "\t\t\tPlease Enter Your Choice: ";
+                    cin >> _choice;
+
+                    if (_choice == 3) exit(0);
+
+                } while (_choice != 1 && _choice != 2);
+
+                if (_choice == 1) goto delete_pool;
+                else goto pool_start;
+                break;
+            }
+
+            case 3: {
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "--------------------------------------------- Menu ----------------------------------------------------" << endl;
+                showService(pool);
+                
+                do {
+                    cout << "\n\n\n\t\t\t 1. Turn back Pool services menu" << endl;
+                    cout << "\t\t\t 2. Exit program" << endl;
+                    cout << "\t\t\tPlease Enter Your Choice: ";
+                    cin >> _choice;   
+                    
+                    if (_choice == 3) exit(0);
+
+                } while (_choice != 1);
+
+                goto pool_start;
+                break;
+            }
+
+            case 4: {
+            edit_pool:
+                cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
+                showService(pool);
+
+                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "--------------------------------------------- Edit ----------------------------------------------------" << endl;
+                cout << "\nEnter ID's type of Pool servicess you want to edit: ";
+                int ID_input = 0; cin >> ID_input;
+
+                editService(ID_input, pool);
+
+                do {
+                    cout << "\n\n\t\t\t 1. Continue editing Another Dish " << endl;
+                    cout << "\n\t\t\t 2. Turn back Pool services menu" << endl;
+                    cout << "\t\t\t 3. Exit program" << endl;
+                    cout << "\t\t\tPlease Enter Your Choice: ";
+                    cin >> _choice;
+
+                    if (_choice == 3) exit(0);
+
+                } while (_choice != 1 && _choice != 2);
+
+                if (_choice == 1) goto edit_pool;
+                else goto pool_start;
+                break;
+            }
+            
+            case 5: {
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "------------------------------------- Program Is Exit --------------------------------------------" << endl;
+                exit(0);
+                break;
+            }
+
+            default:
+                break;  
+            }
 
             break;
 
         case 3: // 3. Gym
         gym_start:
-            cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+            cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
             cout <<  "------------------------------------------Gym----------------------------------------------------------" << endl;  
             do { 
-                cout << "\t\t\t 1. Add type of gym service" << endl; // 1. Thêm món
-                cout << "\t\t\t 2. Delete type of gym service" << endl; // 2. Xóa món
-                cout << "\t\t\t 3. Types of gym service" << endl; // 3. Danh sách món
-                cout << "\t\t\t 4. Edit type of gym service" << endl; // 4. Sửa món
+                cout << "\t\t\t 1. Add type of gym services" << endl; // 1. Thêm 
+                cout << "\t\t\t 2. Delete type of gym services" << endl; // 2. Xóa 
+                cout << "\t\t\t 3. Types of gym services" << endl; // 3. Danh sách 
+                cout << "\t\t\t 4. Edit type of gym services" << endl; // 4. Sửa 
                 cout << "\t\t\t 5. Turn back main menu" << endl; // 5. 	Quay lại
                 cout << "\t\t\t 6. Exit program" << endl;
                 cout << "\t\t\t............................" << endl;
@@ -371,23 +412,261 @@ menuManageService_start:
                 cin >> _choice;
             } while (_choice < 1 || _choice > 6);
 
+            switch (_choice) { 
+            case 1:
+            {
+            add_gym:
+                cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
+                showService(gym);
+
+                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "------------------------------------------- Add -------------------------------------------------------" << endl;
+                cout << "\t\t\tEnter name for new type of Gym services you want: ";
+                string _name = ""; cin.ignore(); cin >> _name;
+
+                cout << "\t\t\tEnter price for new type of Gym services you want: ";
+                int _price = 0; cin >> _price;
+                addService(_name, _price, gym); 
+
+                do {
+                    cout << "\n\n\n\t\t\t 1. Continue adding another type of Gym services " << endl;
+                    cout << "\n\t\t\t 2. Turn back Gym services menu" << endl;
+                    cout << "\t\t\t 3. Exit program" << endl;
+                    cout << "\t\t\tPlease Enter Your Choice: ";
+                    cin >> _choice;
+
+                    if (_choice == 3) exit(0);
+
+                } while (_choice != 1 && _choice != 2);
+
+                if (_choice == 1) goto add_gym;
+                else goto gym_start;
+                break;
+            }
+
+            case 2: {
+            delete_gym:
+                cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
+                showService(gym);
+
+                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "--------------------------------------------Delete-----------------------------------------------------" << endl;
+                cout << "\nEnter ID's type of Gym services you want to delete: ";
+                int ID_input = 0; cin >> ID_input;
+
+                deleteService(ID_input, gym);
+
+                do {
+                    cout << "\n\n\n\t\t\t 1. Continue deleting another type of Gym services " << endl;
+                    cout << "\n\t\t\t 2. Turn back Gym services menu" << endl;
+                    cout << "\t\t\t 3. Exit program" << endl;
+                    cout << "\t\t\tPlease Enter Your Choice: ";
+                    cin >> _choice;
+
+                    if (_choice == 3) exit(0);
+
+                } while (_choice != 1 && _choice != 2);
+
+                if (_choice == 1) goto delete_gym;
+                else goto gym_start;
+                break;
+            }
+
+            case 3: {
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "--------------------------------------------- Menu ----------------------------------------------------" << endl;
+                showService(pool);
+                
+                do {
+                    cout << "\n\n\n\t\t\t 1. Turn back Gym services menu" << endl;
+                    cout << "\t\t\t 2. Exit program" << endl;
+                    cout << "\t\t\tPlease Enter Your Choice: ";
+                    cin >> _choice;   
+                    
+                    if (_choice == 3) exit(0);
+
+                } while (_choice != 1);
+
+                goto gym_start;
+                break;
+            }
+
+            case 4: {
+            edit_gym:
+                cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
+                showService(pool);
+
+                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "--------------------------------------------- Edit ----------------------------------------------------" << endl;
+                cout << "\nEnter ID's type of Gym services you want to edit: ";
+                int ID_input = 0; cin >> ID_input;
+
+                editService(ID_input, gym);
+
+                do {
+                    cout << "\n\n\n\t\t\t 1. Continue editing another type of Gym services " << endl;
+                    cout << "\n\t\t\t 2. Turn back Gym services menu" << endl;
+                    cout << "\t\t\t 3. Exit program" << endl;
+                    cout << "\t\t\tPlease Enter Your Choice: ";
+                    cin >> _choice;
+
+                    if (_choice == 3) exit(0);
+
+                } while (_choice != 1 && _choice != 2);
+
+                if (_choice == 1) goto edit_gym;
+                else goto gym_start;
+                break;
+            }
+            
+            case 5: {
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "------------------------------------- Program Is Exit --------------------------------------------" << endl;
+                exit(0);
+                break;
+            }
+            
+            default:
+                break;  
+            }
+
             break;
         
         case 4: // 4. Giặt ủi
         laundry_start:
-            cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+            cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
             cout << "----------------------------------------Laundry--------------------------------------------------------" << endl;            
             do { 
-                cout << "\t\t\t 1. Add type of laundry service" << endl; // 1. Thêm món
-                cout << "\t\t\t 2. Delete type of laundry service" << endl; // 2. Xóa món
-                cout << "\t\t\t 3. Types of laundry service" << endl; // 3. Danh sách món
-                cout << "\t\t\t 4. Edit type of laundry service" << endl; // 4. Sửa món
+                cout << "\t\t\t 1. Add type of Laundry services" << endl; // 1. Thêm món
+                cout << "\t\t\t 2. Delete type of Laundry services" << endl; // 2. Xóa món
+                cout << "\t\t\t 3. Types of Laundry services" << endl; // 3. Danh sách món
+                cout << "\t\t\t 4. Edit type of Laundry services" << endl; // 4. Sửa món
                 cout << "\t\t\t 5. Turn back main menu" << endl; // 5. 	Quay lại
                 cout << "\t\t\t 6. Exit program" << endl;
                 cout << "\t\t\t............................" << endl;
                 cout << "\t\t\tPlease Enter Your Choice: ";
                 cin >> _choice;
             } while (_choice < 1 || _choice > 6);
+
+            switch (_choice) { 
+            case 1:
+            {
+            add_laundry:
+                cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
+                showService(laundry);
+
+                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "------------------------------------------- Add -------------------------------------------------------" << endl;
+                cout << "\t\t\tEnter name for new type of Laundry services you want: ";
+                string _name = ""; cin.ignore(); cin >> _name;
+
+                cout << "\t\t\tEnter price for new type of Laundry services you want: ";
+                int _price = 0; cin >> _price;
+                addService(_name, _price, laundry); 
+
+                do {
+                    cout << "\n\n\n\t\t\t 1. Continue adding another type of Laundry services " << endl;
+                    cout << "\n\t\t\t 2. Turn back Laundry services menu" << endl;
+                    cout << "\t\t\t 3. Exit program" << endl;
+                    cout << "\t\t\tPlease Enter Your Choice: ";
+                    cin >> _choice;
+
+                    if (_choice == 3) exit(0);
+
+                } while (_choice != 1 && _choice != 2);
+
+                if (_choice == 1) goto add_laundry;
+                else goto laundry_start;
+                break;
+            }
+
+            case 2: {
+            delete_laundry:
+                cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
+                showService(laundry);
+                cout << endl << endl;
+
+                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout <<   "------------------------------------------- Delete ----------------------------------------------------" << endl;
+                cout << "\nEnter ID's type of Laundry services you want to delete: ";
+                int ID_input = 0; cin >> ID_input;
+
+                deleteService(ID_input, laundry);
+
+                do {
+                    cout << "\n\n\n\t\t\t 1. Continue deleting another type of Laundry services " << endl;
+                    cout << "\n\t\t\t 2. Turn back Laundry services menu" << endl;
+                    cout << "\t\t\t 3. Exit program" << endl;
+                    cout << "\t\t\tPlease Enter Your Choice: ";
+                    cin >> _choice;
+
+                    if (_choice == 3) exit(0);
+
+                } while (_choice != 1 && _choice != 2);
+
+                if (_choice == 1) goto delete_laundry;
+                else goto laundry_start;
+                break;
+            }
+
+            case 3: {
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "--------------------------------------------- Menu ----------------------------------------------------" << endl;
+                showService(laundry);
+                
+                do {
+                    cout << "\n\n\n\t\t\t 1. Turn back Laundry services menu" << endl;
+                    cout << "\t\t\t 2. Exit program" << endl;
+                    cout << "\t\t\tPlease Enter Your Choice: ";
+                    cin >> _choice;   
+                    
+                    if (_choice == 3) exit(0);
+
+                } while (_choice != 1);
+
+                goto laundry_start;
+                break;
+            }
+
+            case 4: {
+            edit_laundry:
+            
+                cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
+                showService(pool);
+
+                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "------------------------------------------- Edit ------------------------------------------------------" << endl;
+                cout << "\nEnter ID's type of Laundry services you want to edit: ";
+                int ID_input = 0; cin >> ID_input;
+
+                editService(ID_input, laundry);
+
+                do {
+                    cout << "\n\n\n\t\t\t 1. Continue editing another type of Laundry services " << endl;
+                    cout << "\n\t\t\t 2. Turn back Laundry services menu" << endl;
+                    cout << "\t\t\t 3. Exit program" << endl;
+                    cout << "\t\t\tPlease Enter Your Choice: ";
+                    cin >> _choice;
+
+                    if (_choice == 3) exit(0);
+
+                } while (_choice != 1 && _choice != 2);
+
+                if (_choice == 1) goto edit_laundry;
+                else goto laundry_start;
+                break;
+            }
+            
+            case 5: {
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "------------------------------------- Program Is Exit --------------------------------------------" << endl;
+                exit(0);
+                break;
+            }
+
+            default: 
+                break;  
+            }
 
             break;
 
