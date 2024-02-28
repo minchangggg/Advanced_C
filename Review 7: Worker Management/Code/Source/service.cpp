@@ -154,6 +154,7 @@ menuManageService_start:
                 cout << "\t\t\tEnter price of dish you want: ";
                 int _price = 0; cin >> _price;
                 addService(_name, _price, dish); 
+                cout << "\n---------------------------------- Successfully Add Detail --------------------------------------------" << endl;
 
                 do {
                     cout << "\n\n\t\t\t 1. Continue adding another Dish " << endl;
@@ -176,12 +177,13 @@ menuManageService_start:
                 cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
                 showService(dish);
 
-                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
                 cout << "------------------------------------------- Delete ----------------------------------------------------" << endl;
-                cout << "\nEnter ID of Dish you want to delete: ";
+                cout << "Enter ID of Dish you want to delete: ";
                 int ID_input = 0; cin >> ID_input;
 
                 deleteService(ID_input, dish);
+                cout << "\n---------------------------------- Successfully Delete Detail -----------------------------------------" << endl;
 
                 do {
                     cout << "\n\n\t\t\t 1. Continue deleting another Dish " << endl;
@@ -205,7 +207,7 @@ menuManageService_start:
                 showService(dish);
                 
                 do {
-                    cout << "\n\n\n\t\t\t 1. Turn back Food and Beverage menu" << endl;
+                    cout << "\n\n\t\t\t 1. Turn back Food and Beverage menu" << endl;
                     cout << "\t\t\t 2. Exit program" << endl;
                     cout << "\t\t\tPlease Enter Your Choice: ";
                     cin >> _choice;   
@@ -223,12 +225,13 @@ menuManageService_start:
                 cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
                 showService(dish);
 
-                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
                 cout << "--------------------------------------------- Edit ----------------------------------------------------" << endl;
-                cout << "\nEnter ID of Dish you want to edit: ";
+                cout << "Enter ID of Dish you want to edit: ";
                 int ID_input = 0; cin >> ID_input;
 
                 editService(ID_input, dish);
+                cout << "\n---------------------------------- Successfully Edit Detail -------------------------------------------" << endl;
 
                 do {
                     cout << "\n\n\t\t\t 1. Continue editing another Dish " << endl;
@@ -283,7 +286,7 @@ menuManageService_start:
                 cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
                 showService(pool);
 
-                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
                 cout << "------------------------------------------- Add -------------------------------------------------------" << endl;
                 cout << "\t\t\tEnter name for new type of pool services you want: ";
                 string _name = ""; cin.ignore(); cin >> _name;
@@ -291,9 +294,10 @@ menuManageService_start:
                 cout << "\t\t\tEnter price for new type of pool services you want: ";
                 int _price = 0; cin >> _price;
                 addService(_name, _price, pool); 
+                cout << "\n---------------------------------- Successfully Add Detail --------------------------------------------" << endl;
 
                 do {
-                    cout << "\n\n\n\t\t\t 1. Continue adding another type of Pool services " << endl;
+                    cout << "\n\n\t\t\t 1. Continue adding another type of Pool services " << endl;
                     cout << "\n\t\t\t 2. Turn back Pool services menu" << endl;
                     cout << "\t\t\t 3. Exit program" << endl;
                     cout << "\t\t\tPlease Enter Your Choice: ";
@@ -313,12 +317,13 @@ menuManageService_start:
                 cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
                 showService(pool);
 
-                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
                 cout << "--------------------------------------------Delete-----------------------------------------------------" << endl;
-                cout << "\nEnter ID's type of pool services you want to delete: ";
+                cout << "Enter ID's type of pool services you want to delete: ";
                 int ID_input = 0; cin >> ID_input;
 
                 deleteService(ID_input, pool);
+                cout << "\n---------------------------------- Successfully Delete Detail -----------------------------------------" << endl;
 
                 do {
                     cout << "\n\n\t\t\t 1. Continue deleting another type of Pool services " << endl;
@@ -342,7 +347,7 @@ menuManageService_start:
                 showService(pool);
                 
                 do {
-                    cout << "\n\n\n\t\t\t 1. Turn back Pool services menu" << endl;
+                    cout << "\n\n\t\t\t 1. Turn back Pool services menu" << endl;
                     cout << "\t\t\t 2. Exit program" << endl;
                     cout << "\t\t\tPlease Enter Your Choice: ";
                     cin >> _choice;   
@@ -360,12 +365,13 @@ menuManageService_start:
                 cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
                 showService(pool);
 
-                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
                 cout << "--------------------------------------------- Edit ----------------------------------------------------" << endl;
-                cout << "\nEnter ID's type of Pool servicess you want to edit: ";
+                cout << "Enter ID's type of Pool servicess you want to edit: ";
                 int ID_input = 0; cin >> ID_input;
 
                 editService(ID_input, pool);
+                cout << "\n---------------------------------- Successfully Edit Detail -------------------------------------------" << endl;
 
                 do {
                     cout << "\n\n\t\t\t 1. Continue editing Another Dish " << endl;
@@ -419,7 +425,7 @@ menuManageService_start:
                 cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
                 showService(gym);
 
-                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
                 cout << "------------------------------------------- Add -------------------------------------------------------" << endl;
                 cout << "\t\t\tEnter name for new type of Gym services you want: ";
                 string _name = ""; cin.ignore(); cin >> _name;
@@ -427,9 +433,10 @@ menuManageService_start:
                 cout << "\t\t\tEnter price for new type of Gym services you want: ";
                 int _price = 0; cin >> _price;
                 addService(_name, _price, gym); 
+                cout << "\n---------------------------------- Successfully Add Detail --------------------------------------------" << endl;
 
                 do {
-                    cout << "\n\n\n\t\t\t 1. Continue adding another type of Gym services " << endl;
+                    cout << "\n\n\t\t\t 1. Continue adding another type of Gym services " << endl;
                     cout << "\n\t\t\t 2. Turn back Gym services menu" << endl;
                     cout << "\t\t\t 3. Exit program" << endl;
                     cout << "\t\t\tPlease Enter Your Choice: ";
@@ -449,15 +456,16 @@ menuManageService_start:
                 cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
                 showService(gym);
 
-                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
                 cout << "--------------------------------------------Delete-----------------------------------------------------" << endl;
-                cout << "\nEnter ID's type of Gym services you want to delete: ";
+                cout << "Enter ID's type of Gym services you want to delete: ";
                 int ID_input = 0; cin >> ID_input;
 
                 deleteService(ID_input, gym);
+                cout << "\n---------------------------------- Successfully Delete Detail -----------------------------------------" << endl;
 
                 do {
-                    cout << "\n\n\n\t\t\t 1. Continue deleting another type of Gym services " << endl;
+                    cout << "\n\n\t\t\t 1. Continue deleting another type of Gym services " << endl;
                     cout << "\n\t\t\t 2. Turn back Gym services menu" << endl;
                     cout << "\t\t\t 3. Exit program" << endl;
                     cout << "\t\t\tPlease Enter Your Choice: ";
@@ -478,7 +486,7 @@ menuManageService_start:
                 showService(pool);
                 
                 do {
-                    cout << "\n\n\n\t\t\t 1. Turn back Gym services menu" << endl;
+                    cout << "\n\n\t\t\t 1. Turn back Gym services menu" << endl;
                     cout << "\t\t\t 2. Exit program" << endl;
                     cout << "\t\t\tPlease Enter Your Choice: ";
                     cin >> _choice;   
@@ -496,15 +504,16 @@ menuManageService_start:
                 cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
                 showService(pool);
 
-                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
                 cout << "--------------------------------------------- Edit ----------------------------------------------------" << endl;
-                cout << "\nEnter ID's type of Gym services you want to edit: ";
+                cout << "Enter ID's type of Gym services you want to edit: ";
                 int ID_input = 0; cin >> ID_input;
 
                 editService(ID_input, gym);
+                cout << "\n---------------------------------- Successfully Edit Detail -------------------------------------------" << endl;
 
                 do {
-                    cout << "\n\n\n\t\t\t 1. Continue editing another type of Gym services " << endl;
+                    cout << "\n\n\t\t\t 1. Continue editing another type of Gym services " << endl;
                     cout << "\n\t\t\t 2. Turn back Gym services menu" << endl;
                     cout << "\t\t\t 3. Exit program" << endl;
                     cout << "\t\t\tPlease Enter Your Choice: ";
@@ -525,7 +534,7 @@ menuManageService_start:
                 exit(0);
                 break;
             }
-            
+
             default:
                 break;  
             }
@@ -555,17 +564,18 @@ menuManageService_start:
                 cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
                 showService(laundry);
 
-                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
                 cout << "------------------------------------------- Add -------------------------------------------------------" << endl;
                 cout << "\t\t\tEnter name for new type of Laundry services you want: ";
                 string _name = ""; cin.ignore(); cin >> _name;
 
                 cout << "\t\t\tEnter price for new type of Laundry services you want: ";
                 int _price = 0; cin >> _price;
-                addService(_name, _price, laundry); 
+                addService(_name, _price, laundry);
+                cout << "\n---------------------------------- Successfully Add Detail --------------------------------------------" << endl; 
 
                 do {
-                    cout << "\n\n\n\t\t\t 1. Continue adding another type of Laundry services " << endl;
+                    cout << "\n\n\t\t\t 1. Continue adding another type of Laundry services " << endl;
                     cout << "\n\t\t\t 2. Turn back Laundry services menu" << endl;
                     cout << "\t\t\t 3. Exit program" << endl;
                     cout << "\t\t\tPlease Enter Your Choice: ";
@@ -586,15 +596,16 @@ menuManageService_start:
                 showService(laundry);
                 cout << endl << endl;
 
-                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
-                cout <<   "------------------------------------------- Delete ----------------------------------------------------" << endl;
-                cout << "\nEnter ID's type of Laundry services you want to delete: ";
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "------------------------------------------- Delete ----------------------------------------------------" << endl;
+                cout << "Enter ID's type of Laundry services you want to delete: ";
                 int ID_input = 0; cin >> ID_input;
 
                 deleteService(ID_input, laundry);
+                cout << "\n---------------------------------- Successfully Delete Detail -----------------------------------------" << endl;
 
                 do {
-                    cout << "\n\n\n\t\t\t 1. Continue deleting another type of Laundry services " << endl;
+                    cout << "\n\n\t\t\t 1. Continue deleting another type of Laundry services " << endl;
                     cout << "\n\t\t\t 2. Turn back Laundry services menu" << endl;
                     cout << "\t\t\t 3. Exit program" << endl;
                     cout << "\t\t\tPlease Enter Your Choice: ";
@@ -615,7 +626,7 @@ menuManageService_start:
                 showService(laundry);
                 
                 do {
-                    cout << "\n\n\n\t\t\t 1. Turn back Laundry services menu" << endl;
+                    cout << "\n\n\t\t\t 1. Turn back Laundry services menu" << endl;
                     cout << "\t\t\t 2. Exit program" << endl;
                     cout << "\t\t\tPlease Enter Your Choice: ";
                     cin >> _choice;   
@@ -634,15 +645,16 @@ menuManageService_start:
                 cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
                 showService(pool);
 
-                cout << "\n\n\n-------------------------------------------------------------------------------------------------------" << endl;
+                cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
                 cout << "------------------------------------------- Edit ------------------------------------------------------" << endl;
-                cout << "\nEnter ID's type of Laundry services you want to edit: ";
+                cout << "Enter ID's type of Laundry services you want to edit: ";
                 int ID_input = 0; cin >> ID_input;
 
                 editService(ID_input, laundry);
+                cout << "\n---------------------------------- Successfully Edit Detail -------------------------------------------" << endl;
 
                 do {
-                    cout << "\n\n\n\t\t\t 1. Continue editing another type of Laundry services " << endl;
+                    cout << "\n\n\t\t\t 1. Continue editing another type of Laundry services " << endl;
                     cout << "\n\t\t\t 2. Turn back Laundry services menu" << endl;
                     cout << "\t\t\t 3. Exit program" << endl;
                     cout << "\t\t\tPlease Enter Your Choice: ";
