@@ -207,7 +207,7 @@ menuManageEmployee_start:
         cout << "\t\t\t 4. Set Weekly Shift For Employee" << endl; // 4. Set ca làm cho nhân viên
         cout << "\t\t\t 5. Employee List" << endl; // 5. Danh sách thông tin nhân viên
         cout << "\t\t\t 6. Weekly Shift Timetable " << endl; // 6. Thời gian làm việc
-        cout << "\t\t\t 7. Turn Back Main Menu " << endl; // 7. Quay lại main menu
+        cout << "\t\t\t 7. Turn Back Manager Menu " << endl; // 7. Quay lại main menu
         cout << "\t\t\t 8. Exit" << endl; // 8. Thoát
         cout << "\t\t\t............................" << endl;
         cout << "\t\t\tPlease Enter Your Choice: ";
@@ -327,7 +327,7 @@ menuManageEmployee_start:
 
             goto menuManageEmployee_start;           
 
-        case 7: // 7. Quay lại main menu
+        case 7: // 7. Quay lại Manager menu
             break;
 
         case 8: // 8. Thoát
