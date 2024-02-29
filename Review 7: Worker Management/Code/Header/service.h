@@ -50,14 +50,14 @@ public:
     list <Service> getGym();
     list <Service> getLaundry();
 
-    // 1. Thêm món
+    // 1. Thêm 
     void addService(string _name, int _price, list <Service> &service);
 
-    // 2. Xóa món
+    // 2. Xóa 
     void deleteService(int ID_input, list <Service> &service); 
 
-    // 3. Danh sách món
-    void showService(list <Service> &service); 
+    // 3. Danh sách 
+    void showService(list <Service> service); 
 
     // 4. Cập nhật giá món
     void editService(int ID_input, list <Service> &service); 
