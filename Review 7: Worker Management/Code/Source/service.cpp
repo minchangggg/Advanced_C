@@ -76,7 +76,7 @@ void ManageService::deleteService(int ID_input, list <Service> &service) {
     }
 }
 
-void ManageService::showService(list <Service> &service) {
+void ManageService::showService(list <Service> service) {
     int count = 0;
     cout << "\t\t\tNo" << "\t\t\tID" << "\t\t\tName" << "\t\t\tPrice" << endl;
     cout << "________________________________________________________________________________________________________" << endl;
@@ -116,7 +116,7 @@ void ManageService::menuManageService() {
             cout << "\t\t\t 2. Pool" << endl; // 2. Bể bơi
             cout << "\t\t\t 3. Gym" << endl; // 3. Gym
             cout << "\t\t\t 4. Laundry" << endl; // 4. Giặt ủi
-            cout << "\t\t\t 5. Turn Back Staff Menu" << endl; // 5. Thoát
+            cout << "\t\t\t 5. Turn Back Manager Menu" << endl; // 5. Thoát
             cout << "\t\t\t 6. Exit" << endl; // 6. Thoát
             cout << "\t\t\t............................" << endl;
             cout << "\t\t\tPlease Enter Your Choice: ";
@@ -374,7 +374,7 @@ void ManageService::menuManageService() {
 
                     cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
                     cout << "--------------------------------------------- Edit ----------------------------------------------------" << endl;
-                    cout << "Enter ID's type of Pool servicess you want to edit: ";
+                    cout << "Enter ID's type of Pool services you want to edit: ";
                     int ID_input = 0; cin >> ID_input;
 
                     editService(ID_input, pool);
