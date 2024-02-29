@@ -1,20 +1,20 @@
 #include "../Header/room.h"
 using namespace std;
 
-void Customer::setName(string _name) {
-    name = _name;
+void Customer::setNameCustomer(string _name) {
+    nameCustomer = _name;
 }
 
-string Customer::getName() {
-    return name;
+string Customer::getNameCustomer() {
+    return nameCustomer;
 }
 
-void Customer::setPhone(int _phone) {
-    phone = _phone;
+void Customer::setPhoneCustomer(int _phone) {
+    phoneCustomer = _phone;
 }
 
-int Customer::getPhone() {
-    return phone;
+int Customer::getPhoneCustomer() {
+    return phoneCustomer;
 }
 
 void Customer::setCheckIn (CheckTime _checkIn) {
@@ -41,17 +41,21 @@ string Customer::getFeedback() {
     return feedback;
 }
 
-//___________________________________________________________________________________________________
-    
+//______________________________________________________________________________________________________________________________________
+
+list<Order> Room::getOrderService() {
+    return orderService;
+}  
+
 list<Customer> Room::getCustomerList() {
     return customerList;
 }
 
-void Room::setID(string _roomID) {
+void Room::setRoomID(string _roomID) {
     roomID = _roomID;
 }
 
-string Room::getID() const {
+string Room::getRoomID() const {
     return roomID;
 }
 
@@ -63,18 +67,200 @@ Status Room::getStatus() {
     return status;
 }
 
-//___________________________________________________________________________________________________
+void Room::getRoom() {
+    setStatus(U);
+
+    Customer newCustomer;
+
+    string _name; int _num;
+    cout << "Please enter customer name: ";
+    cin.ignore(); cin >> _name;
+    cout << "Please enter customer phone number: ";
+    cin.ignore(); cin >> _num;
+
+    CheckTime _checkTime;
+    cout << "Please enter time customer Check in: ";
+    cin.ignore(); cin >> _checkTime.Date;
+    cout << "Please enter date customer Check in: ";
+    cin.ignore(); cin >> _checkTime.Time;
+
+    newCustomer.setNameCustomer(_name);
+    newCustomer.setPhoneCustomer(_num);
+    newCustomer.setCheckIn(_checkTime);
+
+    customerList.push_back(newCustomer);
+}
+
+void Room::resetTable() {
+    setStatus(A);
+}
+
+void Room::addOrder(ManageService manageService) {
+    int ans = 0;
+    do{
+        cout << "\t\t\tSelect the type of service you want to use from the categories below" << endl;
+        cout << "\t\t\t1. Food and Beverage" << endl;
+        cout << "\t\t\t2. Pool" << endl;
+        cout << "\t\t\t3. Gym" << endl;
+        cout << "\t\t\t4. Laundry" << endl;
+        cout << "\t\t\tPlease Enter Your Choice: " << endl;
+    } while (ans < 1 || ans > 4);
+
+    Order newOrder; int _ID; int _num; 
+
+    switch(ans) {
+        case 1:
+            cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
+            manageService.showService(manageService.getDish());
+
+            cout << "\n\n\t\t\tEnter ID of Dish you want: ";
+            cin >> _ID;
+
+            list<Service>::iterator it;
+            for (it = manageService.getDish().begin(); it != manageService.getDish().end(); ++it) {
+                if (it->getID() == _ID) {
+                    newOrder.typeService.setID(it->getID());
+                    newOrder.typeService.setName(it->getName());
+                    newOrder.typeService.setPrice(it->getPrice());
+                    break;
+                }
+            }
+
+            cout << "Enter quantity of dish you want: ";
+            cin >> _num;
+            newOrder.numService = _num;  
+
+            orderService.push_back(newOrder);
+
+            break;
+
+        case 2:
+            cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
+            manageService.showService(manageService.getPool());
+
+            cout << "\n\n\t\t\tEnter ID's type of Pool services you want: ";
+            cin >> _ID;
+
+            list<Service>::iterator it;
+            for (it = manageService.getPool().begin(); it != manageService.getPool().end(); ++it) {
+                if (it->getID() == _ID) {
+                    newOrder.typeService.setID(it->getID());
+                    newOrder.typeService.setName(it->getName());
+                    newOrder.typeService.setPrice(it->getPrice());
+                    break;
+                }
+            }
+
+            cout << "Enter quantity for type of Pool services you want: ";
+            cin >> _num;
+            newOrder.numService = _num;  
+
+            orderService.push_back(newOrder);
+
+            break;
+
+        case 3:
+            cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
+            manageService.showService(manageService.getGym());
+
+            cout << "\n\n\t\t\tEnter ID's type of Gym services you want: ";
+            cin >> _ID; 
+
+            list<Service>::iterator it;
+            for (it = manageService.getGym().begin(); it != manageService.getGym().end(); ++it) {
+                if (it->getID() == _ID) {
+                    newOrder.typeService.setID(it->getID());
+                    newOrder.typeService.setName(it->getName());
+                    newOrder.typeService.setPrice(it->getPrice());
+                    break;
+                }
+            }
+
+            cout << "Enter quantity for type of Gym services you want: ";
+            cin >> _num;
+            newOrder.numService = _num;  
+
+            orderService.push_back(newOrder);
+
+            break;
+
+        case 4:
+            cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
+            manageService.showService(manageService.getLaundry());
+
+            cout << "\n\n\t\t\tEnter ID's type of Laundry services you want: ";
+            cin >> _ID;
+
+            list<Service>::iterator it;
+            for (it = manageService.getLaundry().begin(); it != manageService.getLaundry().end(); ++it) {
+                if (it->getID() == _ID) {
+                    newOrder.typeService.setID(it->getID());
+                    newOrder.typeService.setName(it->getName());
+                    newOrder.typeService.setPrice(it->getPrice());
+                    break;
+                }
+            }
+
+            cout << "Enter quantity for type of Laundry services you want: ";
+            cin >> _num;
+            newOrder.numService = _num;  
+
+            orderService.push_back(newOrder);
+
+            break;
+
+        default:
+            break;
+    }
+}
+
+void Room::getOrderList() {
+    int count = 0;
+    cout << "\t\t\t\t\tList Of Your Used Service" << endl << endl;
+    cout << "No" << "\t\tName" << "\t\tPrice" << "\t\tQuantity" << endl;
+    for (auto i : orderService) {
+        count++;
+        cout << count << "\t\t" << i.typeService.getName() << "\t\t" << i.typeService.getPrice() << "\t\t" << i.numService << endl;
+    }
+}
+
+void Room::getBill() {
+    int _totalBill = 0;
+    for (auto i : orderService) {
+        _totalBill += i.typeService.getPrice() * i.numService;
+    }
+    
+    getOrderList();
+    cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+    cout << "\t\t\tTotal: " << _totalBill << endl; // thành tiền
+    cout << "\t\t\tVAT: 10%" << endl;
+    cout << "\t\t\tGrand total: " << 110/100 * _totalBill << endl; // tổng tiền thanh toán
+    cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+} 
+
+//______________________________________________________________________________________________________________________________________
+
+list <Room> ManageRoom::getRoomList() {
+    return roomList;
+}
+
+bool ManageRoom::isFull() {
+    for (auto it : roomList) {
+        if (it.getStatus() == A) return false;
+    }
+    return true;
+}
 
 void ManageRoom::addRoom(string _roomID) {
     Room newRoom;
-    newRoom.setID(_roomID);
+    newRoom.setRoomID(_roomID);
     roomList.push_back(newRoom);
 }
 
 void ManageRoom::deleteRoom(string _ID) {
     list<Room>::iterator it;
     for (it = roomList.begin(); it != roomList.end(); ++it) {
-        if (it->getID() == _ID) {
+        if (it->getRoomID() == _ID) {
             cout << "\n-----------------------------------------Data is founded-----------------------------------------------" << endl << endl;
             cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
 
@@ -99,17 +285,23 @@ void ManageRoom::showRoom() {
         cout << "Floor " << floor << endl;   
 
         for (auto i : roomList) {
-            if (i.getID()[0] == floor) {
-                cout << "\t\t" << i.getID(); 
+            if (i.getRoomID()[0] == floor) {
+                cout << "\t\t" << i.getRoomID(); 
             }
         }
+        cout << endl;
 
         for (auto i : roomList) {
-            if (i.getID()[0] == floor) {
+            if (i.getRoomID()[0] == floor) {
                 cout << "\t\t" << changeStatus(i.getStatus()); 
             }
-        }        
+        }   
+        cout << endl << endl;
     }
+
+    cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+    cout << "\t\t\tU - Unavailable" << endl;
+    cout << "\t\t\tA - Available";
 }
 
 void ManageRoom::getInfor(string _ID) {
@@ -117,10 +309,10 @@ void ManageRoom::getInfor(string _ID) {
     cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
 
     for (auto i : roomList) {
-        if (i.getID() == _ID) {
+        if (i.getRoomID() == _ID) {
             for (auto j : i.getCustomerList()) {
-                cout << "\tName: " << j.getName() << endl;
-                cout << "\tNumber phone: " << j.getPhone() << endl << endl;
+                cout << "\tName: " << j.getNameCustomer() << endl;
+                cout << "\tNumber phone: " << j.getPhoneCustomer() << endl << endl;
 
                 cout << "\tCheckin-Checkout History: " << endl;
                 cout << "\tTime\t\t\t" << "\t\t\tCheck in/out" << endl;
@@ -140,10 +332,11 @@ menuManageRoom_start:
     cout << "\t\t\t|     SERVICE MANAGEMENT     |" << endl;
     cout << "\t\t\t-------------------------------" << endl;
     do { 
-        cout << "\t\t\t 1. Add room" << endl; // 1. Thêm phòng
-        cout << "\t\t\t 2. Delete room" << endl; // 2. Xóa phòng
+        cout << "\t\t\t 1. Add Room" << endl; // 1. Thêm phòng
+        cout << "\t\t\t 2. Delete Room" << endl; // 2. Xóa phòng
         cout << "\t\t\t 3. Room status" << endl; // 3. Xem trạng thái phòng
-        cout << "\t\t\t 4. Exit" << endl; // 5. Thoát
+        cout << "\t\t\t 4. Turn Back Manager Menu" << endl; // 5. Thoát
+        cout << "\t\t\t 5. Exit" << endl; // 5. Thoát
         cout << "\t\t\t............................" << endl;
         cout << "\t\t\tPlease Enter Your Choice: ";
         cin >> _choice;
@@ -205,7 +398,6 @@ menuManageRoom_start:
         cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
         cout << "----------------------------------------------ROOM-----------------------------------------------------" << endl;
         showRoom();
-        cout << endl << endl;
 
         do {
             cout << "\n\n\t\t\t 1. Get room information" << endl;
@@ -223,6 +415,15 @@ menuManageRoom_start:
         }
 
         else goto menuManageRoom_start;
+        break;
+
+    case 4:
+        break;
+
+    case 5:
+        cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
+        cout << "------------------------------------- Program Is Exit --------------------------------------------" << endl;
+        exit(0);
         break;
 
     default:
