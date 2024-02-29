@@ -19,12 +19,18 @@ typedef struct {
 
 class Manager {
 private:
+    int account;
     int password;
+
 public:
     Manager() {
+        this->account = 123456789;
         this->password = 123456789;
     }
+
+    int getAccount();
     int getPassword();
+    
     void menuManager(Database &database);
 };
 
