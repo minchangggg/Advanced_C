@@ -1,9 +1,7 @@
 #ifndef _ROOM_H
 #define _ROOM_H
 
-#include <iostream>
-#include <string>
-#include <list>
+#include "service.h"
 
 using namespace std;
 
@@ -12,10 +10,15 @@ typedef struct {
     string Date;
 } CheckTime;
 
+typedef struct {
+    Service typeService; 
+    int numService;
+} Order;
+
 class Customer {
 private:
-    string name;
-    int phone;
+    string nameCustomer;
+    int phoneCustomer;
     CheckTime checkIn;
     CheckTime checkOut;
     string feedback;
@@ -23,11 +26,11 @@ private:
 public:
     Customer() {}
 
-    void setName(string _name);
-    string getName();
+    void setNameCustomer(string _name);
+    string getNameCustomer();
 
-    void setPhone(int _phone);
-    int getPhone();
+    void setPhoneCustomer(int _phone);
+    int getPhoneCustomer();
 
     void setCheckIn (CheckTime _checkIn);
     void setCheckOut (CheckTime _checkOut);
@@ -41,15 +44,13 @@ public:
 
 typedef enum { 
     U, // Unavailable
-    A, // Available
-    C  // Cleaning
+    A // Available
 } Status;
 
 string changeStatus(Status _status) {
     string status = "";
     if (_status == U) status = "U";
     else if (_status == A) status = "A";
-    else if (_status == C) status = "C";
 
     return status; 
 }
@@ -58,6 +59,9 @@ class Room {
 private:
     string roomID; // ID phòng 
     Status status;
+    list<Order> orderService;
+    int totalBill;
+
     list<Customer> customerList;
 
 public:
@@ -66,14 +70,21 @@ public:
         status = A;
     }
 
+    list<Order> getOrderService();
     list<Customer> getCustomerList();
 
-    void setID(string _roomID);
-    string getID() const;
+    void setRoomID(string _roomID);
+    string getRoomID() const;
 
     void setStatus(Status _status);
     Status getStatus();
 
+    void getRoom();
+    void resetTable();
+
+    void addOrder(ManageService manageService);
+    void getOrderList();
+    void getBill();
 };
 
 class ManageRoom {
@@ -82,11 +93,15 @@ private:
 
 public:
     ManageRoom() {}
+
+    list <Room> getRoomList();
+    bool isFull();
+
     void addRoom(string _roomID);// Thêm phòng
     void deleteRoom(string _ID); // Xóa phòng
 
     bool cmpName(const Room &a, const Room &b) {
-        return a.getID() < b.getID();  
+        return a.getRoomID() < b.getRoomID();  
     }
     void sort_room(list <Room> &room) {
         room.sort(cmpName);
