@@ -3628,3 +3628,184 @@ Syntax: `delete ptr_var;`
 		}
 
 __________________________________________________________________________________________________________________________________________________________________________
+# Lesson 18: Threads		
+**Ex 1.a**
+
+  		#include <iostream>
+		#include <thread>
+		
+		using namespace std;
+		
+		void delay(int s) {
+		    for (size_t i = 0; i < 0xffff; i++) {
+		        for (size_t j = 0; j < 5*s; j++) { }
+		    }   
+		}
+		
+		void funcA(int i, double j){
+		    int count = 0;
+		    while (1) {
+		        count++;
+		        cout<<"funcA: "<<count<<endl;
+		        delay(4000);
+		    }
+		}
+		
+		void funcB(){
+		    int count = 0;
+		    while (1) {
+		        count++;
+		        cout<<"funcB: "<<count<<endl;
+		        delay(1000);
+		    }
+		}
+		
+		
+		int main(int argc, char const *argv[]) {
+		    thread t1(funcA, 4, 6.5);
+		    thread t2(funcB);
+		
+		    t1.join();
+		    t2.join();
+		  
+		    return 0;
+		}
+
+  **Ex 1.b**
+
+		#include <iostream>
+		#include <thread>
+		#include <mutex>
+		
+		int dem = 0;
+		
+		using namespace std;
+		
+		mutex mtx;
+		
+		void delay(int s) {
+		    for (size_t i = 0; i < 0xffff; i++) {
+		        for (size_t j = 0; j < 5*s; j++) { }
+		    }  
+		}
+		
+		void funcA() {
+		    while (1) {
+		        mtx.lock();
+		        dem++;
+		        mtx.unlock();
+		        cout<<"funcA: "<<dem<<endl;
+		        delay(4000);
+		    }
+		}
+		
+		void funcB(){
+		    while (1) {
+		        mtx.lock();
+		        dem++;
+		        mtx.unlock();
+		        cout<<"funcB: "<<dem<<endl;
+		        delay(1000);
+		    }
+		}
+		
+		
+		int main(int argc, char const *argv[]) {
+		    thread t1(funcA);
+		    thread t2(funcB);
+		
+		    t1.join();
+		    t2.join();
+		    
+		    return 0;
+		}
+
+**Ex 2**
+		
+		#include <iostream> 
+		#include <shared_mutex> 
+		#include <mutex> 
+		#include <thread> 
+		using namespace std; 
+		
+		// creating a shared_mutex object 
+		shared_mutex mutx; 
+		int shared_data = 11; 
+		
+		// callable with shared lock 
+		void readData() { 
+			shared_lock<shared_mutex> lock(mutx); 
+			cout << "Thread " << this_thread::get_id() << ": "; 
+			cout << shared_data << endl; 
+		} 
+		
+		// callable with unique_lock 
+		void writeData(int n) { 
+			unique_lock<shared_mutex> lock(mutx); 
+			shared_data = n; 
+			cout << "Thread" << this_thread::get_id() << ": \n"; 
+		} 
+		
+		int main() { 
+			thread t1(readData); 
+			thread t2(writeData, 128); 
+			thread t3(writeData, 10); 
+			thread t4 (readData); 
+			
+			t1.join(); 
+			t2.join(); 
+			t3.join(); 
+			t4.join(); 
+			return 0; 
+		}
+
+**Ex 3**
+
+		// C++ program to illustrate the use of shared_mutex 
+		#include <iostream> 
+		#include <shared_mutex> 
+		#include <mutex> 
+		#include <thread> 
+		#include <condition_variable>
+		using namespace std; 
+		
+		// creating a shared_mutex object 
+		mutex mutx; 
+		condition_variable cv;
+		int data_test = 0;
+		
+		
+		void delay(int s){
+		    for (size_t i = 0; i < 0xffff; i++) {
+		        for (size_t j = 0; j < 5*s; j++) { }
+	  	    } 
+		}
+		
+		void writeData(){
+		    for (int i = 0; i < 5; i++) {
+		        delay(5000);
+		        unique_lock<mutex> lock(mutx);
+		        data_test = data_test+i;
+		       
+		        cv.notify_one(); 
+		    }
+		}
+		
+		void readData(){
+		    for (size_t i = 0; i < 5; i++) {
+		       unique_lock<mutex> lock(mutx);
+		       cv.wait(lock);
+		       cout<<"data: "<<data_test<<endl;
+		    }
+		}
+		
+		// driver code 
+		int main() { 
+			thread t1(writeData); 
+			thread t2(readData); 
+			
+			t1.join(); 
+			t2.join(); 
+		
+			return 0; 
+		}
