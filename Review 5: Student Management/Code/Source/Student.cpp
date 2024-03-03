@@ -11,7 +11,7 @@ using namespace std;
 /*
 * Class: Person
 * Function: setName
-* Discription: This function is used for setting name of student
+* Description: This function is used for setting name of student
 * Input:   _name (name of student)
 * Output:  return: None
 */
@@ -22,7 +22,7 @@ void Person::setName(string _name) {
 /*
 * Class: Person
 * Function: getName
-* Discription: This function is used for getting name of student
+* Description: This function is used for getting name of student
 * Input:   None
 * Output:  return: name (name of student)
 */
@@ -33,7 +33,7 @@ string Person::getName() const {
 /*
 * Class: Person
 * Function: setAge
-* Discription: This function is used for setting age of student
+* Description: This function is used for setting age of student
 * Input:   _age (age of student)
 * Output:  return: None
 */
@@ -44,7 +44,7 @@ void Person::setAge(short int _age) {
 /*
 * Class: Person
 * Function: getAge
-* Discription: This function is used for getting age of student
+* Description: This function is used for getting age of student
 * Input:   None
 * Output:  return: age (age of student)
 */
@@ -55,7 +55,7 @@ short int Person::getAge() {
 /*
 * Class: Person
 * Function: setGender
-* Discription: This function is used for setting gender of student
+* Description: This function is used for setting gender of student
 * Input:   _gender (gender of student)
 * Output:  return: None
 */
@@ -66,7 +66,7 @@ void Person::setGender(Gender _gender) {
 /*
 * Class: Person
 * Function: getGender
-* Discription: This function is used for getting gender of student
+* Description: This function is used for getting gender of student
 * Input:   None
 * Output:  return: gender (gender of student)
 */
@@ -77,7 +77,7 @@ Gender Person::getGender() {
 /*
 * Class: Person
 * Function: setID
-* Discription: This function is used for setting ID of student
+* Description: This function is used for setting ID of student
 * Input:   _ID (ID of student)
 * Output:  return: None
 */
@@ -88,7 +88,7 @@ void Person::setID(short int _ID) {
 /*
 * Class: Person
 * Function: getID
-* Discription: This function is used for getting ID of student
+* Description: This function is used for getting ID of student
 * Input:   None
 * Output:  return: ID (ID of student)
 */
@@ -99,7 +99,7 @@ short int Person::getID() {
 /*
 * Class: Student
 * Function: setMath
-* Discription: This function is used for setting Math score of student
+* Description: This function is used for setting Math score of student
 * Input:   _Math_score (Math score of student)
 * Output:  return: None
 */
@@ -110,7 +110,7 @@ void Student::setMath(float _Math_score) {
 /*
 * Class: Student
 * Function: getMath
-* Discription: This function is used for getting Math score of student
+* Description: This function is used for getting Math score of student
 * Input:   None
 * Output:  return: Math_score (Math score of student)
 */
@@ -121,7 +121,7 @@ float Student::getMath() const {
 /*
 * Class: Student
 * Function: setPhysic
-* Discription: This function is used for setting Physics score of student
+* Description: This function is used for setting Physics score of student
 * Input:   _Physic_score (Physics score of student)
 * Output:  return: None
 */
@@ -132,7 +132,7 @@ void Student::setPhysic(float _Physic_score) {
 /*
 * Class: Student
 * Function: getPhysic
-* Discription: This function is used for getting Physics score of student
+* Description: This function is used for getting Physics score of student
 * Input:   None
 * Output:  return: Physic_score (Physics score of student)
 */
@@ -143,7 +143,7 @@ float Student::getPhysic() const {
 /*
 * Class: Student
 * Function: setChemical
-* Discription: This function is used for setting Chemical score of student
+* Description: This function is used for setting Chemical score of student
 * Input:   _Chemical_score (Chemical score of student)
 * Output:  return: None
 */
@@ -154,7 +154,7 @@ void Student::setChemical(float _Chemical_score) {
 /*
 * Class: Student
 * Function: getChemical
-* Discription: This function is used for getting Chemical score of student
+* Description: This function is used for getting Chemical score of student
 * Input:   None
 * Output:  return: Chemical_score (Chemical score of student)
 */
@@ -165,18 +165,19 @@ float Student::getChemical() const {
 /*
 * Class: Student
 * Function: getAverScore
-* Discription: This function is used for getting Average score of student
+* Description: This function is used for getting Average score of student
 * Input:   None
 * Output:  return: Average_score (Average score of student)
 */
 float Student::getAverScore() const {
-    return (Math_score + Physic_score + Chemical_score) / 3;
+    Average_score = (Math_score + Physic_score + Chemical_score) / 3;
+    return Average_score;
 }
 
 /*
 * Class: Student
 * Function: setData
-* Discription: This function is used for setting data of student
+* Description: This function is used for setting data of student
 * Input:   None
 * Output:  return: None
 */
@@ -224,7 +225,7 @@ void Student::setData() {
 /*
 * Class: Student
 * Function: getData
-* Discription: This function is used for getting data of student
+* Description: This function is used for getting data of student
 * Input:   None
 * Output:  return: None
 */
@@ -269,7 +270,7 @@ void Student::getData() {
 /*
 * Class: Student
 * Function: getRank
-* Discription: This function is used for getting rank of student
+* Description: This function is used for getting rank of student
 * Input:   None
 * Output:  return: rank (rank of student)
 */
