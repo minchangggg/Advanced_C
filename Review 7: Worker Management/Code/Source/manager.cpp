@@ -1,14 +1,42 @@
+/*
+* File: manager.cpp
+* Author: Ton Nu Minh Trang
+* Date: 15/02/2024
+* Description: This file contains all the functions/methods to helps hotel system work
+*/
+
 #include "../Header/manager.h"
 using namespace std; 
 
+/*
+* Class: Manager
+* Function: getAccount
+* Discription: This function is used for getting Account of manager
+* Input:   None
+* Output:  return: account (account of manager)
+*/
 int Manager::getAccount() {
     return account;
 }
 
+/*
+* Class: Manager
+* Function: getPassword
+* Discription: This function is used for getting Password of manager
+* Input:   None
+* Output:  return: password (password of employee)
+*/
 int Manager::getPassword() {
     return password;
 }
 
+/*
+* Class: Manager
+* Function: menuManager
+* Discription: This function is used for managing hotel
+* Input:   None
+* Output:  return: None
+*/
 void Manager::menuManager(Database &database) {
 menuManager_start:
     int _password = 0; int _account = 0; int _choice = 0; 
@@ -22,11 +50,11 @@ menuManager_start:
     cin >> _password;
 
     if ((getAccount() != _account) || (getPassword() != _password)) {
-        cout << "\t\t\t The Password Is Incorrect!" << endl << endl;
-
-        cout << "\t\t\t 1. Re-enter The Password" << endl;
-        cout << "\t\t\t 2. Turn Back Main Menu " << endl;
-        cout << "\t\t\t 3. Exit Program" << endl;
+        cout << "\n\n\t\t\tThe Password Is Incorrect!" << endl;
+        cout << "\t\t\t-------------------------" << endl;
+        cout << "\t\t\t1. Re-enter The Password" << endl;
+        cout << "\t\t\t2. Turn Back Main Menu " << endl;
+        cout << "\t\t\t3. Exit Program" << endl;
         cout << "\t\t\tPlease Enter Your Choice: ";
         cin >> _choice;
 
@@ -67,11 +95,13 @@ menuManager_start:
                 cout << "\t\t\tPlease Enter Your Choice: ";
                 cin >> _choice;
 
-            } while (_choice != 1 && _choice != 2 && _choice != 3 );
+            } while (_choice < 1 || _choice > 5);
 
             if (_choice == 1) function = Employee_function;
-            else if (_choice ==2) function = Room_function;
-            else function = Service_function;
+            else if (_choice == 2) function = Room_function;
+            else if (_choice == 3) function = Service_function;
+            else if (_choice == 4) function = Back_function;
+            else function = Exit_function;
 
             switch (function) {
                 case Employee_function:
@@ -86,10 +116,10 @@ menuManager_start:
                     database.service.menuManageService();
                     break;
 
-                case 4:
+                case Back_function:
                     break;
                     
-                case 5:
+                case Exit_function:
                     cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
                     cout << "------------------------------------- Program Is Exit --------------------------------------------" << endl;
                     exit(0);
