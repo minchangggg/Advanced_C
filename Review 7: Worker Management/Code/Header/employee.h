@@ -19,11 +19,11 @@ typedef enum { Morning, Afternoon, Evening, No_Shift } Time;
 /*
 * Struct: Shift
 * Discription: This struct is used for setting weekly shift 
-Mon[2]: shift for Monday  
-Tue[2]: shift for Tuesday 
-Wed[2]: shift for Wednesday 
-Thur[2]: shift for Thurday 
-Fri[2]: shift for Friday 
+    Mon[2]: shift for Monday  
+    Tue[2]: shift for Tuesday 
+    Wed[2]: shift for Wednesday 
+    Thur[2]: shift for Thurday 
+    Fri[2]: shift for Friday 
 */
 typedef struct {
     Time Mon[2];
