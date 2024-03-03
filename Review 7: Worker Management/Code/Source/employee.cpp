@@ -1,5 +1,5 @@
 /*
-* File: employee.h
+* File: employee.cpp
 * Author: Ton Nu Minh Trang
 * Date: 15/02/2024
 * Description: This file contains all the functions/methods to manage employees of hotel
