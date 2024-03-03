@@ -11,7 +11,7 @@ using namespace std;
 /*
 * Class: Dish
 * Function: setID
-* Discription: This function is used for setting ID of dish
+* Description: This function is used for setting ID of dish
 * Input:   _ID (ID of dish)
 * Output:  return: None
 */
@@ -22,7 +22,7 @@ void Dish::setID (int _ID) {
 /*
 * Class: Dish
 * Function: getID
-* Discription: This function is used for getting ID of dish
+* Description: This function is used for getting ID of dish
 * Input:   None
 * Output:  return: ID (ID of dish)
 */
@@ -33,7 +33,7 @@ int Dish::getID() {
 /*
 * Class: Dish
 * Function: setName
-* Discription: This function is used for setting name of dish
+* Description: This function is used for setting name of dish
 * Input:   _name (name of dish)
 * Output:  return: None
 */
@@ -44,7 +44,7 @@ void Dish::setName(string _name) {
 /*
 * Class: Dish
 * Function: getName
-* Discription: This function is used for getting name of dish
+* Description: This function is used for getting name of dish
 * Input:   None
 * Output:  return: name (name of dish)
 */
@@ -55,7 +55,7 @@ string Dish::getName() {
 /*
 * Class: Dish
 * Function: setPrice
-* Discription: This function is used for setting price of dish
+* Description: This function is used for setting price of dish
 * Input:   _price (price of dish)
 * Output:  return: None
 */
@@ -66,7 +66,7 @@ void Dish::setPrice(int _price) {
 /*
 * Class: Dish
 * Function: getPrice
-* Discription: This function is used for getting price of dish
+* Description: This function is used for getting price of dish
 * Input:   None
 * Output:  return: price (price of dish)
 */
@@ -77,7 +77,7 @@ int Dish::getPrice() {
 /*
 * Class: Dish
 * Function: setData
-* Discription: This function is used for setting data of dish
+* Description: This function is used for setting data of dish
 * Input:   None
 * Output:  return: None
 */
@@ -95,7 +95,7 @@ void Dish::setData() {
 /*
 * Class: Dish
 * Function: getData
-* Discription: This function is used for getting data of dish
+* Description: This function is used for getting data of dish
 * Input:   None
 * Output:  return: None
 */
