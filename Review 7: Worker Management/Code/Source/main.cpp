@@ -3,7 +3,7 @@
 using namespace std; 
 int main() {
     Database database;
-    menuManager(database);
+    menuHotel(database);
 
     return 0;
 }
