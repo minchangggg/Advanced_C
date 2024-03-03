@@ -11,7 +11,7 @@ using namespace std;
 /*
 * Class: Receptionist
 * Function: setAccountt
-* Discription: This function is used for setting receptionist account
+* Description: This function is used for setting receptionist account
 * Input:   _accountt (account of manager)
 * Output:  return: None
 */
@@ -22,7 +22,7 @@ void Receptionist::setAccountt(int _accountt) {
 /*
 * Class: Receptionist
 * Function: setPasswordd
-* Discription: This function is used for setting receptionist password 
+* Description: This function is used for setting receptionist password 
 * Input:   _passwordd (password of employee)
 * Output:  return: None
 */
@@ -33,7 +33,7 @@ void Receptionist::setPasswordd(int _passwordd) {
 /*
 * Class: Receptionist
 * Function: getAccountt
-* Discription: This function is used for getting receptionist account
+* Description: This function is used for getting receptionist account
 * Input:   None
 * Output:  return: accountt (account of manager)
 */
@@ -44,7 +44,7 @@ int Receptionist::getAccountt() {
 /*
 * Class: Receptionist
 * Function: getPasswordd
-* Discription: This function is used for getting receptionist password 
+* Description: This function is used for getting receptionist password 
 * Input:   None
 * Output:  return: passwordd (password of employee)
 */
@@ -55,7 +55,7 @@ int Receptionist::getPasswordd() {
 /*
 * Class: Receptionist
 * Function: checkShift
-* Discription: This function is used for displaying weekly shift timetable of employees
+* Description: This function is used for displaying weekly shift timetable of employees
 * Input:   database 
 * Output:  return: None
 */
@@ -66,7 +66,7 @@ void Receptionist::checkShift(Database database) {
 /*
 * Class: Receptionist
 * Function: makeCheckIn
-* Discription: This function is used for check-in the hotel
+* Description: This function is used for check-in the hotel
 * Input:   database
 * Output:  return: None
 */
@@ -87,7 +87,7 @@ void Receptionist::makeCheckIn(Database &database) {
 /*
 * Class: Receptionist
 * Function: makeCheckOut
-* Discription: This function is used for check-out the hotel
+* Description: This function is used for check-out the hotel
 * Input:   database
 * Output:  return: None
 */
@@ -131,7 +131,7 @@ void Receptionist::makeCheckOut(Database &database) {
 /*
 * Class: Receptionist
 * Function: showRoom
-* Discription: This function is used for displaying rooms of hotel
+* Description: This function is used for displaying rooms of hotel
 * Input:   database
 * Output:  return: None
 */
@@ -142,7 +142,7 @@ void Receptionist::showRoom(Database database) {
 /*
 * Class: Receptionist
 * Function: menuReceptionist
-* Discription: This function is used for serving rooms and services of hotel for customer
+* Description: This function is used for serving rooms and services of hotel for customer
 * Input:   database
 * Output:  return: None
 */
