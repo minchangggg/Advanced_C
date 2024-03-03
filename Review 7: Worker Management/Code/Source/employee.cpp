@@ -11,7 +11,7 @@ using namespace std;
 /*
 * Class: Employee
 * Function: setID
-* Discription: This function is used for setting ID of employee
+* Description: This function is used for setting ID of employee
 * Input:   _ID (ID of employee)
 * Output:  return: None
 */
@@ -22,7 +22,7 @@ void Employee::setID (int _ID) {
 /*
 * Class: Employee
 * Function: getID
-* Discription: This function is used for getting ID of employee
+* Description: This function is used for getting ID of employee
 * Input:   None
 * Output:  return: ID (ID of employee)
 */
@@ -33,7 +33,7 @@ int Employee::getID() {
 /*
 * Class: Employee
 * Function: setName
-* Discription: This function is used for setting name of employee
+* Description: This function is used for setting name of employee
 * Input:   _name (name of employee)
 * Output:  return: None
 */
@@ -44,7 +44,7 @@ void Employee::setName(string _name) {
 /*
 * Class: Employee
 * Function: getName
-* Discription: This function is used for getting name of employee
+* Description: This function is used for getting name of employee
 * Input:   None
 * Output:  return: name (name of employee)
 */
@@ -55,7 +55,7 @@ string Employee::getName() {
 /*
 * Class: Employee
 * Function: setTitle
-* Discription: This function is used for setting title of employee
+* Description: This function is used for setting title of employee
 * Input:   _title (title of employee)
 * Output:  return: None
 */
@@ -66,7 +66,7 @@ void Employee::setTitle(string _title) {
 /*
 * Class: Employee
 * Function: getTitle
-* Discription: This function is used for getting title of employee
+* Description: This function is used for getting title of employee
 * Input:   None
 * Output:  return: title (title of employee)
 */
@@ -77,7 +77,7 @@ string Employee::getTitle() {
 /*
 * Class: Employee
 * Function: setPhone
-* Discription: This function is used for setting phone number of employee
+* Description: This function is used for setting phone number of employee
 * Input:   _phone (phone number of employee)
 * Output:  return: None
 */
@@ -88,7 +88,7 @@ void Employee::setPhone(int _phone) {
 /*
 * Class: Employee
 * Function: getPhone
-* Discription: This function is used for getting phone number of employee
+* Description: This function is used for getting phone number of employee
 * Input:   None 
 * Output:  return: phone (phone number of employee)
 */
@@ -99,7 +99,7 @@ int Employee::getPhone() {
 /*
 * Class: Employee
 * Function: setData
-* Discription: This function is used for setting data of employee
+* Description: This function is used for setting data of employee
 * Input:   None
 * Output:  return: None
 */
@@ -124,7 +124,7 @@ void Employee::setData() {
 /*
 * Class: Employee
 * Function: setShift
-* Discription: This function is used for setting shift of employee
+* Description: This function is used for setting shift of employee
 * Input:   _shift (_shift of employee)
 * Output:  return: None
 */
@@ -135,7 +135,7 @@ void Employee::setShift(Shift _shift) {
 /*
 * Class: Employee
 * Function: getShift
-* Discription: This function is used for getting shift of employee
+* Description: This function is used for getting shift of employee
 * Input:   None 
 * Output:  return: shift (shift of employee)
 */
@@ -146,7 +146,7 @@ Shift Employee::getShift() {
 /*
 * Class: ManageEmployee
 * Function: addEmployee
-* Discription: This Function is used for adding a new employee
+* Description: This Function is used for adding a new employee
 * Input:   None
 * Output:  return: None
 */
@@ -160,7 +160,7 @@ void ManageEmployee::addEmployee() {
 /*
 * Class: ManageEmployee
 * Function: editEmployee
-* Discription: This Function is used for editing details of employee
+* Description: This Function is used for editing details of employee
 * Input:   _ID (ID of employee)
 * Output:  return: None
 */
@@ -180,7 +180,7 @@ void ManageEmployee::editEmployee(int _ID) {
 /*
 * Class: ManageEmployee
 * Function: deleteEmployee
-* Discription: This Function is used for deleting details of employee
+* Description: This Function is used for deleting details of employee
 * Input:   _ID (ID of employee)
 * Output:  return: None
 */
@@ -196,7 +196,7 @@ void ManageEmployee::deleteEmployee(int _ID) {
 /*
 * Class: ManageEmployee
 * Function: setTimePerDay
-* Discription: This function is used for setting shift per day (employee can choose up to 2 shifts in 1 day)
+* Description: This function is used for setting shift per day (employee can choose up to 2 shifts in 1 day)
 * Input:   time[0]: time for 1st shift in day
            time[1]: time for 2nd shift in day 
 * Output:  return: None
@@ -258,7 +258,7 @@ void ManageEmployee::setTimePerDay(Time day[2]) {
 /*
 * Class: ManageEmployee
 * Function: setShift
-* Discription: This function is used for setting weekly shift timetable
+* Description: This function is used for setting weekly shift timetable
 * Input:   _ID (ID of employee)
 * Output:  return: None
 */
@@ -291,7 +291,7 @@ void ManageEmployee::setShift(int _ID) {
 /*
 * Class: ManageEmployee
 * Function: showEmployeeList
-* Discription: This function is used for displaying employees of hotel
+* Description: This function is used for displaying employees of hotel
 * Input:   None
 * Output:  return: None
 */
@@ -309,7 +309,7 @@ void ManageEmployee::showEmployeeList() {
 /*
 * Class: ManageEmployee
 * Function: tableShift
-* Discription: This function is used for displaying weekly shift timetable
+* Description: This function is used for displaying weekly shift timetable
 * Input:   None
 * Output:  return: None
 */
@@ -327,7 +327,7 @@ void ManageEmployee::tableShift() {
 /*
 * Class: ManageEmployee
 * Function: menuManageEmployee
-* Discription: This function is used for managing employees of hotel
+* Description: This function is used for managing employees of hotel
 * Input:   None
 * Output:  return: None
 */
