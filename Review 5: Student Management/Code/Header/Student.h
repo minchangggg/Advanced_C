@@ -1,3 +1,10 @@
+/*
+* File: Student.h
+* Author: Ton Nu Minh Trang
+* Date: 5/02/2024
+* Description: This file is a Student header file that program is used for storing student information
+*/
+
 #ifndef _STUDENT_H
 #define _STUDENT_H
 
@@ -20,6 +27,10 @@ typedef enum Rank {
     Weak
 } Rank;
 
+/*
+* Class: Person
+* Description: This class contains basic properties and methods of a Person object
+*/
 class Person {
 private:
     string name;
@@ -36,36 +47,23 @@ public:
 
     ~Person() {}
 
-    void setName(string _name) {
-        name = _name;
-    }
-    string getName() const {
-        return name;
-    }
+    void setName(string _name);
+    string getName() const;
 
-    void setAge(short int _age) {
-        age = _age;
-    }
-    short int getAge() {
-        return age;
-    }
+    void setAge(short int _age);
+    short int getAge();
 
-    void setGender(Gender _gender) {
-        gender = _gender;
-    }
-    Gender getGender() {
-        return gender;
-    }
+    void setGender(Gender _gender);
+    Gender getGender();
 
-    void setID(short int _ID) {
-        ID = _ID;
-    }
-    short int getID() {
-        return ID;
-    }
-
+    void setID(short int _ID);
+    short int getID();
 };
 
+/*
+* Class: Student
+* Description: This class contains basic properties and methods of a Student object
+*/
 class Student : public Person {
 private:
     float Math_score;
@@ -88,33 +86,16 @@ public:
     void setData();
     void getData();
 
-    void setMath(float _Math_score) {
-        Math_score = _Math_score;
-    }
+    void setMath(float _Math_score);
+    float getMath() const;
 
-    float getMath() const {
-        return Math_score;
-    }
+    void setPhysic(float _Physic_score);
+    float getPhysic() const;
 
-    void setPhysic(float _Physic_score) {
-        Physic_score = _Physic_score;
-    }
+    void setChemical(float _Chemical_score);
+    float getChemical() const;
 
-    float getPhysic() const {
-        return Physic_score;
-    }
-
-    void setChemical(float _Chemical_score) {
-        Chemical_score = _Chemical_score;
-    }
-
-    float getChemical() const {
-        return Chemical_score;
-    }
-
-    float getAverScore() const {
-        return (Math_score + Physic_score + Chemical_score) / 3;
-    }
+    float getAverScore() const;
 
     Rank getRank(); 
 };
