@@ -2,7 +2,7 @@
 * File: Menu.h
 * Author: Ton Nu Minh Trang
 * Date: 5/02/2024
-* Description: This file contains all the functions/methods to manage students of school
+* Description: This file is a Menu header file that program is used for managing students of school
 */
 
 #ifndef _MENU_H
