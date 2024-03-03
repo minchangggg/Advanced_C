@@ -1,6 +1,19 @@
+/*
+* File: Menu.cpp
+* Author: Ton Nu Minh Trang
+* Date: 5/02/2024
+* Description: This file contains all of the functions/methods managing students of school
+*/
+
 #include "Menu.h"
 using namespace std;
 
+/*
+* Function: menu
+* Description: This function is used for managing students of school
+* Input:   database (student list)
+* Output:  return: None
+*/
 void menu(list <Student>& database) {
     static int choice = 0;
     do {
@@ -221,7 +234,12 @@ void menu(list <Student>& database) {
     } while (choice != 8);
 }
 
-// 1.	Them sinh vien
+/*
+* Function: insert
+* Description: This function is used for inserting a new student
+* Input:   database (student list)
+* Output:  return: None
+*/
 void insert(list <Student>& database) {
     Student newstudent;
     newstudent.setData();
@@ -229,7 +247,12 @@ void insert(list <Student>& database) {
     database.push_back(newstudent);
 }
 
-// 2. Sua thong tin sinh vien
+/*
+* Function: edit_detail
+* Description: This function is used for editing details of student
+* Input:   database (student list)
+* Output:  return: None
+*/
 void edit_detail (list <Student>& database, list<Student>::iterator it) {
     cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
     cout << "---------------------------------- What detail you want to edit ---------------------------------------" << endl;
@@ -325,6 +348,12 @@ void edit_detail (list <Student>& database, list<Student>::iterator it) {
     }
 }
 
+/*
+* Function: modify
+* Description: This function is used for editing details of student by student's ID
+* Input:   database (student list), ID_input (ID of student)
+* Output:  return: None
+*/
 void modify (list <Student>& database, short int ID_input) {
     list<Student>::iterator it;
     for (it = database.begin(); it != database.end(); ++it) {
@@ -343,7 +372,12 @@ void modify (list <Student>& database, short int ID_input) {
     }
 }
 
-// 3. Xoa sinh vien
+/*
+* Function: deletee
+* Description: This function is used for deleting details of student by student's ID
+* Input:   database (student list), ID_input (ID of student)
+* Output:  return: None
+*/
 void deletee (list <Student>& database, short int ID_input) {
     list<Student>::iterator it;
     for (it = database.begin(); it != database.end(); ++it) {
@@ -369,7 +403,13 @@ void deletee (list <Student>& database, short int ID_input) {
     cout << "\n\t\t\t No student has this information " << endl;
 }
 
-// 4. Tim kiem sinh vien
+
+/*
+* Function: search_by_id
+* Description: This function is used for search details of student by student's ID
+* Input:   database (student list), ID_input (ID of student)
+* Output:  return: None
+*/
 void search_by_id(list <Student> database, short int ID_input) {
     list<Student>::iterator it;
     for (it = database.begin(); it != database.end(); ++it) {
@@ -382,6 +422,12 @@ void search_by_id(list <Student> database, short int ID_input) {
     }
 }
 
+/*
+* Function: search_by_name
+* Description: This function is used for search details of student by student's name
+* Input:   database (student list), name_input (name of student)
+* Output:  return: None
+*/
 void search_by_name(list <Student> database, string name_input) {
     list<Student>::iterator it;
     for (it = database.begin(); it != database.end(); ++it) {
@@ -394,47 +440,112 @@ void search_by_name(list <Student> database, string name_input) {
     }
 }
 
-// 5. Sap xep sinh vien
+/*
+* Function: cmpName
+* Description: This function is used for sorting two students by student's name
+* Input:   a (1st student), b (2nd student)
+* Output:  return: b (2nd student)
+*/
 bool cmpName(const Student &a, const Student &b) {
     return a.getName() < b.getName();
 }
 
+/*
+* Function: cmpMath
+* Description: This function is used for sorting two students by students's math score
+* Input:   a (1st student), b (2nd student)
+* Output:  return: b (2nd student)
+*/
 bool cmpMath(const Student &a, const Student &b) {
     return a.getMath() < b.getMath();
 }
 
+/*
+* Function: cmpPhysic
+* Description: This function is used for sorting two students by students's physics score
+* Input:   a (1st student), b (2nd student)
+* Output:  return: b (2nd student)
+*/
 bool cmpPhysic(const Student &a, const Student &b) {
     return a.getPhysic() < b.getPhysic();
 }
 
+/*
+* Function: cmpChemical
+* Description: This function is used for sorting two students by students's chemical score
+* Input:   a (1st student), b (2nd student)
+* Output:  return: b (2nd student)
+*/
 bool cmpChemical(const Student &a, const Student &b) {
     return a.getChemical() < b.getChemical();
 }
 
+/*
+* Function: cmpAverScore
+* Description: This function is used for sorting two students by students's average score
+* Input:   a (1st student), b (2nd student)
+* Output:  return: b (2nd student)
+*/
 bool cmpAverScore(const Student& a, const Student &b) {
     return a.getAverScore() < b.getAverScore();
 }
 
+/*
+* Function: sort_name
+* Description: This function is used for sorting student list by student's name
+* Input:   database (student list)
+* Output:  return: None
+*/
 void sort_name(list <Student> &database) {
     database.sort(cmpName);
 }
+
+/*
+* Function: sort_math_score
+* Description: This function is used for sorting student list by student's math score
+* Input:   database (student list)
+* Output:  return: None
+*/
 void sort_math_score(list <Student> &database) {
     database.sort(cmpMath);
 }
 
+/*
+* Function: sort_physic_score
+* Description: This function is used for sorting student list by student's physics score
+* Input:   database (student list)
+* Output:  return: None
+*/
 void sort_physic_score(list <Student> &database) {
     database.sort(cmpPhysic);
 }
 
+/*
+* Function: sort_mechical_score
+* Description: This function is used for sorting student list by student's mechical score
+* Input:   database (student list)
+* Output:  return: None
+*/
 void sort_mechical_score(list <Student> &database) {
     database.sort(cmpChemical);
 }
 
+/*
+* Function: sort_average_score
+* Description: This function is used for sorting student list by student's average score
+* Input:   database (student list)
+* Output:  return: None
+*/
 void sort_average_score(list <Student> &database) {
     database.sort(cmpAverScore);
 }
 
-// 6. In ra danh sach sinh vien
+/*
+* Function: print_list
+* Description: This function is used for displaying student list
+* Input:   database (student list)
+* Output:  return: None
+*/
 void print_list(list <Student> database) {
     for (auto x : database) {
         cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
@@ -442,7 +553,12 @@ void print_list(list <Student> database) {
     }
 }
 
-// 7. Luu vao file “database_sv.csv”
+/*
+* Function: print_list
+* Description: This function is used for saving into database_sv.csv
+* Input:   database (student list)
+* Output:  return: None
+*/
 void saveCSV(list <Student> &database) {
     ofstream file;
     file.open("database_sv.csv");
