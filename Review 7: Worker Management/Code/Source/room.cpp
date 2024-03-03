@@ -1,72 +1,196 @@
+/*
+* File: room.cpp
+* Author: Ton Nu Minh Trang
+* Date: 15/02/2024
+* Description: This file contains all the functions/methods to manage rooms of hotel
+*/
+
 #include "../Header/room.h"
 using namespace std;
 
+/*
+* Class: Customer
+* Function: setNameCustomer
+* Discription: This function is used for setting name of customer
+* Input:   _name (name of customer)
+* Output:  return: None
+*/
 void Customer::setNameCustomer(string _name) {
     nameCustomer = _name;
 }
 
+/*
+* Class: Customer
+* Function: getNameCustomer
+* Discription: This function is used for getting name of customer
+* Input:   None
+* Output:  return: name (name of customer)
+*/
 string Customer::getNameCustomer() {
     return nameCustomer;
 }
 
+/*
+* Class: Customer
+* Function: setPhoneCustomer
+* Discription: This function is used for setting phone number of customer
+* Input:   _phone (phone number of customer)
+* Output:  return: None
+*/
 void Customer::setPhoneCustomer(int _phone) {
     phoneCustomer = _phone;
 }
 
+/*
+* Class: Customer
+* Function: getPhoneCustomer
+* Discription: This function is used for getting phone number of customer
+* Input:   None 
+* Output:  return: phone (phone number of customer)
+*/
 int Customer::getPhoneCustomer() {
     return phoneCustomer;
 }
 
+/*
+* Class: Customer
+* Function: setCheckIn
+* Discription: This function is used for setting check-in time of customer
+* Input:   _checkIn (check-in time of customer) 
+* Output:  None
+*/
 void Customer::setCheckIn (CheckTime _checkIn) {
     checkIn = _checkIn;
 }
 
+/*
+* Class: Customer
+* Function: setCheckOut
+* Discription: This function is used for setting check-out time of customer
+* Input:   _checkOut (check-out time of customer) 
+* Output:  None
+*/
 void Customer::setCheckOut (CheckTime _checkOut) {
     checkOut = _checkOut;
 }
 
+/*
+* Class: Customer
+* Function: getCheckIn
+* Discription: This function is used for getting check-in time of customer
+* Input:   None 
+* Output:  return: checkIn (check-in time of customer) 
+*/
 CheckTime Customer::getCheckIn() {
     return checkIn;
 }
 
+/*
+* Class: Customer
+* Function: getCheckOut
+* Discription: This function is used for getting check-out time of customer
+* Input:   None 
+* Output:  return: checkOut (check-out time of customer) 
+*/
 CheckTime Customer::getCheckOut() {
     return checkOut;
 }
 
+/*
+* Class: Customer
+* Function: setFeedback
+* Discription: This function is used for setting feedback of customer
+* Input:   _feedback (feedback of customer)
+* Output:  return: None
+*/
 void Customer::setFeedback(string _feedback) {
     feedback = _feedback;
 }
 
+/*
+* Class: Customer
+* Function: getFeedback
+* Discription: This function is used for getting feedback of customer
+* Input:   None
+* Output:  return: feedback (feedback of customer)
+*/
 string Customer::getFeedback() {
     return feedback;
 }
 
-//______________________________________________________________________________________________________________________________________
-
+/*
+* Class: Room
+* Function: getOrderService
+* Discription: This function is used for getting orderService (list of ordered services) of customer
+* Input:   None
+* Output:  return: orderService (list of ordered services)
+*/
 list<Order> Room::getOrderService() {
     return orderService;
 }  
 
+/*
+* Class: Room
+* Function: getCustomerList
+* Discription: This function is used for getting customerList (list of customers) of customer
+* Input:   None
+* Output:  return: customerList (list of customers)
+*/
 list<Customer> Room::getCustomerList() {
     return customerList;
 }
 
+/*
+* Class: Room
+* Function: setRoomID
+* Discription: This function is used for setting room ID 
+* Input:   _roomID (room ID)
+* Output:  return: None
+*/
 void Room::setRoomID(string _roomID) {
     roomID = _roomID;
 }
 
+/*
+* Class: Room
+* Function: getRoomID
+* Discription: This function is used for getting room ID 
+* Input:   None
+* Output:  return: roomID (room ID)
+*/
 string Room::getRoomID() const {
     return roomID;
 }
 
+/*
+* Class: Room
+* Function: setStatus
+* Discription: This function is used for setting status of room  
+* Input:   _status (status of room)
+* Output:  return: None
+*/
 void Room::setStatus(Status _status) {
     status = _status;
 }
 
+/*
+* Class: Room
+* Function: getStatus
+* Discription: This function is used for getting status of room 
+* Input:   None
+* Output:  return: status (status of room)
+*/
 Status Room::getStatus() {
     return status;
 }
 
+/*
+* Class: Room
+* Function: getRoom
+* Discription: This function is used for setting information of room 
+* Input:   None
+* Output:  None
+*/
 void Room::getRoom() {
     setStatus(U);
 
@@ -91,10 +215,24 @@ void Room::getRoom() {
     customerList.push_back(newCustomer);
 }
 
+/*
+* Class: Room
+* Function: resetTable
+* Discription: This function is used for reseting status of room 
+* Input:   None
+* Output:  None
+*/
 void Room::resetTable() {
     setStatus(A);
 }
 
+/*
+* Class: Room
+* Function: addOrder
+* Discription: This function is used for adding services
+* Input:   manageService (type of services)
+* Output:  None
+*/
 void Room::addOrder(ManageService manageService) {
     int ans = 0;
     do{
@@ -109,7 +247,7 @@ void Room::addOrder(ManageService manageService) {
     Order newOrder; int _ID; int _num; 
 
     switch(ans) {
-        case 1:
+        case 1: {
             cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
             manageService.showService(manageService.getDish());
 
@@ -133,8 +271,9 @@ void Room::addOrder(ManageService manageService) {
             orderService.push_back(newOrder);
 
             break;
+        }
 
-        case 2:
+        case 2: {
             cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
             manageService.showService(manageService.getPool());
 
@@ -158,8 +297,9 @@ void Room::addOrder(ManageService manageService) {
             orderService.push_back(newOrder);
 
             break;
+        }
 
-        case 3:
+        case 3: {
             cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
             manageService.showService(manageService.getGym());
 
@@ -183,8 +323,9 @@ void Room::addOrder(ManageService manageService) {
             orderService.push_back(newOrder);
 
             break;
+        }
 
-        case 4:
+        case 4: {
             cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
             manageService.showService(manageService.getLaundry());
 
@@ -208,12 +349,20 @@ void Room::addOrder(ManageService manageService) {
             orderService.push_back(newOrder);
 
             break;
+        }
 
         default:
             break;
     }
 }
 
+/*
+* Class: Room
+* Function: addOrder
+* Discription: This function is used for displaying list of ordered services
+* Input:   None
+* Output:  None
+*/
 void Room::getOrderList() {
     int count = 0;
     cout << "\t\t\t\t\tList Of Your Used Service" << endl << endl;
@@ -224,6 +373,13 @@ void Room::getOrderList() {
     }
 }
 
+/*
+* Class: Room
+* Function: addOrder
+* Discription: This function is used for displaying bill
+* Input:   None
+* Output:  None
+*/
 void Room::getBill() {
     int _totalBill = 0;
     for (auto i : orderService) {
@@ -238,12 +394,36 @@ void Room::getBill() {
     cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
 } 
 
-//______________________________________________________________________________________________________________________________________
+/*
+* Class: ManageRoom
+* Function: sort_room
+* Discription: This function is used for sorting ID of room
+* Input:   None
+* Output:  None
+*/
+void ManageRoom::sort_room() {
+    roomList.sort();
+}
 
+/*
+* Class: ManageRoom
+* Function: getRoomList
+* Discription: This function is used for getting roomList (List of rooms)
+* Input:   None
+* Output:  return: roomList (List of rooms)
+*/
 list <Room> ManageRoom::getRoomList() {
     return roomList;
 }
 
+/*
+* Class: ManageRoom
+* Function: isFull
+* Discription: This function is used for check status of rooms
+* Input:   None
+* Output:  return: true (all of rooms is full)
+           return: false (there is still room)
+*/
 bool ManageRoom::isFull() {
     for (auto it : roomList) {
         if (it.getStatus() == A) return false;
@@ -251,12 +431,26 @@ bool ManageRoom::isFull() {
     return true;
 }
 
+/*
+* Class: ManageRoom
+* Function: addRoom
+* Discription: This Function is used for adding a new room
+* Input:   _roomID (ID of room)
+* Output:  return: None
+*/
 void ManageRoom::addRoom(string _roomID) {
     Room newRoom;
     newRoom.setRoomID(_roomID);
     roomList.push_back(newRoom);
 }
 
+/*
+* Class: ManageRoom
+* Function: deleteRoom
+* Discription: This Function is used for deleting details of room
+* Input:   _ID (ID of room)
+* Output:  return: None
+*/
 void ManageRoom::deleteRoom(string _ID) {
     list<Room>::iterator it;
     for (it = roomList.begin(); it != roomList.end(); ++it) {
@@ -278,8 +472,15 @@ void ManageRoom::deleteRoom(string _ID) {
     }
 }
 
+/*
+* Class: ManageRoom
+* Function: showRoom
+* Discription: This function is used for displaying status of rooms
+* Input:   None
+* Output:  return: None
+*/
 void ManageRoom::showRoom() {
-    sort_room(roomList);
+    sort_room();
 
     for (int floor = 1; floor <= 9; floor++) { 
         cout << "Floor " << floor << endl;   
@@ -304,6 +505,13 @@ void ManageRoom::showRoom() {
     cout << "\t\t\tA - Available";
 }
 
+/*
+* Class: ManageRoom
+* Function: getInfor
+* Discription: This function is used for displaying details of rooms
+* Input:   _ID (ID of room)
+* Output:  return: None
+*/
 void ManageRoom::getInfor(string _ID) {
     cout << "\n-----------------------------------------Customer Information------------------------------------------" << endl << endl;
     cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
@@ -325,6 +533,13 @@ void ManageRoom::getInfor(string _ID) {
     }
 }
 
+/*
+* Class: ManageRoom
+* Function: menuManageRoom
+* Discription: This function is used for managing rooms of hotel
+* Input:   None
+* Output:  return: None
+*/
 void ManageRoom::menuManageRoom() {
 menuManageRoom_start:
     int _choice = 0;
