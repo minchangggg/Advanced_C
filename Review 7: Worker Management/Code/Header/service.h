@@ -1,3 +1,10 @@
+/*
+* File: service.h
+* Author: Ton Nu Minh Trang
+* Date: 15/02/2024
+* Description: This file is a Service header file which manages types of services of hotel
+*/
+
 #ifndef _SERVICE_H
 #define _SERVICE_H
 
@@ -7,6 +14,10 @@
 
 using namespace std;
 
+/*
+*Class: Service
+*Description: This class contains basic properties and methods of a Service object
+*/
 class Service {
 private:
     int serviceID;
@@ -35,12 +46,16 @@ public:
     void setData(string _name, int _price);   
 };
 
+/*
+*Class: ManageEmployee
+*Description: This class contains basic properties and methods that manage types of services of hotel
+*/
 class ManageService {
 private:
-    list <Service> dish; // 1. Đồ ăn, thức uống
-    list <Service> pool; // 2. Bể bơi
-    list <Service> gym; // 3. Gym
-    list <Service> laundry; // 4. Giặt ủi
+    list <Service> dish;
+    list <Service> pool;
+    list <Service> gym;
+    list <Service> laundry; 
 
 public:
     ManageService() {}
@@ -50,21 +65,12 @@ public:
     list <Service> getGym();
     list <Service> getLaundry();
 
-    // 1. Thêm 
     void addService(string _name, int _price, list <Service> &service);
-
-    // 2. Xóa 
     void deleteService(int ID_input, list <Service> &service); 
-
-    // 3. Danh sách 
     void showService(list <Service> service); 
-
-    // 4. Cập nhật giá món
     void editService(int ID_input, list <Service> &service); 
 
-    // MENU
     void menuManageService();
-
 };
 
 #endif
