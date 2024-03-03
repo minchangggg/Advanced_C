@@ -1,3 +1,10 @@
+/*
+* File: dish.h
+* Author: Ton Nu Minh Trang
+* Date: 10/02/2024
+* Description: This file is a dish header file that program is used for storing dish's information
+*/
+
 #ifndef _DISH_H
 #define _DISH_H
 
@@ -6,6 +13,10 @@
 
 using namespace std;
 
+/*
+* Class: Dish
+* Description: This class contains basic properties and methods of a Dish object
+*/
 class Dish {
 private:
     int ID;
