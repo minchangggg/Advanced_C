@@ -105,17 +105,17 @@ private:
 public:
     ManageEmployee() {}
 
-    void addEmployee(); // 1. Thêm nhân viên
-    void editEmployee(int _ID); // 2. Sửa thông tin nhân viên
-    void deleteEmployee(int _ID); // 3. Xóa nhân viên
+    void addEmployee(); 
+    void editEmployee(int _ID); 
+    void deleteEmployee(int _ID); 
 
     void setTimePerDay(Time day[2]);
-    void setShift(int _ID); // 4. Set ca làm cho nhân viên
+    void setShift(int _ID); 
 
-    void showEmployeeList(); // 5. Danh sách thông tin nhân viên
-    void tableShift(); // 6. Thời gian làm việc
+    void showEmployeeList(); 
+    void tableShift(); 
 
-    void menuManageEmployee(); // menu quản lý nhân viên
+    void menuManageEmployee(); 
 };
 
 #endif
