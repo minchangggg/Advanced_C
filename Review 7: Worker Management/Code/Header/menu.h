@@ -6,7 +6,7 @@
 
 /*
 * Function: menuHotel
-* Discription: This function is used for managing the hotel
+* Description: This function is used for managing the hotel
 * Input:   database
 * Output:  return: None
 */
