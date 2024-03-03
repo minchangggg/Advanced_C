@@ -2,7 +2,7 @@
 * File: Student.cpp
 * Author: Ton Nu Minh Trang
 * Date: 5/02/2024
-* Description: This file contains all of the functions/methods stored students information
+* Description: This file contains all of the functions/methods storing students information
 */
 
 #include "../Header/employee.h"
