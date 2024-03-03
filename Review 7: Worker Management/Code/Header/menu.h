@@ -4,7 +4,13 @@
 #include "../Header/receptionist.h"
 #include "../Header/manager.h"
 
-void menuManager(Database &database) {
+/*
+* Function: menuHotel
+* Discription: This function is used for managing the hotel
+* Input:   database
+* Output:  return: None
+*/
+void menuHotel(Database &database) {
     Manager manager;
     Receptionist receptionist;
 
