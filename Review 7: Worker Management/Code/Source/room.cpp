@@ -11,7 +11,7 @@ using namespace std;
 /*
 * Class: Customer
 * Function: setNameCustomer
-* Discription: This function is used for setting name of customer
+* Description: This function is used for setting name of customer
 * Input:   _name (name of customer)
 * Output:  return: None
 */
@@ -22,7 +22,7 @@ void Customer::setNameCustomer(string _name) {
 /*
 * Class: Customer
 * Function: getNameCustomer
-* Discription: This function is used for getting name of customer
+* Description: This function is used for getting name of customer
 * Input:   None
 * Output:  return: name (name of customer)
 */
@@ -33,7 +33,7 @@ string Customer::getNameCustomer() {
 /*
 * Class: Customer
 * Function: setPhoneCustomer
-* Discription: This function is used for setting phone number of customer
+* Description: This function is used for setting phone number of customer
 * Input:   _phone (phone number of customer)
 * Output:  return: None
 */
@@ -44,7 +44,7 @@ void Customer::setPhoneCustomer(int _phone) {
 /*
 * Class: Customer
 * Function: getPhoneCustomer
-* Discription: This function is used for getting phone number of customer
+* Description: This function is used for getting phone number of customer
 * Input:   None 
 * Output:  return: phone (phone number of customer)
 */
@@ -55,7 +55,7 @@ int Customer::getPhoneCustomer() {
 /*
 * Class: Customer
 * Function: setCheckIn
-* Discription: This function is used for setting check-in time of customer
+* Description: This function is used for setting check-in time of customer
 * Input:   _checkIn (check-in time of customer) 
 * Output:  None
 */
@@ -66,7 +66,7 @@ void Customer::setCheckIn (CheckTime _checkIn) {
 /*
 * Class: Customer
 * Function: setCheckOut
-* Discription: This function is used for setting check-out time of customer
+* Description: This function is used for setting check-out time of customer
 * Input:   _checkOut (check-out time of customer) 
 * Output:  None
 */
@@ -77,7 +77,7 @@ void Customer::setCheckOut (CheckTime _checkOut) {
 /*
 * Class: Customer
 * Function: getCheckIn
-* Discription: This function is used for getting check-in time of customer
+* Description: This function is used for getting check-in time of customer
 * Input:   None 
 * Output:  return: checkIn (check-in time of customer) 
 */
@@ -88,7 +88,7 @@ CheckTime Customer::getCheckIn() {
 /*
 * Class: Customer
 * Function: getCheckOut
-* Discription: This function is used for getting check-out time of customer
+* Description: This function is used for getting check-out time of customer
 * Input:   None 
 * Output:  return: checkOut (check-out time of customer) 
 */
@@ -99,7 +99,7 @@ CheckTime Customer::getCheckOut() {
 /*
 * Class: Customer
 * Function: setFeedback
-* Discription: This function is used for setting feedback of customer
+* Description: This function is used for setting feedback of customer
 * Input:   _feedback (feedback of customer)
 * Output:  return: None
 */
@@ -110,7 +110,7 @@ void Customer::setFeedback(string _feedback) {
 /*
 * Class: Customer
 * Function: getFeedback
-* Discription: This function is used for getting feedback of customer
+* Description: This function is used for getting feedback of customer
 * Input:   None
 * Output:  return: feedback (feedback of customer)
 */
@@ -121,7 +121,7 @@ string Customer::getFeedback() {
 /*
 * Class: Room
 * Function: getOrderService
-* Discription: This function is used for getting orderService (list of ordered services) of customer
+* Description: This function is used for getting orderService (list of ordered services) of customer
 * Input:   None
 * Output:  return: orderService (list of ordered services)
 */
@@ -132,7 +132,7 @@ list<Order> Room::getOrderService() {
 /*
 * Class: Room
 * Function: getCustomerList
-* Discription: This function is used for getting customerList (list of customers) of customer
+* Description: This function is used for getting customerList (list of customers) of customer
 * Input:   None
 * Output:  return: customerList (list of customers)
 */
@@ -143,7 +143,7 @@ list<Customer> Room::getCustomerList() {
 /*
 * Class: Room
 * Function: setRoomID
-* Discription: This function is used for setting room ID 
+* Description: This function is used for setting room ID 
 * Input:   _roomID (room ID)
 * Output:  return: None
 */
@@ -154,7 +154,7 @@ void Room::setRoomID(string _roomID) {
 /*
 * Class: Room
 * Function: getRoomID
-* Discription: This function is used for getting room ID 
+* Description: This function is used for getting room ID 
 * Input:   None
 * Output:  return: roomID (room ID)
 */
@@ -165,7 +165,7 @@ string Room::getRoomID() const {
 /*
 * Class: Room
 * Function: setStatus
-* Discription: This function is used for setting status of room  
+* Description: This function is used for setting status of room  
 * Input:   _status (status of room)
 * Output:  return: None
 */
@@ -176,7 +176,7 @@ void Room::setStatus(Status _status) {
 /*
 * Class: Room
 * Function: getStatus
-* Discription: This function is used for getting status of room 
+* Description: This function is used for getting status of room 
 * Input:   None
 * Output:  return: status (status of room)
 */
@@ -187,7 +187,7 @@ Status Room::getStatus() {
 /*
 * Class: Room
 * Function: getRoom
-* Discription: This function is used for setting information of room 
+* Description: This function is used for setting information of room 
 * Input:   None
 * Output:  None
 */
@@ -218,7 +218,7 @@ void Room::getRoom() {
 /*
 * Class: Room
 * Function: resetTable
-* Discription: This function is used for reseting status of room 
+* Description: This function is used for reseting status of room 
 * Input:   None
 * Output:  None
 */
@@ -229,7 +229,7 @@ void Room::resetTable() {
 /*
 * Class: Room
 * Function: addOrder
-* Discription: This function is used for adding services
+* Description: This function is used for adding services
 * Input:   manageService (type of services)
 * Output:  None
 */
@@ -359,7 +359,7 @@ void Room::addOrder(ManageService manageService) {
 /*
 * Class: Room
 * Function: addOrder
-* Discription: This function is used for displaying list of ordered services
+* Description: This function is used for displaying list of ordered services
 * Input:   None
 * Output:  None
 */
@@ -376,7 +376,7 @@ void Room::getOrderList() {
 /*
 * Class: Room
 * Function: addOrder
-* Discription: This function is used for displaying bill
+* Description: This function is used for displaying bill
 * Input:   None
 * Output:  None
 */
@@ -397,7 +397,7 @@ void Room::getBill() {
 /*
 * Class: ManageRoom
 * Function: sort_room
-* Discription: This function is used for sorting ID of room
+* Description: This function is used for sorting ID of room
 * Input:   None
 * Output:  None
 */
@@ -408,7 +408,7 @@ void ManageRoom::sort_room() {
 /*
 * Class: ManageRoom
 * Function: getRoomList
-* Discription: This function is used for getting roomList (List of rooms)
+* Description: This function is used for getting roomList (List of rooms)
 * Input:   None
 * Output:  return: roomList (List of rooms)
 */
@@ -419,7 +419,7 @@ list <Room> ManageRoom::getRoomList() {
 /*
 * Class: ManageRoom
 * Function: isFull
-* Discription: This function is used for check status of rooms
+* Description: This function is used for check status of rooms
 * Input:   None
 * Output:  return: true (all of rooms is full)
            return: false (there is still room)
@@ -434,7 +434,7 @@ bool ManageRoom::isFull() {
 /*
 * Class: ManageRoom
 * Function: addRoom
-* Discription: This Function is used for adding a new room
+* Description: This Function is used for adding a new room
 * Input:   _roomID (ID of room)
 * Output:  return: None
 */
@@ -447,7 +447,7 @@ void ManageRoom::addRoom(string _roomID) {
 /*
 * Class: ManageRoom
 * Function: deleteRoom
-* Discription: This Function is used for deleting details of room
+* Description: This Function is used for deleting details of room
 * Input:   _ID (ID of room)
 * Output:  return: None
 */
@@ -475,7 +475,7 @@ void ManageRoom::deleteRoom(string _ID) {
 /*
 * Class: ManageRoom
 * Function: showRoom
-* Discription: This function is used for displaying status of rooms
+* Description: This function is used for displaying status of rooms
 * Input:   None
 * Output:  return: None
 */
@@ -508,7 +508,7 @@ void ManageRoom::showRoom() {
 /*
 * Class: ManageRoom
 * Function: getInfor
-* Discription: This function is used for displaying details of rooms
+* Description: This function is used for displaying details of rooms
 * Input:   _ID (ID of room)
 * Output:  return: None
 */
@@ -536,7 +536,7 @@ void ManageRoom::getInfor(string _ID) {
 /*
 * Class: ManageRoom
 * Function: menuManageRoom
-* Discription: This function is used for managing rooms of hotel
+* Description: This function is used for managing rooms of hotel
 * Input:   None
 * Output:  return: None
 */
