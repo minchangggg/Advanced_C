@@ -1,3 +1,10 @@
+/*
+* File: table.h
+* Author: Ton Nu Minh Trang
+* Date: 10/02/2024
+* Description: This file is a table header file that program is used for storing table's information
+*/
+
 #ifndef _TABLE_H
 #define _TABLE_H
 
@@ -11,6 +18,10 @@ typedef enum {
     Free
 } Status;
 
+/*
+*Class: Table
+*Description: This class contains basic properties and methods of a Table object
+*/
 class Table {
 private:
     int tableID;
@@ -36,19 +47,14 @@ public:
     void setTableID(int _tableID);
     int getTableID();
 
-    // 1. gọi món
     void orderDish(int ID_input, list <Dish> menu); 
     
-    // 2. hủy món 
     void cancelDish(int ID_input); 
 
-    // 3. đổi số lượng món đã đặt
     void changeNum(int ID_input); 
 
-    // 4. danh sách món đã đặt 
     void getOrderList (int ID_input); 
 
-    // 5. tính bill
     void getBill(int ID_input);
 };
 
