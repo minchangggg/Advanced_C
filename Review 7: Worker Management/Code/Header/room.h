@@ -1,3 +1,10 @@
+/*
+* File: room.h
+* Author: Ton Nu Minh Trang
+* Date: 15/02/2024
+* Description: This file is a Room header file which manages rooms of hotel
+*/
+
 #ifndef _ROOM_H
 #define _ROOM_H
 
@@ -15,6 +22,10 @@ typedef struct {
     int numService;
 } Order;
 
+/*
+*Class: Customer
+*Description: This class contains basic properties and methods of a Customer object
+*/
 class Customer {
 private:
     string nameCustomer;
@@ -47,7 +58,7 @@ typedef enum {
     A // Available
 } Status;
 
-string changeStatus(Status _status) {
+inline string changeStatus(Status _status) {
     string status = "";
     if (_status == U) status = "U";
     else if (_status == A) status = "A";
@@ -55,6 +66,10 @@ string changeStatus(Status _status) {
     return status; 
 }
 
+/*
+*Class: Room
+*Description: This class contains basic properties and methods of a Room object
+*/
 class Room {
 private:
     string roomID; // ID phòng 
@@ -85,8 +100,16 @@ public:
     void addOrder(ManageService manageService);
     void getOrderList();
     void getBill();
+    
+    bool operator < (const Room &other) {
+        return this->getRoomID() < other.getRoomID();
+    }
 };
 
+/*
+*Class: ManageRoom
+*Description: This class contains basic properties and methods that manage rooms of hotel
+*/
 class ManageRoom {
 private:
     list <Room> roomList;
@@ -97,20 +120,14 @@ public:
     list <Room> getRoomList();
     bool isFull();
 
-    void addRoom(string _roomID);// Thêm phòng
-    void deleteRoom(string _ID); // Xóa phòng
+    void addRoom(string _roomID);
+    void deleteRoom(string _ID); 
 
-    bool cmpName(const Room &a, const Room &b) {
-        return a.getRoomID() < b.getRoomID();  
-    }
-    void sort_room(list <Room> &room) {
-        room.sort(cmpName);
-    }
-
+    void sort_room();
     void showRoom(); 
-    void getInfor(string _ID); // Xem trạng thái phòng
+    void getInfor(string _ID); 
 
-    void menuManageRoom(); // MENU
+    void menuManageRoom();
 };
 
 #endif
