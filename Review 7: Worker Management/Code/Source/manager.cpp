@@ -11,7 +11,7 @@ using namespace std;
 /*
 * Class: Manager
 * Function: getAccount
-* Discription: This function is used for getting manager account
+* Description: This function is used for getting manager account
 * Input:   None
 * Output:  return: account (account of manager)
 */
@@ -22,7 +22,7 @@ int Manager::getAccount() {
 /*
 * Class: Manager
 * Function: getPassword
-* Discription: This function is used for getting manager password 
+* Description: This function is used for getting manager password 
 * Input:   None
 * Output:  return: password (password of employee)
 */
@@ -33,7 +33,7 @@ int Manager::getPassword() {
 /*
 * Class: Manager
 * Function: menuManager
-* Discription: This function is used for managing employees, rooms and services of hotel 
+* Description: This function is used for managing employees, rooms and services of hotel 
 * Input:   None
 * Output:  return: None
 */
