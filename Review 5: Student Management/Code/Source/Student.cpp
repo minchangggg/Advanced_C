@@ -1,6 +1,185 @@
-#include "Student.h"
+/*
+* File: Student.cpp
+* Author: Ton Nu Minh Trang
+* Date: 5/02/2024
+* Description: This file contains all of the functions/methods stored students information
+*/
+
+#include "../Header/employee.h"
 using namespace std;
 
+/*
+* Class: Person
+* Function: setName
+* Discription: This function is used for setting name of student
+* Input:   _name (name of student)
+* Output:  return: None
+*/
+void Person::setName(string _name) {
+    name = _name;
+}
+
+/*
+* Class: Person
+* Function: getName
+* Discription: This function is used for getting name of student
+* Input:   None
+* Output:  return: name (name of student)
+*/
+string Person::getName() const {
+    return name;
+}
+
+/*
+* Class: Person
+* Function: setAge
+* Discription: This function is used for setting age of student
+* Input:   _age (age of student)
+* Output:  return: None
+*/
+void Person::setAge(short int _age) {
+    age = _age;
+}
+
+/*
+* Class: Person
+* Function: getAge
+* Discription: This function is used for getting age of student
+* Input:   None
+* Output:  return: age (age of student)
+*/
+short int Person::getAge() {
+    return age;
+}
+
+/*
+* Class: Person
+* Function: setGender
+* Discription: This function is used for setting gender of student
+* Input:   _gender (gender of student)
+* Output:  return: None
+*/
+void Person::setGender(Gender _gender) {
+    gender = _gender;
+}
+
+/*
+* Class: Person
+* Function: getGender
+* Discription: This function is used for getting gender of student
+* Input:   None
+* Output:  return: gender (gender of student)
+*/
+Gender Person::getGender() {
+    return gender;
+}
+
+/*
+* Class: Person
+* Function: setID
+* Discription: This function is used for setting ID of student
+* Input:   _ID (ID of student)
+* Output:  return: None
+*/
+void Person::setID(short int _ID) {
+    ID = _ID;
+}
+
+/*
+* Class: Person
+* Function: getID
+* Discription: This function is used for getting ID of student
+* Input:   None
+* Output:  return: ID (ID of student)
+*/
+short int Person::getID() {
+    return ID;
+}
+
+/*
+* Class: Student
+* Function: setMath
+* Discription: This function is used for setting Math score of student
+* Input:   _Math_score (Math score of student)
+* Output:  return: None
+*/
+void Student::setMath(float _Math_score) {
+    Math_score = _Math_score;
+}
+
+/*
+* Class: Student
+* Function: getMath
+* Discription: This function is used for getting Math score of student
+* Input:   None
+* Output:  return: Math_score (Math score of student)
+*/
+float Student::getMath() const {
+    return Math_score;
+}
+
+/*
+* Class: Student
+* Function: setPhysic
+* Discription: This function is used for setting Physics score of student
+* Input:   _Physic_score (Physics score of student)
+* Output:  return: None
+*/
+void Student::setPhysic(float _Physic_score) {
+    Physic_score = _Physic_score;
+}
+
+/*
+* Class: Student
+* Function: getPhysic
+* Discription: This function is used for getting Physics score of student
+* Input:   None
+* Output:  return: Physic_score (Physics score of student)
+*/
+float Student::getPhysic() const {
+    return Physic_score;
+}
+
+/*
+* Class: Student
+* Function: setChemical
+* Discription: This function is used for setting Chemical score of student
+* Input:   _Chemical_score (Chemical score of student)
+* Output:  return: None
+*/
+void Student::setChemical(float _Chemical_score) {
+    Chemical_score = _Chemical_score;
+}
+
+/*
+* Class: Student
+* Function: getChemical
+* Discription: This function is used for getting Chemical score of student
+* Input:   None
+* Output:  return: Chemical_score (Chemical score of student)
+*/
+float Student::getChemical() const {
+    return Chemical_score;
+}
+
+/*
+* Class: Student
+* Function: getAverScore
+* Discription: This function is used for getting Average score of student
+* Input:   None
+* Output:  return: Average_score (Average score of student)
+*/
+float Student::getAverScore() const {
+    return (Math_score + Physic_score + Chemical_score) / 3;
+}
+
+/*
+* Class: Student
+* Function: setData
+* Discription: This function is used for setting data of student
+* Input:   None
+* Output:  return: None
+*/
 void Student::setData() {
     cout << "\t\t\tEnter Name: ";
     cin.ignore();
@@ -42,6 +221,13 @@ void Student::setData() {
     setMath(_Chemical_score);
 }
 
+/*
+* Class: Student
+* Function: getData
+* Discription: This function is used for getting data of student
+* Input:   None
+* Output:  return: None
+*/
 void Student::getData() {
     cout << "ID: " << getID() << endl;
 
@@ -80,6 +266,13 @@ void Student::getData() {
     }
 }
 
+/*
+* Class: Student
+* Function: getRank
+* Discription: This function is used for getting rank of student
+* Input:   None
+* Output:  return: rank (rank of student)
+*/
 Rank Student::getRank() {
         if (getAverScore() >= 8.5 && getAverScore() <= 10) return Excellent;
         else if (getAverScore() >= 7 && getAverScore() <= 8.4) return Good;
