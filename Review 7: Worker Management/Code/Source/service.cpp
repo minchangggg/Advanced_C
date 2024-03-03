@@ -11,7 +11,7 @@ using namespace std;
 /*
 * Class: Service
 * Function: setID
-* Discription: This function is used for setting ID for type of services
+* Description: This function is used for setting ID for type of services
 * Input:   _serviceID (ID of service)
 * Output:  return: None
 */
@@ -22,7 +22,7 @@ void Service::setID (int _serviceID) {
 /*
 * Class: Employee
 * Function: getID
-* Discription: This function is used for getting ID for type of services
+* Description: This function is used for getting ID for type of services
 * Input:   None
 * Output:  return: serviceID (ID of service)
 */
@@ -33,7 +33,7 @@ int Service::getID() {
 /*
 * Class: Service
 * Function: setName
-* Discription: This function is used for setting name for type of services
+* Description: This function is used for setting name for type of services
 * Input:   _name (name of service)
 * Output:  return: None
 */
@@ -44,7 +44,7 @@ void Service::setName(string _name) {
 /*
 * Class: Service
 * Function: getName
-* Discription: This function is used for getting name for type of services
+* Description: This function is used for getting name for type of services
 * Input:   None
 * Output:  return: name (name of service)
 */
@@ -55,7 +55,7 @@ string Service::getName() {
 /*
 * Class: Service
 * Function: setPrice
-* Discription: This function is used for setting price for type of services
+* Description: This function is used for setting price for type of services
 * Input:   _price (price of service)
 * Output:  return: None
 */
@@ -66,7 +66,7 @@ void Service::setPrice(int _price) {
 /*
 * Class: Service
 * Function: getPrice
-* Discription: This function is used for getting price for type of services
+* Description: This function is used for getting price for type of services
 * Input:   None
 * Output:  return: price (price of service)
 */
@@ -77,7 +77,7 @@ int Service::getPrice() {
 /*
 * Class: Service
 * Function: setPrice
-* Discription: This function is used for setting data for type of services
+* Description: This function is used for setting data for type of services
 * Input:    _name (name of service)
             _price (price of service)
 * Output:  return: None
@@ -90,7 +90,7 @@ void Service::setData(string _name, int _price) {
 /*
 * Class: ManageService
 * Function: getDish
-* Discription: This function is used for getting list of dishes served in hotel
+* Description: This function is used for getting list of dishes served in hotel
 * Input:   None
 * Output:  return: dish (list of dishes)
 */
@@ -100,7 +100,7 @@ list <Service> ManageService::getDish() {
 /*
 * Class: ManageService
 * Function: getPool
-* Discription: This function is used for getting list of Pool Services served in hotel
+* Description: This function is used for getting list of Pool Services served in hotel
 * Input:   None
 * Output:  return: pool (list of Pool Services)
 */
@@ -110,7 +110,7 @@ list <Service> ManageService::getPool() {
 /*
 * Class: ManageService
 * Function: getGym
-* Discription: This function is used for getting list of Gym Services served in hotel
+* Description: This function is used for getting list of Gym Services served in hotel
 * Input:   None
 * Output:  return: gym (list of Gym Services)
 */
@@ -120,7 +120,7 @@ list <Service> ManageService::getGym() {
 /*
 * Class: ManageService
 * Function: getLaundry
-* Discription: This function is used for getting list of Laundry Services served in hotel
+* Description: This function is used for getting list of Laundry Services served in hotel
 * Input:   None
 * Output:  return: laundry (list of Laundry Services)
 */
@@ -131,7 +131,7 @@ list <Service> ManageService::getLaundry() {
 /*
 * Class: ManageService
 * Function: addService
-* Discription: This function is used for adding a new type of services 
+* Description: This function is used for adding a new type of services 
 * Input:   _name (name of service), _price (price of service), service (types of services)
 * Output:  return: None
 */
@@ -145,7 +145,7 @@ void ManageService::addService(string _name, int _price, list <Service> &service
 /*
 * Class: ManageService
 * Function: deleteService
-* Discription: This Function is used for deleting details of types of services
+* Description: This ffunction is used for deleting details of types of services
 * Input:   ID_input (ID of service) and service (types of services)
 * Output:  return: None
 */
@@ -177,7 +177,7 @@ void ManageService::deleteService(int ID_input, list <Service> &service) {
 /*
 * Class: ManageService
 * Function: showService
-* Discription: This function is used for displaying all types of service in hotel
+* Description: This function is used for displaying all types of service in hotel
 * Input:   service (types of services)
 * Output:  return: None
 */
@@ -196,7 +196,7 @@ void ManageService::showService(list <Service> service) {
 /*
 * Class: ManageService
 * Function: editService
-* Discription: This function is used for editing details of type of services
+* Description: This function is used for editing details of type of services
 * Input:   ID_input (ID of service) and service (types of services)
 * Output:  return: None
 */
@@ -220,7 +220,7 @@ void ManageService::editService(int ID_input, list <Service> &service) {
 /*
 * Class: ManageService
 * Function: menuManageService
-* Discription: This function is used for managing all types of services in hotel
+* Description: This function is used for managing all types of services in hotel
 * Input:   None
 * Output:  return: None
 */
