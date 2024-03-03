@@ -1,3 +1,10 @@
+/*
+* File: employee.h
+* Author: Ton Nu Minh Trang
+* Date: 15/02/2024
+* Description: This file is a Employee header file which manages employees of hotel
+*/
+
 #ifndef _EMPLOYEE_H
 #define _EMPLOYEE_H
 
@@ -9,6 +16,15 @@ using namespace std;
 
 typedef enum { Morning, Afternoon, Evening, No_Shift } Time;
 
+/*
+* Struct: Shift
+* Discription: This struct is used for setting weekly shift 
+Mon[2]: shift for Monday  
+Tue[2]: shift for Tuesday 
+Wed[2]: shift for Wednesday 
+Thur[2]: shift for Thurday 
+Fri[2]: shift for Friday 
+*/
 typedef struct {
     Time Mon[2];
     Time Tue[2];
@@ -17,7 +33,7 @@ typedef struct {
     Time Fri[2];
 } Shift;
 
-string getTime (Time _time) {
+inline string getTime (Time _time) {
     string time;
     switch (_time) {
         case Morning:
@@ -38,6 +54,10 @@ string getTime (Time _time) {
     return time;
 }
 
+/*
+*Class: Employee
+*Description: This class contains basic properties and methods of a Employee object
+*/
 class Employee {
 private:
     int ID;
@@ -75,6 +95,10 @@ public:
     Shift getShift();
 };
 
+/*
+*Class: ManageEmployee
+*Description: This class contains basic properties and methods that manage employees of hotel
+*/
 class ManageEmployee {
 private:
     list<Employee> employeeList;
