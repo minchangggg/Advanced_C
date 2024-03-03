@@ -1,27 +1,75 @@
+/*
+* File: receptionist.cpp
+* Author: Ton Nu Minh Trang
+* Date: 15/02/2024
+* Description: This file contains all the functions/methods to helps hotel system work
+*/
+
 #include "../Header/receptionist.h"
 using namespace std; 
 
+/*
+* Class: Receptionist
+* Function: setAccountt
+* Discription: This function is used for setting receptionist account
+* Input:   _accountt (account of manager)
+* Output:  return: None
+*/
 void Receptionist::setAccountt(int _accountt) {
     accountt = _accountt;
 }
 
+/*
+* Class: Receptionist
+* Function: setPasswordd
+* Discription: This function is used for setting receptionist password 
+* Input:   _passwordd (password of employee)
+* Output:  return: None
+*/
 void Receptionist::setPasswordd(int _passwordd) {
     passwordd = _passwordd;
 }
 
+/*
+* Class: Receptionist
+* Function: getAccountt
+* Discription: This function is used for getting receptionist account
+* Input:   None
+* Output:  return: accountt (account of manager)
+*/
 int Receptionist::getAccountt() {
     return accountt;
 }
 
+/*
+* Class: Receptionist
+* Function: getPasswordd
+* Discription: This function is used for getting receptionist password 
+* Input:   None
+* Output:  return: passwordd (password of employee)
+*/
 int Receptionist::getPasswordd() {
     return passwordd;
 }
 
+/*
+* Class: Receptionist
+* Function: checkShift
+* Discription: This function is used for displaying weekly shift timetable of employees
+* Input:   database 
+* Output:  return: None
+*/
 void Receptionist::checkShift(Database database) {
     database.employee.tableShift();
 }
 
-
+/*
+* Class: Receptionist
+* Function: makeCheckIn
+* Discription: This function is used for check-in the hotel
+* Input:   database
+* Output:  return: None
+*/
 void Receptionist::makeCheckIn(Database &database) {
     database.room.showRoom();
     cout << "\t\t\tPlease choose one of these Room ID: ";
@@ -36,6 +84,13 @@ void Receptionist::makeCheckIn(Database &database) {
     }
 }
 
+/*
+* Class: Receptionist
+* Function: makeCheckOut
+* Discription: This function is used for check-out the hotel
+* Input:   database
+* Output:  return: None
+*/
 void Receptionist::makeCheckOut(Database &database) {
     int _phoneCustomer;
     cout << "Please enter customer phone number:";
@@ -73,10 +128,24 @@ void Receptionist::makeCheckOut(Database &database) {
     makeCheckOut(database);
 }
 
+/*
+* Class: Receptionist
+* Function: showRoom
+* Discription: This function is used for displaying rooms of hotel
+* Input:   database
+* Output:  return: None
+*/
 void Receptionist::showRoom(Database database) {
     database.room.showRoom();
 }
 
+/*
+* Class: Receptionist
+* Function: menuReceptionist
+* Discription: This function is used for serving rooms and services of hotel for customer
+* Input:   database
+* Output:  return: None
+*/
 void Receptionist::menuReceptionist(Database &database) { 
     int _passwordd = 0; int _accountt = 0; int _choicee = 0; 
 
@@ -189,7 +258,7 @@ void Receptionist::menuReceptionist(Database &database) {
                 goto menuReceptionist_start;  
                 break;
             
-            case 4:
+            case 4: {
                 cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
                 cout << "Enter ID Of Room  You Want To Add Type Of Services: " << endl;
                 cin.ignore(); cin >> _roomID;
@@ -213,6 +282,7 @@ void Receptionist::menuReceptionist(Database &database) {
                     if (_choicee == 1) goto add_service_order;
                     else goto menuReceptionist_start;
                     break;
+            }
 
             case 5:
                 cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
