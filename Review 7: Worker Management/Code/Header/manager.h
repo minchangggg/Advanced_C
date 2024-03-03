@@ -22,7 +22,7 @@ typedef enum {
 
 /*
 * Struct: Database
-* Discription: This struct is used for containing data of hotel
+* Description: This struct is used for containing data of hotel
     employee: data of employees
     room: data of rooms
     service: data of services
