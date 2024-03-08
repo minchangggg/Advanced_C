@@ -3628,50 +3628,262 @@ Syntax: `delete ptr_var;`
 		}
 
 __________________________________________________________________________________________________________________________________________________________________________
-# Lesson 18: Threads		
-**Ex 1.a**
+# Lesson 18: Multithreading	
+> https://viblo.asia/p/lam-quen-voi-multithreading-trong-c-qm6RWQYXGeJE
+>
+> https://viblo.asia/p/concurrency-in-c11-LzD5dOLzljY
+> 
+> https://websitehcm.com/c-multithreading/
 
-  		#include <iostream>
+## I, Tổng quan
+### 1. Multithreading là gì ?
++ Về cơ bản ĐA LUỒNG (Multithreading) là một khả năng của một nền tảng (hệ điều hành, máy ảo vv) hoặc các ứng dụng để tạo ra một **quá trình bao gồm nhiều LUỒNG (Thread) được thực thi**. Những LUỒNG (Thread) này có thể **chạy song song**. Mỗi LUỒNG (Thread) có thể thực hiện một **tác vụ riêng biệt**, cho phép chương trình **xử lý đa nhiệm, tăng hiệu suất và đồng thời tận dụng tối đa tài nguyên hệ thống**.
++ Trong các **hệ thống đa lõi và đa xử lý** thì ĐA LUỒNG (Multithreading) tức là các LUỒNG (thread) được **thực hiện cùng lúc** trên **lõi hoặc bộ vi xử lý khác nhau**.
++ Đối với **hệ thống lõi đơn** thì ĐA LUỒNG (Multithreading) **chia thời gian giữa các thread**. System sẽ gửi 1 số lượng nhất định các hướng dẫn từ mỗi Thread để xử lý. Các Thread không được thực hiện đồng thời. System chỉ mô phỏng thực hiện đồng thời của chúng. Tính năng này của System được gọi là đa luồng.
++ Multithreading được sử dụng khi thực hiện song song 1 số nhiệm vụ dẫn đến việc tận dụng hiệu quả hơn các tài nguyên của hệ thống.
+
+### 2. Lợi ích của Multithreading trong C++
++ Tăng hiệu năng và thời gian thực thi.
++ Tận dụng tài nguyên hệ thống: Bằng cách sử dụng multithreading, chương trình có thể tận dụng được nhiều bộ xử lý (cores) của máy tính. Mỗi luồng (thread) có thể chạy trên một bộ xử lý riêng, đồng thời thực hiện các tác vụ độc lập. Điều này giúp tối ưu hóa sử dụng tài nguyên hệ thống và đảm bảo rằng máy tính hoạt động ở mức tối đa.
++ Xử lý đồng thời các tác vụ độc lập: Multithreading cho phép chương trình chạy đồng thời các tác vụ độc lập nhau. Điều này rất hữu ích trong các tình huống cần xử lý song song các công việc như xử lý dữ liệu đồng thời, phản hồi các sự kiện đồng thời, hoặc thực hiện các tác vụ background trong khi chương trình vẫn tiếp tục hoạt động.
++ Tăng tính tương tác và sự phản hồi của ứng dụng: Multithreading cho phép chương trình chạy các tác vụ không liên quan song song với nhau. Điều này tạo ra một trải nghiệm tương tác mượt mà hơn, giúp người dùng cảm nhận được sự phản hồi nhanh chóng của ứng dụng và không bị gián đoạn.
+
+### 3. Cách tạo một Thread ?**
+
+		// Đầu tiên include header thread 
 		#include <thread>
 		
+		// Khi muốn khởi tạo 1 thread, tạo 1 thread object:
+		thread t_empty;
+
++ Hàm khởi tạo mặc định của thread class được sử dụng. Chúng ta không chuyền bất cứ 1 thông tin nào vào thread. Tức là không có gì được chạy trong thread này.
++ Chúng ta phải khởi tạo thread. Nó có thể được hoàn thành bằng cách khác. Khi bạn tạo 1 thread, bạn có thể truyền 1 con trỏ hàm vào khởi tạo của nó -> 1 thread được khởi tạo, function sẽ bắt đầu chạy, nó chạy trong 1 thread riêng biệt
+
+		#include <iostream>
+		#include <thread>
 		using namespace std;
+		void threadFunc() {
+			cout << "Welcome to Multithreading" << endl;
+		}
+  
+		int main() {
+			//truyền 1 function tới thread
+			thread funcTest1(threadFunc);
+		}
+
++ Việc biên dịch đoạn code trên không có vấn đề gì, tuy nhiên bạn sẽ lập tức đối mặt với 1 runtime error
++ Lý do là: Main thread tạo 1 thread mới là funcTest1 với paramaters threadFunc. **Main thread không đợi funcTes1 huỷ, nó tiếp tục hoạt động và sẽ kết thúc**, nhưng **funcTest vẫn chạy -> Nó sẽ dẫn đễn lỗi**. **TẤT CẢ CÁC THREAD PHẢI HUỶ TRƯỚC KHI MAIN THREAD HUỶ**. Vậy làm các nào khắc phục vấn đề này ?
+
+### 4. Join threads
++ Thread class cung cấp method **join()**, hàm này chỉ **return khi tất cả các thread kết thúc**, điều đó có nghĩa là **main thread sẽ đợi đến khi tất cả các thread con hoàn thành công việc của nó**. Add thêm đoạn call hàm joind vào sample trên và chạy lại
+
+**Ex 1**
+
+		#include <iostream>
+		#include <thread>
+		using namespace std;
+		void threadFunc() {
+			cout << "Welcome to Multithreading" << endl;
+		}
+  
+		int main() {
+			//truyền 1 function tới thread
+			thread funcTest1(threadFunc);
+  
+			//main sẽ block đến khi funcTest1 kết thúc
+			funcTest1.join();
+		}
+  
+**Ex 2:**
+
+		#include <iostream>
+		#include <thread>
 		
-		void delay(int s) {
-		    for (size_t i = 0; i < 0xffff; i++) {
-		        for (size_t j = 0; j < 5*s; j++) { }
-		    }   
+		void printHello() {
+		    std::cout << "Hello from thread!" << std::endl;
 		}
 		
-		void funcA(int i, double j){
-		    int count = 0;
-		    while (1) {
-		        count++;
-		        cout<<"funcA: "<<count<<endl;
-		        delay(4000);
-		    }
-		}
-		
-		void funcB(){
-		    int count = 0;
-		    while (1) {
-		        count++;
-		        cout<<"funcB: "<<count<<endl;
-		        delay(1000);
-		    }
-		}
-		
-		
-		int main(int argc, char const *argv[]) {
-		    thread t1(funcA, 4, 6.5);
-		    thread t2(funcB);
-		
+		int main() {
+  		    // Tạo một luồng t1 với hàm printHello
+		    std::thread t1(printHello);
+      
+      		    // Hàm join() được gọi để chờ luồng t1 kết thúc trước khi chương trình kết thúc.
 		    t1.join();
-		    t2.join();
-		  
+      
 		    return 0;
 		}
 
-  **Ex 1.b**
+### 4. Joinable and not Joinable threads
++ Sau khi hàm join return, thread trở lên không thể join lại. 1 joinable thread là 1 thread mà đại diện cho 1 execution mà chưa join.
++ 1 thread không là joinable khi nó được khởi tạo mặc định hoặc được moved/assigned tới 1 thread khác hoặc joind hoặc detach hàm đã được ọi Not joinable thread có thể huỷ 1 cách an toàn. Hàm joinable() để checks thread có là joinable thread hay không (trả về true nếu thread là joinable and false nếu ngược lại). Nên sử dụng hàm này trước khi call hàm join();
+	
+  		//truyền 1 function tới thread
+		thread funcTest1(threadFunc);
+  
+		//check if thread is joinable
+		if (funcTest1.joinable()) {
+		//main is blocked until funcTest1 is not finished
+		    funcTest1.join();
+		}
+
+### 5. Detaching thread
++ Thread trở thành not joinable sau khi hàm detach được gọi.
++ `void detach()`
++ Hàm này tách 1 thread từ 1 thread cha, nó cho phép thread cha và thread con được chạy ngay lập tức từ cái còn lại. Sau khi call detach functon, các thread sẽ không đồng bộ trong bất kỳ cách nào.
+
+		//detach funcTest1 from main thread
+		funcTest1.detach();
+		if (funcTest1.joinable()) {
+			//main is blocked until funcTest1 is not finished
+			funcTest1.join();
+		}
+		else cout << "functTest1 is detached" << endl;
+
++ mainthread không đợi các thread con bị huỷ!
+
+### 6. Initializing thread with an object
++ Có thể khởi tạo thread không chỉ với 1 function mà có thể dùng với 1 object hoặc 1 function của class.
+  
+**Ex 1:**
+
+		class myFunctor {
+		public:
+			void operator()() {
+				cout << "This is my function object" << endl;
+			}
+		};
+  
+		int main() {
+  			// 1. Khởi tạo thread bằng cách truyền object của class myFunctor vào hàm khởi tạo của thread
+			myFunctor myFunc1;
+			thread functorTest1(myFunc1);
+			if (functorTest1.joinable()) functorTest1.join();
+		}
+
+**Ex 2:**
+
+		class myFunctor {
+		public:
+			void publicFunction() {
+				cout << "public function of myFunctor class is called" << endl;
+			}
+		};
+  
+		int main() {
+		 	// 2. Khởi tạo thread với 1 public function của class, phải định nghĩa function và truyền object của class định nghĩa function đó
+			myFunctor myFunc2;
+			thread functorTest2(&myFunctor::publicFunction,myFunc2);
+			if (functorTest2.joinable()) functorTest2.join();
+		}
+
+### 7. Passing arguments to thread
+
+**Ex 1:**
+
+		#include <iostream>
+		#include <thread>
+		using namespace std;
+
+		void printSomeValues(int val, string str, double dval) {
+			cout << val << " " << str <<" " << dval << endl;
+		}
+  
+		int main() {
+			string str = "Hello";
+			thread paramPass(printSomeValues, 5, str, 3.2); //5, str and 3.2 are passed to printSomeValues function
+			if (paramPass.joinable()) paramPass.join();
+		}
+  
+> Output Ex 1
+
+		5 Hello 3.2
+
+**Ex 2:** // Ví dụ về việc sử dụng nhiều luồng để tăng hiệu suất của chương trình
+
+		#include <iostream>
+		#include <thread>
+		#include <vector>
+		
+		void printSum(int start, int end, int* sum) {
+		    for (int i = start; i <= end; i++) {
+		        (*sum) += i;
+		    }
+		}
+		
+		int main() {
+		    int sum = 0;
+		    std::vector<std::thread> threads;
+
+       		    // Sử dụng 10 luồng để tính tổng của các số từ 1 đến 1000. Mỗi luồng tính tổng cho một phần của dãy số.
+		    for (int i = 0; i < 10; i++) {
+		        threads.push_back(std::thread(printSum, i * 100 + 1, (i + 1) * 100, &sum));
+		    }
+      		    // Sau đó gộp kết quả lại -> Sử dụng multithreading như vậy có thể tăng hiệu suất của chương trình.
+		    for (int i = 0; i < 10; i++) {
+		        threads[i].join();
+		    }
+      
+		    std::cout << "Sum = " << sum << std::endl;
+		    return 0;
+		}
+
+
+**Ex 3:**
+
+		#include <iostream>
+		#include <thread>
+		using namespace std;
+		
+		class myFunctorParam {
+		public:
+			void operator()(int* arr, int length) {
+				cout << "An array of length " << length << " is passed to thread" << endl;
+				for (int i = 0; i != length; ++i) cout << arr[i] << " ";
+				cout << endl << endl;
+			}
+			
+			void changeSign(int* arr, int length) {
+				cout << "An arrray of length " << length << " is passed to thread" << endl;
+				for (int i = 0; i != length; ++i) cout << arr[i] << " ";
+				cout << "\nChanging sign of all elements of initial array" << endl;
+				for (int i = 0; i != length; ++i) {
+					arr[i] *= -1;
+					cout << arr[i] << " ";
+				}
+			}
+		};
+		
+		int main() {
+			int arr2[5] = { -1, -3, -5, -7, 0 };
+		   	myFunctorParam objParamPass;
+		   	
+		   	thread test(objParamPass, arr2, 5);
+			thread test2(&myFunctorParam::changeSign, &objParamPass, arr2, 5);
+			
+			if (test.joinable()) test.join();
+			if (test2.joinable()) test2.join();
+		}
+
+> Output Ex 2
+
+		An array of length 5 is passed to thread
+		-1 -3 -5 -7 0 
+		
+		An arrray of length 5 is passed to thread
+		-1 -3 -5 -7 0 
+		Changing sign of all elements of initial array
+		1 3 5 7 0 
+
+## II. Sử dụng shared memory
++ `Threads`
++ `Race conditions`
++ `Mutexes`
++ `Atomicity`
++ `Asynchonous tasks`
++ `Condition variables`
+
+
+///////////////////////////////////////////////////////////////
 
 		#include <iostream>
 		#include <thread>
@@ -3709,7 +3921,6 @@ ________________________________________________________________________________
 		    }
 		}
 		
-		
 		int main(int argc, char const *argv[]) {
 		    thread t1(funcA);
 		    thread t2(funcB);
@@ -3719,7 +3930,7 @@ ________________________________________________________________________________
 		    
 		    return 0;
 		}
-
+/////////////////////////////////////////////////////////////////////
 **Ex 2**
 		
 		#include <iostream> 
