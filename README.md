@@ -3882,8 +3882,45 @@ ________________________________________________________________________________
 + `Asynchonous tasks`
 + `Condition variables`
 
+### 1. Mutex (Mutual Exclusion)
++ Được sử dụng để đồng bộ hóa truy cập vào các tài nguyên được chia sẻ giữa các luồng. Để khóa một mutex, bạn cần sử dụng phương thức lock() của đối tượng mutex, và để mở khóa mutex, bạn sử dụng phương thức unlock(). 
++ Dưới đây là một ví dụ đơn giản về cách sử dụng mutex để đồng bộ hóa truy cập vào biến được chia sẻ giữa các luồng:
 
-///////////////////////////////////////////////////////////////
+**Ex 1:**
+
+		#include <iostream>
+		#include <thread>
+		#include <mutex>
+		
+		std::mutex mtx; // Khai báo một mutex global
+		
+		int sharedVariable = 0; // Biến được chia sẻ giữa các luồng
+		
+		// Hàm thực hiện công việc cho luồng
+		void threadFunction() {
+			// Khóa mutex trước khi truy cập vào biến được chia sẻ
+			mtx.lock();
+			sharedVariable++; // Thực hiện một hoạt động trên biến được chia sẻ
+			std::cout << "Giá trị biến được chia sẻ: " << sharedVariable << std::endl;
+			// Mở khóa mutex sau khi thực hiện xong
+			mtx.unlock();
+		}
+
+		int main() {
+			// Tạo và bắt đầu hai luồng
+			std::thread t1(threadFunction);
+			std::thread t2(threadFunction);
+			
+			// Đợi cho các luồng kết thúc
+			t1.join();
+			t2.join();
+			
+			return 0;
+		}
+
++ Trong ví dụ này, std::mutex mtx; là một biến mutex được khai báo global. Trong hàm threadFunction, mutex được khóa bằng cách sử dụng mtx.lock() trước khi truy cập vào biến sharedVariable, và được mở khóa bằng cách sử dụng mtx.unlock() sau khi đã thực hiện xong các hoạt động trên biến đó.
+
+**Ex 2:**
 
 		#include <iostream>
 		#include <thread>
@@ -3930,7 +3967,53 @@ ________________________________________________________________________________
 		    
 		    return 0;
 		}
-/////////////////////////////////////////////////////////////////////
+  
+**a, std::unique_lock:**
+
++ std::unique_lock cho phép bạn khóa và mở khóa mutex một cách linh hoạt.
++ Nó có thể được sử dụng để khóa một mutex trong một phạm vi cụ thể và tự động mở khóa khi ra khỏi phạm vi đó.
++ std::unique_lock có thể được sử dụng cho các tình huống cần đặt khóa trong thời gian dài hoặc cần mở khóa trước thời gian kết thúc.
+
+**b, std::shared_lock: **
+
++ std::shared_lock cũng được sử dụng để khóa mutex, nhưng nó hỗ trợ việc chia sẻ truy cập giữa các luồng.
++ Nó cho phép nhiều luồng cùng đọc một tài nguyên mà không cần phải chờ đợi khi một luồng khác đang đọc (khóa đọc).
++ Khi một luồng muốn ghi vào tài nguyên (khóa ghi), nó phải chờ cho đến khi tất cả các luồng đang đọc kết thúc.
+
+**c, Ví dụ cách sử dụng std::unique_lock và std::shared_lock:**
+
+**Ex 1**
+
+		#include <iostream>
+		#include <thread>
+		#include <mutex>
+		
+		std::mutex mtx; // Mutex được chia sẻ
+		
+		void reader() {
+			std::shared_lock<std::mutex> lock(mtx);
+			std::cout << "Luồng đọc..." << std::endl;
+		}
+		
+		void writer() {
+			std::unique_lock<std::mutex> lock(mtx);
+			std::cout << "Luồng ghi..." << std::endl;
+		}
+		
+		int main() {
+			std::thread t1(reader);
+			std::thread t2(writer);
+			std::thread t3(reader);
+			
+			t1.join();
+			t2.join();
+			t3.join();
+			
+			return 0;
+		}
+
++ Trong ví dụ này, reader() sử dụng std::shared_lock để cho phép nhiều luồng đọc cùng một lúc, trong khi writer() sử dụng std::unique_lock để đảm bảo rằng chỉ có một luồng được phép ghi vào tài nguyên tại một thời điểm.
+
 **Ex 2**
 		
 		#include <iostream> 
@@ -3961,16 +4044,67 @@ ________________________________________________________________________________
 			thread t1(readData); 
 			thread t2(writeData, 128); 
 			thread t3(writeData, 10); 
-			thread t4 (readData); 
+			thread t4(readData); 
 			
 			t1.join(); 
 			t2.join(); 
 			t3.join(); 
 			t4.join(); 
+   
 			return 0; 
 		}
+  
+### 2. std::condition_variable : 
++ là một phần của thư viện chuẩn C++ (C++11 trở đi) được sử dụng để đồng bộ hóa giữa các luồng thông qua sự kích hoạt (notify) và chờ đợi (wait) của các sự kiện.
++ Nó cho phép một hoặc nhiều luồng đợi cho đến khi một điều kiện cụ thể được đáp ứng trước khi tiếp tục thực hiện các công việc khác.
++ Để sử dụng std::condition_variable, bạn cần kết hợp nó với một hoặc nhiều mutex. Thông thường, việc kết hợp std::condition_variable với std::unique_lock là phổ biến.
++ Dưới đây là một ví dụ về cách sử dụng std::condition_variable để đồng bộ hóa giữa hai luồng:
 
-**Ex 3**
+**Ex 1:**
+
+		#include <iostream>
+		#include <thread>
+		#include <mutex>
+		#include <condition_variable>
+		#include <chrono>
+		
+		std::mutex mtx;
+		std::condition_variable cv;
+		bool ready = false;
+		
+		void threadFunction1() {
+			for (int i = 0; i < 5; ++i) {
+				std::this_thread::sleep_for(std::chrono::seconds(1));
+				{
+				std::unique_lock<std::mutex> lock(mtx);
+				ready = true;
+				}
+				cv.notify_one();
+			}
+		}
+		
+		void threadFunction2() {
+			for (int i = 0; i < 5; ++i) {
+				std::unique_lock<std::mutex> lock(mtx);
+				cv.wait(lock, [] { return ready; });
+				ready = false; // Đặt lại cờ trạng thái
+				std::cout << "Luồng 2 nhận được thông báo và tiếp tục thực hiện công việc." << std::endl;
+			}
+		}
+		
+		int main() {
+			std::thread t1(threadFunction1);
+			std::thread t2(threadFunction2);
+			
+			t1.join();
+			t2.join();
+			
+			return 0;
+		}
+
++ Trong ví dụ này, threadFunction1 sẽ chạy một vòng lặp trong đó nó sẽ thực hiện việc chuẩn bị dữ liệu và gửi thông báo cho threadFunction2 sau mỗi giây. Trong khi threadFunction2 sẽ chờ đợi thông báo và sau đó tiếp tục thực hiện công việc của nó. Điều này sẽ diễn ra trong 5 lần lặp, mỗi lần đợi một thông báo mới từ threadFunction1.
+
+**Ex 2:**
 
 		// C++ program to illustrate the use of shared_mutex 
 		#include <iostream> 
@@ -4020,3 +4154,66 @@ ________________________________________________________________________________
 		
 			return 0; 
 		}
+  
+### 3. Bất đồng bộ (Asynchronous):
++ Trong lập trình, bất đồng bộ thường ám chỉ việc thực hiện một tác vụ mà không cần chờ đợi kết quả của tác vụ trước đó hoàn thành.
++ Các tác vụ bất đồng bộ thường được thực hiện song song và có thể hoàn thành trong thời gian khác nhau.
++ Bất đồng bộ thường được sử dụng trong các tình huống khi bạn muốn tiếp tục thực hiện các tác vụ khác mà không cần chờ đợi kết quả từ các tác vụ trước đó.
+
+		#include <iostream>
+		#include <thread>
+		#include <chrono>
+		
+		// Hàm thực hiện công việc bất đồng bộ
+		void asynchronousTask() {
+			std::this_thread::sleep_for(std::chrono::seconds(2));
+			std::cout << "Công việc bất đồng bộ đã hoàn thành!" << std::endl;
+		}
+		
+		int main() {
+			// Tạo một luồng để thực hiện công việc bất đồng bộ
+			std::thread asyncThread(asynchronousTask);
+			
+			std::cout << "Chương trình đang tiếp tục thực hiện công việc khác..." << std::endl;
+			
+			// Đợi cho luồng kết thúc
+			asyncThread.join();
+			
+			std::cout << "Chương trình đã hoàn thành!" << std::endl;
+			
+			return 0;
+		}
+
+
++ Trong ví dụ này, hàm asynchronousTask được gọi trong một luồng riêng biệt bằng cách sử dụng std::thread. Hàm này thực hiện một công việc bất đồng bộ bằng cách chờ 2 giây và sau đó in ra một thông báo. Trong khi đó, chương trình tiếp tục thực hiện các công việc khác mà không cần chờ đợi luồng bất đồng bộ hoàn thành.
++ Điều này chứng minh rằng công việc bất đồng bộ đã tiếp tục thực hiện mà không cần chờ đợi luồng hoàn thành, và chương trình tiếp tục thực hiện các công việc khác.
+
+		#include <iostream>
+		#include <thread>
+		#include <future>
+		#include <chrono>
+		
+		// Hàm thực hiện công việc bất đồng bộ và trả về một kết quả
+		int asynchronousTask() {
+			std::this_thread::sleep_for(std::chrono::seconds(2));
+			return 42;
+		}
+		
+		int main() {
+			// Tạo một tác vụ bất đồng bộ và lấy kết quả bằng future
+			std::future<int> resultFuture = std::async(std::launch::async, asynchronousTask);
+			
+			// Thực hiện một số công việc khác
+			std::cout << "Chương trình đang tiếp tục thực hiện công việc khác..." << std::endl;
+			
+			// Chờ và lấy kết quả từ tác vụ bất đồng bộ
+			int result = resultFuture.get(); // Đợi và lấy kết quả từ tác vụ
+			
+			std::cout << "Kết quả từ tác vụ bất đồng bộ là: " << result << std::endl;
+			
+			return 0;
+		}
+
++ Trong ví dụ này, chúng ta sử dụng std::async để tạo một tác vụ bất đồng bộ và std::future để lấy kết quả từ tác vụ đó. Phương thức get() được sử dụng để đợi và lấy kết quả từ tác vụ. Khi tác vụ hoàn thành, kết quả được trả về và được gán cho biến result.
+
+
