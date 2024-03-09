@@ -36,8 +36,7 @@ void DeviceFunction::getTempOutside() {
         unique_lock<mutex> lock(mtx_temp_outside);
         cv_temp_outside.wait(lock);
         
-        cout << "---------------TEMPERATURE OUTSIDE----------------" << endl;
-        cout << "Nhiet do ngoai troi bay gio la: " << deviceValue.temp_outside << endl;
+        cout << "---------------OUTSIDE CAR TEMPERATURE: " << deviceValue.temp_outside << " ---------------" << endl;
     }
 }
 
@@ -60,8 +59,7 @@ void DeviceFunction::getTempInside() {
         unique_lock<mutex> lock (mtx_temp_outside);
         cv_temp_outside.wait(lock);
 
-        cout << "---------------TEMPERATURE INSIDE----------------" << endl;
-        cout << "Nhiet do trong xe bay gio la: " << deviceValue.temp_inside << endl;
+        cout << "---------------INSIDE CAR TEMPERATURE: " << deviceValue.temp_inside << "---------------" << endl;
     }
 }
 
@@ -71,11 +69,10 @@ void DeviceFunction::getWindInside() {
         cv_wind_insdide.wait(lock);
 
         if (deviceValue.wind_inside != 0) {
-            cout << "---------------WIND LEVEL INSIDE----------------" << endl;
-            cout << "Muc gio trong xe bay gio la: " << deviceValue.wind_inside << endl;
+            cout << "---------------WIND LEVEL: " << deviceValue.wind_inside << "---------------" << endl;
         }
         else {
-            cout << "Fan off" << endl;
+            cout << "Wind function is off now" << endl;
         }
     }  
 }
