@@ -4441,10 +4441,25 @@ Do vậy để tránh trường hợp này chúng ta sẽ sử dụng các cách
 
 <img width="500" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/2201c1ee-61fd-40bc-a890-fa456ae4c77d">
 
-### VI. Bất đồng bộ (Asynchronous):
+### VI. Bất đồng bộ (Asynchronous)
+#### 1. Bối cảnh
++ Giả sử bạn có một một chương trình, trong chương trình này có một hàm để tính giai thừa. Giả định rằng hàm này chạy rất tốn thời gian, mà bạn muốn tách ra một thread riêng để chạy. Khi thread thực thi xong, bạn làm thế nào để nhận kết quả của hàm này trả về? (cách cũ bạn có thể xài condition variable và mutex – nhưng ở đây mình không sử dụng cách này).
+#### 2. Giải pháp
++ Sử dụng std::async() kết hợp std::future (bất đồng bộ)
 + Trong lập trình, bất đồng bộ thường ám chỉ việc thực hiện một tác vụ mà không cần chờ đợi kết quả của tác vụ trước đó hoàn thành.
 + Các tác vụ bất đồng bộ thường được thực hiện song song và có thể hoàn thành trong thời gian khác nhau.
 + Bất đồng bộ thường được sử dụng trong các tình huống khi bạn muốn tiếp tục thực hiện các tác vụ khác mà không cần chờ đợi kết quả từ các tác vụ trước đó.
+
+**Ex 1:**
+
+<img width="500" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/ad8d53eb-c309-4f30-8372-908a136e7e0f">
+
++ Ở ví dụ trên, chúng ta **gọi std::async()** và nó **trả về một std::future**.
++ Để **lấy được giá trị trả về**, ta sử dụng hàm **get() từ std::future** để nhận **giá trị trả về** của hàm **factorial()**.
++ Lưu ý: get() chỉ được gọi một lần, nếu không sẽ gây crash chương trình.
++ Hàm async() với tham số std::launch:async sẽ tạo một thread riêng biệt, tách biệt khỏi main thread.
+
+**Ex 2:**
 
 		#include <iostream>
 		#include <thread>
@@ -4470,9 +4485,10 @@ Do vậy để tránh trường hợp này chúng ta sẽ sử dụng các cách
 			return 0;
 		}
 
-
 + Trong ví dụ này, hàm asynchronousTask được gọi trong một luồng riêng biệt bằng cách sử dụng std::thread. Hàm này thực hiện một công việc bất đồng bộ bằng cách chờ 2 giây và sau đó in ra một thông báo. Trong khi đó, chương trình tiếp tục thực hiện các công việc khác mà không cần chờ đợi luồng bất đồng bộ hoàn thành.
 + Điều này chứng minh rằng công việc bất đồng bộ đã tiếp tục thực hiện mà không cần chờ đợi luồng hoàn thành, và chương trình tiếp tục thực hiện các công việc khác.
+
+**Ex 3:**
 
 		#include <iostream>
 		#include <thread>
