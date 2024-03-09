@@ -3637,23 +3637,19 @@ ________________________________________________________________________________
 > 
 > https://websitehcm.com/c-multithreading/
 
-## A, Tổng quan
-### I. Các mô hình lập trình: tuần tự, đồng thời và song song
+## A, Tổng quan về các mô hình lập trình: tuần tự, đồng thời và song song
 > https://zalopay-oss.github.io/go-advanced/ch1-basic/ch1-05-concurrency-parallelism.html
 
-+ Thời gian đầu, CPU chỉ có một nhân duy nhất, các ngôn ngữ khi đó sẽ theo **mô hình lập trình tuần tự (sequential processing)**.
+**I. Mô hình lập trình tuần tự Sequential**.
++ Thời gian đầu, CPU chỉ có một nhân duy nhất, các ngôn ngữ khi đó sẽ theo **mô hình lập trình tuần tự**.
 + Xử lý tuần tự là khả năng xử lý chỉ một tác vụ trong một khoảng thời gian, các tác vụ sẽ được thực thi theo thứ tự hết tác vụ này sẽ thực thi tiếp tác vụ khác.
 + Dưới đây là ví dụ cho mô hình xử lý tuần tự (sequential processing):
   
 ![image](https://github.com/minchangggg/Advanced_C/assets/125820144/9f2644b6-e056-4b8b-b753-b6655d7c1f94)
 
-+ Ngày nay, với sự phát triển của công nghệ, **mô hình lập trình đồng thời Concurrency đối với các hệ thống lõi đơn** và **mô hình lập trình song song Parallelism đối với các hệ thống đa lõi và đa xử lý** ngày càng phổ biến.
++ Ngày nay, với sự phát triển của công nghệ, **mô hình lập trình đồng thời Concurrency đối với các hệ thống lõi đơn** và **mô hình lập trình song song Parallelism đối với các hệ thống đa lõi và đa xử lý** ngày càng phổ biến với những ưu điểm nổi bật.
 
-### II. Multithreading là gì ?
-+ Về cơ bản ĐA LUỒNG (Multithreading) là một khả năng của một nền tảng (hệ điều hành, máy ảo vv) hoặc các ứng dụng để tạo ra một **quá trình bao gồm nhiều LUỒNG (đơn vị thực thi nhỏ nhất) được thực thi**. 
-+ Những LUỒNG (Thread) này có thể **chạy song song**. Mỗi LUỒNG (Thread) có thể thực hiện một **tác vụ riêng biệt**, cho phép chương trình **xử lý đa nhiệm, tăng hiệu suất và đồng thời tận dụng tối đa tài nguyên hệ thống**.
-
-**a. Mô hình lập trình đồng thời Concurrency**
+**II. Mô hình lập trình đồng thời Concurrency**
 + Đối với **hệ thống lõi đơn(máy tính có một processor với một unit/core)** thì ĐA LUỒNG (Multithreading) thực chất **xử lý task tuần tự**.
 + Bản chất tại một thời điểm nhân CPU chỉ có thể xử lý một tác vụ, vậy làm sao 1 máy tính có CPU 1 nhân có thể làm được việc xử lý đồng thời nhiều tác vụ của các tiến trình cùng lúc.
 + Như câu nói của Rob Pike: Concurrency is about dealing with lots of things at once-Rob Pike, ông đã sử dụng từ dealing (phân chia xử lý) để nói đến khái niệm concurrency.
@@ -3662,13 +3658,12 @@ ________________________________________________________________________________
 
 ![image](https://github.com/minchangggg/Advanced_C/assets/125820144/09152694-4476-4799-8e3b-5fe14ef40a5c)
 
-
 ![image](https://github.com/minchangggg/Advanced_C/assets/125820144/26090c70-0ae8-454f-a858-d5902b6c715a)
 
 		Trong đó, màu đỏ: task 1; màu xanh: task 2; màu xám: context switch
 		Context switch: Hệ điều hành sẽ lưu trạng thái CPU và instruction pointer của task hiện tại; tìm task sẽ được thực hiện tiếp; load trạng thái CPU cho việc thực hiện task tiếp theo)
   
-**b. Mô hình lập trình song song Parallelism.**
+**III. Mô hình lập trình song song Parallelism.**
 
 + Đối với **hệ thống đa lõi và đa xử lý (máy tính có nhiều processor | máy tính có nhiều core trong một processors)** thì ĐA LUỒNG (Multithreading) thực chất là các LUỒNG (thread) **xử lý song song các task khác nhau cùng một lúc, các tác vụ này hoàn toàn độc lập với nhau** trên **lõi hoặc bộ vi xử lý khác nhau**. Thay vì một nhân CPU chúng ta chỉ có thể xử lý một tác vụ nhỏ tại một thời điểm thì khi số nhân CPU có nhiều hơn chúng ta có thể xử lý các tác vụ song song với nhau cùng lúc trên các nhân CPU.
 + Dưới đây là ví dụ cho mô hình xử lý song song các tác vụ cùng một thời điểm.
@@ -3679,31 +3674,46 @@ ________________________________________________________________________________
   
 ![image](https://github.com/minchangggg/Advanced_C/assets/125820144/266eaccb-5449-4f19-a4a0-0e9645b3a6fb)
 
+### B. Các mô hình của Concurrency
+**I. Multiprocessing**
 
-![image](https://github.com/minchangggg/Advanced_C/assets/125820144/a2742e69-4780-4cc2-b5e0-0ad2bf08402f)
-
-		Các task được thực hiện tách biệt nhau trên 2 core khác nhau.
++ Ở multiprocessing, sẽ có nhiều process (tiến trình). Mỗi tiến trình chỉ có một thread (luồng).
++ Các process giao tiếp với nhau thông qua Interprocess Communication (signals, sockets, files, pipes, message queues, …).
++ Dưới đây là ví dụ cho việc giao tiếp giữa 2 process chạy đồng thời
   
+![image](https://github.com/minchangggg/Advanced_C/assets/125820144/dbeaca76-9b08-464b-a538-cecf27fcafc0)
 
+**II. Multithreading**
 
-+ Multithreading được sử dụng khi thực hiện song song 1 số nhiệm vụ dẫn đến việc tận dụng hiệu quả hơn các tài nguyên của hệ thống.
++ Ở multithreading, một process chứa hai hay nhiều thread. Việc giao tiếp giữa các thread này sẽ qua Shared memory.
++ Dưới đây là ví dụ cho việc giao tiếp giữa 2 thread qua shared memory
+  
+![image](https://github.com/minchangggg/Advanced_C/assets/125820144/d718b6c2-fa21-4b29-87cd-eb751c5ded65)
 
-### III. Lợi ích của Multithreading trong C++
-+ Tăng hiệu năng và thời gian thực thi.
-+ Tận dụng tài nguyên hệ thống: Bằng cách sử dụng multithreading, chương trình có thể tận dụng được nhiều bộ xử lý (cores) của máy tính. Mỗi luồng (thread) có thể chạy trên một bộ xử lý riêng, đồng thời thực hiện các tác vụ độc lập. Điều này giúp tối ưu hóa sử dụng tài nguyên hệ thống và đảm bảo rằng máy tính hoạt động ở mức tối đa.
-+ Xử lý đồng thời các tác vụ độc lập: Multithreading cho phép chương trình chạy đồng thời các tác vụ độc lập nhau. Điều này rất hữu ích trong các tình huống cần xử lý song song các công việc như xử lý dữ liệu đồng thời, phản hồi các sự kiện đồng thời, hoặc thực hiện các tác vụ background trong khi chương trình vẫn tiếp tục hoạt động.
-+ Tăng tính tương tác và sự phản hồi của ứng dụng: Multithreading cho phép chương trình chạy các tác vụ không liên quan song song với nhau. Điều này tạo ra một trải nghiệm tương tác mượt mà hơn, giúp người dùng cảm nhận được sự phản hồi nhanh chóng của ứng dụng và không bị gián đoạn.
++ Lợi ích của Multithreading trong C++ là:
+  
+	Tăng hiệu năng và thời gian thực thi.
+	Tận dụng tài nguyên hệ thống: Bằng cách sử dụng multithreading, chương trình có thể tận dụng được nhiều bộ xử lý (cores) của máy tính. Mỗi luồng (thread) có thể chạy trên một bộ xử lý riêng, đồng thời thực hiện các tác vụ độc lập. Điều này giúp tối ưu hóa sử dụng tài nguyên hệ thống và đảm bảo rằng máy tính hoạt động ở mức tối đa.
+	Xử lý đồng thời các tác vụ độc lập: Multithreading cho phép chương trình chạy đồng thời các tác vụ độc lập nhau. Điều này rất hữu ích trong các tình huống cần xử lý song song các công việc như xử lý dữ liệu đồng thời, phản hồi các sự kiện đồng thời, hoặc thực hiện các tác vụ background trong khi chương trình vẫn tiếp tục hoạt động.
+	Tăng tính tương tác và sự phản hồi của ứng dụng: Multithreading cho phép chương trình chạy các tác vụ không liên quan song song với nhau. Điều này tạo ra một trải nghiệm tương tác mượt mà hơn, giúp người dùng cảm nhận được sự phản hồi nhanh chóng của ứng dụng và không bị gián đoạn.
 
-## B. Sử dụng shared memory
+## C. Sử dụng shared memory cho Multithreading 
 + `Threads`
 + `Race conditions`
 + `Mutexes`
++ `Deadlock`
 + `Condition variables`
 + `Asynchonous tasks`
 + `Atomicity`
 
 ### I. Threads
-#### 1. Cách tạo một Thread
+#### 1. Cơ bản về thread
++ Mỗi chương trình C++ đều có **tối thiểu một thread**, nó được chạy trong runtime: thread đó là main().
++ Sau đó chương trình có thể khởi chạy các thread khác nữa với từng tác vụ nhất định phục vụ cho một mục đích nào đó.
++ Những thread này chạy đồng bộ với các thread khác cũng như thread được khỏi tạo ban đầu. Khi tác vụ của một thread chạy xong và trả về một kết quả nào đó, thread đó sẽ kết thúc; tương tự như chương trình sẽ kết thúc khi chương trình nhận giá trị trả về từ main().
++ Như các bạn cũng đã biết, nếu chúng ta có một đối tượng std::thread cho một thread nào đó, chúng ta cần đợi cho đến khi nó chạy xong.
++ Nhưng trước khi việc đó xảy ra, mình cần làm là khởi tạo một thread.
+#### a. Việc khởi chạy một thread (launching a thread)
 
 		// Đầu tiên include header thread 
 		#include <thread>
@@ -3729,8 +3739,8 @@ ________________________________________________________________________________
 + Việc biên dịch đoạn code trên không có vấn đề gì, tuy nhiên bạn sẽ lập tức đối mặt với 1 runtime error
 + Lý do là: Main thread tạo 1 thread mới là funcTest1 với paramaters threadFunc. **Main thread không đợi funcTes1 huỷ, nó tiếp tục hoạt động và sẽ kết thúc**, nhưng **funcTest vẫn chạy -> Nó sẽ dẫn đễn lỗi**. **TẤT CẢ CÁC THREAD PHẢI HUỶ TRƯỚC KHI MAIN THREAD HUỶ**. Vậy làm các nào khắc phục vấn đề này ?
 
-#### 2. Join threads
-+ Thread class cung cấp method **join()**, hàm này chỉ **return khi tất cả các thread kết thúc**, điều đó có nghĩa là **main thread sẽ đợi đến khi tất cả các thread con hoàn thành công việc của nó**. Add thêm đoạn call hàm joind vào sample trên và chạy lại
+#### b. Dùng Join threads để chờ một thread cho đến khi nó hoàn thành tác vụ
++ Thread class cung cấp method **join()**, hàm này chỉ **return khi tất cả các thread kết thúc**, điều đó có nghĩa là **main thread sẽ đợi đến khi tất cả các thread con hoàn thành công việc của nó**. 
 
 **Ex 1**
 
@@ -3768,35 +3778,29 @@ ________________________________________________________________________________
 		    return 0;
 		}
 
-#### 3. Joinable and not Joinable threads
-+ Sau khi hàm join return, thread trở lên không thể join lại. 1 joinable thread là 1 thread mà đại diện cho 1 execution mà chưa join.
-+ 1 thread không là joinable khi nó được khởi tạo mặc định hoặc được moved/assigned tới 1 thread khác hoặc joind hoặc detach hàm đã được ọi Not joinable thread có thể huỷ 1 cách an toàn. Hàm joinable() để checks thread có là joinable thread hay không (trả về true nếu thread là joinable and false nếu ngược lại). Nên sử dụng hàm này trước khi call hàm join();
-	
-  		//truyền 1 function tới thread
-		thread funcTest1(threadFunc);
+**Ex 3:**
+
+		struct func {
+		   int& i;
+		   func(int& i_):i(i_){}
+		   void operator()() {
+		      for(unsigned j=0;j<1000000;++j) {
+		         do_something(i); // point1: Potential access to dangling reference
+		      }
+		   }
+		};
   
-		//check if thread is joinable
-		if (funcTest1.joinable()) {
-		//main is blocked until funcTest1 is not finished
-		    funcTest1.join();
-		}
+		void oops() {
+		   int some_local_state=0;
+		   func my_func(some_local_state);
+		   std::thread my_thread(my_func);
+		   my_thread.join(); // point2: wait for thread to finish
+                }
 
-#### 4. Detaching thread
-+ Thread trở thành not joinable sau khi hàm detach được gọi.
-+ `void detach()`
-+ Hàm này tách 1 thread từ 1 thread cha, nó cho phép thread cha và thread con được chạy ngay lập tức từ cái còn lại. Sau khi call detach functon, các thread sẽ không đồng bộ trong bất kỳ cách nào.
+> Việc sử dụng my_thread.join() nhằm mục đích cho thread này chạy xong trước khi kết thúc function oop() và do đó, nó cũng sẽ chạy trước khi biến some_local_state bị huỷ. Nếu biến này bị huỷ trước khi thread chạy xong, sẽ dẫn đến việc ở lần chạy tiếp theo, do_something(i) (point1) sẽ truy cập vào một biến đã bị huỷ (some_local_state). Điều này có thể dẫn đến những kết quả không mong muốn của chương trình.
+> Lưu ý là chúng ta chỉ được gọi join() một lần với mỗi một thread cụ thể, bởi vì hành động này dọn dẹp các tài nguyên, bộ nhớ liên quan tới thread đó. Một khi chúng ta đã gọi hàm join(), hàm joinable() sẽ trả về giá trị false.
 
-		//detach funcTest1 from main thread
-		funcTest1.detach();
-		if (funcTest1.joinable()) {
-			//main is blocked until funcTest1 is not finished
-			funcTest1.join();
-		}
-		else cout << "functTest1 is detached" << endl;
-
-+ mainthread không đợi các thread con bị huỷ!
-
-#### 5. Initializing thread with an object
+#### c. Khởi tạo thread với object hoặc 1 function của class
 + Có thể khởi tạo thread không chỉ với 1 function mà có thể dùng với 1 object hoặc 1 function của class.
   
 **Ex 1:**
@@ -3830,8 +3834,91 @@ ________________________________________________________________________________
 			thread functorTest2(&myFunctor::publicFunction,myFunc2);
 			if (functorTest2.joinable()) functorTest2.join();
 		}
+  
+#### d. Joinable and not Joinable threads
++ Sau khi hàm join return, thread trở lên không thể join lại. 1 joinable thread là 1 thread mà đại diện cho 1 execution mà chưa join.
++ 1 thread không là joinable khi nó được khởi tạo mặc định hoặc được moved/assigned tới 1 thread khác hoặc joind hoặc detach hàm đã được ọi Not joinable thread có thể huỷ 1 cách an toàn. Hàm joinable() để checks thread có là joinable thread hay không (trả về true nếu thread là joinable and false nếu ngược lại). Nên sử dụng hàm này trước khi call hàm join();
+	
+  		//truyền 1 function tới thread
+		thread funcTest1(threadFunc);
+  
+		//check if thread is joinable
+		if (funcTest1.joinable()) {
+		//main is blocked until funcTest1 is not finished
+		    funcTest1.join();
+		}
+#### e. Việc chờ một thread trong các trường hợp đặc biệt (exceptional circumstances)
+Đặc biệt ở đây có nghĩa là gì? Ví dụ:
 
-### 6. Passing arguments to thread
++ Điều gì xảy ra nếu chương trình chúng ta xảy ra lỗi sau khi thread đã khởi chạy và trước khi chúng ta gọi hàm join().
++ Ở trường hợp này, chương trình quăng exception rồi bị chấm dứt (terminate) trước khi hàm join() được gọi (tham khảo phần References).
+  
+Do vậy để tránh trường hợp này chúng ta sẽ sử dụng các cách sau:
+
+**Dùng try/catch** 
+
++ Ngoài việc gọi hàm join() trong trường hợp lý tưởng không có exception, chúng ta cũng sẽ gọi hàm join() khi exception xảy ra:
+
+			struct func;
+			void f() {
+				int some_local_state=0;
+				func my_func(some_local_state);
+				std::thread t(my_func);
+				try {
+					do_something_in_current_thread();
+				}
+				catch(...) {
+					t.join(); //point1
+					throw;
+				}
+				t.join(); //point2
+			}
++ Việc dùng try/catch sẽ đảm bảo cho việc truy cập vào biến some_local_state sẽ kết thúc trước khi hàm kết thúc, dù là kết thúc bình thương (point2) hay do exception (point1).
+
+**Dùng RAII (Resource Acquisition Is Initialization)**
+
++ Nếu việc sử dụng try/catch hơi dài dòng, thì chúng ta có thể sử dụng cách này, nó cung cấp cho chúng ta một class thực hiện việc gọi join() trong destructor:
+  
+			class thread_guard {
+			   std::thread& t;
+			   public:
+			   explicit thread_guard(std::thread& t_): t(t_){}
+			   ~thread_guard() {
+				if(t.joinable()) t.join();
+			   }
+			   thread_guard(thread_guard const&)=delete;
+			   thread_guard& operator=(thread_guard const&)=delete;
+			};
+  
+			struct func;
+			void f() {
+			   int some_local_state=0;
+			   func my_func(some_local_state);
+			   std::thread t(my_func);
+			   thread_guard g(t);
+			   do_something_in_current_thread();
+			}
+
++ Ở cách này, khi hàm f() kết thúc, những đối tượng trong function này sẽ được huỷ theo thứ tự ngược, có nghĩa là đối tượng thread_guard với tên g sẽ gọi hàm huỷ trước, sau đó, hàm join() sẽ được gọi trong hàm destructor này. Việc này được tiến hành ngay cả khi hàm do_something_in_current_thread() quăng exception nào đó.
++ Nếu chúng ta không cần đợi một thread chạy xong trước khi chương trình/hàm kết thúc, mình có thể sử dụng hàm detach(). Một khi hàm này được gọi, nó sẽ không có bất kỳ liên kết nào nữa với đối tượng std::thread, do đó đảm bảo việc std::terminate() sẽ không được gọi khi đối tượng std::thread bị huỷ, mặc dù thread này chạy ngầm.
+  
+#### f. Detaching thread
++ Thread trở thành not joinable sau khi hàm detach được gọi.
++ Việc gọi detach() ở đối tượng std::thread có nghĩa tách một thread chạy độc lập/chạy ngầm. Một khi thread chạy ngầm, quyền sở hữu (ownership) và điều khiển sẽ do C++ Runtime Library thực hiện, việc này sẽ đảm bảo các tài nguyên liên qua đến thread đó sẽ được lấy lại một cách chính xác khi thread kết thúc.
++ Một thread khi đã detach còn được gọi là daemon thread (ở một số sách nói về khái niệm của daemon process trong UNIX – tiến trình chạy ngầm trong hệ thống mà không hề có User interface). Những thread loại này thường chạy xuyên suốt vòng đời của ứng dụng, thực hiện các tác vụ chạy ngầm như theo dõi hệ thống, dọn dẹp tài nguyên…
++ Việc khi nào sử dụng detach() phụ thuộc vào từng task cụ thể, để từ đó ta có những cơ chế để biết được thread đó đã hoàn thành hay chưa – hay là được sử dụng cho những task kiểu “fire and forget“.
+
+		//detach funcTest1 from main thread
+		funcTest1.detach();
+		if (funcTest1.joinable()) {
+			//main is blocked until funcTest1 is not finished
+			funcTest1.join();
+		}
+		else cout << "functTest1 is detached" << endl;
+
++ mainthread không đợi các thread con bị huỷ!
+
+#### 2. Truyền đối số cho thread (Passing arguments to a thread function)
 
 **Ex 1:**
 
@@ -3928,6 +4015,45 @@ ________________________________________________________________________________
 		-1 -3 -5 -7 0 
 		Changing sign of all elements of initial array
 		1 3 5 7 0 
+  
+#### 3. Chuyển quyền sở hữu của một thread
+#### a. Bối cảnh
++ Chúng ta muốn viết một hàm tạo một thread (luồng) để chạy ngầm nhưng cần chuyển lại quyền sở hữu thread mới này cho hàm gọi thay vì ngồi đợi cho thread chạy xong.
++ Chúng ta cần tạo một thread và chuyển lại quyền sở hữu cho một hàm – mà hàm đó cần đợi cho tác vụ hoàn thành.
++ Cả 2 trường hợp này, ta cần thưc hiện chuyển quyền sở hữu thread cho một thread khác hoặc là một function (hàm).
+#### b. Giải pháp
++ Sử dụng hàm std::move() của đối tượng std::thread
+
+<img width="400" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/128779f1-a66a-4ad8-9485-7046be154e73">
+
+		Chuyển quyền sở hữu cho một thread khác
+  
++ Ở ví dụ trên, ta đã thực hiện việc chuyển quyền sở hữu của thread t1 -> t2 bằng std::move(). Lúc này t1 không còn bất cứ liên kết với bất cứ thread nào – trở thành empty thread. Do đó, nó có thể được gán để chạy một thread mới.
+
+#### c. Lợi ích của việc hỗ trợ std::move() ở std::thread
++ Chúng ta có thể xây dựng một class thread_guard như ở mục 1.3 (RAII) tại phần 1 của bài viết; giúp cho class này sở hữu quyền thực sự một thread. Điều này giúp chúng ta rất lớn, nó giúp ta tránh được kết quả không mong muốn trong quá trình chạy khi mà một đối tượng của class RAII tồn tại lâu hơn một thread mà nó đang tham chiếu – có nghĩa là không một thread nào khác có thể join hay detach thread một khi quyền sở hữu đã được chuyển sang đối tượng khác.
+
+<img width="500" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/ff96e1ff-58e3-45fd-8af9-79fcf111578a">
+
+		Chuyển quyền sở hữu ngay tại constructor của class scoped_thread ở 1 – 2
+  
++ Việc hỗ trợ chuyển quyền sở hữu ở std::thread cho phép các containers (vùng chứa) nếu các containers đó là move-aware container (như là std::vector). Việc đặt các đối tượng thread vào std::vector là một bước hướng tới việc quản lý các thread một cách tự động, thay vì phải tạo từng biến cho mỗi thread rồi sau đó join từng cái riêng lẻ.
+
+#### 4. Việc chọn số lượng thread cần khi chạy 
+#### a. Bối cảnh
++ Giả sử chúng ta có một vấn đề phức tạp cần giải quyết, vậy chúng ta cần bao nhiêu thread để giải quyết một vấn đề nào đó?
+#### b. Giải pháp
++ C++ Standard Library hỗ trợ chúng ta trong việc xác định số lượng threads có thể chạy lúc runtime bằng std::thread::hardware_concurrency(). Hàm này sẽ trả về số thread có thể chạy đồng thời của một chương trình.
++ Lưu ý: đây chỉ là con số tham khảo bời vì nó có thể trả về 0 nếu giá trị không được xác định rõ hoặc do lý do gì đó không thể tính toán được. Nhưng nó có thể hữu dụng giúp chúng ta trong việc chia các task giữa các thread.
+
+	Ví dụ về std::thread::hardware_concurrency()
+
+<img width="400" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/d6b58e9c-c86d-4da6-a8a2-6cc8a5213462">
+
+	Output 
+
+<img width="400" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/962fd81d-975a-446e-aeed-7274fb47ab6b">
+
 ### II. Race conditions
 + Xảy ra khi có **hai hay nhiều yêu cầu** có thể **truy cập dữ liệu** được chia sẻ và chúng cố gắng **thay đổi** nó **cùng một lúc**. Vì thuật toán lập lịch luồng có thể hoán đổi giữa các luồng bất kỳ lúc nào, nên bạn không biết thứ tự mà các luồng sẽ cố gắng truy cập vào dữ liệu được chia sẻ. Do đó, kết quả của sự thay đổi dữ liệu lại phụ thuộc vào thuật toán lập lịch luồng, tức là cả hai luồng đang "chạy đua" để truy cập/thay đổi dữ liệu.
 + Vì lẽ đó, Race condition có thể gây ra lỗi không mong muốn trong lập trình, vì thế chúng ta cần phải tìm ra cách để giải quyết việc tranh chấp này. Hay chí ít là phải xác định được yêu cầu nào có quyền thao tác với dữ liệu. Đó là lí do Mutex ra đời.
@@ -3935,7 +4061,7 @@ ________________________________________________________________________________
 ### III. Mutex (Mutual Exclusion)
 + Hay còn gọi là "loại trừ lẫn nhau" được tạo ra nhằm ngăn chặn Race condition. Với mục tiêu một luồng không bao giờ được truy cập vào tài nguyên mà một luồng thực thi đang nắm giữ.
 + Tài nguyên được chia sẻ là một đối tượng dữ liệu, mà hai hoặc nhiều luồng đồng thời đang cố gắng sửa đổi. Thuật toán Mutex đảm bảo rằng nếu một quy trình đang chuẩn bị thao tác sửa đổi trên một đối tượng dữ liệu thì không một quy trình/luồng nào khác được phép truy cập hay sửa đổi cho đến khi nó hoàn tất và giải phóng đối tượng để các quy trình khác có thể tiếp tục.
-+ Để khóa một mutex, bạn cần sử dụng phương thức lock() của đối tượng mutex, và để mở khóa mutex, bạn sử dụng phương thức unlock(). 
++ Trong C++, chúng ta sử dụng std::mutex để khởi tạo một đối tượng mutex, sau đó gọi hàm lock() và unlock() để chỉ cho phép 1 thread tại một thời điểm có quyền truy cập vào đối tượng/ dữ liệu.
 + Dưới đây là một ví dụ đơn giản về cách sử dụng mutex để đồng bộ hóa truy cập vào biến được chia sẻ giữa các luồng:
 
 **Ex 1:**
@@ -4062,13 +4188,15 @@ ________________________________________________________________________________
 			return 0; 
 		} 
 
++ Tuy nhiên, vì các thread khác phải chờ đến khi unlock được gọi mới có quyền truy cập nên sẽ dẫn tới một vấn đề được gọi là deadlock. Ngoài ra, việc này khiến chúng ta phải luôn ghi nhớ phải gọi unlock mỗi khi kết thúc một hàm, hay thậm khi cả có lỗi xảy ra. Do đó, C++ Standard có hỗ trợ việc gọi unlock() một cách tự động.
+  
 **a, std::unique_lock:**
 
 + std::unique_lock cho phép bạn khóa và mở khóa mutex một cách linh hoạt.
 + Nó có thể được sử dụng để khóa một mutex trong một phạm vi cụ thể và tự động mở khóa khi ra khỏi phạm vi đó.
 + std::unique_lock có thể được sử dụng cho các tình huống cần đặt khóa trong thời gian dài hoặc cần mở khóa trước thời gian kết thúc.
 
-**b, std::shared_lock: **
+**b, std::shared_lock:**
 
 + std::shared_lock cũng được sử dụng để khóa mutex, nhưng nó hỗ trợ việc chia sẻ truy cập giữa các luồng.
 + Nó cho phép nhiều luồng cùng đọc một tài nguyên mà không cần phải chờ đợi khi một luồng khác đang đọc (khóa đọc).
@@ -4148,9 +4276,26 @@ ________________________________________________________________________________
 			return 0; 
 		}
   
-### IV. std::condition_variable : 
+### IV. Deadlock
+#### 1. Deadlock là gì?
++ Deadlock là trạng thái mà 2 hay nhiều thread sẽ chờ đợi lẫn nhau vì mỗi thread (vd là A) giữ một tài nguyên và chờ đợi tài nguyên từ thread khác (vd là B) – trong khi thread B này cũng đang cần tài nguyên từ A để mở khoá mutex.
+
+<img width="450" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/83173629-d655-4afc-9b73-fd269763d451">
+
+=> Ở ví dụ này, khi chạy chương trình sẽ xảy ra deadlock do mỗi thread đang đợi thread khác để giải phóng khoá mutex. Dưới đây là kết quả chạy chương trình
+
+<img width="450" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/a3fa17d2-d8b6-4030-9bf3-415350456370">
+
+#### 2. Các cách để tránh deadlock
+#### a. Nên sử dụng một khoá mutex duy nhất
+#### b. Tránh việc khoá một mutex rồi sau đó gọi một hàm được cung cấp bởi người dùng
+#### c. Sử dụng std::lock() khi muốn khoá nhiều hơn một mutex.
+#### d. Khoá mutex theo thứ tự giống nhau
+
+### V. std::condition_variable : 
 + là một phần của thư viện chuẩn C++ (C++11 trở đi) được sử dụng để đồng bộ hóa giữa các luồng thông qua sự kích hoạt (notify) và chờ đợi (wait) của các sự kiện.
 + Nó cho phép một hoặc nhiều luồng đợi cho đến khi một điều kiện cụ thể được đáp ứng trước khi tiếp tục thực hiện các công việc khác.
++ Hiểu đơn giản nó đóng vai trò như cái điện thoại, nhằm đồng bộ thứ tự thực thi của các threads trong chương trình.
 + Để sử dụng std::condition_variable, bạn cần kết hợp nó với một hoặc nhiều mutex. Thông thường, việc kết hợp std::condition_variable với std::unique_lock là phổ biến.
 + Dưới đây là một ví dụ về cách sử dụng std::condition_variable để đồng bộ hóa giữa hai luồng:
 
@@ -4285,8 +4430,18 @@ ________________________________________________________________________________
 		    assigner.join();
 		    return 0;
 		}
+
+**Ex 4:**
+
++ Chúng ta có một hàng đợi, producer thread sẽ có nhiệm vụ thêm phần tử vào hàng đợi này.
++ Cũng trong lúc đó, ta có consumer thread cũng đang chờ để xử lý khi hàng đợi này có dữ liệu từ producer thread.
++ producer sẽ thêm phần tử vào trong hàng đợi, sau đó thông báo cho consumer biết (thông qua notify_one()), và nó sẽ thực hiện in ra giá trị vừa được thêm vào.
   
-### V. Bất đồng bộ (Asynchronous):
+<img width="500" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/3033e716-2ac8-46d1-9e2f-7bb6acc71f76">
+
+<img width="500" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/2201c1ee-61fd-40bc-a890-fa456ae4c77d">
+
+### VI. Bất đồng bộ (Asynchronous):
 + Trong lập trình, bất đồng bộ thường ám chỉ việc thực hiện một tác vụ mà không cần chờ đợi kết quả của tác vụ trước đó hoàn thành.
 + Các tác vụ bất đồng bộ thường được thực hiện song song và có thể hoàn thành trong thời gian khác nhau.
 + Bất đồng bộ thường được sử dụng trong các tình huống khi bạn muốn tiếp tục thực hiện các tác vụ khác mà không cần chờ đợi kết quả từ các tác vụ trước đó.
