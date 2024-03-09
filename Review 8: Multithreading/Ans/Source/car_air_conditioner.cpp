@@ -19,6 +19,56 @@ void DeviceFunction::userMenu() {
 
     thread thread_controlTempInside(controlTempInside);
     thread thread_controlWindInside(controlWindInside);
+
+    while (1) {
+        cout << "-------------BUTTON------------------" << endl;
+        cout << "1. Increase temperature " << endl;
+        cout << "2. Decrease temperature " << endl;
+        cout << "3. Increase wind level " << endl;
+        cout << "4. Decrease wind level " << endl;
+        cout << "5. Turn on air mode " << endl;
+        cout << "6. Turn off air mode " << endl;
+        cout << "Enter your choice" << endl;
+        int choice = 0; cin >> choice;
+
+        switch (choice) {
+        case 1: 
+            controlTempInside(INCREASE);
+            break;
+
+        case 2:
+            controlTempInside(DECREASE);
+            break;
+
+        case 3:
+            controlWindInside(INCREASE);
+            break;
+
+        case 4:
+            controlWindInside(DECREASE);
+            break;
+
+        case 5:
+            break;
+
+        case 6:
+            break;
+            
+        default:
+            break;
+        }
+    }
+
+    thread_setTempOutside.join();
+    thread_getTempOutside.join();
+
+    thread_setTempInside.join();
+    thread_getTempInside.join();
+
+    thread_getWindInside.join();
+
+    thread_controlTempInside.join();
+    thread_controlWindInside.join();
 }
 
 void DeviceFunction::setTempOutside() {
