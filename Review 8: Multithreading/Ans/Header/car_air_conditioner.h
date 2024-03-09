@@ -18,7 +18,18 @@
 
 using namespace std;
 
-mutex mtx_sensor_outside, mtx_sensor_inside, mtx_cout, mtx_sensor_wind, mtx_key_input;
+mutex mtx_temp_outside, mtx_temp_inside, mtx_wind_insdide, mtx_data_inside, mtx_key_input;
+DeviceValue deviceValue;
+
+// Thông số giá trị điều hòa
+typedef struct {
+    float temp_outside = 0;
+    float temp_inside = 0;
+    float temp_setting = 0;
+
+    int sensor_wind = 0;
+    int wind_setting = 0;
+} DeviceValue;
 
 // Chế độ điều hòa 
 typedef enum {
@@ -40,21 +51,12 @@ typedef struct {
     HandControl handControl; // Chế độ Bằng tay
 } DeviceControl;
 
-inline double generateRandomTemperature() {
+inline float getTempRandom() {
     static random_device rd;
     static mt19937 gen(rd());
     static uniform_real_distribution<> dis(20.0, 40.0);
     return dis(gen);
 }
-
-typedef struct {
-    float sensor_outside = 0;
-    float sensor_inside = 0;
-    float temp_setting = 0;
-
-    int sensor_wind = 0;
-    int wind_setting = 0;
-} DeviceValue;
 
 typedef struct {
     // Task 1: Luồng giao diện ng dùng (Màn hình hiển thị)
