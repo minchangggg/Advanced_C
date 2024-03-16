@@ -10,7 +10,7 @@ public:
     float totalMoney() {
         float ans = 0;
         for (auto it : container) {
-            ans += it.getTotalPrice();
+            ans += it.getPrice() * it.getNum();
         }
 
         return ans;
@@ -21,7 +21,7 @@ public:
 
         list <Product>::iterator it;
         for (it = MainStorage.container.begin(); it != MainStorage.container.end(); ++it) {
-            if (it->getName() == prod.getName()) return ammount <= prod.getAmmount();
+            if (it->getName() == prod.getName()) return ammount <= prod.getNum();
         }
 
         return false;
@@ -34,7 +34,7 @@ public:
         list <Product>::iterator it;
         for (it = container.begin(); it != container.end(); ++it) {
             if (*it == prod) {
-                it->setAmmount(newAmmount);
+                it->setNum(newAmmount);
                 break;
             }
         }
