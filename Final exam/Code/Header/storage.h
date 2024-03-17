@@ -42,6 +42,11 @@ public:
 
 } MainStorage;
 
+/*
+*Class: Administrator
+*Description: This class contains basic properties and methods of a Administrator object
+*/
+
 class Administrator {
 private:
     int account;
