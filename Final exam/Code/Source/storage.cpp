@@ -1,150 +1,134 @@
 /*
-* File: storage.cpp
+* File: product.cpp
 * Author: Ton Nu Minh Trang
 * Date: 15/03/2024
-* Description: This file contains all the functions/methods to store all of the Supermarket products's information
+* Description: This file is a storage header file that program is used for storing Supermarket product's information
 */
 
-#include "../Header/storage.h"
+#include "../Header/product.h"
 using namespace std;
 
-/*
-* Class: Storage
-* Function: add
-* Description: This Function is used for adding a new product
-* Input:   prod 
-* Output:  return: None
-*/
-void Storage::add(Product prod) { 
-    container.push_back(prod);
+bool Product::operator== (const Product& other) {
+    return (name == other.name && price == other.price && num == other.num);
 }
 
 /*
-* Class: Storage
-* Function: erase
-* Description: This Function is used for erasing a new product
-* Input:   prod
-* Output:  return: None
+* Class: Product
+* Function: getID
+* Description: This function is used for getting ID of product 
+* Input:   None
+* Output:  return: ID (ID of product)
 */
-void Storage::erase(Product prod) {
-    list <Product>::iterator it;
-    for (it = container.begin(); it != container.end(); ++it) {
-        if (*it == prod) break;
-    }
-
-    container.erase(it);
+int Product::getID() {
+    return ID;
 }
 
 /*
-* Class: Storage
-* Function: decrease
-* Description: This function is used for decreasing number of product in shopping cart
-* Input:   prod and _num
-* Output:  return: None
+* Class: Product
+* Function: getName
+* Description: This function is used for getting name of product
+* Input:   None
+* Output:  return: name (name of product)
 */
-void Storage::decrease(Product prod, int _num) {
-    list <Product>::iterator it;
-    for (it = container.begin(); it != container.end(); ++it) {
-        if (*it == prod) {
-            it->setNum(it->getNum() - _num);
-            break;
-        }
-    }
+string Product::getName() const {
+    return name;
 }
 
 /*
-* Class: Storage
-* Function: increase
-* Description: This function is used for increasing number of product in shopping cart
-* Input:   prod and _num
-* Output:  return: None
+* Class: Product
+* Function: getPrice
+* Description: This function is used for getting price of product
+* Input:   None
+* Output:  return: price (price of product)
 */
-void Storage::increase(Product prod, int _num) {
-    list <Product>::iterator it;
-    for (it = container.begin(); it != container.end(); ++it) {
-        if (*it == prod) {
-            it->setNum(it->getNum() + _num);
-            break;
-        }
-    }
+float Product::getPrice() const {
+    return price;
+}
+
+int Product::getNum() {
+    return num;
 }
 
 /*
-* Class: Storage
-* Function: showStorage
-* Description: This function is used for showing storage of supermarket
+* Class: Product
+* Function: getProduct
+* Description: This function is used for getting data of product
 * Input:   None
 * Output:  return: None
 */
-void Storage::showStorage() {
-    int count = 0;
-    cout << "\t\t\tNo" << "\t\t\tID" << "\t\t\tName" << "\t\t\tPrice" <<endl;
+void Product::getProduct() {
+    cout << "\t\t\tID" << "\t\t\tName" << "\t\t\tPrice" << "\t\t\tQuantity" << endl ;
     cout << "________________________________________________________________________________________________________" << endl;
 
-    for (auto i : container) {
-        count++;
-        cout << "\t\t\t" << count << "\t\t\t" << i.getID() << "\t\t\t" << i.getName() << "\t\t\t" << i.getPrice() << endl;
-        cout << "-------------------------------------------------------------------------------------------------------" << endl;
-    }
+    cout << "\t\t\t" << "\t\t\t" << getID() << "\t\t\t" << getName() << "\t\t\t" << getPrice() << endl;
+    cout << "-------------------------------------------------------------------------------------------------------" << endl;
 }
 
 /*
-* Class: Storage
-* Function: searchByName
-* Description: This function is used for searching product by name
-* Input:   _name
+* Class: Product
+* Function: setID
+* Description: This function is used for setting ID of product
+* Input:   _ID (ID of product)
 * Output:  return: None
 */
-void Storage::searchByName(string _name) {
-    list<Product>::iterator it;
-    for (it = container.begin(); it != container.end(); ++it) {
-        if (it->getName() == _name) {
-            cout << "\n\t\t\tData is founded " << endl;
-            it->getProduct();
-            return;
-        }
-        cout << "\n\t\t\t No product has this information " << endl;
-    }
+void Product::setID (int _ID) {
+    ID = _ID;
 }
 
 /*
-* Class: Storage
-* Function: cmpName
-* Description: This function is used for sorting two products by name
-* Input:   a (1st student), b (2nd student)
-* Output:  return: b (2nd student)
+* Class: Product
+* Function: setName
+* Description: This function is used for setting name of product
+* Input:   _name (name of product)
+* Output:  return: None
 */
-bool Storage::cmpName(const Product &a, const Product &b) {
-    return a.getName() < b.getName();
+void Product::setName(string _name) {
+    name = _name;
 }
 
 /*
-* Class: Storage
-* Function: cmpPrice
-* Description: This function is used for sorting two products by price
-* Input:   a (1st product), b (2nd product)
-* Output:  return: b (2nd product)
+* Class: Product
+* Function: setPrice
+* Description: This function is used for setting price of product
+* Input:   _price (price of product)
+* Output:  return: None
 */
-bool Storage::cmpPrice(const Product &a, const Product &b) {
-    return a.getPrice() < b.getPrice();
+void Product::setPrice(float _price) {
+    price = _price;
 }
 
 /*
-* Function: sortName
-* Description: This function is used for sorting all of the products by name 
+* Class: Product
+* Function: setNum
+* Description: This function is used for setting number of product
+* Input:   _num (number of product)
+* Output:  return: None
+*/
+void Product::setNum(int _num) {
+    num = _num;
+}
+
+/*
+* Class: Product
+* Function: increase
+* Description: This function is used for increasing number of product
 * Input:   None
 * Output:  return: None
 */
-void Storage::sortName() {
-    container.sort(cmpName);
+void Product::increase() {
+    ++num;
 }
 
 /*
-* Function: sortPrice
-* Description: This function is used for sorting all of the products by price 
+* Class: Product
+* Function: decrease
+* Description: This function is used for decreasing number of product
 * Input:   None
-* Output:  return: None
+* Output:  return: true || false
 */
-void Storage::sortPrice() {
-    container.sort(cmpPrice);
+bool Product::decrease() {
+    if (num == 0) return false;
+
+    --num;
+    return true;
 }
