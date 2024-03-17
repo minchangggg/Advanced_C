@@ -24,14 +24,14 @@ public:
 
     void add(string _name, int _price, int _num);
 
-    bool searchByName(string _name); 
+    Product* searchByName(string _name); 
 
-    void erase(Product prod);
+    void erase(string _name);
     
     void showStorage();
 
-    void decrease(Product prod, int ammount);
-    void increase(Product prod, int ammount);
+    void decrease(string _name, int ammount);
+    void increase(string _name, int ammount);
 
     bool cmpName(const Product &a, const Product &b);
     bool cmpPrice(const Product &a, const Product &b);
@@ -55,7 +55,7 @@ public:
     int getAccount();
     int getPassword();
     
-    void menuAdmin(Storage &storage);
+    void menuAdmin();
 };
 
 #endif
