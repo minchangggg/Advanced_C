@@ -28,7 +28,7 @@ public:
 
     void erase(string _name);
     
-    void showStorage();
+    void showStorage(); 
 
     void decrease(string _name, int ammount);
     void increase(string _name, int ammount);
