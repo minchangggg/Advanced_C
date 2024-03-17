@@ -32,6 +32,7 @@ public:
 
     void decrease(string _name, int ammount);
     void increase(string _name, int ammount);
+    bool checkNum(string _name);
 
     bool cmpName(const Product &a, const Product &b);
     bool cmpPrice(const Product &a, const Product &b);
