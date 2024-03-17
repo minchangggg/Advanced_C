@@ -30,8 +30,8 @@ public:
     
     void showStorage(); 
 
-    void decrease(string _name, int ammount);
-    void increase(string _name, int ammount);
+    void decrease(string _name, int _num);
+    void increase(string _name, int _num);
     bool checkNum(string _name);
 
     bool cmpName(const Product &a, const Product &b);
