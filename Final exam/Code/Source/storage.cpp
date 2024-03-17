@@ -254,11 +254,11 @@ menuAdmin_start:
         cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
         cout << "--------------------------------------Administration menu----------------------------------------------" << endl;            
         do { 
-            cout << "\t\t\t 1. Add New Product" << endl; // 1. Thêm món
-            cout << "\t\t\t 2. Delete Product" << endl; // 2. Xóa món
-            cout << "\t\t\t 3. Show Products" << endl; // 3. Danh sách món
-            cout << "\t\t\t 4. Edit Products" << endl; // 4. Sửa món
-            cout << "\t\t\t 5. Turn Back Main Menu" << endl; // 5. 	Quay lại
+            cout << "\t\t\t 1. Add New Product" << endl; 
+            cout << "\t\t\t 2. Delete Product" << endl; 
+            cout << "\t\t\t 3. Show Products" << endl; 
+            cout << "\t\t\t 4. Edit Product" << endl; 
+            cout << "\t\t\t 5. Turn Back Main Menu" << endl; 
             cout << "\t\t\t 6. Exit program" << endl;
             cout << "\t\t\t............................" << endl;
             cout << "\t\t\tPlease Enter Your Choice: ";
