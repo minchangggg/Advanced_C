@@ -24,6 +24,8 @@ private:
     int num;
 
 public:
+    mutex Prod_mtx;
+
     Product() {
         static int _ID = 0;
         this->ID = _ID;
