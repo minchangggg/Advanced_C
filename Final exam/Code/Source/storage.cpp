@@ -32,25 +32,25 @@ void Storage::add(string _name, int _price, int _num) {
 * Output:  return: None
 */
 
-bool Storage::searchByName(string _name) {
+Product* Storage::searchByName(string _name) {
     list<Product>::iterator it;
     for (it = container.begin(); it != container.end(); ++it) {
-        if (it->getName() == _name) return true;
-        return false;
+        if (it->getName() == _name) return &it;
     }
+    return NULL;
 }
 
 /*
 * Class: Storage
 * Function: erase
 * Description: This Function is used for erasing a new product
-* Input:   prod
+* Input:   _name
 * Output:  return: None
 */
-void Storage::erase(Product prod) {
+void Storage::erase(string _name) {
     list <Product>::iterator it;
     for (it = container.begin(); it != container.end(); ++it) {
-        if (*it == prod) {
+        if (it->getName() == _name) {
             unique_lock <mutex> lock(it->Prod_mtx);
             container.erase(it);
             return;
@@ -65,10 +65,10 @@ void Storage::erase(Product prod) {
 * Input:   prod and _num
 * Output:  return: None
 */
-void Storage::decrease(Product prod, int _num) {
+void Storage::decrease(string _name, int _num) {
     list <Product>::iterator it;
     for (it = container.begin(); it != container.end(); ++it) {
-        if (*it == prod) {
+        if (it->getName() == _name) {
             (it->Prod_mtx).lock();
             it->setNum(it->getNum() - _num);
             (it->Prod_mtx).unlock();
@@ -84,10 +84,10 @@ void Storage::decrease(Product prod, int _num) {
 * Input:   prod and _num
 * Output:  return: None
 */
-void Storage::increase(Product prod, int _num) {
+void Storage::increase(string _name, int _num) {
     list <Product>::iterator it;
     for (it = container.begin(); it != container.end(); ++it) {
-        if (*it == prod) {
+        if (it->getName() == _name) {
             (it->Prod_mtx).lock();
             it->setNum(it->getNum() + _num);
             (it->Prod_mtx).unlock();
@@ -191,7 +191,7 @@ int Administrator::getPassword() {
 * Output:  return: None
 */
 
-void Administrator::menuAdmin(Storage &storage) {
+void Administrator::menuAdmin() {
 menuAdmin_start:
     int _password = 0; int _account = 0; int _choice = 0; 
 
@@ -251,7 +251,7 @@ menuAdmin_start:
         {
         add_product:
             cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
-            storage.showStorage();
+            MainStorage.showStorage();
 
             cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
             cout << "------------------------------------------- Add -------------------------------------------------------" << endl;
@@ -264,7 +264,7 @@ menuAdmin_start:
             cout << "\t\t\tEnter the quantity of the product: ";
             int _num = 0; cin >> _num;
             
-            storage.add(_name, _price, _num); 
+            MainStorage.add(_name, _price, _num); 
 
             cout << "\n---------------------------------- Successfully Add Detail --------------------------------------------" << endl;
 
@@ -288,7 +288,7 @@ menuAdmin_start:
         {
         erase_product:
             cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
-            storage.showStorage();
+            MainStorage.showStorage();
 
             cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
             cout << "------------------------------------------- Delete ----------------------------------------------------" << endl;
@@ -296,16 +296,11 @@ menuAdmin_start:
             string _name = ""; cin.ignore(); cin >> _name;
 
             try {
-                if (storage.searchByName(_name)) {
+                if (MainStorage.searchByName(_name) != NULL) {
                     cout << "\n------------------------------------------------------------------------------------------------------" << endl;
                     cout << "\n\t\t\tData is founded" << endl;
-                    list <Product>::iterator it;
-                    for (it = storage.container.begin(); it != storage.container.end(); ++it) {
-                        if (it->getName() == _name) {
-                            it->getProduct();
-                            storage.erase(*it);
-                        }
-                    }
+                    MainStorage.searchByName(_name)->getProduct();
+                    MainStorage.erase(_name);
                     cout << "\n---------------------------------- Successfully Delete Detail -----------------------------------------" << endl;
                 }
                 else throw false;
@@ -335,7 +330,7 @@ menuAdmin_start:
         {
             cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
             cout << "--------------------------------------------- Menu ----------------------------------------------------" << endl;
-            storage.showStorage();
+            MainStorage.showStorage();
             
             do {
                 cout << "\n\n\t\t\t 1. Turn back Administration menu" << endl;
@@ -355,7 +350,7 @@ menuAdmin_start:
         {
         edit_product:
             cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
-            storage.showStorage();
+            MainStorage.showStorage();
 
             cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
             cout << "--------------------------------------------- Edit ----------------------------------------------------" << endl;
@@ -363,31 +358,27 @@ menuAdmin_start:
             string _name = ""; cin.ignore(); cin >> _name;
 
             try {
-                if (storage.searchByName(_name)) {
+                if (MainStorage.searchByName(_name) != NULL) {
                     cout << "\n------------------------------------------------------------------------------------------------------" << endl;
                     cout << "\n\t\t\tData is founded" << endl;
+                    MainStorage.searchByName(_name)->getProduct();
 
-                    list <Product>::iterator it;
-                    for (it = storage.container.begin(); it != storage.container.end(); ++it) {
-                        if (it->getName() == _name) it->getProduct();
+                    cout << "Do you want to increase or decrease the quantity?" << endl;
+                    do {
+                        cout << "\t\t\t1. Increase" << endl;
+                        cout << "\t\t\t2. Decrease" << endl; 
+                        cout << "\t\t\t........................." << endl;
+                        cout << "\t\t\tPlease Enter Your Choice: ";
+                        cin >> _choice;
+                    } while (_choice != 1 && _choice != 2);
 
-                        cout << "Do you want to increase or decrease the quantity?" << endl;
-                        do {
-                            cout << "\t\t\t1. Increase" << endl;
-                            cout << "\t\t\t2. Decrease" << endl; 
-                            cout << "\t\t\t........................." << endl;
-                            cout << "\t\t\tPlease Enter Your Choice: ";
-                            cin >> _choice;
-                        } while (_choice != 1 && _choice != 2);
+                    cout << "Enter the quantity of product you want to edit: ";
+                    int _num; cin >> _num;
 
-                        cout << "Enter the quantity of product you want to edit: ";
-                        int _num; cin >> _num;
-
-                        if (_choice == 1) storage.increase(*it, _num);
-                        else storage.decrease(*it, _num);
-                        break;
-                    }
-
+                    if (_choice == 1) MainStorage.increase(_name, _num);
+                    else MainStorage.decrease(_name, _num);
+                    break;
+                
                     cout << "\n---------------------------------- Successfully Edit Detail -------------------------------------------" << endl;
                 }
                 else throw false;
@@ -428,6 +419,6 @@ menuAdmin_start:
         default:
             break;  
         }
-    
+
     }
 }
