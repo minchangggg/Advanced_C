@@ -61,7 +61,7 @@ void Storage::erase(string _name) {
 /*
 * Class: Storage
 * Function: decrease
-* Description: This function is used for decreasing number of product in shopping cart
+* Description: This function is used for decreasing number of product 
 * Input:   prod and _num
 * Output:  return: None
 */
@@ -80,7 +80,7 @@ void Storage::decrease(string _name, int _num) {
 /*
 * Class: Storage
 * Function: increase
-* Description: This function is used for increasing number of product in shopping cart
+* Description: This function is used for increasing number of product
 * Input:   prod and _num
 * Output:  return: None
 */
@@ -92,6 +92,24 @@ void Storage::increase(string _name, int _num) {
             it->setNum(it->getNum() + _num);
             (it->Prod_mtx).unlock();
             return;
+        }
+    }
+}
+
+/*
+* Class: Storage
+* Function: checkNum
+* Description: This function is used for checking number of product 
+* Input:   _name
+* Output:  return: true || false
+*/
+bool Storage::checkNum(string _name) {
+    list <Product>::iterator it;
+    for (it = container.begin(); it != container.end(); ++it) {
+        if (it->getName() == _name) {
+            shared_lock <mutex> lock(it->Prod_mtx);
+            if (it->getNum() != 0) return true;
+            return false;
         }
     }
 }
@@ -428,7 +446,7 @@ menuAdmin_start:
 
         default:
             break;  
+            
         }
-
     }
 }
