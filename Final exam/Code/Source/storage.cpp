@@ -213,7 +213,7 @@ int Administrator::getPassword() {
 void Administrator::menuAdmin() {
 menuAdmin_start:
     int _password = 0; int _account = 0; int _choice = 0; 
-    string _name = ""; int price = 0; int _num = 0;
+    string _name = ""; int _price = 0; int _num = 0;
 
     thread threadAdd(MainStorage.add, _name, _price, _num);
     thread threadErase(MainStorage.erase, _name);
@@ -457,11 +457,11 @@ menuAdmin_start:
 
         }
         
-        thread_input_key.join();
-        thread_display.join();
-        thread_air_condition.join();
-        thread_fan.join();
-        thread_sensor_inside.join();
-        thread_sensor_outside.join();
+        threadAdd.join();
+        threadErase.join();
+
+        threadDecrease.join();
+        threadIncrease.join();
+        threadCheckNum.join();
     }
 }
