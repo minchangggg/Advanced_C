@@ -213,6 +213,14 @@ int Administrator::getPassword() {
 void Administrator::menuAdmin() {
 menuAdmin_start:
     int _password = 0; int _account = 0; int _choice = 0; 
+    string _name = ""; int price = 0; int _num = 0;
+
+    thread threadAdd(MainStorage.add, _name, _price, _num);
+    thread threadErase(MainStorage.erase, _name);
+
+    thread threadDecrease(MainStorage.decrease, _name, _num);
+    thread threadIncrease(MainStorage.increase, _name, _num);
+    thread threadCheckNum(MainStorage.checkNum);
 
     cout << "\t\t\t\t\t\tLOG IN" << endl;
 
@@ -255,10 +263,10 @@ menuAdmin_start:
         cout << "--------------------------------------Administration menu----------------------------------------------" << endl;            
         do { 
             cout << "\t\t\t 1. Add New Product" << endl; 
-            cout << "\t\t\t 2. Delete Product" << endl; 
+            cout << "\t\t\t 2. Delete Product" << endl;
             cout << "\t\t\t 3. Show Products" << endl; 
             cout << "\t\t\t 4. Edit Product" << endl; 
-            cout << "\t\t\t 5. Turn Back Main Menu" << endl; 
+            cout << "\t\t\t 5. Turn Back Main Menu" << endl;
             cout << "\t\t\t 6. Exit program" << endl;
             cout << "\t\t\t............................" << endl;
             cout << "\t\t\tPlease Enter Your Choice: ";
@@ -446,7 +454,14 @@ menuAdmin_start:
 
         default:
             break;  
-            
+
         }
+        
+        thread_input_key.join();
+        thread_display.join();
+        thread_air_condition.join();
+        thread_fan.join();
+        thread_sensor_inside.join();
+        thread_sensor_outside.join();
     }
 }
