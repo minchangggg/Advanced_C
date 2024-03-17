@@ -31,10 +31,10 @@ public:
     Cart() : Storage() {}
 
     void add();
+    void erase();
+    void update();
 
-    void earase();
-
-    void edit();
+    void show();
 
     float calcBill();
     void getBill();
@@ -62,7 +62,7 @@ public:
 
     void paymentProgress();
 
-    void menuCustom();
+    void menuCustom(); 
 };
 
 #endif
