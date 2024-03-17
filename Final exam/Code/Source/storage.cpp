@@ -35,7 +35,7 @@ void Storage::add(string _name, int _price, int _num) {
 Product* Storage::searchByName(string _name) {
     list<Product>::iterator it;
     for (it = container.begin(); it != container.end(); ++it) {
-        if (it->getName() == _name) return &it;
+        if (it->getName() == _name) return &(*it);
     }
     return NULL;
 }
