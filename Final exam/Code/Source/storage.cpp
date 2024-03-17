@@ -148,6 +148,7 @@ bool Storage::cmpPrice(const Product &a, const Product &b) {
 */
 void Storage::sortName() {
     container.sort(cmpName);
+    showStorage();
 }
 
 /*
@@ -159,6 +160,7 @@ void Storage::sortName() {
 */
 void Storage::sortPrice() {
     container.sort(cmpPrice);
+    showStorage();
 }
 
 /*
@@ -190,7 +192,6 @@ int Administrator::getPassword() {
 * Input:   storage 
 * Output:  return: None
 */
-
 void Administrator::menuAdmin() {
 menuAdmin_start:
     int _password = 0; int _account = 0; int _choice = 0; 
@@ -266,13 +267,13 @@ menuAdmin_start:
             
             MainStorage.add(_name, _price, _num); 
 
-            cout << "\n---------------------------------- Successfully Add Detail --------------------------------------------" << endl;
+            cout << "\n---------------------------------- Successfully Add Detail --------------------------------------------" << endl << endl;
 
             do {
-                cout << "\n\n\t\t\t 1. Continue adding another Dish " << endl;
-                cout << "\n\t\t\t 2. Turn back Administration menu" << endl;
+                cout << "\t\t\t 1. Continue adding another product" << endl;
+                cout << "\t\t\t 2. Turn back Administration menu" << endl;
                 cout << "\t\t\t 3. Exit program" << endl;
-                cout << "\t\t\tPlease Enter Your Choice: ";
+                cout << "\t\t\t Please Enter Your Choice: ";
                 cin >> _choice;
 
                 if (_choice == 3) exit(0);
@@ -306,15 +307,15 @@ menuAdmin_start:
                 else throw false;
             } 
             catch (bool earase) {
-                cout << "\n------------------------------------------------------------------------------------------------------" << endl;
+                cout << "\n------------------------------------------------------------------------------------------------------" << endl << endl;
                 cout << "\n\t\t\tNo product has this information" << endl;                   
             }
 
             do {
-                cout << "\n\n\t\t\t 1. Continue erasing another product" << endl;
-                cout << "\n\t\t\t 2. Turn back Administration menu" << endl;
+                cout << "\t\t\t 1. Continue erasing another product" << endl;
+                cout << "\t\t\t 2. Turn back Administration menu" << endl;
                 cout << "\t\t\t 3. Exit program" << endl;
-                cout << "\t\t\tPlease Enter Your Choice: ";
+                cout << "\t\t\t Please Enter Your Choice: ";
                 cin >> _choice;
 
                 if (_choice == 3) exit(0);
@@ -329,13 +330,22 @@ menuAdmin_start:
         case 3: 
         {
             cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
-            cout << "--------------------------------------------- Menu ----------------------------------------------------" << endl;
-            MainStorage.showStorage();
+            cout << "--------------------------------------------- Menu ----------------------------------------------------" << endl << endl;
+            do {
+                cout << "\t\t\t 1. Sort by name" << endl;
+                cout << "\t\t\t 2. Sort by price" << endl;
+                cout << "\t\t\t Please Enter Your Choice: ";
+                cin >> _choice;
+            } while (_choice != 1 && _choice != 2);
+            cout << "-------------------------------------------------------------------------------------------------------" << endl;
+
+            if (_choice==1) MainStorage.sortName();
+            else MainStorage.sortPrice();
             
             do {
-                cout << "\n\n\t\t\t 1. Turn back Administration menu" << endl;
+                cout << "\n\t\t\t 1. Turn back Administration menu" << endl;
                 cout << "\t\t\t 2. Exit program" << endl;
-                cout << "\t\t\tPlease Enter Your Choice: ";
+                cout << "\t\t\t Please Enter Your Choice: ";
                 cin >> _choice;   
                 
                 if (_choice == 2) exit(0);
@@ -365,10 +375,10 @@ menuAdmin_start:
 
                     cout << "Do you want to increase or decrease the quantity?" << endl;
                     do {
-                        cout << "\t\t\t1. Increase" << endl;
-                        cout << "\t\t\t2. Decrease" << endl; 
-                        cout << "\t\t\t........................." << endl;
-                        cout << "\t\t\tPlease Enter Your Choice: ";
+                        cout << "\t\t\t 1. Increase" << endl;
+                        cout << "\t\t\t 2. Decrease" << endl; 
+                        cout << "\t\t\t ........................." << endl;
+                        cout << "\t\t\t Please Enter Your Choice: ";
                         cin >> _choice;
                     } while (_choice != 1 && _choice != 2);
 
@@ -379,20 +389,20 @@ menuAdmin_start:
                     else MainStorage.decrease(_name, _num);
                     break;
                 
-                    cout << "\n---------------------------------- Successfully Edit Detail -------------------------------------------" << endl;
+                    cout << "\n---------------------------------- Successfully Edit Detail -------------------------------------------" << endl << endl;
                 }
                 else throw false;
             } 
             catch (bool earase) {
                 cout << "\n------------------------------------------------------------------------------------------------------" << endl;
-                cout << "\n\t\t\tNo product has this information" << endl;                   
+                cout << "\n\t\t\tNo product has this information" << endl << endl;               
             }
 
             do {
-                cout << "\n\n\t\t\t 1. Continue editing another product " << endl;
-                cout << "\n\t\t\t 2. Turn back Administration menu" << endl;
+                cout << "\t\t\t 1. Continue editing another product " << endl;
+                cout << "\t\t\t 2. Turn back Administration menu" << endl;
                 cout << "\t\t\t 3. Exit program" << endl;
-                cout << "\t\t\tPlease Enter Your Choice: ";
+                cout << "\t\t\t Please Enter Your Choice: ";
                 cin >> _choice;
 
                 if (_choice == 3) exit(0);
