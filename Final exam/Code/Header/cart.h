@@ -19,6 +19,11 @@ typedef enum {
     BankTransfer
 } PaymentMethod; 
 
+/*
+*Class: Cart
+*Description: This class contains basic properties and methods of a Cart object
+*/
+
 class Cart : public Storage {
 public:
     list <Product> shoppingCart;
@@ -33,9 +38,14 @@ public:
 
     float calcBill();
     void getBill();
-    
+
     void resetCart();
 };
+
+/*
+*Class: Customer
+*Description: This class contains basic properties and methods of a Customer object
+*/
 
 class Customer {
 private:
@@ -54,3 +64,5 @@ public:
 
     void menuCustom();
 };
+
+#endif
