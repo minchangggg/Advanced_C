@@ -57,7 +57,7 @@ int Product::getNum() {
 * Output:  return: None
 */
 void Product::getProduct() {
-    cout << "\t\t\tID" << "\t\t\tName" << "\t\t\tPrice" << endl ;
+    cout << "\t\t\tID" << "\t\t\tName" << "\t\t\tPrice" << "\t\t\tQuantity" << endl ;
     cout << "________________________________________________________________________________________________________" << endl;
 
     cout << "\t\t\t" << "\t\t\t" << getID() << "\t\t\t" << getName() << "\t\t\t" << getPrice() << endl;
