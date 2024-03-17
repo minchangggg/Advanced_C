@@ -1,44 +1,56 @@
+/*
+* File: cart.h
+* Author: Ton Nu Minh Trang
+* Date: 15/03/2024
+* Description: This file is a cart header file that program is used for storing customer shopping cart's information
+*/
+
 #ifndef __CART_H
 #define __CART_H
 
-#include <Storage.h>
+#include <storage.h>
+
+using namespace std;
+
+typedef enum {
+    Cash,
+    DebitCard,
+    CreditCard,
+    BankTransfer
+} PaymentMethod; 
 
 class Cart : public Storage {
 public:
+    list <Product> shoppingCart;
+
     Cart() : Storage() {}
 
-    float totalMoney() {
-        float ans = 0;
-        for (auto it : container) {
-            ans += it.getPrice() * it.getNum();
-        }
+    void add();
 
-        return ans;
-    }
+    void earase();
 
-    bool checkAmmount(Product prod, int ammount) {
-        if (ammount < 0) return false;
+    void edit();
 
-        list <Product>::iterator it;
-        for (it = MainStorage.container.begin(); it != MainStorage.container.end(); ++it) {
-            if (it->getName() == prod.getName()) return ammount <= prod.getNum();
-        }
-
-        return false;
-    }
-
-    bool changeAmmount(Product prod, int newAmmount) {
-        checkAmmount(prod, newAmmount);
-        if (newAmmount == 0) erase(prod);
-
-        list <Product>::iterator it;
-        for (it = container.begin(); it != container.end(); ++it) {
-            if (*it == prod) {
-                it->setNum(newAmmount);
-                break;
-            }
-        }
-    }
+    float calcBill();
+    void getBill();
+    
+    void resetCart();
 };
 
-#endif
+class Customer {
+private:
+    int account;
+    int password;
+    PaymentMethod payment;
+
+public:
+    Customer() {
+        this->account = 123456789;
+        this->password = 123456789;
+        this->payment = Cash;
+    }
+
+    void paymentProgress();
+
+    void menuCustom();
+};
