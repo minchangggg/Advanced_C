@@ -8,7 +8,7 @@
 #ifndef __CART_H
 #define __CART_H
 
-#include <storage.h>
+#include "storage.h"
 
 using namespace std;
 
@@ -30,16 +30,17 @@ public:
 
     Cart() : Storage() {}
 
-    void add();
-    void erase();
-    void update();
+    Product* searchByName(string _name); 
 
-    void show();
+    void add(string _name);
+    void erase(string _name);
+
+    void update(string _name, int _num);
+    int checkNum(string _name);
 
     float calcBill();
     void getBill();
-
-    void resetCart();
+    void payment();
 };
 
 /*
@@ -59,6 +60,9 @@ public:
         this->password = 123456789;
         this->payment = Cash;
     }
+
+    int getAccount();
+    int getPassword();
 
     void paymentProgress();
 
