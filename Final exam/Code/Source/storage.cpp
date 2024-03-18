@@ -214,12 +214,12 @@ menuAdmin_start:
     int _password = 0; int _account = 0; int _choice = 0; 
     string _name = ""; int _price = 0; int _num = 0;
 
-    thread threadAdd(MainStorage.add, _name, _price, _num);
-    thread threadErase(MainStorage.erase, _name);
+    thread threadAdd(&Storage::add, _name, _price, _num, &MainStorage);
+    thread threadErase(&Storage::erase, _name, &MainStorage);
 
-    thread threadDecrease(MainStorage.decrease, _name, _num);
-    thread threadIncrease(MainStorage.increase, _name, _num);
-    thread threadCheckNum(MainStorage.checkNum);
+    thread threadDecrease(&Storage::decrease, _name, _num, &MainStorage);
+    thread threadIncrease(&Storage::increase, _name, _num, &MainStorage);
+    thread threadCheckNum(&Storage::isEmpty, _name, &MainStorage);
 
     cout << "\t\t\t\t\t\tLOG IN" << endl;
 
