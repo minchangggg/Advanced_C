@@ -38,8 +38,15 @@ void Cart::add(string _name) {
 
             try {
                 if (!MainStorage.isEmpty(_name)) {
-                    MainStorage.decrease(_name, 1); // trừ đi 1 sản phẩm khỏi kho 
                     shoppingCart.push_back(*MainStorage.searchByName(_name));
+
+                    list<Product>::iterator it;
+                    for (it = shoppingCart.begin(); it != shoppingCart.end(); ++it) {
+                        if (it->getName() == _name) it->setNum(1); // set số lượng lúc đầu khi thêm vào là 1
+                    }
+
+                    MainStorage.decrease(_name, 1); // trừ đi 1 sản phẩm khỏi kho 
+
                     cout << "\n---------------------------------- Successfully Add Detail -------------------------------------------" << endl;
                 }
                 else throw false;
@@ -139,7 +146,7 @@ float Cart::calcBill() {
 * Output:  return: None
 */
 void Cart::getBill() { 
-    future <float> resultFuture = async(launch::async, calcBill);
+    future <float> resultFuture = async(launch::async, &Cart::calcBill);
 
     cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
     cout << "\t\t\tTotal: " << resultFuture.get() << endl; 
@@ -235,5 +242,189 @@ menuCustom_start:
             cout << "\t\t\tPlease Enter Your Choice: ";
             cin >> _choice;
         } while (_choice < 1 || _choice > 6);
-        // code
+      
+        switch (_choice) {
+        case 1:
+        {
+        add_cart:
+            cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
+            MainStorage.showStorage();
+
+            cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
+            cout << "------------------------------------------- Add -------------------------------------------------------" << endl;
+            cout << "\t\t\tEnter the product name: ";
+            string _name = ""; cin.ignore(); cin >> _name;
+
+            cout << "\t\t\tEnter the price of the product: ";
+            int _price = 0; cin >> _price;
+
+            cout << "\t\t\tEnter the quantity of the product: ";
+            int _num = 0; cin >> _num;
+            
+            MainStorage.add(_name, _price, _num); 
+
+            cout << "\n---------------------------------- Successfully Add Detail --------------------------------------------" << endl << endl;
+
+            do {
+                cout << "\t\t\t 1. Continue adding another product" << endl;
+                cout << "\t\t\t 2. Turn back Administration menu" << endl;
+                cout << "\t\t\t 3. Exit program" << endl;
+                cout << "\t\t\t Please Enter Your Choice: ";
+                cin >> _choice;
+
+                if (_choice == 3) exit(0);
+
+            } while (_choice != 1 && _choice != 2);
+
+            if (_choice == 1) goto add_cart;
+            else goto menuCustom_start;
+            break;
+        }
+
+        case 2: 
+        {
+        remove_cart:
+            cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
+            MainStorage.showStorage();
+
+            cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
+            cout << "------------------------------------------- Delete ----------------------------------------------------" << endl;
+            cout << "Enter the product name: ";
+            string _name = ""; cin.ignore(); cin >> _name;
+
+            try {
+                if (MainStorage.searchByName(_name) != NULL) {
+                    cout << "\n------------------------------------------------------------------------------------------------------" << endl;
+                    cout << "\n\t\t\tData is founded" << endl;
+                    MainStorage.searchByName(_name)->getProduct();
+                    MainStorage.erase(_name);
+                    cout << "\n---------------------------------- Successfully Delete Detail -----------------------------------------" << endl;
+                }
+                else throw false;
+            } 
+            catch (bool earase) {
+                cout << "\n------------------------------------------------------------------------------------------------------" << endl << endl;
+                cout << "\n\t\t\tNo product has this information" << endl;                   
+            }
+
+            do {
+                cout << "\t\t\t 1. Continue erasing another product" << endl;
+                cout << "\t\t\t 2. Turn back Administration menu" << endl;
+                cout << "\t\t\t 3. Exit program" << endl;
+                cout << "\t\t\t Please Enter Your Choice: ";
+                cin >> _choice;
+
+                if (_choice == 3) exit(0);
+
+            } while (_choice != 1 && _choice != 2);
+
+            if (_choice == 1) goto remove_cart;
+            else goto menuCustom_start;
+            break;
+        }
+
+        case 3: 
+        {
+            cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
+            cout << "--------------------------------------------- Menu ----------------------------------------------------" << endl << endl;
+            do {
+                cout << "\t\t\t 1. Sort by name" << endl;
+                cout << "\t\t\t 2. Sort by price" << endl;
+                cout << "\t\t\t Please Enter Your Choice: ";
+                cin >> _choice;
+            } while (_choice != 1 && _choice != 2);
+            cout << "-------------------------------------------------------------------------------------------------------" << endl;
+
+            if (_choice==1) MainStorage.sortName();
+            else MainStorage.sortPrice();
+            
+            do {
+                cout << "\n\t\t\t 1. Turn back Administration menu" << endl;
+                cout << "\t\t\t 2. Exit program" << endl;
+                cout << "\t\t\t Please Enter Your Choice: ";
+                cin >> _choice;   
+                
+                if (_choice == 2) exit(0);
+
+            } while (_choice != 1);
+
+            goto menuCustom_start;
+            break;
+        }
+
+        case 4: 
+        {
+        edit_cart:
+            cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
+            MainStorage.showStorage();
+
+            cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
+            cout << "--------------------------------------------- Edit ----------------------------------------------------" << endl;
+            cout << "Enter the product name: ";
+            string _name = ""; cin.ignore(); cin >> _name;
+
+            try {
+                if (MainStorage.searchByName(_name) != NULL) {
+                    cout << "\n------------------------------------------------------------------------------------------------------" << endl;
+                    cout << "\n\t\t\tData is founded" << endl;
+                    MainStorage.searchByName(_name)->getProduct();
+
+                    cout << "Do you want to increase or decrease the quantity?" << endl;
+                    do {
+                        cout << "\t\t\t 1. Increase" << endl;
+                        cout << "\t\t\t 2. Decrease" << endl; 
+                        cout << "\t\t\t ........................." << endl;
+                        cout << "\t\t\t Please Enter Your Choice: ";
+                        cin >> _choice;
+                    } while (_choice != 1 && _choice != 2);
+
+                    cout << "Enter the quantity of product you want to edit: ";
+                    int _num; cin >> _num;
+
+                    if (_choice == 1) MainStorage.increase(_name, _num);
+                    else MainStorage.decrease(_name, _num);
+                    break;
+                
+                    cout << "\n---------------------------------- Successfully Edit Detail -------------------------------------------" << endl << endl;
+                }
+                else throw false;
+            } 
+            catch (bool earase) {
+                cout << "\n------------------------------------------------------------------------------------------------------" << endl;
+                cout << "\n\t\t\tNo product has this information" << endl << endl;               
+            }
+
+            do {
+                cout << "\t\t\t 1. Continue editing another product " << endl;
+                cout << "\t\t\t 2. Turn back Administration menu" << endl;
+                cout << "\t\t\t 3. Exit program" << endl;
+                cout << "\t\t\t Please Enter Your Choice: ";
+                cin >> _choice;
+
+                if (_choice == 3) exit(0);
+
+            } while (_choice != 1 && _choice != 2);
+
+            if (_choice == 1) goto edit_cart;
+            else goto menuCustom_start;
+            break;
+        }
+
+        case 5: 
+            goto menuCustom_start;
+            break;
+
+        case 6: 
+        {
+            cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
+            cout << "------------------------------------- Program Is Exit --------------------------------------------" << endl;
+            exit(0);
+            break;
+        }
+
+        default:
+            break;  
+        }
+
+    }
 }
