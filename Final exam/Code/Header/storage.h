@@ -8,7 +8,7 @@
 #ifndef __STORAGE_H
 #define __STORAGE_H
 
-#include <product.h>
+#include "product.h"
 using namespace std;
 
 /*
@@ -22,9 +22,9 @@ public:
 
     Storage() {}
 
-    void add(string _name, int _price, int _num);
-
     Product* searchByName(string _name); 
+    
+    void add(string _name, int _price, int _num);
 
     void erase(string _name);
     
@@ -32,7 +32,7 @@ public:
 
     void decrease(string _name, int _num);
     void increase(string _name, int _num);
-    bool checkNum(string _name);
+    bool isEmpty(string _name);
 
     bool cmpName(const Product &a, const Product &b);
     bool cmpPrice(const Product &a, const Product &b);
