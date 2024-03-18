@@ -10,6 +10,21 @@ using namespace std;
 
 /*
 * Class: Storage
+* Function: searchByName
+* Description: This function is used for searching product by name
+* Input:   _name
+* Output:  return: None
+*/
+Product* Storage::searchByName(string _name) {
+    list<Product>::iterator it;
+    for (it = container.begin(); it != container.end(); ++it) {
+        if (it->getName() == _name) return &(*it);
+    }
+    return NULL;
+}
+
+/*
+* Class: Storage
 * Function: add
 * Description: This Function is used for adding a new product
 * Input:   _name (name of product), _price (price of product), _num (number of product) 
@@ -26,24 +41,8 @@ void Storage::add(string _name, int _price, int _num) {
 
 /*
 * Class: Storage
-* Function: searchByName
-* Description: This function is used for searching product by name
-* Input:   _name
-* Output:  return: None
-*/
-
-Product* Storage::searchByName(string _name) {
-    list<Product>::iterator it;
-    for (it = container.begin(); it != container.end(); ++it) {
-        if (it->getName() == _name) return &(*it);
-    }
-    return NULL;
-}
-
-/*
-* Class: Storage
 * Function: erase
-* Description: This Function is used for erasing a new product
+* Description: This Function is used for erasing a product
 * Input:   _name
 * Output:  return: None
 */
@@ -98,18 +97,18 @@ void Storage::increase(string _name, int _num) {
 
 /*
 * Class: Storage
-* Function: checkNum
+* Function: isEmpty
 * Description: This function is used for checking number of product 
 * Input:   _name
 * Output:  return: true || false
 */
-bool Storage::checkNum(string _name) {
+bool Storage::isEmpty(string _name) {
     list <Product>::iterator it;
     for (it = container.begin(); it != container.end(); ++it) {
         if (it->getName() == _name) {
             shared_lock <mutex> lock(it->Prod_mtx);
-            if (it->getNum() != 0) return true;
-            return false;
+            if (it->getNum() != 0) return false;
+            return true;
         }
     }
 }
@@ -325,7 +324,7 @@ menuAdmin_start:
             try {
                 if (MainStorage.searchByName(_name) != NULL) {
                     cout << "\n------------------------------------------------------------------------------------------------------" << endl;
-                    cout << "\n\t\t\tData is founded" << endl;
+                    cout << "\t\t\tData is founded" << endl;
                     MainStorage.searchByName(_name)->getProduct();
                     MainStorage.erase(_name);
                     cout << "\n---------------------------------- Successfully Delete Detail -----------------------------------------" << endl;
@@ -396,7 +395,7 @@ menuAdmin_start:
             try {
                 if (MainStorage.searchByName(_name) != NULL) {
                     cout << "\n------------------------------------------------------------------------------------------------------" << endl;
-                    cout << "\n\t\t\tData is founded" << endl;
+                    cout << "\t\t\tData is founded" << endl;
                     MainStorage.searchByName(_name)->getProduct();
 
                     cout << "Do you want to increase or decrease the quantity?" << endl;
@@ -421,7 +420,7 @@ menuAdmin_start:
             } 
             catch (bool earase) {
                 cout << "\n------------------------------------------------------------------------------------------------------" << endl;
-                cout << "\n\t\t\tNo product has this information" << endl << endl;               
+                cout << "\t\t\tNo product has this information" << endl << endl;               
             }
 
             do {
