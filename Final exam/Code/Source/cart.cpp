@@ -15,7 +15,7 @@ using namespace std;
 * Input:   _name
 * Output:  return: None
 */
-Product* Cart::searchByName(string _name) {
+Product* Cart::searchByNameCart(string _name) {
     list<Product>::iterator it;
     for (it = shoppingCart.begin(); it != shoppingCart.end(); ++it) {
         if (it->getName() == _name) return &(*it);
@@ -30,7 +30,7 @@ Product* Cart::searchByName(string _name) {
 * Input:   _name (name of product)
 * Output:  return: None
 */
-void Cart::add(string _name) {
+void Cart::add(string _name, int _num) {
     try {
         if (MainStorage.searchByName(_name) != NULL) {
             cout << "\n------------------------------------------------------------------------------------------------------" << endl;
@@ -42,10 +42,10 @@ void Cart::add(string _name) {
 
                     list<Product>::iterator it;
                     for (it = shoppingCart.begin(); it != shoppingCart.end(); ++it) {
-                        if (it->getName() == _name) it->setNum(1); // set số lượng lúc đầu khi thêm vào là 1
+                        if (it->getName() == _name) it->setNum(_num); // set số lượng lúc đầu khi thêm vào là 1
                     }
 
-                    MainStorage.decrease(_name, 1); // trừ đi 1 sản phẩm khỏi kho 
+                    MainStorage.decrease(_name, _num); // trừ đi 1 sản phẩm khỏi kho 
 
                     cout << "\n---------------------------------- Successfully Add Detail -------------------------------------------" << endl;
                 }
@@ -131,9 +131,11 @@ int Cart::checkNum(string _name) {
 * Output:  return: totalBill
 */
 float Cart::calcBill() {
-    int totalBill = 0;
-    for (auto &i : shoppingCart) {
-        totalBill += i.getPrice() * i.getNum();
+    if (shoppingCart.empty()) totalBill = 0;
+    else {
+        for (auto &i : shoppingCart) {
+            totalBill += i.getPrice() * i.getNum();
+        }
     }
     return totalBill;
 }
@@ -146,7 +148,7 @@ float Cart::calcBill() {
 * Output:  return: None
 */
 void Cart::getBill() { 
-    future <float> resultFuture = async(launch::async, &Cart::calcBill);
+    future <float> resultFuture = async(launch::async, calcBill());
 
     cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
     cout << "\t\t\tTotal: " << resultFuture.get() << endl; 
@@ -155,8 +157,26 @@ void Cart::getBill() {
     cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
 } 
 
-void Cart::payment() {
-    //
+/*
+* Class: Cart
+* Function: payment
+* Description: This Function is used for print bill of storage
+* Input:   None
+* Output:  return: None
+*/
+void Cart::getMethod(PaymentMethod method) {
+    switch (method) {
+    case Cash:
+        break;
+    case DebitCard:
+        break;
+    case CreditCard:
+        break;
+    case BankTransfer:
+        break;
+    default:
+        break;
+    }
 }
 
 /*
@@ -188,9 +208,18 @@ int Customer::getPassword() {
 * Input:   storage 
 * Output:  return: None
 */
+
 void Customer::menuCustom() {
 menuCustom_start:
     int _password = 0; int _account = 0; int _choice = 0; 
+    string _name = ""; int _price = 0; int _num = 0;
+    Storage _shoppingCart = MainCart;
+
+    thread threadAddCart(&Cart::add, _name, _num, &MainCart);
+    thread threadEraseCart(&Cart::erase, _name, &MainCart);
+
+    thread threadUpdate(&Cart::update, _name, _num, &MainCart);
+    thread threadCheckNum(&Cart::checkNum, _name, &MainCart);
 
     cout << "\t\t\t\t\t\tLOG IN" << endl;
 
@@ -236,15 +265,48 @@ menuCustom_start:
             cout << "\t\t\t 2. Add Product Add To Cart" << endl; 
             cout << "\t\t\t 3. Remove Product From Cart" << endl; 
             cout << "\t\t\t 4. Edit Product" << endl;
-            cout << "\t\t\t 5. Turn Back Main Menu" << endl; 
-            cout << "\t\t\t 6. Exit program" << endl;
+            cout << "\t\t\t 5. Confirm Payment" << endl; 
+            cout << "\t\t\t 6. Turn Back Main Menu" << endl;
+            cout << "\t\t\t 7. Exit program" << endl;
             cout << "\t\t\t............................" << endl;
             cout << "\t\t\tPlease Enter Your Choice: ";
             cin >> _choice;
         } while (_choice < 1 || _choice > 6);
-      
+
         switch (_choice) {
-        case 1:
+
+        case 1: 
+        {
+            cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
+            cout << "--------------------------------------------- Menu ----------------------------------------------------" << endl << endl;
+            _shoppingCart.showStorage();
+
+            do {
+                cout << "\t\t\t 1. Sort by name" << endl;
+                cout << "\t\t\t 2. Sort by price" << endl;
+                cout << "\t\t\t Please Enter Your Choice: ";
+                cin >> _choice;
+            } while (_choice != 1 && _choice != 2);
+            cout << "-------------------------------------------------------------------------------------------------------" << endl;
+
+            if (_choice == 1) _shoppingCart.sortName();
+            else _shoppingCart.sortPrice();
+
+            do {
+                cout << "\n\t\t\t 1. Turn back Customer menu" << endl;
+                cout << "\t\t\t 2. Exit program" << endl;
+                cout << "\t\t\t Please Enter Your Choice: ";
+                cin >> _choice;   
+                
+                if (_choice == 2) exit(0);
+
+            } while (_choice != 1);
+
+            goto menuCustom_start;
+            break;
+        }
+
+        case 2:
         {
         add_cart:
             cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
@@ -253,21 +315,18 @@ menuCustom_start:
             cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
             cout << "------------------------------------------- Add -------------------------------------------------------" << endl;
             cout << "\t\t\tEnter the product name: ";
-            string _name = ""; cin.ignore(); cin >> _name;
-
-            cout << "\t\t\tEnter the price of the product: ";
-            int _price = 0; cin >> _price;
+            cin.ignore(); cin >> _name;
 
             cout << "\t\t\tEnter the quantity of the product: ";
-            int _num = 0; cin >> _num;
+            cin >> _num;
             
-            MainStorage.add(_name, _price, _num); 
+            this->add(_name, _num); 
 
             cout << "\n---------------------------------- Successfully Add Detail --------------------------------------------" << endl << endl;
 
             do {
                 cout << "\t\t\t 1. Continue adding another product" << endl;
-                cout << "\t\t\t 2. Turn back Administration menu" << endl;
+                cout << "\t\t\t 2. Turn back Customer menu" << endl;
                 cout << "\t\t\t 3. Exit program" << endl;
                 cout << "\t\t\t Please Enter Your Choice: ";
                 cin >> _choice;
@@ -281,23 +340,23 @@ menuCustom_start:
             break;
         }
 
-        case 2: 
+        case 3: 
         {
         remove_cart:
             cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
-            MainStorage.showStorage();
+            _shoppingCart.showStorage();
 
             cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
             cout << "------------------------------------------- Delete ----------------------------------------------------" << endl;
             cout << "Enter the product name: ";
-            string _name = ""; cin.ignore(); cin >> _name;
+            cin.ignore(); cin >> _name;
 
             try {
-                if (MainStorage.searchByName(_name) != NULL) {
+                if (searchByName(_name) != NULL) {
                     cout << "\n------------------------------------------------------------------------------------------------------" << endl;
                     cout << "\n\t\t\tData is founded" << endl;
-                    MainStorage.searchByName(_name)->getProduct();
-                    MainStorage.erase(_name);
+                    searchByName(_name)->getProduct();
+                    erase(_name);
                     cout << "\n---------------------------------- Successfully Delete Detail -----------------------------------------" << endl;
                 }
                 else throw false;
@@ -309,7 +368,7 @@ menuCustom_start:
 
             do {
                 cout << "\t\t\t 1. Continue erasing another product" << endl;
-                cout << "\t\t\t 2. Turn back Administration menu" << endl;
+                cout << "\t\t\t 2. Turn back Customer menu" << endl;
                 cout << "\t\t\t 3. Exit program" << endl;
                 cout << "\t\t\t Please Enter Your Choice: ";
                 cin >> _choice;
@@ -323,66 +382,28 @@ menuCustom_start:
             break;
         }
 
-        case 3: 
-        {
-            cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
-            cout << "--------------------------------------------- Menu ----------------------------------------------------" << endl << endl;
-            do {
-                cout << "\t\t\t 1. Sort by name" << endl;
-                cout << "\t\t\t 2. Sort by price" << endl;
-                cout << "\t\t\t Please Enter Your Choice: ";
-                cin >> _choice;
-            } while (_choice != 1 && _choice != 2);
-            cout << "-------------------------------------------------------------------------------------------------------" << endl;
-
-            if (_choice==1) MainStorage.sortName();
-            else MainStorage.sortPrice();
-            
-            do {
-                cout << "\n\t\t\t 1. Turn back Administration menu" << endl;
-                cout << "\t\t\t 2. Exit program" << endl;
-                cout << "\t\t\t Please Enter Your Choice: ";
-                cin >> _choice;   
-                
-                if (_choice == 2) exit(0);
-
-            } while (_choice != 1);
-
-            goto menuCustom_start;
-            break;
-        }
-
         case 4: 
         {
         edit_cart:
             cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
-            MainStorage.showStorage();
+            _shoppingCart.showStorage();
 
             cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
             cout << "--------------------------------------------- Edit ----------------------------------------------------" << endl;
             cout << "Enter the product name: ";
-            string _name = ""; cin.ignore(); cin >> _name;
+            cin.ignore(); cin >> _name;
 
             try {
-                if (MainStorage.searchByName(_name) != NULL) {
+                if (searchByNameCart(_name) != NULL) {
                     cout << "\n------------------------------------------------------------------------------------------------------" << endl;
                     cout << "\n\t\t\tData is founded" << endl;
-                    MainStorage.searchByName(_name)->getProduct();
+                    searchByNameCart(_name)->getProduct();
 
-                    cout << "Do you want to increase or decrease the quantity?" << endl;
-                    do {
-                        cout << "\t\t\t 1. Increase" << endl;
-                        cout << "\t\t\t 2. Decrease" << endl; 
-                        cout << "\t\t\t ........................." << endl;
-                        cout << "\t\t\t Please Enter Your Choice: ";
-                        cin >> _choice;
-                    } while (_choice != 1 && _choice != 2);
 
                     cout << "Enter the quantity of product you want to edit: ";
-                    int _num; cin >> _num;
+                    cin >> _num;
 
-                    if (_choice == 1) MainStorage.increase(_name, _num);
-                    else MainStorage.decrease(_name, _num);
+                    update(_name, _num)
                     break;
                 
                     cout << "\n---------------------------------- Successfully Edit Detail -------------------------------------------" << endl << endl;
@@ -391,12 +412,12 @@ menuCustom_start:
             } 
             catch (bool earase) {
                 cout << "\n------------------------------------------------------------------------------------------------------" << endl;
-                cout << "\n\t\t\tNo product has this information" << endl << endl;               
+                cout << "\n\t\t\tNo product in cart has this information" << endl << endl;               
             }
 
             do {
                 cout << "\t\t\t 1. Continue editing another product " << endl;
-                cout << "\t\t\t 2. Turn back Administration menu" << endl;
+                cout << "\t\t\t 2. Turn back Customer menu" << endl;
                 cout << "\t\t\t 3. Exit program" << endl;
                 cout << "\t\t\t Please Enter Your Choice: ";
                 cin >> _choice;
@@ -409,12 +430,48 @@ menuCustom_start:
             else goto menuCustom_start;
             break;
         }
-
         case 5: 
+        {
+        get_paid:
+            _shoppingCart.showStorage();
+            getBill();
+            try {
+                do {
+                    cout << "\t\t\tWhich payment method do you want?" << endl;
+                    cout << "\t\t\t1. Cash" << endl;
+                    cout << "\t\t\t2. DebitCard" << endl;
+                    cout << "\t\t\t3. CreditCard" << endl;
+                    cout << "\t\t\t4. BankTransfer" << endl;
+                    cin >> _choice;
+                } while (_choice < 1 || _choice > 4);
+
+                PaymentMethod _method;
+                if (_choice == 1) _method = Cash;
+                else if (_choice == 2) _method = DebitCard;
+                else if (_choice == 3) _method = CreditCard;
+                else if (_choice == 4) _method = BankTransfer;
+
+                cout << "Enter your password to confirm payment: " << endl;
+                cin >> _password;
+                if (getPassword() == _password) {
+                    cout << "\n---------------------------------- Successfully Confirm Payment -------------------------------------------" << endl;
+                    getMethod(_method);
+                    _shoppingCart.clear();
+                    cout << "\n---------------------------------- Thank You For You Payment -------------------------------------------" << endl;
+                }
+                else throw false;
+            } 
+            throw (bool exception) {
+                cout << "Confirmed password is incorrect. Please re-enter" << endl;
+                goto get_paid;
+            }
+            break;
+        }
+        case 6: 
             goto menuCustom_start;
             break;
 
-        case 6: 
+        case 7: 
         {
             cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
             cout << "------------------------------------- Program Is Exit --------------------------------------------" << endl;
