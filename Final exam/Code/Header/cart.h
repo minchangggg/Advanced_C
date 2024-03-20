@@ -10,6 +10,8 @@
 
 #include "storage.h"
 
+int totalBill = 0;
+
 using namespace std;
 
 typedef enum {
@@ -24,15 +26,15 @@ typedef enum {
 *Description: This class contains basic properties and methods of a Cart object
 */
 
-class Cart : public Storage {
+class Cart {
 public:
     list <Product> shoppingCart;
 
-    Cart() : Storage() {}
+    Cart() {}
 
-    Product* searchByName(string _name); 
+    Product* searchByNameCart(string _name); 
 
-    void add(string _name);
+    void add(string _name, int _num);
     void erase(string _name);
 
     void update(string _name, int _num);
@@ -48,14 +50,14 @@ public:
 *Description: This class contains basic properties and methods of a Customer object
 */
 
-class Customer {
+class Customer : public Cart {
 private:
     int account;
     int password;
     PaymentMethod payment;
 
 public:
-    Customer() {
+    Customer() : Cart() {
         this->account = 123456789;
         this->password = 123456789;
         this->payment = Cash;
