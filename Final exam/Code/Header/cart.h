@@ -43,7 +43,8 @@ public:
     float calcBill();
     void getBill();
     void payment();
-};
+    
+} MainCart;
 
 /*
 *Class: Customer
