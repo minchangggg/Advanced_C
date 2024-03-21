@@ -38,14 +38,15 @@ void Cart::add(string _name, int _num) {
 
             try {
                 if (!MainStorage.isEmpty(_name)) {
-                    shoppingCart.push_back(*MainStorage.searchByName(_name));
+                    Product _product;
+                    _product.setID(MainStorage.searchByName(_name)->getID());
+                    _product.setName(MainStorage.searchByName(_name)->getName());
+                    _product.setNum(_num);
+                    _product.setPrice(MainStorage.searchByName(_name)->getPrice());
 
-                    list<Product>::iterator it;
-                    for (it = shoppingCart.begin(); it != shoppingCart.end(); ++it) {
-                        if (it->getName() == _name) it->setNum(_num); // set số lượng lúc đầu khi thêm vào là 1
-                    }
+                    shoppingCart.push_back(_product);
 
-                    MainStorage.decrease(_name, _num); // trừ đi 1 sản phẩm khỏi kho 
+                    MainStorage.decrease(_name, _num); 
 
                     cout << "\n---------------------------------- Successfully Add Detail -------------------------------------------" << endl;
                 }
@@ -80,6 +81,26 @@ void Cart::erase(string _name) {
 
 /*
 * Class: Cart
+* Function: showCart
+* Description: This function is used for showing storage of supermarket
+* Input:   None
+* Output:  return: None
+*/
+void Cart::showCart(){
+    int count = 0;
+    cout << "\t\t\tNo" << "\t\t\tID" << "\t\t\tName" << "\t\t\tPrice" << "\t\t\tQuantity" <<endl;
+    cout << "________________________________________________________________________________________________________" << endl;
+
+    list <Product>::iterator it;
+    for (it = MainCart.shoppingCart.begin(); it != MainCart.shoppingCart.end(); ++it) {
+        count++;
+        cout << "\t\t\t" << count << "\t\t\t" << it->getID() << "\t\t\t" << it->getName() << "\t\t\t" << it->getPrice() << "\t\t\t" << it->getNum() << endl;
+        cout << "-------------------------------------------------------------------------------------------------------" << endl;
+    }
+}
+
+/*
+* Class: Cart
 * Function: update
 * Description: This Function is used for updating product detail in cart
 * Input:   _name (name of product), _num (num of product)
@@ -89,21 +110,21 @@ void Cart::update(string _name, int _num) {
     if (_num == 0) erase(_name); // TH1: nếu num nhập vào = 0 thì xóa sp 
 
     else if (_num > checkNum(_name)) { // TH2: nếu num nhập vào > số lượng sản phẩm còn trong kho
-        if (_num < searchByName(_name)->getNum()) { 
-            MainStorage.increase(_name, (searchByName(_name)->getNum())-(_num)); // nếu mà lượng sp nhập vào < lượng sp ban đầu -> ng dùng giảm số lượng sp -> cộng phần dư vào lại storage
-            searchByName(_name)->setNum(_num); 
+        if (_num < MainStorage.searchByName(_name)->getNum()) { 
+            MainStorage.increase(_name, (MainStorage.searchByName(_name)->getNum())-(_num)); // nếu mà lượng sp nhập vào < lượng sp ban đầu -> ng dùng giảm số lượng sp -> cộng phần dư vào lại storage
+            searchByNameCart(_name)->setNum(_num); 
         }  
         else cout << "It is an invalid quantity value." << endl; // nếu ko đủ lượng sp thì thông báo lỗi
     }
 
     else { // TH3: nếu num nhập vào < số lượng sản phẩm trong kho
-        if (_num < searchByName(_name)->getNum()) { 
-            MainStorage.increase(_name, (searchByName(_name)->getNum())-(_num)); // nếu mà lượng sp nhập vào < lượng sp ban đầu -> ng dùng giảm số lượng sp -> cộng phần dư vào lại storage
-            searchByName(_name)->setNum(_num); 
+        if (_num < MainStorage.searchByName(_name)->getNum()) { 
+            MainStorage.increase(_name, (MainStorage.searchByName(_name)->getNum())-(_num)); // nếu mà lượng sp nhập vào < lượng sp ban đầu -> ng dùng giảm số lượng sp -> cộng phần dư vào lại storage
+            searchByNameCart(_name)->setNum(_num); 
         }  
-        else if (_num > searchByName(_name)->getNum()) {
-            MainStorage.decrease(_name, (_num)-(searchByName(_name)->getNum())); // nếu mà lượng sp nhập vào < lượng sp ban đầu -> ng dùng giảm số lượng sp -> cộng phần dư vào lại storage
-            searchByName(_name)->setNum(_num);             
+        else if (_num > MainStorage.searchByName(_name)->getNum()) {
+            MainStorage.decrease(_name, (_num)-(MainStorage.searchByName(_name)->getNum())); // nếu mà lượng sp nhập vào < lượng sp ban đầu -> ng dùng giảm số lượng sp -> cộng phần dư vào lại storage
+            searchByNameCart(_name)->setNum(_num);             
         }
         else cout << "Product quantity does not change" << endl;
     }
@@ -167,6 +188,7 @@ void Cart::getBill() {
 void Cart::getMethod(PaymentMethod method) {
     switch (method) {
     case Cash:
+        // 
         break;
     case DebitCard:
         break;
@@ -213,7 +235,9 @@ void Customer::menuCustom() {
 menuCustom_start:
     int _password = 0; int _account = 0; int _choice = 0; 
     string _name = ""; int _price = 0; int _num = 0;
-    Storage _shoppingCart = MainCart;
+    
+    // Storage _shoppingCart;
+    // _shoppingCart.container = MainCart.shoppingCart;
 
     thread threadAddCart(&Cart::add, _name, _num, &MainCart);
     thread threadEraseCart(&Cart::erase, _name, &MainCart);
@@ -278,8 +302,8 @@ menuCustom_start:
         case 1: 
         {
             cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
-            cout << "--------------------------------------------- Menu ----------------------------------------------------" << endl << endl;
-            _shoppingCart.showStorage();
+            cout << "-----------------------------------------List of Product ----------------------------------------------" << endl << endl;
+            MainStorage.showStorage();
 
             do {
                 cout << "\t\t\t 1. Sort by name" << endl;
@@ -289,8 +313,8 @@ menuCustom_start:
             } while (_choice != 1 && _choice != 2);
             cout << "-------------------------------------------------------------------------------------------------------" << endl;
 
-            if (_choice == 1) _shoppingCart.sortName();
-            else _shoppingCart.sortPrice();
+            if (_choice == 1) MainStorage.sortName();
+            else MainStorage.sortPrice();
 
             do {
                 cout << "\n\t\t\t 1. Turn back Customer menu" << endl;
@@ -309,7 +333,7 @@ menuCustom_start:
         case 2:
         {
         add_cart:
-            cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
+            cout << "\n\n-----------------------------------------List of Product ----------------------------------------------" << endl;
             MainStorage.showStorage();
 
             cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
@@ -320,7 +344,7 @@ menuCustom_start:
             cout << "\t\t\tEnter the quantity of the product: ";
             cin >> _num;
             
-            this->add(_name, _num); 
+            MainCart.add(_name, _num); 
 
             cout << "\n---------------------------------- Successfully Add Detail --------------------------------------------" << endl << endl;
 
@@ -343,8 +367,8 @@ menuCustom_start:
         case 3: 
         {
         remove_cart:
-            cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
-            _shoppingCart.showStorage();
+            cout << "\n\n-------------------------------------------- My Cart --------------------------------------------------" << endl;
+            MainCart.showCart();
 
             cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
             cout << "------------------------------------------- Delete ----------------------------------------------------" << endl;
@@ -352,11 +376,11 @@ menuCustom_start:
             cin.ignore(); cin >> _name;
 
             try {
-                if (searchByName(_name) != NULL) {
+                if (MainCart.searchByNameCart(_name) != NULL) {
                     cout << "\n------------------------------------------------------------------------------------------------------" << endl;
                     cout << "\n\t\t\tData is founded" << endl;
-                    searchByName(_name)->getProduct();
-                    erase(_name);
+                    MainCart.searchByNameCart(_name)->getProduct();
+                    MainCart.erase(_name);
                     cout << "\n---------------------------------- Successfully Delete Detail -----------------------------------------" << endl;
                 }
                 else throw false;
@@ -386,7 +410,7 @@ menuCustom_start:
         {
         edit_cart:
             cout << "\n\n--------------------------------------------- Menu ----------------------------------------------------" << endl;
-            _shoppingCart.showStorage();
+            MainCart.showCart();
 
             cout << "\n\n-------------------------------------------------------------------------------------------------------" << endl;
             cout << "--------------------------------------------- Edit ----------------------------------------------------" << endl;
@@ -403,7 +427,7 @@ menuCustom_start:
                     cout << "Enter the quantity of product you want to edit: ";
                     cin >> _num;
 
-                    update(_name, _num)
+                    update(_name, _num);
                     break;
                 
                     cout << "\n---------------------------------- Successfully Edit Detail -------------------------------------------" << endl << endl;
@@ -433,7 +457,7 @@ menuCustom_start:
         case 5: 
         {
         get_paid:
-            _shoppingCart.showStorage();
+            MainCart.showCart();
             getBill();
             try {
                 do {
@@ -456,12 +480,12 @@ menuCustom_start:
                 if (getPassword() == _password) {
                     cout << "\n---------------------------------- Successfully Confirm Payment -------------------------------------------" << endl;
                     getMethod(_method);
-                    _shoppingCart.clear();
+                    MainCart.shoppingCart.clear();
                     cout << "\n---------------------------------- Thank You For You Payment -------------------------------------------" << endl;
                 }
                 else throw false;
             } 
-            throw (bool exception) {
+            catch (bool exception) {
                 cout << "Confirmed password is incorrect. Please re-enter" << endl;
                 goto get_paid;
             }
