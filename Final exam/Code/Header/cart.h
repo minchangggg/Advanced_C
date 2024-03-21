@@ -37,12 +37,14 @@ public:
     void add(string _name, int _num);
     void erase(string _name);
 
+    void showCart();
+
     void update(string _name, int _num);
     int checkNum(string _name);
 
     float calcBill();
     void getBill();
-    void payment();
+    void getMethod(PaymentMethod method);
     
 } MainCart;
 
