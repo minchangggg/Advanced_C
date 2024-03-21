@@ -169,12 +169,13 @@ float Cart::calcBill() {
 * Output:  return: None
 */
 void Cart::getBill() { 
-    future <float> resultFuture = async(launch::async, calcBill());
+    // future <float> resultFuture = async(launch::async, calcBill());
 
     cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
-    cout << "\t\t\tTotal: " << resultFuture.get() << endl; 
+    // cout << "\t\t\tTotal: " << resultFuture.get() << endl; 
+    cout << "\t\t\tTotal: " << calcBill() << endl; 
     cout << "\t\t\tVAT: 10%" << endl;
-    cout << "\t\t\tGrand total: " << 110/100 * resultFuture.get() << endl; 
+    cout << "\t\t\tGrand total: " << 110/100 * calcBill() << endl; 
     cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
 } 
 
@@ -485,8 +486,8 @@ menuCustom_start:
                 cout << "Enter your password to confirm payment: " << endl;
                 cin >> _password;
                 if (getPassword() == _password) {
+                    MainCart.getMethod(_method);
                     cout << "\n---------------------------------- Successfully Confirm Payment -------------------------------------------" << endl;
-                    getMethod(_method);
                     MainCart.shoppingCart.clear();
                     cout << "\n---------------------------------- Thank You For You Payment -------------------------------------------" << endl;
                 }
