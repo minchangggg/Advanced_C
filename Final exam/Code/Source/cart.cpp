@@ -190,12 +190,19 @@ void Cart::getMethod(PaymentMethod method) {
     case Cash:
         // 
         break;
+
     case DebitCard:
+        //
         break;
+
     case CreditCard:
+        //
         break;
+
     case BankTransfer:
+        //
         break;
+
     default:
         break;
     }
