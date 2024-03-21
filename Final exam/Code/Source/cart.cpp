@@ -507,5 +507,11 @@ menuCustom_start:
             break;  
         }
 
+        threadAddCart.join();
+        threadEraseCart.join();
+
+        threadUpdate.join();
+        threadCheckNum.join();
+
     }
 }
