@@ -1,4 +1,4 @@
-![image](https://github.com/minchangggg/Advanced_C/assets/125820144/94620fea-b46a-40cd-95b7-150afe5aa8a1)# NHỮNG ĐIỀU CƠ BẢN VỀ NGÔN NGỮ LẬP TRÌNH C
+# NHỮNG ĐIỀU CƠ BẢN VỀ NGÔN NGỮ LẬP TRÌNH C
 > https://drive.google.com/file/d/1bfNs8DcXfcF7pu1ee3z3_6MWsvbn_Zow/view?usp=sharing
 ## namespace
 > https://viblo.asia/p/namespace-trong-c-XL6lAv0R5ek
@@ -17,17 +17,14 @@
 
 ![image](https://github.com/minchangggg/Advanced_C/assets/125820144/d2aa9dab-1901-4788-a8f9-6e29d0453adb)
 
-    + Trong ô đầu tiên: “Chương trình được viết bằng ngôn ngữ lập trình đơn giản”. Cụm từ “Ngôn ngữ lập trình đơn giản” còn đuợc gọi là “ngôn ngữ bậc cao”. (high-level programming language).
-    Có rất nhiều “cấp bậc” trong ngôn ngữ lập trình. Và ngôn ngữ bậc càng cao càng gần và giống với ngôn ngữ của chúng ta (cũng giống như tiếng Việt hay tiếng Anh). Ngôn ngữ bậc cao giúp ta
-    dễ dàng hơn trong sử dụng, nhưng nó vẫn có một vài thiếu sót mà bạn sẽ thấy về sau. Có rất nhiều ngôn ngữ bậc cao hay thấp trong tin học, trong số đó bạn có thể dùng để lập trình. Và đây là một vài ví dụ: C, C++, Java, Visual Basic, Delphi, ..vv..
+    + Trong ô đầu tiên: “Chương trình được viết bằng ngôn ngữ lập trình đơn giản”. Cụm từ “Ngôn ngữ lập trình đơn giản” còn đuợc gọi là “ngôn ngữ bậc cao”. (high-level programming language). Có rất nhiều “cấp bậc” trong ngôn ngữ lập trình. Và ngôn ngữ bậc càng cao càng gần và giống với ngôn ngữ của chúng ta (cũng giống như tiếng Việt hay tiếng Anh). Ngôn ngữ bậc cao giúp ta dễ dàng hơn trong sử dụng, nhưng nó vẫn có một vài thiếu sót mà bạn sẽ thấy về sau. Có rất nhiều ngôn ngữ bậc cao hay thấp trong tin học, trong số đó bạn có thể dùng để lập trình. Và đây là một vài ví dụ: C, C++, Java, Visual Basic, Delphi, ..vv..
     + Trong giai đoạn tiếp theo, “chương trình biên dịch” sẽ dịch ngôn ngữ bậc cao đó (C hay C++) sang nhị phân. Chương trình này có tên là compiler. Việc biên dịch gọi là compilation.
     > Quan trọng: các ngôn ngữ lập trình bậc cao khác nhau sẽ có các compiler khác nhau. Nói cách khác, chúng ta không thể dịch ngôn ngữ C++ cùng với cách mà ta dịch ngôn ngữ Delphi.
+    >
     > Về sau bạn sẽ nhận thấy, cùng một ngôn ngữ sẽ có nhiều compilers khác nhau (compiler của Microsoft, compiler GNU...). Rất may mắn là những compiler đó gần như giống nhau (đôi khi chúng có những khác biệt nhỏ và tôi sẽ chỉ cho bạn).
     + Cuối cùng, chương trình nhị phân được tạo ra bởi compiler được gọi là: executable. Các chương trình này trên Windows có đuôi “.exe” giống như EXEcutable.
     
     => Quay lại với biểu đồ vừa rồi nhưng thay bằng những thuật ngữ tin học chính xác
-    
-    ![image](https://github.com/minchangggg/Advanced_C/assets/125820144/bb5fc057-b627-49ef-841f-b8c4e75bcb65)
 
 ## Những công cụ cần thiết cho việc lập trình
 <img width="20" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/191efbf2-8449-428b-a966-943b669130ad"> 
@@ -132,20 +129,19 @@ của console.
 - Chỉ có ổ cứng giữ lại tất cả những gì mà nó chứa. Tất cả các bộ nhớ khác (registers, Memory cache, RAM) đều là những bộ nhớ nhất thời: khi mà bạn tắt máy tính đi thì tất cả dữ liệu trong đó sẽ mất đi.
 
 **a. Hình ảnh của RAM**
-
-![image](https://github.com/minchangggg/Advanced_C/assets/125820144/631a3c78-0be4-40d5-a2e7-c42b4b0108e7)
-
 - Các bạn đã biết thế nào là bàn phím, chuột, màn hình và thùng máy. Bây giờ chúng ta chỉ quan tâm đến thùng máy của bạn, trung tâm của máy tính, nó chứa tất cả các loại bộ nhớ.
-
-![image](https://github.com/minchangggg/Advanced_C/assets/125820144/5e589f29-f894-4424-b011-5d99bea19431)
+- Dưới đây là hình ảnh của ram:
+  
+<img width="400" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/5e589f29-f894-4424-b011-5d99bea19431"> 
 
 **b. Biểu đồ của RAM**
 
 - Nếu ta nhìn một cách bình thường trên RAM thì chẳng thấy được gì cả. Nhưng, điều quan trọng là cần biết bên trong nó hoạt động như thế nào. Đây chính là điều tôi muốn hướng dẫn các bạn.
 - Dưới đây là một biểu đồ về cách hoạt động của RAM, nó cực kì đơn giản. Nếu bạn nắm được biểu đồ này thì điều đó vô cùng tốt đối với bạn
 
-![image](https://github.com/minchangggg/Advanced_C/assets/125820144/061540b9-46a4-407b-8fe6-60a3a8c5eeaa)
+<img width="400" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/061540b9-46a4-407b-8fe6-60a3a8c5eeaa"> 
 
 - Như bạn thấy, nó được chia làm 2 cột:
-+ Một cột địa chỉ (address): địa chỉ là một số cho phép máy tính có thể xác đinh vị trí trong RAM. Nó bắt đầu từ địa chỉ 0 và kết thúc ở địa chỉ 3 448 765 900 126... Hic, tôi không hề biết rõ số lượng địa chỉ chứa trong RAM, tôi chỉ biêt rằng nó có rất nhiều. Bởi vì nó phụ thuộc vào dung lượng bộ nhớ mà bạn có. Chỉ có thể nói là, bạn có RAM, bạn có thể để vào đó nhiều thứ.
-+ Và mỗi địa chỉ chứa một giá trị (một số, value): Máy tính của bạn đưa vào RAM những số này để có thể nhớ ngay lập tức. Và người ta chỉ có thể đưa vào một số cho một địa chỉ trong RAM!
+  
+        + Một cột địa chỉ (address): địa chỉ là một số cho phép máy tính có thể xác đinh vị trí trong RAM. Nó bắt đầu từ địa chỉ 0 và kết thúc ở địa chỉ 3 448 765 900 126... Hic, tôi không hề biết rõ số lượng địa chỉ chứa trong RAM, tôi chỉ biêt rằng nó có rất nhiều. Bởi vì nó phụ thuộc vào dung lượng bộ nhớ mà bạn có. Chỉ có thể nói là, bạn có RAM, bạn có thể để vào đó nhiều thứ.
+        + Và mỗi địa chỉ chứa một giá trị (một số, value): Máy tính của bạn đưa vào RAM những số này để có thể nhớ ngay lập tức. Và người ta chỉ có thể đưa vào một số cho một địa chỉ trong RAM!
