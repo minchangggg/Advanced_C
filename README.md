@@ -1056,6 +1056,7 @@ ________________________________________________________________________________
  
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 6: BITMASK
+> https://www.geeksforgeeks.org/c-bitmasking/
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/d7d9f1a0-b842-4d91-b95f-5efdeed6f534">
 <img width="400" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/84a5abe2-3eae-4f1c-b7ef-74cfe5805bac">
@@ -1094,6 +1095,8 @@ A structure in C is a collection of variables, possibly of different types, unde
 <img width="550" alt="image" src="https://github.com/user-attachments/assets/bbdf109b-ca47-42cd-8954-ede4f39b13d8">
 
 #### Example
+> Input
+
 	#include <stdio.h>
 
 	struct Student {
@@ -1114,7 +1117,9 @@ A structure in C is a collection of variables, possibly of different types, unde
 	
 	    return 0;
 	}
-#### Output
+
+> Output
+
 	Geek
 	20
 	85.50
@@ -1130,7 +1135,7 @@ A union in C is similar to a structure, but with a key difference: all members o
 	       memberN definition;
 	};
 
- <img width="550" alt="image" src="https://github.com/user-attachments/assets/e8a05336-f0a8-4066-b493-8d4529f23e4c">
+<img width="550" alt="image" src="https://github.com/user-attachments/assets/e8a05336-f0a8-4066-b493-8d4529f23e4c">
 
 <img width="550" alt="image" src="https://github.com/user-attachments/assets/d8b0d15e-a420-44ae-bab2-eddc51c10c3d">
 
@@ -1139,6 +1144,8 @@ A union in C is similar to a structure, but with a key difference: all members o
 <img width="550" alt="image" src="https://github.com/user-attachments/assets/c7245d23-c5ae-449a-be0c-d195af662921">
 
 #### Example
+> Input
+
 	#include <stdio.h>
 	#include <stdint.h>
 
@@ -1159,6 +1166,8 @@ A union in C is similar to a structure, but with a key difference: all members o
 	}
 
 #### Example
+> Input
+
 	#include <stdio.h>
 	
 	union Data {
@@ -1188,7 +1197,9 @@ A union in C is similar to a structure, but with a key difference: all members o
 	
 	    return 0;
 	}
-#### Output
+
+> Output
+
 	100
 	99.99
 	A
@@ -1281,6 +1292,7 @@ Ex 1
 		    free(arr_calloc);
 		    return 0;
 		}
+  
 Ex 2
 
 		#include <stdio.h>
@@ -1302,7 +1314,8 @@ Ex 2
 		    return 0;
 		}
 
-  Ex 3
+Ex 3
+
 		#include <stdio.h>
 		#include <stdlib.h>
 		
