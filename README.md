@@ -624,7 +624,6 @@ Ex:
 		}
 
 ### D. Constant Pointer
-
 #### Syntax: int *const const_ptr = &value;
 
 Ex:
@@ -902,16 +901,16 @@ Ex:
 		}
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 5: GOTO - setjmp.h
-### A. Goto
-**Ex1**
+## A. Goto
+### Ex1
 
 <img width="700" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/6fcf16fd-b6a3-4a34-b1ab-e45f070bf5ad">
 
-**Ex2**
+### Ex2
 
 <img width="700" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/a4a25f0f-f5c9-4816-bba3-a9f5896e5817">
 
-**Ex3**
+### Ex3
 
 <img width="600" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/80e7ef78-3e98-4e04-b7d8-012615790033">
 
@@ -1052,14 +1051,39 @@ ________________________________________________________________________________
 		    return 0;
 		}
 
-### B. C Library - <setjmp.h>
+## B. C Library - <setjmp.h>
  
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 6: BITMASK
+Bitmask in C is a powerful way to basically work with bits and functions upon boolean logic. It can be used to store data compactly and with much more efficiency in certain cases.
+
 > https://www.geeksforgeeks.org/c-bitmasking/
+
+### What is a Bit?
+A bit is the smallest unit of data which can either store a 0 or 1 inside it. All the data in the computer is stored using these bits. These 2 possible values can also be represented as boolean values that are True or False. Using this we can apply boolean logic to manipulate data stored on the computer.
+
+## Bitmasking in C
+Bitmasking is a technique that involves bit manipulation. It is basically like putting a mask over certain bits and hiding the other un-useful bits, so as to make the program much more efficient and optimize the memory.
+A bitmask is a sequence of bits that can also be known as a bitset or bit field and is used to perform bitwise operations on the given data.
+There are basically 6 bitwise operators in C that can be used to manipulate bits which are as follows:
+
+	+ & (Bitwise AND Operator)
+	+ | (Bitwise OR Operator)
+	+ ^ (Bitwise XOR Operator)
+	+ ~ (Bitwise NOT Operator)
+	+ >> (RIght Shift Operator)
+	+ << (Left Shift Operator)
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/d7d9f1a0-b842-4d91-b95f-5efdeed6f534">
 <img width="400" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/84a5abe2-3eae-4f1c-b7ef-74cfe5805bac">
+
+Using these operators, we perform different bit masking techniques according to the requirements. Let's discuss these techniques and how to implement them.
+
+## Bitmasking Techniques
+### 1. Setting a Bit
+### 2. Clearing a Bit
+### 3. Flipping a Bit
+### 4. Checking a Bit
 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 7: Struct - Union
