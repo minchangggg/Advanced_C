@@ -1126,31 +1126,33 @@ A union in C is similar to a structure, but with a key difference: all members o
 	       memberN definition;
 	};
 
-#### Example
-	#include <stdio.h>
-	#include <stdint.h>
-
-typedef union Data {
-    uint8_t arr1[5];
-    uint8_t arr2[3];
-    uint8_t arr3[6];
-}Data;
-
-
-void display(uint8_t arr[], int size)
-{
-    for (int i = 0; i < size; i++)
-    {
-        printf("arr[%d]: %d\n",i, arr[i]);
-    }
-    printf("----------\n");
-}
+ <img width="550" alt="image" src="https://github.com/user-attachments/assets/e8a05336-f0a8-4066-b493-8d4529f23e4c">
 
 <img width="550" alt="image" src="https://github.com/user-attachments/assets/d8b0d15e-a420-44ae-bab2-eddc51c10c3d">
 
 <img width="550" alt="image" src="https://github.com/user-attachments/assets/f04b1234-e475-4c75-b9d8-e9cb8502be40">
 
 <img width="550" alt="image" src="https://github.com/user-attachments/assets/c7245d23-c5ae-449a-be0c-d195af662921">
+
+#### Example
+	#include <stdio.h>
+	#include <stdint.h>
+
+	typedef union Data {
+	    uint8_t arr1[5];
+	    uint8_t arr2[3];
+	    uint8_t arr3[6];
+	}Data;
+	
+	
+	void display(uint8_t arr[], int size)
+	{
+	    for (int i = 0; i < size; i++)
+	    {
+	        printf("arr[%d]: %d\n",i, arr[i]);
+	    }
+	    printf("----------\n");
+	}
 
 #### Example
 	#include <stdio.h>
@@ -1187,7 +1189,42 @@ void display(uint8_t arr[], int size)
 	99.99
 	A
 	Size: 8
- 
+
+### C. Combine Struct and Union
+<img width="550" alt="image" src="https://github.com/user-attachments/assets/d5855923-753c-4ae0-bbc8-6f9c873df8a4">
+
+	#include <stdio.h>
+	#include <stdint.h>
+	#include <string.h>
+	
+	
+	typedef union {
+	    struct {
+	        uint8_t id[2];
+	        uint8_t data[4];
+	        uint8_t check_sum[2];
+	    } data;
+	
+	    uint8_t frame[8];
+	
+	} Data_Frame;
+	
+	
+	int main(int argc, char const *argv[])
+	{
+	    Data_Frame transmitter_data;
+	    
+	    strcpy(transmitter_data.data.id, "10");
+	    strcpy(transmitter_data.data.data, "1234");
+	    strcpy(transmitter_data.data.check_sum, "70");
+	
+			Data_Frame receiver_data;
+	    strcpy(receiver_data.frame, transmitter_data.frame);
+		
+	    
+	    return 0;
+	}
+
 _________________________________________________________________________________________________________________________________________________________________________
 # Lesson 8: Memory layout
 
