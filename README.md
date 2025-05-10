@@ -1067,7 +1067,7 @@ ________________________________________________________________________________
 In C programming, both structures and unions are used to group different types of data under a single name, but they behave in different ways. The main difference lies in how they store data.
 The below table lists the primary differences between the C structures and unions:
 
-![image](https://github.com/user-attachments/assets/414de498-7f06-41a7-82be-b82d42d3ebb4)
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/414de498-7f06-41a7-82be-b82d42d3ebb4">
 
 ### A. Struct
 A structure in C is a collection of variables, possibly of different types, under a single name. Each member of the structure is allocated its own memory space, and the size of the structure is the sum of the sizes of all its members.
@@ -1078,6 +1078,17 @@ A structure in C is a collection of variables, possibly of different types, unde
        		…
        		memberN definition;
 	};
+ 
+<img width="550" alt="image" src="https://github.com/user-attachments/assets/65c27df6-bb7e-41a9-894d-9c9717b2d6b0">
+
+<img width="550" alt="image" src="https://github.com/user-attachments/assets/27ff0f06-b5e5-4837-8116-ef0742687ab5">
+<img width="550" alt="image" src="https://github.com/user-attachments/assets/8fca9157-815c-4e95-8a5c-b44b3cdc8470">
+
+<img width="550" alt="image" src="https://github.com/user-attachments/assets/f7abf6cf-e1ec-4169-9e7b-9b94327d2a26">
+<img width="550" alt="image" src="https://github.com/user-attachments/assets/c1c7dd01-1427-4f9b-9bce-d3f746f5062b">
+
+<img width="550" alt="image" src="https://github.com/user-attachments/assets/bbdf109b-ca47-42cd-8954-ede4f39b13d8">
+
 #### Example
 	#include <stdio.h>
 
@@ -1114,6 +1125,33 @@ A union in C is similar to a structure, but with a key difference: all members o
 	       …
 	       memberN definition;
 	};
+
+#### Example
+	#include <stdio.h>
+	#include <stdint.h>
+
+typedef union Data {
+    uint8_t arr1[5];
+    uint8_t arr2[3];
+    uint8_t arr3[6];
+}Data;
+
+
+void display(uint8_t arr[], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        printf("arr[%d]: %d\n",i, arr[i]);
+    }
+    printf("----------\n");
+}
+
+<img width="550" alt="image" src="https://github.com/user-attachments/assets/d8b0d15e-a420-44ae-bab2-eddc51c10c3d">
+
+<img width="550" alt="image" src="https://github.com/user-attachments/assets/f04b1234-e475-4c75-b9d8-e9cb8502be40">
+
+<img width="550" alt="image" src="https://github.com/user-attachments/assets/c7245d23-c5ae-449a-be0c-d195af662921">
+
 #### Example
 	#include <stdio.h>
 	
