@@ -1062,9 +1062,94 @@ ________________________________________________________________________________
 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 7: Struct - Union
+> https://www.geeksforgeeks.org/structure-vs-union-in-c/
+
+In C programming, both structures and unions are used to group different types of data under a single name, but they behave in different ways. The main difference lies in how they store data.
+The below table lists the primary differences between the C structures and unions:
+
+![image](https://github.com/user-attachments/assets/414de498-7f06-41a7-82be-b82d42d3ebb4)
+
 ### A. Struct
+A structure in C is a collection of variables, possibly of different types, under a single name. Each member of the structure is allocated its own memory space, and the size of the structure is the sum of the sizes of all its members.
+#### Syntax
+	struct name {
+       		member1 definition;
+       		member2 definition;
+       		…
+       		memberN definition;
+	};
+#### Example
+	#include <stdio.h>
+
+	struct Student {
+	    char name[50];
+	    int age;
+    	    float grade;
+	};
+
+	int main() {
+	    // Create a structure variable
+	    struct Student s1 = {"Geek", 20, 85.5};
+	
+	    // Access structure members
+	    printf("%s\n", s1.name);
+	    printf("%d\n", s1.age);
+	    printf("%.2f\n", s1.grade);
+	    printf("Size: %d bytes", sizeof(s1));
+	
+	    return 0;
+	}
+#### Output
+	Geek
+	20
+	85.50
+	Size: 60 bytes
 
 ### B. Union
+A union in C is similar to a structure, but with a key difference: all members of a union share the same memory location. This means only one member of the union can store a value at any given time. The size of a union is determined by the size of its largest member.
+#### Syntax
+	union name {
+	       member1 definition;
+	       member2 definition;
+	       …
+	       memberN definition;
+	};
+#### Example
+	#include <stdio.h>
+	
+	union Data {
+	    int i;
+	    double d;
+	    char c;
+	};
+	
+	int main() {
+	    // Create a union variable
+	    union Data data;
+	
+	    // Store an integer in the union
+	    data.i = 100;
+	    printf("%d", data.i);
+	
+	    // Store a double in the union (this will
+	  	// overwrite the integer value)
+	    data.d = 99.99;
+	    printf("%.2f", data.d);
+	
+	    // Store a character in the union (this will
+	  	// overwrite the double value)
+	    data.c = 'A';
+	    printf("%c", data.c);
+	    printf("Size: %d", sizeof(data));
+	
+	    return 0;
+	}
+#### Output
+	100
+	99.99
+	A
+	Size: 8
+ 
 _________________________________________________________________________________________________________________________________________________________________________
 # Lesson 8: Memory layout
 
