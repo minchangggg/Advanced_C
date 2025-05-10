@@ -1063,11 +1063,15 @@ ________________________________________________________________________________
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 7: Struct - Union
 > https://www.geeksforgeeks.org/structure-vs-union-in-c/
+>
+> https://www.laptrinhdientu.com/2021/08/struct-vs-union.html
+
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/a68b9b79-ec55-4f09-8df2-03063f066f66">
 
 In C programming, both structures and unions are used to group different types of data under a single name, but they behave in different ways. The main difference lies in how they store data.
 The below table lists the primary differences between the C structures and unions:
 
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/414de498-7f06-41a7-82be-b82d42d3ebb4">
+<img width="850" alt="image" src="https://github.com/user-attachments/assets/414de498-7f06-41a7-82be-b82d42d3ebb4">
 
 ### A. Struct
 A structure in C is a collection of variables, possibly of different types, under a single name. Each member of the structure is allocated its own memory space, and the size of the structure is the sum of the sizes of all its members.
