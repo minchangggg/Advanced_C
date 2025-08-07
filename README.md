@@ -67,49 +67,50 @@ There are devided into 3 main groups:
 + Macros using #define (Function like Macros...)
 + Conditional Compilation: #ifdef, #if, #defined, #else and #elif
 
-a, How to include files with the #include directive
-            
-            #include <stdio.h>
-            #include "myfile.h"
-      
-            int main() {
-            	printf(message);
-            	return 0;
-            }
+#### a, How to include files with the #include directive
+```c
+#include <stdio.h>
+#include "myfile.h"
 
-b, How to define a macro with #define
+int main() {
+	printf(message);
+	return 0;
+}
+```
+#### b, How to define a macro with #define
+```c
+#include <stdio.h>
 
-            #include <stdio.h>
-            
-            #define MESSAGE "Hello World" // macro definition
-            #define TRUE 1 // macro definition
-            #define FALSE 0 // macro definition
-            #define SUM (3 + 5) // macro definition
-            
-            int main() {
-                printf("String: %s\n", MESSAGE);
-                printf("Custom boolean TRUE: %d\n", TRUE);
-                printf("Custom boolean FALSE: %d\n", FALSE);
-                printf("Arithmetic: 3+5=%d\n", SUM);
-                return 0;
-            }
+#define MESSAGE "Hello World" // macro definition
+#define TRUE 1 // macro definition
+#define FALSE 0 // macro definition
+#define SUM (3 + 5) // macro definition
 
-c, How to undefine a macro with #undef
-
+int main() {
+	printf("String: %s\n", MESSAGE);
+	printf("Custom boolean TRUE: %d\n", TRUE);
+	printf("Custom boolean FALSE: %d\n", FALSE);
+	printf("Arithmetic: 3+5=%d\n", SUM);
+	return 0;
+}
+```
+#### c, How to undefine a macro with #undef
 => We can remove, or redefine, a macro that we set up previously with the #undef directive.
 Macro definition is typically done at the top of the document, but macro undefining and redefining is done inside the rest of the document.
 
-            #include <stdio.h>
-            
-            #define MESSAGE "Hello World"
-            
-            int main() {
-                printf("String: %s\n", MESSAGE);
-                #undef MESSAGE // remove macro
-                #define MESSAGE "Hello there" // redefine macro
-                printf("String: %s\n", MESSAGE);
-                return 0;
-            }
+```c
+#include <stdio.h>
+
+#define MESSAGE "Hello World"
+
+int main() {
+	printf("String: %s\n", MESSAGE);
+	#undef MESSAGE // remove macro
+	#define MESSAGE "Hello there" // redefine macro
+	printf("String: %s\n", MESSAGE);
+	return 0;
+}
+```
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 2: STDARG and ASSERT
 ### A. C Library - <stdarg.h>
@@ -129,27 +130,29 @@ Example 1:
 
 > Input
 
-		#include <stdio.h>
-		#include <stdarg.h>
-		
-		int sum(int count, ...) {
-		    va_list args; // args là 1 con trỏ, dùng để các lưu địa chỉ các tham số truyền vào
-		    va_start(args, count);  // va_start () tạo vùng nhớ, địa chỉ đầu tiên của nó là địa chỉ biến count đc lưu trong args
-		
-		    int result = 0;
-		    for (int i = 0; i < count; i++) {
-			result += va_arg(args, int); // va_arg () dịch chuyển đến địa chỉ tiếp theo, và lấy giá trị tại địa chỉ đó
-		    }
-		
-		    va_end(args); // va_ end () giải phóng vùng nhớ 
-		
-		    return result;
-		}
-		
-		int main() {
-		    printf("Sum: %d\n", sum(4, 1, 2, 3, 4));
-		    return 0;
-		}
+```c
+#include <stdio.h>
+#include <stdarg.h>
+
+int sum(int count, ...) {
+    va_list args; // args là 1 con trỏ, dùng để các lưu địa chỉ các tham số truyền vào
+    va_start(args, count);  // va_start () tạo vùng nhớ, địa chỉ đầu tiên của nó là địa chỉ biến count đc lưu trong args
+
+    int result = 0;
+    for (int i = 0; i < count; i++) {
+	result += va_arg(args, int); // va_arg () dịch chuyển đến địa chỉ tiếp theo, và lấy giá trị tại địa chỉ đó
+    }
+
+    va_end(args); // va_ end () giải phóng vùng nhớ 
+
+    return result;
+}
+
+int main() {
+    printf("Sum: %d\n", sum(4, 1, 2, 3, 4));
+    return 0;
+}
+```
 
 > Output
 
@@ -159,50 +162,52 @@ Example 2:
 
 > Input
 
-		#include <stdio.h>
-		#include <stdarg.h>
-		
-		typedef enum { TEMPERATURE_SENSOR, PRESSURE_SENSOR } SensorType;
-		
-		void processSensorData(SensorType type, ...) {
-			va_list args;
-			va_start(args, type);
-		
-			switch (type) {
-			    case TEMPERATURE_SENSOR: {
-				int numArgs = va_arg(args, int);
-				int sensorId = va_arg(args, int);
-				float temperature = va_arg(args, double); // float được promote thành double
-				printf("Temperature Sensor ID: %d, Reading: %.2f degrees\n", sensorId, temperature);
-				if (numArgs > 2) {
-				    // Xử lý thêm tham số nếu có
-				    char* additionalInfo = va_arg(args, char*);
-				    printf("Additional Info: %s\n", additionalInfo);
-				}
-				break;
-			    }
-			    case PRESSURE_SENSOR: {
-				int numArgs = va_arg(args, int);
-				int sensorId = va_arg(args, int);
-				int pressure = va_arg(args, int);
-				printf("Pressure Sensor ID: %d, Reading: %d Pa\n", sensorId, pressure);
-				if (numArgs > 2) {
-				    // Xử lý thêm tham số nếu có
-				    char* unit = va_arg(args, char*);
-				    printf("Unit: %s\n", unit);
-				}
-				break;
-			    }
-			}
-		
-			va_end(args);
+```c
+#include <stdio.h>
+#include <stdarg.h>
+
+typedef enum { TEMPERATURE_SENSOR, PRESSURE_SENSOR } SensorType;
+
+void processSensorData(SensorType type, ...) {
+	va_list args;
+	va_start(args, type);
+
+	switch (type) {
+	    case TEMPERATURE_SENSOR: {
+		int numArgs = va_arg(args, int);
+		int sensorId = va_arg(args, int);
+		float temperature = va_arg(args, double); // float được promote thành double
+		printf("Temperature Sensor ID: %d, Reading: %.2f degrees\n", sensorId, temperature);
+		if (numArgs > 2) {
+		    // Xử lý thêm tham số nếu có
+		    char* additionalInfo = va_arg(args, char*);
+		    printf("Additional Info: %s\n", additionalInfo);
 		}
-		
-		int main() {
-			processSensorData(TEMPERATURE_SENSOR, 3, 1, 36.5, "Room Temperature");
-			processSensorData(PRESSURE_SENSOR, 2, 2, 101325);
-			return 0;
+		break;
+	    }
+	    case PRESSURE_SENSOR: {
+		int numArgs = va_arg(args, int);
+		int sensorId = va_arg(args, int);
+		int pressure = va_arg(args, int);
+		printf("Pressure Sensor ID: %d, Reading: %d Pa\n", sensorId, pressure);
+		if (numArgs > 2) {
+		    // Xử lý thêm tham số nếu có
+		    char* unit = va_arg(args, char*);
+		    printf("Unit: %s\n", unit);
 		}
+		break;
+	    }
+	}
+
+	va_end(args);
+}
+
+int main() {
+	processSensorData(TEMPERATURE_SENSOR, 3, 1, 36.5, "Room Temperature");
+	processSensorData(PRESSURE_SENSOR, 2, 2, 101325);
+	return 0;
+}
+```
 
 > Output
 
@@ -211,7 +216,6 @@ Example 2:
 		Pressure Sensor ID: 2, Reading: 101325 Pa
   
 ### B. C Library - <assert.h>
-
 > - Provides a macro called assert
 > 
 > - This macro can be used to verify assumptions made by the program. 
@@ -263,37 +267,39 @@ Ex:
 
 > Input
 
-		#include <stdio.h>
-		#include <stdlib.h>
+```c
+#include <stdio.h>
+#include <stdlib.h>
 
-		int sum(int a, int b) {
-		    return a+b;
-		}
-		
-		int main() {
-		    char array[] = "Hello";
-		    int value = 5;
-		    double test = 15.7;
-		    char letter = 'A';
-		   
-		    void *ptr = &value;
-		    printf("value is: %d\n", *(int*)(ptr));
-		
-		    ptr = &test;
-		    printf("value is: %f\n", *(double*)(ptr));
-		
-		    ptr = &letter;
-		    printf("value is: %c\n", *(char*)(ptr));
-		
-		    ptr = (void*)sum;
-		    printf("sum: %d\n", ((int (*)(int,int))ptr)(5,6));
-		
-		    void *ptr1[] = {&value, &test, &letter , (void*)sum, array};
-		    printf("value: %d\n", *(int*)ptr1[0]);
-		    printf("value: %s\n", ((char*)ptr1[4]));
-		
-		    return 0;
-		}
+int sum(int a, int b) {
+    return a+b;
+}
+
+int main() {
+    char array[] = "Hello";
+    int value = 5;
+    double test = 15.7;
+    char letter = 'A';
+   
+    void *ptr = &value;
+    printf("value is: %d\n", *(int*)(ptr));
+
+    ptr = &test;
+    printf("value is: %f\n", *(double*)(ptr));
+
+    ptr = &letter;
+    printf("value is: %c\n", *(char*)(ptr));
+
+    ptr = (void*)sum;
+    printf("sum: %d\n", ((int (*)(int,int))ptr)(5,6));
+
+    void *ptr1[] = {&value, &test, &letter , (void*)sum, array};
+    printf("value: %d\n", *(int*)ptr1[0]);
+    printf("value: %s\n", ((char*)ptr1[4]));
+
+    return 0;
+}
+```
 
 > Output
 
@@ -319,31 +325,33 @@ Ex 1:
 
 > Input
 
-		#include <stdio.h>
-		
-		void greetEnglish() {
-		    printf("Hello!\n");
-		}
-		
-		void greetFrench() {
-		    printf("Bonjour!\n");
-		}
-		
-		int main() {
-		    void (*ptrToFunc)(); // Khai báo con trỏ hàm
-		
-		    ptrToFunc = greetEnglish; // Gán địa chỉ của hàm greetEnglish cho con trỏ hàm
-		    // Gọi hàm thông qua con trỏ hàm -> In ra: Hello!
-      		    (*ptrToFunc)();// cách 1
-	 	    ptrToFunc();// cách 2
-		
-		    ptrToFunc = greetFrench; // Gán địa chỉ của hàm greetFrench cho con trỏ hàm
-		    // Gọi hàm thông qua con trỏ hàm -> In ra: Bonjour!
-      		    (*ptrToFunc)(); // cách 1
-	    	    ptrToFunc(); // cách 2
-		
-		    return 0;
-		}
+```c
+#include <stdio.h>
+
+void greetEnglish() {
+    printf("Hello!\n");
+}
+
+void greetFrench() {
+    printf("Bonjour!\n");
+}
+
+int main() {
+    void (*ptrToFunc)(); // Khai báo con trỏ hàm
+
+    ptrToFunc = greetEnglish; // Gán địa chỉ của hàm greetEnglish cho con trỏ hàm
+    // Gọi hàm thông qua con trỏ hàm -> In ra: Hello!
+    (*ptrToFunc)();// cách 1
+    ptrToFunc();// cách 2
+
+    ptrToFunc = greetFrench; // Gán địa chỉ của hàm greetFrench cho con trỏ hàm
+    // Gọi hàm thông qua con trỏ hàm -> In ra: Bonjour!
+    (*ptrToFunc)(); // cách 1
+    ptrToFunc(); // cách 2
+
+    return 0;
+}
+```
 
 > Output
 
@@ -355,53 +363,54 @@ Ex 1:
 Ex 2:
 
 > Input
+```c
+#include <stdio.h>
 
-		#include <stdio.h>
-		
-		void sum(int a, int b) {
-		    printf("Sum of %d and %d is: %d\n",a,b, a+b);
-		}
-		
-		void subtract(int a, int b) {
-		    printf("Subtract of %d by %d is: %d \n", a, b, a-b);
-		}
-		
-		void multiple(int a, int b) {
-		    printf("Multiple of %d and %d is: %d \n", a, b, a*b );
-		}
-		
-		void divide(int a, int b) {
-		    if (b == 0) {
-		        printf("Mau so phai khac 0\n");
-		        return;
-		    }
-		    printf("%d divided by %d is: %f \n",a,b, (double)a / (double)b);
-		}
-		
-		void calculator(void (*ptr)(int, int), int a, int b) {
-		    ptr(a,b);
-		}
-		
-		int main() {
-	            // Cách 1: dùng hàm calculator thay địa chỉ hàm cần tính cho con trỏ hàm
-	            printf("\tProgram calculate: \n");
-			    calculator(sum,5,2);
-			    calculator(subtract,5,2);
-			    calculator(multiple,5,2);
-			    calculator(divide,5,2);
+void sum(int a, int b) {
+    printf("Sum of %d and %d is: %d\n",a,b, a+b);
+}
+
+void subtract(int a, int b) {
+    printf("Subtract of %d by %d is: %d \n", a, b, a-b);
+}
+
+void multiple(int a, int b) {
+    printf("Multiple of %d and %d is: %d \n", a, b, a*b );
+}
+
+void divide(int a, int b) {
+    if (b == 0) {
+	printf("Mau so phai khac 0\n");
+	return;
+    }
+    printf("%d divided by %d is: %f \n",a,b, (double)a / (double)b);
+}
+
+void calculator(void (*ptr)(int, int), int a, int b) {
+    ptr(a,b);
+}
+
+int main() {
+    // Cách 1: dùng hàm calculator thay địa chỉ hàm cần tính cho con trỏ hàm
+    printf("\tProgram calculate: \n");
+	    calculator(sum,5,2);
+	    calculator(subtract,5,2);
+	    calculator(multiple,5,2);
+	    calculator(divide,5,2);
+
+    printf ("______________________________\n");
+
+    // Cách 2: tạo 1 mảng chứa các con trỏ hàm cho từng hàm riêng biệt
+    printf("\tProgram calculate: \n");
+	    void (*ptr[])(int, int) = {sum, subtract, multiple, divide};
+	    ptr[0](5,2);
+    ptr[1](5,2);
+    ptr[2](5,2);
+    ptr[3](5,2);
 	
-	            printf ("______________________________\n");
-	
-	            // Cách 2: tạo 1 mảng chứa các con trỏ hàm cho từng hàm riêng biệt
-	            printf("\tProgram calculate: \n");
-			    void (*ptr[])(int, int) = {sum, subtract, multiple, divide};
-			    ptr[0](5,2);
-	            ptr[1](5,2);
-	            ptr[2](5,2);
-	            ptr[3](5,2);
-			
-		    return 0;
-		}
+    return 0;
+}
+```
 
 > Output
 
@@ -421,133 +430,136 @@ Ex 3:
 
 > Input
 
-		#include <stdio.h>
-		#include <string.h>
-		
-		void bubbleSort(int arr[], int n) {
-		    int i, j, temp;
-		    for (i = 0; i < n-1; i++) {    
-		        for (j = i+1; j < n; j++) {
-		            if (arr[i] > arr[j]) {
-		                temp = arr[i];
-		                arr[i] = arr[j];
-		                arr[j] = temp;
-		            }
-	      		}
-	 	    }	
-		}
-		
-		int main() {
-		    int arr[] = {64, 34, 25, 12, 22, 11, 90};
-		    int n = sizeof(arr)/sizeof(arr[0]);
-		    bubbleSort(arr, n);
-		    printf("Sorted array: \n");
-		    for (int i=0; i < n; i++)
-		        printf("%d ", arr[i]);
-		    return 0;
-		}
+```c
+#include <stdio.h>
+#include <string.h>
+
+void bubbleSort(int arr[], int n) {
+    int i, j, temp;
+    for (i = 0; i < n-1; i++) {    
+	for (j = i+1; j < n; j++) {
+	    if (arr[i] > arr[j]) {
+		temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
+	    }
+	}
+    }	
+}
+
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    bubbleSort(arr, n);
+    printf("Sorted array: \n");
+    for (int i=0; i < n; i++)
+	printf("%d ", arr[i]);
+    return 0;
+}
+```
 
 Ex 4: 
 
 > Input
-		
-		#include <stdio.h>
-		#include <string.h>
-		
-		typedef struct {
-		   char ten[50];
-		   float diemTrungBinh;
-		   int id;
-		} SinhVien;
-		
-		int stringCompare(const char *str1, const char *str2) {
-		   while (*str1 && (*str1 == *str2)) {
-		       str1++;
-		       str2++;
-		   }
-		   return *(const unsigned char*)str1 - *(const unsigned char*)str2;
-		}
-		
-		// Hàm so sánh theo tên
-		int compareByName(const void *a, const void *b) {
-		   SinhVien *sv1 = (SinhVien *)a;
-		   SinhVien *sv2 = (SinhVien *)b;
-		   return stringCompare(sv1->ten, sv2->ten);
-		}
-		
-		// Hàm so sánh theo điểm trung bình
-		int compareByDiemTrungBinh(const void *a, const void *b) {
-		   SinhVien *sv1 = (SinhVien *)a;
-		   SinhVien *sv2 = (SinhVien *)b;
-		   if (sv1->diemTrungBinh > sv2->diemTrungBinh) return 1;
-		   return 0;
-		}
-		
-		// Hàm so sánh theo ID
-		int compareByID(const void *a, const void *b) {
-		   SinhVien *sv1 = (SinhVien *)a;
-		   SinhVien *sv2 = (SinhVien *)b;
-		   return sv1->id - sv2->id;
-		}
-		
-		// Hàm sắp xếp chung
-		void sort(SinhVien array[], size_t size, int (*compareFunc)(const void *, const void *)) {
-		   int i, j;
-		   SinhVien temp;
-		   for (i = 0; i < size-1; i++)    
-		       for (j = i+1; j < size; j++)
-		           if (compareFunc(array+i, array+j)>0) {
-		               temp = array[i];
-		               array[i] = array[j];
-		               array[j] = temp;
-		           }
-		}
-		
-		void display(SinhVien *array, size_t size) {
-		   for (size_t i = 0; i < size; i++) {
-		       printf("ID: %d, Ten: %s, Diem Trung Binh: %.2f\n", array[i].id, array[i].ten, array[i].diemTrungBinh);
-		   }
-		   printf("\n");
-		}
-		
-		int main() {
-		   SinhVien danhSachSV[] = {
-		       {  
-		           .ten = "Hoang",
-		           .diemTrungBinh = 7.5,
-		           .id = 100
-		       },
-		       {
-		           .ten = "Tuan",
-		           .diemTrungBinh = 4.5,
-		           .id = 101
-		       },
-		       {
-		           .ten = "Vy",
-		           .diemTrungBinh = 6.8,
-		           .id = 102},
-		       {  
-		           .ten = "Ngan",
-		           .diemTrungBinh = 5.6,
-		           .id = 10
-		       },
-		   };
-		   size_t size = sizeof(danhSachSV) / sizeof(danhSachSV[0]);
-		
-		   // Sắp xếp theo tên
-		   sort(danhSachSV, size, compareByName);
-		   display(danhSachSV, size);
-		
-		   // Sắp xếp theo điểm trung bình
-		   sort(danhSachSV, size, compareByDiemTrungBinh);
-		   display(danhSachSV, size);
-		
-		   // Sắp xếp theo ID
-		   sort(danhSachSV, size, compareByID);
-		   display(danhSachSV, size);
-		
-		   return 0;
-		}
+```c	
+#include <stdio.h>
+#include <string.h>
+
+typedef struct {
+   char ten[50];
+   float diemTrungBinh;
+   int id;
+} SinhVien;
+
+int stringCompare(const char *str1, const char *str2) {
+   while (*str1 && (*str1 == *str2)) {
+       str1++;
+       str2++;
+   }
+   return *(const unsigned char*)str1 - *(const unsigned char*)str2;
+}
+
+// Hàm so sánh theo tên
+int compareByName(const void *a, const void *b) {
+   SinhVien *sv1 = (SinhVien *)a;
+   SinhVien *sv2 = (SinhVien *)b;
+   return stringCompare(sv1->ten, sv2->ten);
+}
+
+// Hàm so sánh theo điểm trung bình
+int compareByDiemTrungBinh(const void *a, const void *b) {
+   SinhVien *sv1 = (SinhVien *)a;
+   SinhVien *sv2 = (SinhVien *)b;
+   if (sv1->diemTrungBinh > sv2->diemTrungBinh) return 1;
+   return 0;
+}
+
+// Hàm so sánh theo ID
+int compareByID(const void *a, const void *b) {
+   SinhVien *sv1 = (SinhVien *)a;
+   SinhVien *sv2 = (SinhVien *)b;
+   return sv1->id - sv2->id;
+}
+
+// Hàm sắp xếp chung
+void sort(SinhVien array[], size_t size, int (*compareFunc)(const void *, const void *)) {
+   int i, j;
+   SinhVien temp;
+   for (i = 0; i < size-1; i++)    
+       for (j = i+1; j < size; j++)
+	   if (compareFunc(array+i, array+j)>0) {
+	       temp = array[i];
+	       array[i] = array[j];
+	       array[j] = temp;
+	   }
+}
+
+void display(SinhVien *array, size_t size) {
+   for (size_t i = 0; i < size; i++) {
+       printf("ID: %d, Ten: %s, Diem Trung Binh: %.2f\n", array[i].id, array[i].ten, array[i].diemTrungBinh);
+   }
+   printf("\n");
+}
+
+int main() {
+   SinhVien danhSachSV[] = {
+       {  
+	   .ten = "Hoang",
+	   .diemTrungBinh = 7.5,
+	   .id = 100
+       },
+       {
+	   .ten = "Tuan",
+	   .diemTrungBinh = 4.5,
+	   .id = 101
+       },
+       {
+	   .ten = "Vy",
+	   .diemTrungBinh = 6.8,
+	   .id = 102},
+       {  
+	   .ten = "Ngan",
+	   .diemTrungBinh = 5.6,
+	   .id = 10
+       },
+   };
+   size_t size = sizeof(danhSachSV) / sizeof(danhSachSV[0]);
+
+   // Sắp xếp theo tên
+   sort(danhSachSV, size, compareByName);
+   display(danhSachSV, size);
+
+   // Sắp xếp theo điểm trung bình
+   sort(danhSachSV, size, compareByDiemTrungBinh);
+   display(danhSachSV, size);
+
+   // Sắp xếp theo ID
+   sort(danhSachSV, size, compareByID);
+   display(danhSachSV, size);
+
+   return 0;
+}
+```
 
 Ex 5: 
 
@@ -625,7 +637,6 @@ Ex:
 
 ### D. Constant Pointer
 #### Syntax: int *const const_ptr = &value;
-
 Ex:
 
 		#include <stdio.h>
