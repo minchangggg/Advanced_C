@@ -2,17 +2,15 @@
 ## A. COMPILER
 > https://www.geeksforgeeks.org/compiling-a-c-program-behind-the-scenes/
 ### 1, How do we compile and run a C program?
--> Step 1: Creating a C Source File
+[Step 1] `Creating a C Source File`
 
--> Step 2: Compiling using GCC compiler
+[Step 2] `Compiling using GCC compiler`
 
--> Step 3: Executing the program
-
+[Step 3] `Executing the program`
 ### 2, What is the compilation?
 The compilation is the process of converting the source code of the C language into machine code. 
 
 C is a mid-level language, it needs a compiler to convert it into an executable code so that the program can be run on our machine.
-
 ### 3, What goes inside the compilation process?
 <img width="600" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/bce15492-bcab-4c06-aae9-b77140e00075">
 
@@ -82,7 +80,8 @@ int main() {
 }
 ```
 ### 3, How to undefine a macro with #undef
-=> We can remove, or redefine, a macro that we set up previously with the #undef directive.
+We can remove, or redefine, a macro that we set up previously with the #undef directive.
+
 Macro definition is typically done at the top of the document, but macro undefining and redefining is done inside the rest of the document.
 
 ```c
@@ -100,23 +99,18 @@ int main() {
 ```
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 2: STDARG and ASSERT
-### A. C Library - <stdarg.h>
+## A. C Library - <stdarg.h>
 *The stdarg.h header defines a variable type va_list and three macros which can be used to get the arguments in a function when the number of arguments are not known i.e. variable number of arguments.*
 
-**1, Library Variables**
-	
+### 1, Library Variables
 <img width="300" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/4cd3fc83-555d-4b23-b9d7-b6ac2b99a1e5">
 
-**2, Library Macros**
-
+### 2, Library Macros
 <img width="350" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/d7d6df93-5ca0-4d23-866c-ddbd1fd3a475">
 
-**3, Example**
-
-Example 1:
-
-> Input
-
+### 3, Example
+#### 3.1 Example 1
+> **Input**
 ```c
 #include <stdio.h>
 #include <stdarg.h>
@@ -141,14 +135,12 @@ int main() {
 }
 ```
 
-> Output
+> **Output**
 
 		Sum: 10
   
-Example 2:
-
-> Input
-
+#### 3.2 Example 2
+> **Input**
 ```c
 #include <stdio.h>
 #include <stdarg.h>
@@ -196,33 +188,26 @@ int main() {
 }
 ```
 
-> Output
+> **Output**
 
 		Temperature Sensor ID: 1, Reading: 36.50 degrees
 		Additional Info: Room Temperature
 		Pressure Sensor ID: 2, Reading: 101325 Pa
   
-### B. C Library - <assert.h>
-> - Provides a macro called assert
-> 
-> - This macro can be used to verify assumptions made by the program. 
-> 
-> - If this assumption is false, nothing happens and the program continues to execute.
-> 
-> - If this assumption is false, The program stops to execute and print a diagnostic message.
-> 
-> - Using for debugging, use #define NDEBUG to turn off debug mode.
+## B. C Library - <assert.h>
+- Provides a macro called assert
+- This macro can be used to verify assumptions made by the program.
+- If this assumption is false, nothing happens and the program continues to execute.
+- If this assumption is false, The program stops to execute and print a diagnostic message.
+- Using for debugging, use #define NDEBUG to turn off debug mode.
+- Macro is used for debugging
 
-Ex:
-
+  **`#define LOG(condition, cmd) assert(condition && #cmd);`**
+  
+#### Ex1
 <img width="800" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/ec805091-04c8-4347-9e39-b5b9be87acf6">
 
-**Macro is used for debugging**
-
-		#define LOG(condition, cmd) assert(condition && #cmd);
-
-Ex1: 
-
+#### Ex2 
 ```c
 #include <assert.h>
 #define ASSERT_IN_RANGE(val, min, max) assert((val) >= (min) && (val) <= (max))
@@ -233,8 +218,7 @@ void setLevel(int level) {
 }
 ```
 
-Ex2:  
-
+#### Ex3
 ```c
 #include <assert.h>
 #include <stdint.h>
@@ -249,10 +233,9 @@ void checkTypeSizes() {
 ```
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 3: POINTER
-### A. Void Pointer
+## A. Void Pointer
 > https://www.scaler.com/topics/void-pointer/
-
-`Syntax: void *ptr_void;`
+#### `Syntax: void *ptr_void;`
 
 Ex:
 
@@ -303,7 +286,7 @@ int main() {
 		value: 5
 		value: Hello
 
-### B. Function Pointer
+## B. Function Pointer
 > https://daynhauhoc.com/t/con-tro-ham-function-pointers/31959
 
 Function pointer is a pointer that points to a function.
@@ -312,10 +295,8 @@ Function pointer is a pointer that points to a function.
 
 Function pointers syntax  `<return_type> (*<name_of_pointer>)( <data_type_of_parameters> );`
 
-Ex 1:
-
-> Input
-
+#### Ex1
+> **Input**
 ```c
 #include <stdio.h>
 
@@ -344,16 +325,15 @@ int main() {
 }
 ```
 
-> Output
+> **Output**
 
 		Hello!
 		Hello!
 		Bonjour!
 		Bonjour!
   
-Ex 2:
-
-> Input
+#### Ex2
+> **Input**
 ```c
 #include <stdio.h>
 
@@ -403,7 +383,7 @@ int main() {
 }
 ```
 
-> Output
+> **Output**
 
 		        Program calculate: 
 		Sum of 5 and 2 is: 7
@@ -417,10 +397,8 @@ int main() {
 		Multiple of 5 and 2 is: 10 
 		5 divided by 2 is: 2.500000 
 
-Ex 3:
-
-> Input
-
+#### Ex3
+> **Input**
 ```c
 #include <stdio.h>
 #include <string.h>
@@ -449,10 +427,8 @@ int main() {
 }
 ```
 
-Ex 4: 
-
-> Input
-
+#### Ex4
+> **Input**
 ```c	
 #include <stdio.h>
 #include <string.h>
@@ -553,8 +529,7 @@ int main() {
 }
 ```
 
-Ex 5: 
-
+#### Ex5 
 ```c
 #include <stdio.h>
 
@@ -603,7 +578,7 @@ int main() {
 }
 ```
 
-### C. Pointer to Constant
+## C. Pointer to Constant
 #### Syntax: int const *ptr_const; 
 #### Syntax: const int *ptr_const;
 
@@ -630,7 +605,7 @@ int main() {
 }
 ```
 
-### D. Constant Pointer
+## D. Constant Pointer
 #### Syntax: int *const const_ptr = &value;
 Ex:
 
@@ -656,9 +631,8 @@ int main() {
 }
 ```
 
-### E. Pointer to Pointer
-Ex:
-
+## E. Pointer to Pointer
+#### Ex
 ```c
 #include <stdio.h>
 
@@ -689,9 +663,8 @@ int main() {
 }
 ```
 
-### F. NULL Pointer
-Ex:
-
+## F. NULL Pointer
+#### Ex
 ```c
 #include <stdio.h>
 
@@ -715,14 +688,12 @@ int main() {
 ```
 ________________________________________________________________________________________________________________________________________________________________________
 # Lesson 4: EXTERN - STATIC - VOLATILE - REGISTER
-### A. Extern
-	- Syntax: extern data_type variable_name;
+## A. Extern
+- Syntax: **`extern data_type variable_name;`**
 
-### B. Static
-**1. Static local variables**
-
-Ex: 
-
+## B. Static
+### 1. Static local variables
+#### Ex
 ```c
 #include <stdio.h>
 
@@ -740,12 +711,9 @@ int main() {
 }
 ```
 
-**2. Static global variables**
-
-Ex: 
-
-> File motor.c
-
+### 2. Static global variables
+#### Ex
+> **File motor.c**
 ```c
 #include <stdio.h>
 #include "motor.h"
@@ -770,8 +738,7 @@ void init_motor(MotorController *motorName) {
 }
 ```
 
-> File motor.h
-
+> **File motor.h**
 ```c
 #ifndef __MOTOR_H
 #define __MOTOR_H
@@ -793,8 +760,7 @@ void init_motor(MotorController *motorName);
 #endif
 ```
 
-**3. Static in class**
-
+### 3. Static in class
 ```c
 #include <iostream>
 
@@ -871,9 +837,8 @@ int main(int argc, char const *argv[]) {
 }
 ```
 
-### C. Volatile
-Ex:
-
+## C. Volatile
+#### Ex
 ```c
 #include "stm32f10x.h"
 
@@ -889,12 +854,10 @@ int main() {
 }
 ```
 
-### D. Register
-
+## D. Register
 <img width="500" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/8cffd3cf-f6e8-4241-8b92-e126aba8716c">
 
-Ex:
-
+#### Ex
 ```c
 #include <stdio.h>
 #include <time.h>
@@ -924,7 +887,6 @@ ________________________________________________________________________________
 # Lesson 5: GOTO - setjmp.h
 ## A. Goto
 ### Ex1
-
 <img width="700" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/6fcf16fd-b6a3-4a34-b1ab-e45f070bf5ad">
 
 ### Ex2
@@ -1118,7 +1080,7 @@ The below table lists the primary differences between the C structures and union
 
 <img width="850" alt="image" src="https://github.com/user-attachments/assets/414de498-7f06-41a7-82be-b82d42d3ebb4">
 
-### A. Struct
+## A. Struct
 A structure in C is a collection of variables, possibly of different types, under a single name. Each member of the structure is allocated its own memory space, and the size of the structure is the sum of the sizes of all its members.
 #### Syntax
 	struct name {
@@ -1139,8 +1101,7 @@ A structure in C is a collection of variables, possibly of different types, unde
 <img width="550" alt="image" src="https://github.com/user-attachments/assets/bbdf109b-ca47-42cd-8954-ede4f39b13d8">
 
 #### Example
-> Input
-
+> **Input**
 ```c
 #include <stdio.h>
 
@@ -1164,14 +1125,14 @@ int main() {
 }
 ```
 
-> Output
+> **Output**
 
 	Geek
 	20
 	85.50
 	Size: 60 bytes
 
-### B. Union
+## B. Union
 A union in C is similar to a structure, but with a key difference: all members of a union share the same memory location. This means only one member of the union can store a value at any given time. The size of a union is determined by the size of its largest member.
 #### Syntax
 ```c
@@ -1257,7 +1218,7 @@ int main() {
 	A
 	Size: 8
 
-### C. Combine Struct and Union
+## C. Combine Struct and Union
 <img width="550" alt="image" src="https://github.com/user-attachments/assets/d5855923-753c-4ae0-bbc8-6f9c873df8a4">
 
 ```c
@@ -1311,26 +1272,23 @@ ________________________________________________________________________________
 
 | Global variables & Static variables | Initialized (≠0) by programmer |
 
-Ex:
+#### Ex
 <img width="555" alt="image" src="https://github.com/minchangggg/Basic_C/assets/125820144/879a182d-4990-42d1-9b13-51686eca892d">
-
 
 <img width="275" alt="image" src="https://github.com/minchangggg/Basic_C/assets/125820144/9b7a668f-bdf8-4ef4-aee0-c54fe0713601">
 
 | Global variables & Static variables | Uninitialized or Initialized (=0) by programmer |
 
-Ex:
+#### Ex
 <img width="556" alt="image" src="https://github.com/minchangggg/Basic_C/assets/125820144/300dcabf-ad5f-42fa-b261-cbae175fc4ce">
-
-                                                                                                                                 
+                                                                                                                            
 <img width="275" alt="image" src="https://github.com/minchangggg/Basic_C/assets/125820144/41ca0f62-4f37-4a2e-8954-a2656ab66d00"> ***-> Dynamic Memory Allocation***
 
 + malloc/ calloc/ realloc/ free
 + new/ delete
 > Forget to deallocate memory in Heap -> cause Memory leak
 
-Ex 1
-
+#### Ex1
 ```c
 #include <stdlib.h>
 int main() {
@@ -1348,8 +1306,7 @@ int main() {
 }
 ```
   
-Ex 2
-
+#### Ex2
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -1371,8 +1328,7 @@ int main(int argc, char const *argv[]) {
 }
 ```
 
-Ex 3
-
+#### Ex3
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -1416,14 +1372,12 @@ ________________________________________________________________________________
 > https://www.w3schools.com/js/js_json_intro.asp
 >
 > https://www.geeksforgeeks.org/cjson-json-file-write-read-modify-in-c/
-### I, Overview 
+## I, Overview 
 	+ JSON stands for JavaScript Object Notation
 	+ JSON is a text format for storing and transporting data; which is used for data exchange between applications and web services. 
 	+ JSON is "self-describing", easy to read and write for humans and machines alike. 
-a, JSON Values
-
+### a, JSON Values
 - In JSON, values must be one of the following data types:
-  
 	+ a string (must be written in double quotes) -> Ex: {"name":"John"}
 	+ a number (must be an integer or a floating point) -> Ex: {"age":30}
 	+ an object (Values in JSON can be objects) -> Ex: { "employee":{"name":"John", "age":30, "city":"New York"} }
@@ -1432,13 +1386,11 @@ a, JSON Values
 	+ null -> Ex: {"middlename":null} 
 
 - JSON values cannot be one of the following data types:
+  + a function
+  + a date
+  + undefined
 
-	a function
-	a date
-	undefined
-
-b, JSON Objects
-
+### b, JSON Objects
 ```c
 { "name": "Bob Johnson", "age": 35, "city": "Chicago" },
 { "name": "John Doe", "age": 30, "city": "New York", "occupation": "Software Engineer", "isStudent": false },
@@ -1450,8 +1402,7 @@ b, JSON Objects
 }
 ```
 
-Ex: 
-
+#### Ex
 ```c
 #include <stdio.h> 
 #include <cjson/cJSON.h> 
@@ -1482,7 +1433,7 @@ int main() {
 }
 ```
 
-### II, How does it work? 
+## II, How does it work? 
 ```c
 #include <stdio.h>
 #include <string.h>
@@ -1852,7 +1803,8 @@ int main(int argc, char const *argv[]) {
 }
 ```
 
-  **II, Complete Example**
+## III, Complete Example
+
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 10: Linked List
 > https://techacademy.edu.vn/danh-sach-lien-ket-don-c/
@@ -1865,263 +1817,253 @@ ________________________________________________________________________________
 
 <img width="700" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/ee824eda-c2cd-498d-a35a-f328d0e35802">
 
-**What is a Linked List?** 
-
-+ A linked list is a linear data structure that stores a collection of data elements dynamically.
-+ Nodes represent those data elements, and links or pointers connect each node.
-+ Each node consists of two fields, the information stored in a linked list and a pointer that stores the address of its next node.
-+ The last node contains null in its second field because it will point to no node.
-+ A linked list can grow and shrink its size, as per the requirement.
-+ It does not waste memory space.
+## What is a Linked List?
+- A linked list is a linear data structure that stores a collection of data elements dynamically.
+- Nodes represent those data elements, and links or pointers connect each node.
+- Each node consists of two fields, the information stored in a linked list and a pointer that stores the address of its next node.
+- The last node contains null in its second field because it will point to no node.
+- A linked list can grow and shrink its size, as per the requirement.
+- It does not waste memory space.
 
 ![image](https://github.com/minchangggg/Advanced_C/assets/125820144/979b63f1-cfa0-4070-ace0-37433d0e36ca)
 
-		tyedef struct Node { 
-			int value;
-			struct Node* next;
-		} Node;
-		
-		Node* createNode (int value) {
-			Node* ptr = (Node*)malloc(sizeof(Node));
-		 	ptr->value = value;
-		  	ptr->next = NULL;
-		   	return ptr;
-		};
+```c
+tyedef struct Node { 
+	int value;
+	struct Node* next;
+} Node;
 
-### 1, Insertion at Beginning
+Node* createNode (int value) {
+	Node* ptr = (Node*)malloc(sizeof(Node));
+	ptr->value = value;
+	ptr->next = NULL;
+	return ptr;
+};
+```
+## 1, Insertion at Beginning
 > In this operation, we are adding an element at the beginning of the list.
 ![image](https://github.com/minchangggg/Advanced_C/assets/125820144/d69d5ce7-5b09-41f9-90e5-3689469f3123)
 
-**a, Algorithm**
+### a, Algorithm
+1. START
+2. Create a node to store the data
+3. Check if the list is empty
+4. If the list is empty, add the data to the node and assign the head pointer to it.
+5. If the list is not empty, add the data to a node and link to the current head. Assign the head to the newly added node.
+6. END
+### b, Example
+```c
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+struct node {
+   int data;
+   struct node *next;
+};
+struct node *head = NULL;
+struct node *current = NULL;
 
-> 1. START
-> 2. Create a node to store the data
-> 3. Check if the list is empty
-> 4. If the list is empty, add the data to the node and assign the head pointer to it.
-> 5. If the list is not empty, add the data to a node and link to the current head. Assign the head to the newly added node.
-> 6. END
+// display the list
+void printList(){
+   struct node *p = head;
+   printf("\n[");
+   
+   //start from the beginning
+   while(p != NULL) {
+	  printf(" %d ",p->data);
+	  p = p->next;
+   }
+   printf("]");
+}
 
-**b, Example**
-
-		#include <stdio.h>
-		#include <string.h>
-		#include <stdlib.h>
-		struct node {
-		   int data;
-		   struct node *next;
-		};
-		struct node *head = NULL;
-		struct node *current = NULL;
-		
-		// display the list
-		void printList(){
-		   struct node *p = head;
-		   printf("\n[");
-		   
-		   //start from the beginning
-		   while(p != NULL) {
-		      printf(" %d ",p->data);
-		      p = p->next;
-		   }
-		   printf("]");
-		}
-		
-		//insertion at the beginning
-		void insertatbegin(int data){
-		   
-		   //create a link
-		   struct node *ptr = (struct node*) malloc(sizeof(struct node));
-		   ptr->data = data;
-		   
-		   // point it to old first node
-		   ptr->next = head;
-		   
-		   //point first to new first node
-		   head = ptr;
-		}
-		void main(){
-		   int k=0;
-		   insertatbegin(12);
-		   insertatbegin(22);
-		   insertatbegin(30);
-		   insertatbegin(44);
-		   insertatbegin(50);
-		   printf("Linked List: ");
-		   
-		   // print list
-		   printList();
-		}
-  
+//insertion at the beginning
+void insertatbegin(int data){
+   
+   //create a link
+   struct node *ptr = (struct node*) malloc(sizeof(struct node));
+   ptr->data = data;
+   
+   // point it to old first node
+   ptr->next = head;
+   
+   //point first to new first node
+   head = ptr;
+}
+void main(){
+   int k=0;
+   insertatbegin(12);
+   insertatbegin(22);
+   insertatbegin(30);
+   insertatbegin(44);
+   insertatbegin(50);
+   printf("Linked List: ");
+   
+   // print list
+   printList();
+}
+```
 <img width="700" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/592effc0-2d14-4b7a-90c2-4d6f5742f9f3">
-
   
-### 2, Insertion at Ending
+## 2, Insertion at Ending
 > In this operation, we are adding an element at the ending of the list.
 ![image](https://github.com/minchangggg/Advanced_C/assets/125820144/f0610056-d3e5-4984-9eb8-b1ef9c95dc04)
 
-**a, Algorithm**
+### a, Algorithm
+1. START
+2. Create a new node and assign the data
+3. Find the last node
+4. Point the last node to new node
+5. END
+### b, Example
+```c
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+struct node {
+   int data;
+   struct node *next;
+};
+struct node *head = NULL;
+struct node *current = NULL;
 
-> 1. START
-> 2. Create a new node and assign the data
-> 3. Find the last node
-> 4. Point the last node to new node
-> 5. END
+// display the list
+void printList(){
+   struct node *p = head;
+   printf("\n[");
+   
+   //start from the beginning
+   while(p != NULL) {
+	  printf(" %d ",p->data);
+	  p = p->next;
+   }
+   printf("]");
+}
 
-**b, Example**
+//insertion at the beginning
+void insertatbegin(int data){
 
-		#include <stdio.h>
-		#include <string.h>
-		#include <stdlib.h>
-		struct node {
-		   int data;
-		   struct node *next;
-		};
-		struct node *head = NULL;
-		struct node *current = NULL;
-		
-		// display the list
-		void printList(){
-		   struct node *p = head;
-		   printf("\n[");
-		   
-		   //start from the beginning
-		   while(p != NULL) {
-		      printf(" %d ",p->data);
-		      p = p->next;
-		   }
-		   printf("]");
-		}
-		
-		//insertion at the beginning
-		void insertatbegin(int data){
-		
-		   //create a link
-		   struct node *lk = (struct node*) malloc(sizeof(struct node));
-		   lk->data = data;
-		
-		   // point it to old first node
-		   lk->next = head;
-		   
-		   //point first to new first node
-		   head = lk;
-		}
-		void insertatend(int data){
-		
-		   //create a link
-		   struct node *lk = (struct node*) malloc(sizeof(struct node));
-		   lk->data = data;
-		   lk->next = NULL;
-		   struct node *linkedlist = head;
-		
-		   // point it to old first node
-		   while(linkedlist->next != NULL)
-		      linkedlist = linkedlist->next;
-		
-		   //point first to new first node
-		   linkedlist->next = lk;
-		}
-		void main(){
-		   int k=0;
-		   insertatbegin(12);
-		   insertatend(22);
-		   insertatend(30);
-		   insertatend(44);
-		   insertatend(50);
-		   printf("Linked List: ");
-		   
-		   // print list
-		   printList();
-		}
+   //create a link
+   struct node *lk = (struct node*) malloc(sizeof(struct node));
+   lk->data = data;
+
+   // point it to old first node
+   lk->next = head;
+   
+   //point first to new first node
+   head = lk;
+}
+void insertatend(int data){
+
+   //create a link
+   struct node *lk = (struct node*) malloc(sizeof(struct node));
+   lk->data = data;
+   lk->next = NULL;
+   struct node *linkedlist = head;
+
+   // point it to old first node
+   while(linkedlist->next != NULL)
+	  linkedlist = linkedlist->next;
+
+   //point first to new first node
+   linkedlist->next = lk;
+}
+void main(){
+   int k=0;
+   insertatbegin(12);
+   insertatend(22);
+   insertatend(30);
+   insertatend(44);
+   insertatend(50);
+   printf("Linked List: ");
+   
+   // print list
+   printList();
+}
+```
 
 <img width="700" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/d8f39a14-fe6e-4e6d-b49e-bd107bd3dc8c">
 
-### 3, Insertion at a Given Position
+## 3, Insertion at a Given Position
 > In this operation, we are adding an element at any position within the list.
 ![image](https://github.com/minchangggg/Advanced_C/assets/125820144/6c3b2d99-93db-4b78-9c4d-2d99ab5992c5)
 
-**a, Algorithm**
+### a, Algorithm
+1. START
+2. Create a new node and assign data to it
+3. Iterate until the node at position is found
+4. Point first to new first node
+5. END
+### b, Example
+```c
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+struct node {
+   int data;
+   struct node *next;
+};
+struct node *head = NULL;
+struct node *current = NULL;
 
-> 1. START
-> 2. Create a new node and assign data to it
-> 3. Iterate until the node at position is found
-> 4. Point first to new first node
-> 5. END
+// display the list
+void printList(){
+   struct node *p = head;
+   printf("\n[");
+   
+   //start from the beginning
+   while(p != NULL) {
+	  printf(" %d ",p->data);
+	  p = p->next;
+   }
+   printf("]");
+}
 
-**b, Example**
+//insertion at the beginning
+void insertatbegin(int data){
 
-		#include <stdio.h>
-		#include <string.h>
-		#include <stdlib.h>
-		struct node {
-		   int data;
-		   struct node *next;
-		};
-		struct node *head = NULL;
-		struct node *current = NULL;
-		
-		// display the list
-		void printList(){
-		   struct node *p = head;
-		   printf("\n[");
-		   
-		   //start from the beginning
-		   while(p != NULL) {
-		      printf(" %d ",p->data);
-		      p = p->next;
-		   }
-		   printf("]");
-		}
-		
-		//insertion at the beginning
-		void insertatbegin(int data){
-		
-		   //create a link
-		   struct node *lk = (struct node*) malloc(sizeof(struct node));
-		   lk->data = data;
-		
-		   // point it to old first node
-		   lk->next = head;
-		
-		   //point first to new first node
-		   head = lk;
-		}
-		void insertafternode(struct node *list, int data){
-		   struct node *lk = (struct node*) malloc(sizeof(struct node));
-		   lk->data = data;
-		   lk->next = list->next;
-		   list->next = lk;
-		}
-		void main(){
-		   int k=0;
-		   insertatbegin(12);
-		   insertatbegin(22);
-		   insertafternode(head->next, 30);
-		   printf("Linked List: ");
-		
-		   // print list
-		   printList();
-		}
+   //create a link
+   struct node *lk = (struct node*) malloc(sizeof(struct node));
+   lk->data = data;
 
+   // point it to old first node
+   lk->next = head;
+
+   //point first to new first node
+   head = lk;
+}
+void insertafternode(struct node *list, int data){
+   struct node *lk = (struct node*) malloc(sizeof(struct node));
+   lk->data = data;
+   lk->next = list->next;
+   list->next = lk;
+}
+void main(){
+   int k=0;
+   insertatbegin(12);
+   insertatbegin(22);
+   insertafternode(head->next, 30);
+   printf("Linked List: ");
+
+   // print list
+   printList();
+}
+```
   <img width="700" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/abd78c80-61bf-480c-9e33-1b3e688b8d2b">
 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 11: Stack - Queue
-### A. Stack
+## A. Stack
 > https://www.programiz.com/dsa/stack
 >
 > https://medium.com/@noransaber685/understanding-the-stack-data-structure-in-c-introduction-implementation-and-examples-8d3fb03de809
 
-**I. What is Stack?**
-
-**1. What is stack**
-
-+ A stack is a linear data structure in which **the insertion of a new element** and **removal of an existing element** takes place at the same end **represented as the top** of the stack.
-+  It follows the principle of LIFO (Last In First Out) - This means the last element inserted inside the stack is removed first.
+### I. What is Stack?
+- A stack is a linear data structure in which **the insertion of a new element** and **removal of an existing element** takes place at the same end **represented as the top** of the stack.
+- It follows the principle of LIFO (Last In First Out) - This means the last element inserted inside the stack is removed first.
 
 <img width="300" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/55f10aaa-82e2-4680-8ae4-39c561f2c990">
 
-**II, Basic Operations on Stack**
-
+### II, Basic Operations on Stack
 + push() to insert an element into the stack
 + pop() to remove an element from the stack
 + peek() Get the value of the top element without removing it.
@@ -2192,8 +2134,7 @@ ________________________________________________________________________________
 		   }
 		}
 
-**III, Complete Example**
-
+### III, Complete Example
 EX1:
 
 		#include <stdio.h>
@@ -2365,20 +2306,18 @@ EX2:
 		    }
 		}
 
-### B. Queue
+## B. Queue
 > https://www.programiz.com/dsa/queue
 >
 > https://www.scaler.com/topics/data-structures/queue-in-data-structure/
 
-**I. What is Queue?**
-
+### I. What is Queue?
 ![image](https://github.com/minchangggg/Advanced_C/assets/125820144/6318de71-e333-4fce-b048-86106e9d205b)
 
 + Queue follows the **First In First Out (FIFO)** rule - the item that goes in first is the item that comes out first.
 <img width="566" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/065c4cd5-c919-4a80-b60c-55d6fbb38400">
 
-**II, Basic Operations on Queue**
-
+### II, Basic Operations on Queue
 + Enqueue: Add an element to the end of the queue
 + Dequeue: Remove an element from the front of the queue
 + IsEmpty: Check if the queue is empty
@@ -2396,8 +2335,7 @@ EX2:
 
   <img width="450" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/b505dc7b-f5b8-4c3d-91b9-e9baef1e969f">
 
-**III, Complete Example**
-
+### III, Complete Example
 Ex:
 
 		#include <stdio.h>
