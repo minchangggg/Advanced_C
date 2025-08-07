@@ -2547,155 +2547,156 @@ ________________________________________________________________________________
 ### 4. Static keyword
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 14: OOP
-### 1. Encapsulation // tính đóng gói
-**Ex:** 
+## 1. Encapsulation // tính đóng gói
+#### Ex 
+```c
+#include <iostream>
+#include <string>
 
-		#include <iostream>
-		#include <string>
-		
-		using namespace std;
-		
-		class Student {
-		private:
-			string Name;
-			double GPA;
-			int StudentID;
-		
-		public:
-			Student(string name) {
-				Name = name;
-				static int id = 1000;
-				StudentID = id;
-				++id;
-			}
-		
-			string getName() { return Name; }
-			double getGPA() { return GPA; }
-			int getID() { return StudentID; }
-			
-			void setName(string name) { Name = name; };
-			void setGPA(double gpa) { GPA = gpa; };
-			void setStudentID(int studentID) { StudentID = studentID; }
-		};
-		
-		int main() {
-			Student student1("Trung"); student1.setGPA(8);
-			Student student2("Thai"); student2.setGPA(9);
-			Student student3("Thao"); student3.setGPA(10);
-			
-			cout << "Name: " << student1.getName() << "\tGPA: " << student1.getGPA() << "\tID: " << student1.getID() << endl;
-			cout << "Name: " << student2.getName() << "\tGPA: " << student2.getGPA() << "\tID: " << student2.getID() << endl;
-			cout << "Name: " << student3.getName() << "\tGPA: " << student3.getGPA() << "\tID: " << student3.getID() << endl;
-			
-			return 0;
-		}
+using namespace std;
 
-### 2. Inheritance // tính kế thừa 
-**Ex:**
+class Student {
+private:
+	string Name;
+	double GPA;
+	int StudentID;
 
-		#include <iostream>
-		#include <string>
-		
-		using namespace std;
-		
-		class Person {
-		protected:
-		    string Name;
-		    int Age;
-		    string Home_Address;
-		
-		public:
-		    string getName() { return Name; }
-		    void setName(string name) { Name = name; }
-		
-		    int getAge() { return Age; }
-		    void setAge(int age) { Age = age; }
-		
-		    string getAddress() { return Home_Address; }
-		    void setAddress(string address) { Home_Address = address; }
-		
-		    void displayInfo() { 
-		        cout << "Name: " << Name << "\tAge: " << Age << "\tAddress: " << Home_Address << endl; 
-		    }
-		};
-		
-		class Student : public Person {
-		private:
-		    string School_Name;
-		    double GPA;
-		    int StudentID;
-		
-		public:
-		    Student() {
-		        static int id = 1000;
-		        StudentID = id;
-		        ++id;
-		    }
-		
-			string getSchoolName() { return School_Name; }
-		    void setSchoolName(string school_name) { School_Name = school_name; }
-		
-		    double getGPA() { return GPA; }
-		    void setGPA(double gpa) { GPA = gpa; }
-		
-		    int getID() { return StudentID; }
-		
-		    void displayInfo() { // overriding
-		        cout << "Name: " << Name << "\tAge: " << Age << "\tAddress: " << Home_Address << "\tSchool name: " << School_Name << "\tGPA: " << GPA << endl;
-		    }
-		};
-		
-		int main() {
-		    Person person1;
-		    person1.setName("Trung");
-		    person1.setAge(20);
-		    person1.setAddress("HCM");
-		    person1.displayInfo();
-		
-		    Student student1;
-		    student1.setName("Trunggg");
-		    student1.setAge(24);
-		    student1.setAddress("HCMM");
-		    student1.setGPA(8.1);
-		    student1.setSchoolName("DinhTienHoang");
-		    student1.displayInfo();
-		
-		    return 0;
-		}
+public:
+	Student(string name) {
+		Name = name;
+		static int id = 1000;
+		StudentID = id;
+		++id;
+	}
 
-### 3. Polymorphism
-**a, Function overriding**
+	string getName() { return Name; }
+	double getGPA() { return GPA; }
+	int getID() { return StudentID; }
+	
+	void setName(string name) { Name = name; };
+	void setGPA(double gpa) { GPA = gpa; };
+	void setStudentID(int studentID) { StudentID = studentID; }
+};
 
-**Ex:** 
+int main() {
+	Student student1("Trung"); student1.setGPA(8);
+	Student student2("Thai"); student2.setGPA(9);
+	Student student3("Thao"); student3.setGPA(10);
+	
+	cout << "Name: " << student1.getName() << "\tGPA: " << student1.getGPA() << "\tID: " << student1.getID() << endl;
+	cout << "Name: " << student2.getName() << "\tGPA: " << student2.getGPA() << "\tID: " << student2.getID() << endl;
+	cout << "Name: " << student3.getName() << "\tGPA: " << student3.getGPA() << "\tID: " << student3.getID() << endl;
+	
+	return 0;
+}
+```
 
-> Input
+## 2. Inheritance // tính kế thừa 
+#### Ex
+```c
+#include <iostream>
+#include <string>
 
-		#include <iostream>
-		#include <string>
-		
-		using namespace std;
-		
-		class Calc {
-		public:
-		    int sum(int a, int b) {
-		        return a+b;
-		    }
-		    int sum(int a, int b, int c) {
-		        return a+b+c;
-		    }
-		    double sum(double a, double b) {
-		        return a+b;
-		    }
-		};
-		
-		int main() {
-		    Calc* ptr = new Calc();
-		    cout << "Sum: " << ptr->sum(1,2) << endl;
-		    cout << "Sum: " << ptr->sum(2.5,3.7) << endl;
-		    cout << "Sum: " << ptr->sum(1,2,3) << endl;
-		
-		    return 0;
-		}
+using namespace std;
+
+class Person {
+protected:
+	string Name;
+	int Age;
+	string Home_Address;
+
+public:
+	string getName() { return Name; }
+	void setName(string name) { Name = name; }
+
+	int getAge() { return Age; }
+	void setAge(int age) { Age = age; }
+
+	string getAddress() { return Home_Address; }
+	void setAddress(string address) { Home_Address = address; }
+
+	void displayInfo() { 
+		cout << "Name: " << Name << "\tAge: " << Age << "\tAddress: " << Home_Address << endl; 
+	}
+};
+
+class Student : public Person {
+private:
+	string School_Name;
+	double GPA;
+	int StudentID;
+
+public:
+	Student() {
+		static int id = 1000;
+		StudentID = id;
+		++id;
+	}
+
+	string getSchoolName() { return School_Name; }
+	void setSchoolName(string school_name) { School_Name = school_name; }
+
+	double getGPA() { return GPA; }
+	void setGPA(double gpa) { GPA = gpa; }
+
+	int getID() { return StudentID; }
+
+	void displayInfo() { // overriding
+		cout << "Name: " << Name << "\tAge: " << Age << "\tAddress: " << Home_Address << "\tSchool name: " << School_Name << "\tGPA: " << GPA << endl;
+	}
+};
+
+int main() {
+	Person person1;
+	person1.setName("Trung");
+	person1.setAge(20);
+	person1.setAddress("HCM");
+	person1.displayInfo();
+
+	Student student1;
+	student1.setName("Trunggg");
+	student1.setAge(24);
+	student1.setAddress("HCMM");
+	student1.setGPA(8.1);
+	student1.setSchoolName("DinhTienHoang");
+	student1.displayInfo();
+
+	return 0;
+}
+```
+
+## 3. Polymorphism
+### a, Function overriding
+#### Ex
+> **Input**
+```c
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Calc {
+public:
+	int sum(int a, int b) {
+		return a+b;
+	}
+	int sum(int a, int b, int c) {
+		return a+b+c;
+	}
+	double sum(double a, double b) {
+		return a+b;
+	}
+};
+
+int main() {
+	Calc* ptr = new Calc();
+	cout << "Sum: " << ptr->sum(1,2) << endl;
+	cout << "Sum: " << ptr->sum(2.5,3.7) << endl;
+	cout << "Sum: " << ptr->sum(1,2,3) << endl;
+
+	return 0;
+}
+```
 
 > Output
 
@@ -2703,48 +2704,47 @@ ________________________________________________________________________________
 		Sum: 6.2
 		Sum: 6
 
-**b, Virtual fuction**
-
-**Ex 1:**
-
+### b, Virtual fuction
+#### Ex1
 > Input
+```c
+#include <iostream>
+#include <string>
 
-		#include <iostream>
-		#include <string>
-		
-		using namespace std;
-		
-		class Person {
-		public:
-		  void show() { cout << "hello person" << endl; } 
-		  virtual void displayInfo() { cout << "HELLO PERSON"<< endl; } // thêm virtual vào chỗ này
-		};
-		
-		class Student : public Person {
-		public:
-		  void show() { cout << "hello student" << endl; } 
-		  void displayInfo() { cout << "HELLO STUDENT"<< endl; }
-		};
-		
-		int main() {
-		  Person *ptr = NULL; 
-		  Person person1;   
-		  Student student1;
-		  
-		  ptr = &person1;
-		  ptr->show(); 
-		  ptr->displayInfo();  
+using namespace std;
 
-    	          cout << "-----------------------" << endl;
-	       
-		  ptr = &student1;
-		  ptr->show();
-		  ptr->displayInfo();
-		
-		  return 0;
-		}
+class Person {
+public:
+  void show() { cout << "hello person" << endl; } 
+  virtual void displayInfo() { cout << "HELLO PERSON"<< endl; } // thêm virtual vào chỗ này
+};
 
-> Output
+class Student : public Person {
+public:
+  void show() { cout << "hello student" << endl; } 
+  void displayInfo() { cout << "HELLO STUDENT"<< endl; }
+};
+
+int main() {
+  Person *ptr = NULL; 
+  Person person1;   
+  Student student1;
+  
+  ptr = &person1;
+  ptr->show(); 
+  ptr->displayInfo();  
+
+		  cout << "-----------------------" << endl;
+   
+  ptr = &student1;
+  ptr->show();
+  ptr->displayInfo();
+
+  return 0;
+}
+```
+
+> **Output**
 
 		hello person
 		HELLO PERSON
@@ -2752,71 +2752,72 @@ ________________________________________________________________________________
 		hello person
 		HELLO STUDENT
 
-**Ex 2:**
+#### Ex2
+> **Input**
+```c
+#include <iostream>
+#include <string>
 
-> Input
+using namespace std;
 
-		#include <iostream>
-		#include <string>
-		
-		using namespace std;
-		
-		class Parent {
-		public:
-		  virtual string test() { return "Hello Parent"; } // thêm virtual vào chỗ này
-		  void displayInfo() {cout << test() << endl; }
-		};
-		
-		class Baby : public Parent {
-		public:
-		  string test() { return "Hello Baby"; }
-		};
-		
-		int main() {
-		  Parent parent;
-		  parent.displayInfo();
-		  
-		  cout << "-----------------------" << endl;
-		  
-		  Baby baby;
-		  baby.displayInfo();
-		  return 0;
-		}
+class Parent {
+public:
+  virtual string test() { return "Hello Parent"; } // thêm virtual vào chỗ này
+  void displayInfo() {cout << test() << endl; }
+};
+
+class Baby : public Parent {
+public:
+  string test() { return "Hello Baby"; }
+};
+
+int main() {
+  Parent parent;
+  parent.displayInfo();
   
-> Output
+  cout << "-----------------------" << endl;
+  
+  Baby baby;
+  baby.displayInfo();
+  return 0;
+}
+```
+
+> **Output**
 
 		Hello Parent
 		-----------------------
 		Hello Baby
 
-**Ex 3:** 
+#### Ex3 
+> **Input**
 
-> Input
+```c
+#include <iostream>
+#include <string>
 
-		#include <iostream>
-		#include <string>
-		
-		using namespace std;
-		
-		class Buffalo {
-		public:
-		    virtual void  action(){cout << "Hello Buffalo\n";}; // thêm virtual vào chỗ này
-		}; 
-		class YoungBuffalo : public Buffalo {
-		public:
-		    void action(){ cout << "Hello Young Buffalo\n";};
-		};
-		void takeAnBuffalo(Buffalo* buffalo){
-		    buffalo->action();
-		}
-		int main() {
-		  Buffalo *buffalo = new Buffalo();
-		  Buffalo *youngBuffalo = new YoungBuffalo();
-    
-		  takeAnBuffalo(buffalo);
-    		  cout << "-----------------------" << endl;
-		  takeAnBuffalo(youngBuffalo);
-		}
+using namespace std;
+
+class Buffalo {
+public:
+	virtual void  action(){cout << "Hello Buffalo\n";}; // thêm virtual vào chỗ này
+}; 
+class YoungBuffalo : public Buffalo {
+public:
+	void action(){ cout << "Hello Young Buffalo\n";};
+};
+void takeAnBuffalo(Buffalo* buffalo){
+	buffalo->action();
+}
+int main() {
+  Buffalo *buffalo = new Buffalo();
+  Buffalo *youngBuffalo = new YoungBuffalo();
+
+  takeAnBuffalo(buffalo);
+	  cout << "-----------------------" << endl;
+  takeAnBuffalo(youngBuffalo);
+}
+```
 
 > Output
 
@@ -2824,74 +2825,74 @@ ________________________________________________________________________________
 		-----------------------
 		Hello Young Buffalo
 
-### 4. Abstraction // Tính trừu tượng 
-Ex: 
-
+## 4. Abstraction // Tính trừu tượng 
+#### Ex 
 > Input
+```c
+#include <iostream>
+#include <string>
+#include <cmath>
 
-		#include <iostream>
-		#include <string>
-		#include <cmath>
-		
-		using namespace std;
-		
-		class GiaiPhuongTrinh {
-		    private:
-		        double a, b, c;
-		        int x1, x2;
-		
-		        double delta;
-		
-		        void tinhNghiem() {
-		            delta = b*b - 4*a*c;
-		            if (delta < 0) {
-		                delta = -1; 
-		            }
-		            else if (delta == 0)  {
-		                x1 = x2 = -b/ (2*a);  
-		            }    
-		            else if (delta > 0) {
-		                delta = 1;
-		                x1 = (-b + sqrt(delta))/(2*a);
-		                x2 = (-b - sqrt(delta))/(2*a);
-		            }
-		        }
-		     
-		    public:
-		        void enterNumber(double num_a, double num_b, double num_c);
-		        void printResult();
-		
-		};
-		
-		void GiaiPhuongTrinh::enterNumber(double num_a, double num_b, double num_c) {
-		    a = num_a;
-		    b = num_b;
-		    c = num_c;
+using namespace std;
+
+class GiaiPhuongTrinh {
+	private:
+		double a, b, c;
+		int x1, x2;
+
+		double delta;
+
+		void tinhNghiem() {
+			delta = b*b - 4*a*c;
+			if (delta < 0) {
+				delta = -1; 
+			}
+			else if (delta == 0)  {
+				x1 = x2 = -b/ (2*a);  
+			}    
+			else if (delta > 0) {
+				delta = 1;
+				x1 = (-b + sqrt(delta))/(2*a);
+				x2 = (-b - sqrt(delta))/(2*a);
+			}
 		}
-		
-		void GiaiPhuongTrinh::printResult() {
-		    tinhNghiem();
-		    switch ((int)delta) {
-		        case -1:
-		            cout << "PT vo nghiem" << endl;
-		            break;
-		        case 0:
-		            cout << "PT co nghiem kep: " << x1 << endl;
-		            break;
-		        default: 
-		            cout << "PT co 2 nghiem phan biet:" << endl; 
-		            cout << "x1 = " << x1 << "\tx2 = " << x2 << endl; 
-		            break;
-		    }
-		}
-		
-		int main() {
-		    GiaiPhuongTrinh phuongtrinh1;
-		    phuongtrinh1.enterNumber(1,-3,2);
-		    phuongtrinh1.printResult();
-		
-		    return 0;
-		}
+	 
+	public:
+		void enterNumber(double num_a, double num_b, double num_c);
+		void printResult();
+
+};
+
+void GiaiPhuongTrinh::enterNumber(double num_a, double num_b, double num_c) {
+	a = num_a;
+	b = num_b;
+	c = num_c;
+}
+
+void GiaiPhuongTrinh::printResult() {
+	tinhNghiem();
+	switch ((int)delta) {
+		case -1:
+			cout << "PT vo nghiem" << endl;
+			break;
+		case 0:
+			cout << "PT co nghiem kep: " << x1 << endl;
+			break;
+		default: 
+			cout << "PT co 2 nghiem phan biet:" << endl; 
+			cout << "x1 = " << x1 << "\tx2 = " << x2 << endl; 
+			break;
+	}
+}
+
+int main() {
+	GiaiPhuongTrinh phuongtrinh1;
+	phuongtrinh1.enterNumber(1,-3,2);
+	phuongtrinh1.printResult();
+
+	return 0;
+}
+```
 
 > Output
 
@@ -2953,32 +2954,34 @@ a. Capacity_____________________________________________________________________
 
 Ex: 
 
-		#include <iostream> 
-		#include <vector>  
-		using namespace std; 
-		   
-		int main() { 
-		    vector<int> vec1; 
-		   
-		    for (int i = 1; i <= 10; i++) 
-		        vec1.push_back(i); 
-		   
-		    cout << "Size of our vector: " << vec1.size() << endl; 
-		    cout << "nCapacity of our vector: " << vec1.capacity() << endl; 
-		    cout << "nMax_Size of our vector: " << vec1.max_size() << endl; 
-		   
-		    // resizes the vector size to 4 
-		    vec1.resize(4); 
-		   
-		    // prints the vector size after resize() 
-		    cout << "nSize of our vector after resize: " << vec1.size() << endl;  
-		   
-		    // checks if the vector is empty or not 
-		    if (vec1.empty() == false) cout << "nVector is not empty"; 
-		    else cout << "nVector is empty"; 
-		   
-		    return 0; 
-		}
+```c
+#include <iostream> 
+#include <vector>  
+using namespace std; 
+   
+int main() { 
+	vector<int> vec1; 
+   
+	for (int i = 1; i <= 10; i++) 
+		vec1.push_back(i); 
+   
+	cout << "Size of our vector: " << vec1.size() << endl; 
+	cout << "nCapacity of our vector: " << vec1.capacity() << endl; 
+	cout << "nMax_Size of our vector: " << vec1.max_size() << endl; 
+   
+	// resizes the vector size to 4 
+	vec1.resize(4); 
+   
+	// prints the vector size after resize() 
+	cout << "nSize of our vector after resize: " << vec1.size() << endl;  
+   
+	// checks if the vector is empty or not 
+	if (vec1.empty() == false) cout << "nVector is not empty"; 
+	else cout << "nVector is empty"; 
+   
+	return 0; 
+}
+```
 
 b. Access Elements of a Vector_______________________________________________________________________________________________________
    
@@ -3013,35 +3016,36 @@ c. Add Elements to a Vector_____________________________________________________
   
 Ex: 
 
-		#include <iostream>
-		#include <vector>
-		using namespace std;
-		
-		int main() {
-			vector <int> arr1 = {2,5,7,4,9};
-			
-			arr1.at(0) = 3; // 3 5 7 4 9
-			arr1.resize(7);  // 3 5 7 4 9 0 0 	    
-			arr1.push_back(10); // 3 5 7 4 9 0 0 10
-			
-			// Duyet vector bang chi so 
-			for (int i = 0; i < arr1.size(); i++) { 
-				cout << "Value: " << arr1.at(i) << endl;
-			}
-			
-			cout << "-----------" << endl;
-   
-			// Duyet vector bang ranged-base for loop
-			for (const int& i : arr1) { 
-				cout << "Value: " << i << endl;
-			}
-			for (int i : arr1) {
-				cout << "Value: " << i << endl;
-			}
-			
-			return 0;
-		}
+```c
+#include <iostream>
+#include <vector>
+using namespace std;
 
+int main() {
+	vector <int> arr1 = {2,5,7,4,9};
+	
+	arr1.at(0) = 3; // 3 5 7 4 9
+	arr1.resize(7);  // 3 5 7 4 9 0 0 	    
+	arr1.push_back(10); // 3 5 7 4 9 0 0 10
+	
+	// Duyet vector bang chi so 
+	for (int i = 0; i < arr1.size(); i++) { 
+		cout << "Value: " << arr1.at(i) << endl;
+	}
+	
+	cout << "-----------" << endl;
+
+	// Duyet vector bang ranged-base for loop
+	for (const int& i : arr1) { 
+		cout << "Value: " << i << endl;
+	}
+	for (int i : arr1) {
+		cout << "Value: " << i << endl;
+	}
+	
+	return 0;
+}
+```
 
 d. Delete Elements from C++ Vectors
 
@@ -3053,25 +3057,27 @@ d. Delete Elements from C++ Vectors
 
 Ex: 
 
-	#include <iostream>
-	#include <vector>
-	using namespace std;
+```c
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main(){
+	vector<string> v = {"Da Nang", "Ngay 5"};
+	cout << "Size of vector : " << v.size() << endl;
+	v.push_back("Thang 2");
+	v.push_back("Nam 2024");
+	cout << "Size of vector : " << v.size() << endl;
+	cout << "Access vector : ";
 	
-	int main(){
-		vector<string> v = {"Da Nang", "Ngay 5"};
-		cout << "Size of vector : " << v.size() << endl;
-		v.push_back("Thang 2");
-		v.push_back("Nam 2024");
-		cout << "Size of vector : " << v.size() << endl;
-		cout << "Access vector : ";
-
-		for(int i = 0; i < v.size(); i++){
-			cout << v[i] << ", ";
-		}
-
-		v.pop_back(); 
-		cout << "\nSize of vector : " << v.size() << endl;
-		}
+	for(int i = 0; i < v.size(); i++){
+		cout << v[i] << ", ";
+	}
+	
+	v.pop_back(); 
+	cout << "\nSize of vector : " << v.size() << endl;
+}
+```
 
 **3, C++ Vector Iterators**
 Vector iterators are used to point to the memory address of a vector element. In some ways, they act like pointers in C++.
@@ -3094,120 +3100,129 @@ b. end() function
 		// iter points to the last element of num
 		iter = num.end() - 1;
 c. Ex
-		#include <iostream>
-		#include <vector>
-		using namespace std;
-		
-		int main() {
-			vector<int> num {1, 2, 3, 4, 5};
-			vector<int>::iterator iter;
-			
-			// use iterator with for loop
-			for (iter = num.begin(); iter != num.end(); ++iter) {
-				cout << *iter << "  ";
-			}
-			
-			return 0;
-		}
 
-		#include <iostream> 
-		#include <vector> 
-		using namespace std; 
-		   
-		int main() { 
-		    vector<int> vec1; 
-		   
-		    for (int i = 1; i <= 10; i++) 
-		        vec1.push_back(i); 
-		   
-		    cout << "Understanding begin() and end() function: " << endl; 
-		    for (auto i = vec1.begin(); i != vec1.end(); ++i) 
-		        cout << *i << " "; 
-		 
-		    return 0; 
-		}
+```c
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+	vector<int> num {1, 2, 3, 4, 5};
+	vector<int>::iterator iter;
+	
+	// use iterator with for loop
+	for (iter = num.begin(); iter != num.end(); ++iter) {
+		cout << *iter << "  ";
+	}
+	
+	return 0;
+}
+
+#include <iostream> 
+#include <vector> 
+using namespace std; 
+   
+int main() { 
+	vector<int> vec1; 
+   
+	for (int i = 1; i <= 10; i++) 
+		vec1.push_back(i); 
+   
+	cout << "Understanding begin() and end() function: " << endl; 
+	for (auto i = vec1.begin(); i != vec1.end(); ++i) 
+		cout << *i << " "; 
+ 
+	return 0; 
+}
+```
 
 **4, Vector Và Mảng 1 Chiều**
 
-		#include <iostream>
-		#include <vector>
-		
-		using namespace std;
-		
-		int main(){
-		    int n, tmp; cout << "Nhap so luong phan tu : ";
-		    cin >> n;
-		    vector<int> v(n);
-		    for(int i = 0; i < n; i++){
-		        cout << "Nhap phan tu thu " << i + 1 << " : ";
-		        cin >> v[i];
-		    }
-		    cout << "Day so vua nhap : \n";
-		    for(int i = 0; i < v.size(); i++){
-		        cout << v[i] << " ";
-		    }
-		    return 0;
-		}
+```c
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main(){
+	int n, tmp; cout << "Nhap so luong phan tu : ";
+	cin >> n;
+	vector<int> v(n);
+	for(int i = 0; i < n; i++){
+		cout << "Nhap phan tu thu " << i + 1 << " : ";
+		cin >> v[i];
+	}
+	cout << "Day so vua nhap : \n";
+	for(int i = 0; i < v.size(); i++){
+		cout << v[i] << " ";
+	}
+	return 0;
+}
+```
 
 **5, Vector Và Mảng 2 Chiều**
 
 Cách 1: 
 
-		#include <iostream>
-		#include <vector>
-		using namespace std;
-		
-		int main(){
-		    int n, m;
-		    cout << "Nhap hang, cot : ";
-		    cin >> n >> m;
-		    vector<vector<int>> v;
-		    for(int i = 0; i < n; i++){
-		        vector<int> row;
-		        for(int j = 0; j < m; j++){
-		            cout << "Nhap phan tu hang " << i + 1 << ", cot " << j + 1 << " : ";
-		            int tmp; cin >> tmp;
-		            row.push_back(tmp);
-		        }   
-		        v.push_back(row);
-		    }
-		    cout << "\nMang 2 chieu vua nhap : \n";
-		    for(int i = 0; i < n; i++){
-		        for(int j = 0; j < m; j++){
-		            cout << v[i][j] << " ";
-		        }
-		        cout << endl;
-		    }
-		    return 0;
+```c
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main(){
+	int n, m;
+	cout << "Nhap hang, cot : ";
+	cin >> n >> m;
+	vector<vector<int>> v;
+	for(int i = 0; i < n; i++){
+		vector<int> row;
+		for(int j = 0; j < m; j++){
+			cout << "Nhap phan tu hang " << i + 1 << ", cot " << j + 1 << " : ";
+			int tmp; cin >> tmp;
+			row.push_back(tmp);
+		}   
+		v.push_back(row);
+	}
+	cout << "\nMang 2 chieu vua nhap : \n";
+	for(int i = 0; i < n; i++){
+		for(int j = 0; j < m; j++){
+			cout << v[i][j] << " ";
 		}
+		cout << endl;
+	}
+	return 0;
+}
+```
 
 Cách 2:
 
-		#include <iostream>
-		#include <vector>
-		using namespace std;
-		
-		int main(){
-		    int n, m;
-		    cout << "Nhap hang, cot : ";
-		    cin >> n >> m;
-		    vector<vector<int>> v(n, vector<int>(m));
-		    for(int i = 0; i < n; i++){
-		        for(int j = 0; j < m; j++){
-		            cout << "Nhap phan tu hang " << i + 1 << ", cot " << j + 1 << " : ";
-		            cin >> v[i][j];
-		        }   
-		    }
-		    cout << "\nMang 2 chieu vua nhap : \n";
-		    for(int i = 0; i < n; i++){
-		        for(int j = 0; j < m; j++){
-		            cout << v[i][j] << " ";
-		        }
-		        cout << endl;
-		    }
-		    return 0;
+```c
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main(){
+	int n, m;
+	cout << "Nhap hang, cot : ";
+	cin >> n >> m;
+	vector<vector<int>> v(n, vector<int>(m));
+	for(int i = 0; i < n; i++){
+		for(int j = 0; j < m; j++){
+			cout << "Nhap phan tu hang " << i + 1 << ", cot " << j + 1 << " : ";
+			cin >> v[i][j];
+		}   
+	}
+	cout << "\nMang 2 chieu vua nhap : \n";
+	for(int i = 0; i < n; i++){
+		for(int j = 0; j < m; j++){
+			cout << v[i][j] << " ";
 		}
-  
+		cout << endl;
+	}
+	return 0;
+}
+```
+
 ### II. List
 > https://www.programiz.com/cpp-programming/list
 >
@@ -3218,8 +3233,6 @@ Cách 2:
 > https://viblo.asia/p/cau-truc-du-lieu-va-giai-thuat-danh-sach-lien-ket-doi-doubly-linked-list-924lJ82WKPM
 
 ![image](https://github.com/minchangggg/Advanced_C/assets/125820144/e2695ead-47bf-4d44-bbdd-8a45c1d53bdc)
-
-
 
 
 ### III. Map
@@ -3243,201 +3256,208 @@ ________________________________________________________________________________
 > https://www.codeguru.com/cplusplus/exploring-the-c-generics-programming-model/
 >
 ## A. Generic Functions using Template
-**Ex 1:**
+#### Ex1
 
-		#include <iostream> 
-		using namespace std; 
-		  
-		// One function works for all data types. 
-		// This would work even for user defined types 
-		// if operator '>' is overloaded 
-		template <typename T> 
-		  
-		T myMax(T x, T y) { 
-		    return (x > y) ? x : y; 
-		} 
-		  
-		int main() {  
-		    cout << myMax<int>(3, 7) << endl; // call myMax for int
-		    cout << myMax<double>(3.5, 7.5) << endl; // call myMax for double  
-		    cout << myMax<char>('g', 'e') << endl; // call myMax for char 
-		    return 0; 
-		} 
-
-**Ex 2:** 
-
-		#include <iostream>
-		using namespace std;
+```c
+#include <iostream> 
+using namespace std; 
   
-		class Person {
-		    private:
-		        int age;
-		        string name;
-		    public:
-		        Person(string _name, int _age) {
-		            age = _age;
-		            name = _name;
-		        }
-		        void toString() {
-		            cout << name << " is " << age << " years old."<< endl;
-		        }
-		};
-		
-		template < class T > 
-		void printTheData(T &obj) {
-			obj.toString();
-		}
-		
-		int main() {
-		    Person p1 = Person("Tommy Vercetti", 21);
-		    printTheData(p1);
-		    return 0;
-		}
+// One function works for all data types. 
+// This would work even for user defined types 
+// if operator '>' is overloaded 
+template <typename T> 
+  
+T myMax(T x, T y) { 
+	return (x > y) ? x : y; 
+} 
+  
+int main() {  
+	cout << myMax<int>(3, 7) << endl; // call myMax for int
+	cout << myMax<double>(3.5, 7.5) << endl; // call myMax for double  
+	cout << myMax<char>('g', 'e') << endl; // call myMax for char 
+	return 0; 
+} 
+```
 
+#### Ex2
+```c
+#include <iostream>
+using namespace std;
+
+class Person {
+	private:
+		int age;
+		string name;
+	public:
+		Person(string _name, int _age) {
+			age = _age;
+			name = _name;
+		}
+		void toString() {
+			cout << name << " is " << age << " years old."<< endl;
+		}
+};
+
+template < class T > 
+void printTheData(T &obj) {
+	obj.toString();
+}
+
+int main() {
+	Person p1 = Person("Tommy Vercetti", 21);
+	printTheData(p1);
+	return 0;
+}
+```
 
 ## B. Generic Class using Template
-**Ex 1:**
+#### Ex1
+```c
+#include <iostream>
+using namespace std;
 
-		#include <iostream>
-		using namespace std;
-		
-		template < class T >
-		  class Container {
-		    private:
-		      T data;
-		    public:
-		      static int count;
-		    Container() {
-		      count++;
-		    }
-		
-		    static void displayStaticVariable() {
-		      cout << count << endl;
-		    }
-		  };
-		
-		template < class T >
-		  int Container < T > ::count = 0;
-		
-		int main() {
-		  Container < int > obj1;
-		  Container < float > obj2;
-		  Container < int > obj3;
-		  Container < int > ::displayStaticVariable();
-		  Container < float > ::displayStaticVariable();
-		
-		  return 0;
-		}
+template < class T >
+  class Container {
+	private:
+	  T data;
+	public:
+	  static int count;
+	Container() {
+	  count++;
+	}
 
-**Ex 2:**
+	static void displayStaticVariable() {
+	  cout << count << endl;
+	}
+  };
 
-		#include <iostream> 
-		using namespace std; 
-		
-		template <typename T> 
-		class Array { 
-		    private: 
-		    	T* ptr; 
-		    	int size; 
-		    
-		    public: 
-		    	Array(T arr[], int s); 
-		    	void print(); 
-		}; 
-		
-		template <typename T> 
-		Array<T>::Array(T arr[], int s) { 
-			ptr = new T[s]; 
-			size = s; 
-			for (int i = 0; i < size; i++) 
-				ptr[i] = arr[i]; 
-		} 
-		
-		template <typename T> 
-		void Array<T>::print() { 
-			for (int i = 0; i < size; i++) 
-				cout << " " << *(ptr + i); 
-			cout << endl; 
-		} 
-		
-		int main() { 
-			int arr[5] = { 1, 2, 3, 4, 5 }; 
-			Array<int> a(arr, 5); 
-			a.print(); 
-			return 0; 
-		} 
+template < class T >
+  int Container < T > ::count = 0;
 
-**Ex 3:** 
+int main() {
+  Container < int > obj1;
+  Container < float > obj2;
+  Container < int > obj3;
+  Container < int > ::displayStaticVariable();
+  Container < float > ::displayStaticVariable();
 
-		#include <iostream>
-		using namespace std;
-		
-		template <typename E>class MyStack{
-		private:
-		   int SIZE;
-		   int tos;
-		   E *items;
-		public:
-		   MyStack(int=10);
-		   ~MyStack(){ delete[] items;}
-		   void push(const E&);
-		   E pop();
-		};
-		
-		template<typename E>MyStack<E>::
-		   MyStack(int s):SIZE(s>0?s:10),tos(-1),items(new E[SIZE]){}
-		
-		template<typename E> void MyStack<E>::push(const E &value){
-		   if (tos == SIZE - 1)
-		      cout<<"Stack is full"<<endl;
-		   else
-		      items[++tos] = value;
-		}
-		
-		template<typename E> E MyStack<E>::pop() {
-		   E item;
-		   if (tos == -1)
-		      cout<<"Stack is empty"<<endl;
-		   else
-		      item = items[tos--];
-		      return item;
-		}
-		
-		int main() {
-		   MyStack<string> strStack(4);
-		   strStack.push("January");
-		   strStack.push("February");
-		   strStack.push("March");
-		   strStack.push("April");
-		   cout<<strStack.pop()<<endl;
-		   cout<<strStack.pop()<<endl;
-		   cout<<strStack.pop()<<endl;
-		   cout<<strStack.pop()<<endl;
-		   cout<<strStack.pop()<<endl;   // stack is empty now
-		   return 0;
-		}
+  return 0;
+}
+```
+
+#### Ex2
+```c
+#include <iostream> 
+using namespace std; 
+
+template <typename T> 
+class Array { 
+	private: 
+		T* ptr; 
+		int size; 
+	
+	public: 
+		Array(T arr[], int s); 
+		void print(); 
+}; 
+
+template <typename T> 
+Array<T>::Array(T arr[], int s) { 
+	ptr = new T[s]; 
+	size = s; 
+	for (int i = 0; i < size; i++) 
+		ptr[i] = arr[i]; 
+} 
+
+template <typename T> 
+void Array<T>::print() { 
+	for (int i = 0; i < size; i++) 
+		cout << " " << *(ptr + i); 
+	cout << endl; 
+} 
+
+int main() { 
+	int arr[5] = { 1, 2, 3, 4, 5 }; 
+	Array<int> a(arr, 5); 
+	a.print(); 
+	return 0; 
+} 
+```
+
+#### Ex3 
+```c
+#include <iostream>
+using namespace std;
+
+template <typename E>class MyStack{
+private:
+   int SIZE;
+   int tos;
+   E *items;
+public:
+   MyStack(int=10);
+   ~MyStack(){ delete[] items;}
+   void push(const E&);
+   E pop();
+};
+
+template<typename E>MyStack<E>::
+   MyStack(int s):SIZE(s>0?s:10),tos(-1),items(new E[SIZE]){}
+
+template<typename E> void MyStack<E>::push(const E &value){
+   if (tos == SIZE - 1)
+	  cout<<"Stack is full"<<endl;
+   else
+	  items[++tos] = value;
+}
+
+template<typename E> E MyStack<E>::pop() {
+   E item;
+   if (tos == -1)
+	  cout<<"Stack is empty"<<endl;
+   else
+	  item = items[tos--];
+	  return item;
+}
+
+int main() {
+   MyStack<string> strStack(4);
+   strStack.push("January");
+   strStack.push("February");
+   strStack.push("March");
+   strStack.push("April");
+   cout<<strStack.pop()<<endl;
+   cout<<strStack.pop()<<endl;
+   cout<<strStack.pop()<<endl;
+   cout<<strStack.pop()<<endl;
+   cout<<strStack.pop()<<endl;   // stack is empty now
+   return 0;
+}
+```
 
 ## C. Working with multi-type Generics
+```c
+#include <iostream> 
+using namespace std; 
+  
+template <class T, class U> 
+class A { 
+	T x; 
+	U y; 
+  
+public: 
+	A() { 
+		cout << "Constructor Called" << endl; 
+	} 
+}; 
+  
+int main() { 
+	A<char, char> a; 
+	A<int, double> b; 
+	return 0; 
+}
+```
 
-		#include <iostream> 
-		using namespace std; 
-		  
-		template <class T, class U> 
-		class A { 
-		    T x; 
-		    U y; 
-		  
-		public: 
-		    A() { 
-		        cout << "Constructor Called" << endl; 
-		    } 
-		}; 
-		  
-		int main() { 
-		    A<char, char> a; 
-		    A<int, double> b; 
-		    return 0; 
-		} 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 17: Smart Pointer - Lambda
 <img width="350" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/d7568942-e7a3-432c-85a1-d5d279ccc919">
@@ -3473,102 +3493,105 @@ b. The "delete" Operator in C++
 
 Syntax: `delete ptr_var;`
 
-**Example 1: C++ Dynamic Memory Allocation**
+#### Example 1: C++ Dynamic Memory Allocation**
+```c
+#include <iostream>
+using namespace std;
 
-		#include <iostream>
-		using namespace std;
-		
-		int main() {
-		
-		  // declare an int pointer
-		  int* pointInt;
-		
-		  // declare a float pointer
-		  float* pointFloat;
-		
-		  // dynamically allocate memory
-		  pointInt = new int;
-		  pointFloat = new float;
-		
-		  // assigning value to the memory
-		  *pointInt = 45;
-		  *pointFloat = 45.45f;
-		
-		  cout << *pointInt << endl;
-		  cout << *pointFloat << endl;
-		
-		  // deallocate the memory
-		  delete pointInt;
-		  delete pointFloat;
-		
-		  return 0;
-		}
+int main() {
 
-**Example 2: C++ new and delete Operator for Arrays**
+  // declare an int pointer
+  int* pointInt;
 
-		// C++ Program to store GPA of n number of students and display it
-		// where n is the number of students entered by the user
-		
-		#include <iostream>
-		using namespace std;
-		
-		int main() {
-		
-		  int num;
-		  cout << "Enter total number of students: ";
-		  cin >> num;
-		  float* ptr;
-		    
-		  // memory allocation of num number of floats
-		  ptr = new float[num];
-		
-		  cout << "Enter GPA of students." << endl;
-		  for (int i = 0; i < num; ++i) {
-		    cout << "Student" << i + 1 << ": ";
-		    cin >> *(ptr + i);
-		  }
-		
-		  cout << "\nDisplaying GPA of students." << endl;
-		  for (int i = 0; i < num; ++i) {
-		    cout << "Student" << i + 1 << ": " << *(ptr + i) << endl;
-		  }
-		
-		  // ptr memory is released
-		  delete[] ptr;
-		
-		  return 0;
-		}
+  // declare a float pointer
+  float* pointFloat;
 
-**Example 3: C++ new and delete Operator for Objects**
-		
-		#include <iostream>
-		using namespace std;
-		
-		class Student {
-		  private:
-		    int age;
-		
-		  public:
-		    // constructor initializes age to 12
-		    Student() : age(12) {}
-		
-		    void getAge() {
-		      cout << "Age = " << age << endl;
-		    }
-		};
-		
-		int main() {
-		  // dynamically declare Student object
-		  Student* ptr = new Student();
-		
-		  // call getAge() function
-		  ptr->getAge();
-		
-		  // ptr memory is released
-		  delete ptr;
-		
-		  return 0;
-		}
+  // dynamically allocate memory
+  pointInt = new int;
+  pointFloat = new float;
+
+  // assigning value to the memory
+  *pointInt = 45;
+  *pointFloat = 45.45f;
+
+  cout << *pointInt << endl;
+  cout << *pointFloat << endl;
+
+  // deallocate the memory
+  delete pointInt;
+  delete pointFloat;
+
+  return 0;
+}
+```
+
+#### Example 2: C++ new and delete Operator for Arrays
+```c
+// C++ Program to store GPA of n number of students and display it
+// where n is the number of students entered by the user
+
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int num;
+  cout << "Enter total number of students: ";
+  cin >> num;
+  float* ptr;
+	
+  // memory allocation of num number of floats
+  ptr = new float[num];
+
+  cout << "Enter GPA of students." << endl;
+  for (int i = 0; i < num; ++i) {
+	cout << "Student" << i + 1 << ": ";
+	cin >> *(ptr + i);
+  }
+
+  cout << "\nDisplaying GPA of students." << endl;
+  for (int i = 0; i < num; ++i) {
+	cout << "Student" << i + 1 << ": " << *(ptr + i) << endl;
+  }
+
+  // ptr memory is released
+  delete[] ptr;
+
+  return 0;
+}
+```
+
+#### Example 3: C++ new and delete Operator for Objects
+```c
+#include <iostream>
+using namespace std;
+
+class Student {
+  private:
+	int age;
+
+  public:
+	// constructor initializes age to 12
+	Student() : age(12) {}
+
+	void getAge() {
+	  cout << "Age = " << age << endl;
+	}
+};
+
+int main() {
+  // dynamically declare Student object
+  Student* ptr = new Student();
+
+  // call getAge() function
+  ptr->getAge();
+
+  // ptr memory is released
+  delete ptr;
+
+  return 0;
+}
+```
 
 ## B. Smart Pointer
 > https://www.geeksforgeeks.org/smart-pointers-cpp/
