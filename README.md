@@ -3614,229 +3614,234 @@ Syntax: `delete ptr_var;`
 >
 > https://techacademy.edu.vn/smartpointer-trong-c/
 
-		#include <iostream>
-		using namespace std;
-		 
-		class SmartPtr {
-		private:
-		    int* ptr; 
-		public:
-		    SmartPtr(int* p = NULL) { ptr = p; }
-		    ~SmartPtr() { delete (ptr); }
-		 
-		    int& operator*() { return *ptr; } // Overloading dereferencing operator
-		    int getValue() { return *ptr; }
-		    void setValue(int value) { *ptr = value; }
-		};
-		 
-		int main() {
-		   SmartPtr ptr1(new int);
-		   ptr1.setValue(50);
-		   cout << "Value: " << ptr1.getValue() << endl;
-		   cout << "Value: " << *ptr1 << endl;
-		
-		   cout << "_____________________________" << endl;
-		   SmartPtr ptr2(new int);
-		   *ptr2 = 20;
-		   cout << "Value: " << ptr2.getValue() << endl;
-		   cout << "Value: " << *ptr2 << endl;
-		
-		    return 0;
-		}
+```c
+#include <iostream>
+using namespace std;
+ 
+class SmartPtr {
+private:
+    int* ptr; 
+public:
+    SmartPtr(int* p = NULL) { ptr = p; }
+    ~SmartPtr() { delete (ptr); }
+ 
+    int& operator*() { return *ptr; } // Overloading dereferencing operator
+    int getValue() { return *ptr; }
+    void setValue(int value) { *ptr = value; }
+};
+ 
+int main() {
+   SmartPtr ptr1(new int);
+   ptr1.setValue(50);
+   cout << "Value: " << ptr1.getValue() << endl;
+   cout << "Value: " << *ptr1 << endl;
+
+   cout << "_____________________________" << endl;
+   SmartPtr ptr2(new int);
+   *ptr2 = 20;
+   cout << "Value: " << ptr2.getValue() << endl;
+   cout << "Value: " << *ptr2 << endl;
+
+    return 0;
+}
+```
 
 ### I. auto_ptr
 ### II. unique_ptr
+```c
+#include <iostream>
+#include <memory>
 
-		#include <iostream>
-		#include <memory>
-		
-		using namespace std;
-		
-		template < typename T >
-		class HinhChuNhat {
-		private:
-		    T ChieuDai, ChieuRong;
-		
-		public:
-		    HinhChuNhat(T dai, T rong){
-		        ChieuDai = dai;
-		        ChieuRong = rong;
-		        cout << "Constructor called. "  << endl;
-		    }
-		
-		    void tinhDienTich() {
-		        cout << "Dien tich: " << ChieuDai * ChieuRong << endl;
-		    }
-		
-		    ~HinhChuNhat() {
-		        cout << "Destructor called " << endl;
-		    }
-		};
-		
-		int main() {
-		
-		    unique_ptr <HinhChuNhat<float>> ptr1(new HinhChuNhat<float>(10.5,5.2));
-		    (*ptr1).tinhDienTich(); // Dien tich: 54.6
-		
-		    //unique_ptr <HinhChuNhat> ptr2(ptr1); // Khong cho phep vì giát trị ptr1 thực chất là địa chỉ của object HinhChuNhat<float>(10.5,5.2) mà mỗi unique ptr chỉ đc trỏ đến 1 object 
-      
-		    unique_ptr <HinhChuNhat<float>> ptr2 = move(ptr1); // gan object HinhChuNhat(10,5) cho ptr2, sau do remove ptr1
-		    (*ptr2).tinhDienTich(); // Dien tich: 54.6
-		    // (*ptr1).tinhDienTich(); -> lỗi, 1 unique chỉ đi 1 object, ptr1 đã bị remove
-		
-		    return 0;
-		}
+using namespace std;
+
+template < typename T >
+class HinhChuNhat {
+private:
+    T ChieuDai, ChieuRong;
+
+public:
+    HinhChuNhat(T dai, T rong){
+	ChieuDai = dai;
+	ChieuRong = rong;
+	cout << "Constructor called. "  << endl;
+    }
+
+    void tinhDienTich() {
+	cout << "Dien tich: " << ChieuDai * ChieuRong << endl;
+    }
+
+    ~HinhChuNhat() {
+	cout << "Destructor called " << endl;
+    }
+};
+
+int main() {
+
+    unique_ptr <HinhChuNhat<float>> ptr1(new HinhChuNhat<float>(10.5,5.2));
+    (*ptr1).tinhDienTich(); // Dien tich: 54.6
+
+    //unique_ptr <HinhChuNhat> ptr2(ptr1); // Khong cho phep vì giát trị ptr1 thực chất là địa chỉ của object HinhChuNhat<float>(10.5,5.2) mà mỗi unique ptr chỉ đc trỏ đến 1 object 
+
+    unique_ptr <HinhChuNhat<float>> ptr2 = move(ptr1); // gan object HinhChuNhat(10,5) cho ptr2, sau do remove ptr1
+    (*ptr2).tinhDienTich(); // Dien tich: 54.6
+    // (*ptr1).tinhDienTich(); -> lỗi, 1 unique chỉ đi 1 object, ptr1 đã bị remove
+
+    return 0;
+}
+```
 
 ### III. shared_ptr
+```c
+#include <iostream>
+#include <memory>
 
-		    #include <iostream>
-		    #include <memory>
-		    
-		    using namespace std;
-		    
-		    class HinhChuNhat {
-		    private:
-		        int ChieuDai;
-		        int ChieuRong;
-		    
-		    public:
-		        HinhChuNhat(int dai, int rong){
-		            ChieuDai = dai;
-		            ChieuRong = rong;
-		            cout << "Constructor called. "  << endl;
-		        }
-		    
-		        void tinhDienTich() {
-		            cout << "Dien tich: " << ChieuDai * ChieuRong << endl;
-		        }
-		    
-		        ~HinhChuNhat() {
-		            cout << "Destructor called " << endl;
-		        }
-		    };
-		    
-		    int main() {
-		        shared_ptr <HinhChuNhat> ptr1 (new HinhChuNhat(40,10));
-		        (*ptr1).tinhDienTich();
-		        shared_ptr <HinhChuNhat> ptr2 (ptr1);
-		        shared_ptr <HinhChuNhat> ptr3;
-		        ptr3 = ptr2;
-		    
-		        (*ptr2).tinhDienTich();
-		        (*ptr1).tinhDienTich();
-		        (*ptr3).tinhDienTich();
-		        
-		        cout << "Count: " << ptr1.use_count() << endl; // số con trỏ, trỏ đến địa chỉ object HinhChuNhat(40,10)
-		        cout << "Count: " << ptr2.use_count() << endl; // số con trỏ, trỏ đến địa chỉ object HinhChuNhat(40,10)
-		        cout << "Count: " << ptr3.use_count() << endl; // số con trỏ, trỏ đến địa chỉ object HinhChuNhat(40,10)
-		
-		        ptr3.reset();
-		        // (*ptr3).tinhDienTich(); -> không hợp lệ, ctr bị lỗi
-		        cout << "Count: " << ptr1.use_count() << endl;
-		        cout << "Count: " << ptr3.use_count() << endl; // ptr3 đang không trỏ đến 1 object nào cả 
-		
-		        return 0;
-		    }
+using namespace std;
+
+class HinhChuNhat {
+private:
+int ChieuDai;
+int ChieuRong;
+
+public:
+HinhChuNhat(int dai, int rong){
+    ChieuDai = dai;
+    ChieuRong = rong;
+    cout << "Constructor called. "  << endl;
+}
+
+void tinhDienTich() {
+    cout << "Dien tich: " << ChieuDai * ChieuRong << endl;
+}
+
+~HinhChuNhat() {
+    cout << "Destructor called " << endl;
+}
+};
+
+int main() {
+	shared_ptr <HinhChuNhat> ptr1 (new HinhChuNhat(40,10));
+	(*ptr1).tinhDienTich();
+	shared_ptr <HinhChuNhat> ptr2 (ptr1);
+	shared_ptr <HinhChuNhat> ptr3;
+	ptr3 = ptr2;
+	
+	(*ptr2).tinhDienTich();
+	(*ptr1).tinhDienTich();
+	(*ptr3).tinhDienTich();
+	
+	cout << "Count: " << ptr1.use_count() << endl; // số con trỏ, trỏ đến địa chỉ object HinhChuNhat(40,10)
+	cout << "Count: " << ptr2.use_count() << endl; // số con trỏ, trỏ đến địa chỉ object HinhChuNhat(40,10)
+	cout << "Count: " << ptr3.use_count() << endl; // số con trỏ, trỏ đến địa chỉ object HinhChuNhat(40,10)
+	
+	ptr3.reset();
+	// (*ptr3).tinhDienTich(); -> không hợp lệ, ctr bị lỗi
+	cout << "Count: " << ptr1.use_count() << endl;
+	cout << "Count: " << ptr3.use_count() << endl; // ptr3 đang không trỏ đến 1 object nào cả 
+	
+	return 0;
+}
+```
 
 ### IV. weak_ptr
+```c
+#include <iostream>
+#include <memory>
 
-			#include <iostream>
-			#include <memory>
-			
-			using namespace std;
-			
-			class HinhChuNhat {
-			private:
-			    int ChieuDai;
-			    int ChieuRong;
-			
-			public:
-			    HinhChuNhat(int dai, int rong){
-			        ChieuDai = dai;
-			        ChieuRong = rong;
-			        cout << "Constructor called. "  << endl;
-			    }
-			
-			    void tinhDienTich() {
-			        cout << "Dien tich: " << ChieuDai * ChieuRong << endl;
-			    }
-			    ~HinhChuNhat() {
-			        cout << "Destructor called " << endl;
-			    }
-			};
-			
-			int main() {
-			    shared_ptr <HinhChuNhat> ptr1 (new HinhChuNhat(40,10));
-			    shared_ptr <HinhChuNhat> ptr2(ptr1);
-			    weak_ptr <HinhChuNhat> ptr3 (ptr1);
-		            weak_ptr <HinhChuNhat> ptr4 (ptr2);
-				    
-		            // ________________________________________________________________________________________________________________________________________ 
-		            cout << "\nCase 1" << endl; // Khi chưa reset, giá trị của ptr1 và ptr2 vẫn còn.
-		            
-		            if (auto ptr_lock = ptr3.lock()) ptr_lock->tinhDienTich(); // diện tích = 400
-				    else cout << "Object has been deallocated" << endl;
-				    
-		            if (auto ptr_lock = ptr4.lock()) ptr_lock->tinhDienTich();  // diện tích = 400
-				    else cout << "Object has been deallocated" << endl;
-		
-		            cout << "Count: " <<ptr1.use_count() << endl;
-		            cout << "Count: " <<ptr2.use_count() << endl;
-		
-		            // ________________________________________________________________________________________________________________________________________ 
-		            cout << "\nCase 2" << endl; // Khi chỉ reset giá trị ptr1 -> vẫn còn tồn tại 1 share pointer là ptr2 trỏ đến object -> lock() vẫn sẽ trả về một shared_ptr hợp lệ có thể sử dụng để truy cập đối tượng.
-				    
-		            ptr1.reset(); 
-				    if (auto ptr_lock = ptr3.lock()) ptr_lock->tinhDienTich(); // diện tích = 400
-				    else cout << "Object has been deallocated" << endl;
-		            cout << "Count: " <<ptr1.use_count() << endl; // tuy nhiên count ở đây đã = 0
-		            cout << "Count: " <<ptr2.use_count() << endl;
-		
-		            // ________________________________________________________________________________________________________________________________________ 
-		            cout << "\nCase 3 " << endl; // Cả ptr1 và ptr2 đã bị reset-> shared_ptr đã bị giải phóng -> lock() sẽ trả về một shared_ptr rỗng. 
-		            
-		            ptr2.reset(); 
-		            if (auto ptr_lock = ptr4.lock()) ptr_lock->tinhDienTich();
-				    else cout << "Object has been deallocated" << endl; // "Object has been deallocated"
-		            cout << "Count: " <<ptr1.use_count() << endl; // count = 0
-		            cout << "Count: " <<ptr2.use_count() << endl; // count = 0
-		
-			    return 0;
-			}
+using namespace std;
+
+class HinhChuNhat {
+private:
+    int ChieuDai;
+    int ChieuRong;
+
+public:
+    HinhChuNhat(int dai, int rong){
+	ChieuDai = dai;
+	ChieuRong = rong;
+	cout << "Constructor called. "  << endl;
+    }
+
+    void tinhDienTich() {
+	cout << "Dien tich: " << ChieuDai * ChieuRong << endl;
+    }
+    ~HinhChuNhat() {
+	cout << "Destructor called " << endl;
+    }
+};
+
+int main() {
+    shared_ptr <HinhChuNhat> ptr1 (new HinhChuNhat(40,10));
+    shared_ptr <HinhChuNhat> ptr2(ptr1);
+    weak_ptr <HinhChuNhat> ptr3 (ptr1);
+    weak_ptr <HinhChuNhat> ptr4 (ptr2);
+	    
+    // ________________________________________________________________________________________________________________________________________ 
+    cout << "\nCase 1" << endl; // Khi chưa reset, giá trị của ptr1 và ptr2 vẫn còn.
+    
+    if (auto ptr_lock = ptr3.lock()) ptr_lock->tinhDienTich(); // diện tích = 400
+	    else cout << "Object has been deallocated" << endl;
+	    
+    if (auto ptr_lock = ptr4.lock()) ptr_lock->tinhDienTich();  // diện tích = 400
+	    else cout << "Object has been deallocated" << endl;
+
+    cout << "Count: " <<ptr1.use_count() << endl;
+    cout << "Count: " <<ptr2.use_count() << endl;
+
+    // ________________________________________________________________________________________________________________________________________ 
+    cout << "\nCase 2" << endl; // Khi chỉ reset giá trị ptr1 -> vẫn còn tồn tại 1 share pointer là ptr2 trỏ đến object -> lock() vẫn sẽ trả về một shared_ptr hợp lệ có thể sử dụng để truy cập đối tượng.
+	    
+    ptr1.reset(); 
+	    if (auto ptr_lock = ptr3.lock()) ptr_lock->tinhDienTich(); // diện tích = 400
+	    else cout << "Object has been deallocated" << endl;
+    cout << "Count: " <<ptr1.use_count() << endl; // tuy nhiên count ở đây đã = 0
+    cout << "Count: " <<ptr2.use_count() << endl;
+
+    // ________________________________________________________________________________________________________________________________________ 
+    cout << "\nCase 3 " << endl; // Cả ptr1 và ptr2 đã bị reset-> shared_ptr đã bị giải phóng -> lock() sẽ trả về một shared_ptr rỗng. 
+    
+    ptr2.reset(); 
+    if (auto ptr_lock = ptr4.lock()) ptr_lock->tinhDienTich();
+	    else cout << "Object has been deallocated" << endl; // "Object has been deallocated"
+    cout << "Count: " <<ptr1.use_count() << endl; // count = 0
+    cout << "Count: " <<ptr2.use_count() << endl; // count = 0
+
+    return 0;
+}
+```
 
 ## B. Lambda
+```c
+#include <iostream>
+#include <functional>
 
-		#include <iostream>
-		#include <functional>
-		
-		#define PI 3.14
-		
-		using namespace std;
-		
-		void processFunction(int a, int b, const function<void(int, int)>& func) {
-		    cout << "Processing numbers: " << a << " and " << b << endl;
-		    func(a, b);
-		}
-		
-		int main() {
-		    int a = 10;
-		    const double g = 9.8;
-		
-		    processFunction(7, 9, [a](int x, int y) {
-		        cout << "Product: " << x * y + a << endl;
-		    });
-		
-		    processFunction(7, 9, [g](int x, int y) {
-		        cout << "Product: " << x + y + g << endl;
-		    });
-		
-		    processFunction(7, 9, [](int x, int y) {
-		        cout << "Product: " << x - y + PI << endl;
-		    });
-		
-		    return 0;
-		}
+#define PI 3.14
 
+using namespace std;
+
+void processFunction(int a, int b, const function<void(int, int)>& func) {
+    cout << "Processing numbers: " << a << " and " << b << endl;
+    func(a, b);
+}
+
+int main() {
+    int a = 10;
+    const double g = 9.8;
+
+    processFunction(7, 9, [a](int x, int y) {
+	cout << "Product: " << x * y + a << endl;
+    });
+
+    processFunction(7, 9, [g](int x, int y) {
+	cout << "Product: " << x + y + g << endl;
+    });
+
+    processFunction(7, 9, [](int x, int y) {
+	cout << "Product: " << x - y + PI << endl;
+    });
+
+    return 0;
+}
+```
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 18: Multithreading	
 > https://viblo.asia/p/lam-quen-voi-multithreading-trong-c-qm6RWQYXGeJE
@@ -3956,58 +3961,64 @@ ________________________________________________________________________________
 
 **Ex 1**
 
-		#include <iostream>
-		#include <thread>
-		using namespace std;
-		void threadFunc() {
-			cout << "Welcome to Multithreading" << endl;
-		}
-  
-		int main() {
-			//truyền 1 function tới thread
-			thread funcTest1(threadFunc);
-  
-			//main sẽ block đến khi funcTest1 kết thúc
-			funcTest1.join();
-		}
-  
+```c
+#include <iostream>
+#include <thread>
+using namespace std;
+void threadFunc() {
+	cout << "Welcome to Multithreading" << endl;
+}
+
+int main() {
+	//truyền 1 function tới thread
+	thread funcTest1(threadFunc);
+
+	//main sẽ block đến khi funcTest1 kết thúc
+	funcTest1.join();
+}
+```
+
 **Ex 2:**
 
-		#include <iostream>
-		#include <thread>
-		
-		void printHello() {
-		    std::cout << "Hello from thread!" << std::endl;
-		}
-		
-		int main() {
-  		    // Tạo một luồng t1 với hàm printHello
-		    std::thread t1(printHello);
-      
-      		    // Hàm join() được gọi để chờ luồng t1 kết thúc trước khi chương trình kết thúc.
-		    t1.join();
-      
-		    return 0;
-		}
+```c
+#include <iostream>
+#include <thread>
+
+void printHello() {
+    std::cout << "Hello from thread!" << std::endl;
+}
+
+int main() {
+    // Tạo một luồng t1 với hàm printHello
+    std::thread t1(printHello);
+
+    // Hàm join() được gọi để chờ luồng t1 kết thúc trước khi chương trình kết thúc.
+    t1.join();
+
+    return 0;
+}
+```
 
 **Ex 3:**
 
-		struct func {
-		   int& i;
-		   func(int& i_):i(i_){}
-		   void operator()() {
-		      for(unsigned j=0;j<1000000;++j) {
-		         do_something(i); // point1: Potential access to dangling reference
-		      }
-		   }
-		};
-  
-		void oops() {
-		   int some_local_state=0;
-		   func my_func(some_local_state);
-		   std::thread my_thread(my_func);
-		   my_thread.join(); // point2: wait for thread to finish
-                }
+```c
+struct func {
+   int& i;
+   func(int& i_):i(i_){}
+   void operator()() {
+      for(unsigned j=0;j<1000000;++j) {
+	 do_something(i); // point1: Potential access to dangling reference
+      }
+   }
+};
+
+void oops() {
+   int some_local_state=0;
+   func my_func(some_local_state);
+   std::thread my_thread(my_func);
+   my_thread.join(); // point2: wait for thread to finish
+}
+```
 
 > Việc sử dụng my_thread.join() nhằm mục đích cho thread này chạy xong trước khi kết thúc function oop() và do đó, nó cũng sẽ chạy trước khi biến some_local_state bị huỷ. Nếu biến này bị huỷ trước khi thread chạy xong, sẽ dẫn đến việc ở lần chạy tiếp theo, do_something(i) (point1) sẽ truy cập vào một biến đã bị huỷ (some_local_state). Điều này có thể dẫn đến những kết quả không mong muốn của chương trình.
 > Lưu ý là chúng ta chỉ được gọi join() một lần với mỗi một thread cụ thể, bởi vì hành động này dọn dẹp các tài nguyên, bộ nhớ liên quan tới thread đó. Một khi chúng ta đã gọi hàm join(), hàm joinable() sẽ trả về giá trị false.
@@ -4017,36 +4028,40 @@ ________________________________________________________________________________
   
 **Ex 1:**
 
-		class myFunctor {
-		public:
-			void operator()() {
-				cout << "This is my function object" << endl;
-			}
-		};
-  
-		int main() {
-  			// 1. Khởi tạo thread bằng cách truyền object của class myFunctor vào hàm khởi tạo của thread
-			myFunctor myFunc1;
-			thread functorTest1(myFunc1);
-			if (functorTest1.joinable()) functorTest1.join();
-		}
+```c
+class myFunctor {
+public:
+	void operator()() {
+		cout << "This is my function object" << endl;
+	}
+};
+
+int main() {
+	// 1. Khởi tạo thread bằng cách truyền object của class myFunctor vào hàm khởi tạo của thread
+	myFunctor myFunc1;
+	thread functorTest1(myFunc1);
+	if (functorTest1.joinable()) functorTest1.join();
+}
+```
 
 **Ex 2:**
 
-		class myFunctor {
-		public:
-			void publicFunction() {
-				cout << "public function of myFunctor class is called" << endl;
-			}
-		};
-  
-		int main() {
-		 	// 2. Khởi tạo thread với 1 public function của class, phải định nghĩa function và truyền object của class định nghĩa function đó
-			myFunctor myFunc2;
-			thread functorTest2(&myFunctor::publicFunction,myFunc2);
-			if (functorTest2.joinable()) functorTest2.join();
-		}
-  
+```c
+class myFunctor {
+public:
+	void publicFunction() {
+		cout << "public function of myFunctor class is called" << endl;
+	}
+};
+
+int main() {
+	// 2. Khởi tạo thread với 1 public function của class, phải định nghĩa function và truyền object của class định nghĩa function đó
+	myFunctor myFunc2;
+	thread functorTest2(&myFunctor::publicFunction,myFunc2);
+	if (functorTest2.joinable()) functorTest2.join();
+}
+```
+
 #### d. Joinable and not Joinable threads
 + Sau khi hàm join return, thread trở lên không thể join lại. 1 joinable thread là 1 thread mà đại diện cho 1 execution mà chưa join.
 + 1 thread không là joinable khi nó được khởi tạo mặc định hoặc được moved/assigned tới 1 thread khác hoặc joind hoặc detach hàm đã được ọi Not joinable thread có thể huỷ 1 cách an toàn. Hàm joinable() để checks thread có là joinable thread hay không (trả về true nếu thread là joinable and false nếu ngược lại). Nên sử dụng hàm này trước khi call hàm join();
@@ -4071,45 +4086,50 @@ Do vậy để tránh trường hợp này chúng ta sẽ sử dụng các cách
 
 + Ngoài việc gọi hàm join() trong trường hợp lý tưởng không có exception, chúng ta cũng sẽ gọi hàm join() khi exception xảy ra:
 
-			struct func;
-			void f() {
-				int some_local_state=0;
-				func my_func(some_local_state);
-				std::thread t(my_func);
-				try {
-					do_something_in_current_thread();
-				}
-				catch(...) {
-					t.join(); //point1
-					throw;
-				}
-				t.join(); //point2
-			}
+	```c
+	struct func;
+	void f() {
+		int some_local_state=0;
+		func my_func(some_local_state);
+		std::thread t(my_func);
+		try {
+			do_something_in_current_thread();
+		}
+		catch(...) {
+			t.join(); //point1
+			throw;
+		}
+		t.join(); //point2
+	}
+	```
+
 + Việc dùng try/catch sẽ đảm bảo cho việc truy cập vào biến some_local_state sẽ kết thúc trước khi hàm kết thúc, dù là kết thúc bình thương (point2) hay do exception (point1).
 
 **Dùng RAII (Resource Acquisition Is Initialization)**
 
 + Nếu việc sử dụng try/catch hơi dài dòng, thì chúng ta có thể sử dụng cách này, nó cung cấp cho chúng ta một class thực hiện việc gọi join() trong destructor:
-  
-			class thread_guard {
-			   std::thread& t;
-			   public:
-			   explicit thread_guard(std::thread& t_): t(t_){}
-			   ~thread_guard() {
-				if(t.joinable()) t.join();
-			   }
-			   thread_guard(thread_guard const&)=delete;
-			   thread_guard& operator=(thread_guard const&)=delete;
-			};
-  
-			struct func;
-			void f() {
-			   int some_local_state=0;
-			   func my_func(some_local_state);
-			   std::thread t(my_func);
-			   thread_guard g(t);
-			   do_something_in_current_thread();
-			}
+
+	```c
+	class thread_guard {
+	   std::thread& t;
+	   public:
+	   explicit thread_guard(std::thread& t_): t(t_){}
+	   ~thread_guard() {
+		if(t.joinable()) t.join();
+	   }
+	   thread_guard(thread_guard const&)=delete;
+	   thread_guard& operator=(thread_guard const&)=delete;
+	};
+	
+	struct func;
+	void f() {
+	   int some_local_state=0;
+	   func my_func(some_local_state);
+	   std::thread t(my_func);
+	   thread_guard g(t);
+	   do_something_in_current_thread();
+	}
+	```
 
 + Ở cách này, khi hàm f() kết thúc, những đối tượng trong function này sẽ được huỷ theo thứ tự ngược, có nghĩa là đối tượng thread_guard với tên g sẽ gọi hàm huỷ trước, sau đó, hàm join() sẽ được gọi trong hàm destructor này. Việc này được tiến hành ngay cả khi hàm do_something_in_current_thread() quăng exception nào đó.
 + Nếu chúng ta không cần đợi một thread chạy xong trước khi chương trình/hàm kết thúc, mình có thể sử dụng hàm detach(). Một khi hàm này được gọi, nó sẽ không có bất kỳ liên kết nào nữa với đối tượng std::thread, do đó đảm bảo việc std::terminate() sẽ không được gọi khi đối tượng std::thread bị huỷ, mặc dù thread này chạy ngầm.
@@ -4134,89 +4154,94 @@ Do vậy để tránh trường hợp này chúng ta sẽ sử dụng các cách
 
 **Ex 1:**
 
-		#include <iostream>
-		#include <thread>
-		using namespace std;
+```c
+#include <iostream>
+#include <thread>
+using namespace std;
 
-		void printSomeValues(int val, string str, double dval) {
-			cout << val << " " << str <<" " << dval << endl;
-		}
-  
-		int main() {
-			string str = "Hello";
-			thread paramPass(printSomeValues, 5, str, 3.2); //5, str and 3.2 are passed to printSomeValues function
-			if (paramPass.joinable()) paramPass.join();
-		}
-  
+void printSomeValues(int val, string str, double dval) {
+	cout << val << " " << str <<" " << dval << endl;
+}
+
+int main() {
+	string str = "Hello";
+	thread paramPass(printSomeValues, 5, str, 3.2); //5, str and 3.2 are passed to printSomeValues function
+	if (paramPass.joinable()) paramPass.join();
+}
+```
+
 > Output Ex 1
 
 		5 Hello 3.2
 
 **Ex 2:** // Ví dụ về việc sử dụng nhiều luồng để tăng hiệu suất của chương trình
 
-		#include <iostream>
-		#include <thread>
-		#include <vector>
-		
-		void printSum(int start, int end, int* sum) {
-		    for (int i = start; i <= end; i++) {
-		        (*sum) += i;
-		    }
-		}
-		
-		int main() {
-		    int sum = 0;
-		    std::vector<std::thread> threads;
+```c
+#include <iostream>
+#include <thread>
+#include <vector>
 
-       		    // Sử dụng 10 luồng để tính tổng của các số từ 1 đến 1000. Mỗi luồng tính tổng cho một phần của dãy số.
-		    for (int i = 0; i < 10; i++) {
-		        threads.push_back(std::thread(printSum, i * 100 + 1, (i + 1) * 100, &sum));
-		    }
-      		    // Sau đó gộp kết quả lại -> Sử dụng multithreading như vậy có thể tăng hiệu suất của chương trình.
-		    for (int i = 0; i < 10; i++) {
-		        threads[i].join();
-		    }
-      
-		    std::cout << "Sum = " << sum << std::endl;
-		    return 0;
-		}
+void printSum(int start, int end, int* sum) {
+    for (int i = start; i <= end; i++) {
+	(*sum) += i;
+    }
+}
 
+int main() {
+    int sum = 0;
+    std::vector<std::thread> threads;
+
+    // Sử dụng 10 luồng để tính tổng của các số từ 1 đến 1000. Mỗi luồng tính tổng cho một phần của dãy số.
+    for (int i = 0; i < 10; i++) {
+	threads.push_back(std::thread(printSum, i * 100 + 1, (i + 1) * 100, &sum));
+    }
+    // Sau đó gộp kết quả lại -> Sử dụng multithreading như vậy có thể tăng hiệu suất của chương trình.
+    for (int i = 0; i < 10; i++) {
+	threads[i].join();
+    }
+
+    std::cout << "Sum = " << sum << std::endl;
+    return 0;
+}
+```
 
 **Ex 3:**
 
-		#include <iostream>
-		#include <thread>
-		using namespace std;
-		
-		class myFunctorParam {
-		public:
-			void operator()(int* arr, int length) {
-				cout << "An array of length " << length << " is passed to thread" << endl;
-				for (int i = 0; i != length; ++i) cout << arr[i] << " ";
-				cout << endl << endl;
-			}
-			
-			void changeSign(int* arr, int length) {
-				cout << "An arrray of length " << length << " is passed to thread" << endl;
-				for (int i = 0; i != length; ++i) cout << arr[i] << " ";
-				cout << "\nChanging sign of all elements of initial array" << endl;
-				for (int i = 0; i != length; ++i) {
-					arr[i] *= -1;
-					cout << arr[i] << " ";
-				}
-			}
-		};
-		
-		int main() {
-			int arr2[5] = { -1, -3, -5, -7, 0 };
-		   	myFunctorParam objParamPass;
-		   	
-		   	thread test(objParamPass, arr2, 5);
-			thread test2(&myFunctorParam::changeSign, &objParamPass, arr2, 5);
-			
-			if (test.joinable()) test.join();
-			if (test2.joinable()) test2.join();
+```c
+#include <iostream>
+#include <thread>
+using namespace std;
+
+class myFunctorParam {
+public:
+	void operator()(int* arr, int length) {
+		cout << "An array of length " << length << " is passed to thread" << endl;
+		for (int i = 0; i != length; ++i) cout << arr[i] << " ";
+		cout << endl << endl;
+	}
+	
+	void changeSign(int* arr, int length) {
+		cout << "An arrray of length " << length << " is passed to thread" << endl;
+		for (int i = 0; i != length; ++i) cout << arr[i] << " ";
+		cout << "\nChanging sign of all elements of initial array" << endl;
+		for (int i = 0; i != length; ++i) {
+			arr[i] *= -1;
+			cout << arr[i] << " ";
 		}
+	}
+};
+
+int main() {
+	int arr2[5] = { -1, -3, -5, -7, 0 };
+	myFunctorParam objParamPass;
+	
+	thread test(objParamPass, arr2, 5);
+	thread test2(&myFunctorParam::changeSign, &objParamPass, arr2, 5);
+	
+	if (test.joinable()) test.join();
+	if (test2.joinable()) test2.join();
+}
+```
 
 > Output Ex 2
 
@@ -4278,127 +4303,133 @@ Do vậy để tránh trường hợp này chúng ta sẽ sử dụng các cách
 
 **Ex 1:**
 
-		#include <iostream>
-		#include <thread>
-		#include <mutex>
-		
-		std::mutex mtx; // Khai báo một mutex global
-		
-		int sharedVariable = 0; // Biến được chia sẻ giữa các luồng
-		
-		// Hàm thực hiện công việc cho luồng
-		void threadFunction() {
-			// Khóa mutex trước khi truy cập vào biến được chia sẻ
-			mtx.lock();
-			sharedVariable++; // Thực hiện một hoạt động trên biến được chia sẻ
-			std::cout << "Giá trị biến được chia sẻ: " << sharedVariable << std::endl;
-			// Mở khóa mutex sau khi thực hiện xong
-			mtx.unlock();
-		}
+```c
+#include <iostream>
+#include <thread>
+#include <mutex>
 
-		int main() {
-			// Tạo và bắt đầu hai luồng
-			std::thread t1(threadFunction);
-			std::thread t2(threadFunction);
-			
-			// Đợi cho các luồng kết thúc
-			t1.join();
-			t2.join();
-			
-			return 0;
-		}
+std::mutex mtx; // Khai báo một mutex global
+
+int sharedVariable = 0; // Biến được chia sẻ giữa các luồng
+
+// Hàm thực hiện công việc cho luồng
+void threadFunction() {
+	// Khóa mutex trước khi truy cập vào biến được chia sẻ
+	mtx.lock();
+	sharedVariable++; // Thực hiện một hoạt động trên biến được chia sẻ
+	std::cout << "Giá trị biến được chia sẻ: " << sharedVariable << std::endl;
+	// Mở khóa mutex sau khi thực hiện xong
+	mtx.unlock();
+}
+
+int main() {
+	// Tạo và bắt đầu hai luồng
+	std::thread t1(threadFunction);
+	std::thread t2(threadFunction);
+	
+	// Đợi cho các luồng kết thúc
+	t1.join();
+	t2.join();
+	
+	return 0;
+}
+```
 
 + Trong ví dụ này, std::mutex mtx; là một biến mutex được khai báo global. Trong hàm threadFunction, mutex được khóa bằng cách sử dụng mtx.lock() trước khi truy cập vào biến sharedVariable, và được mở khóa bằng cách sử dụng mtx.unlock() sau khi đã thực hiện xong các hoạt động trên biến đó.
 
 **Ex 3:**
 
-		#include <iostream>
-		#include <thread>
-		#include <mutex>
-		
-		int dem = 0;
-		
-		using namespace std;
-		
-		mutex mtx;
-		
-		void delay(int s) {
-		    for (size_t i = 0; i < 0xffff; i++) {
-		        for (size_t j = 0; j < 5*s; j++) { }
-		    }  
-		}
-		
-		void funcA() {
-		    while (1) {
-		        mtx.lock();
-		        dem++;
-		        mtx.unlock();
-		        cout<<"funcA: "<<dem<<endl;
-		        delay(4000);
-		    }
-		}
-		
-		void funcB(){
-		    while (1) {
-		        mtx.lock();
-		        dem++;
-		        mtx.unlock();
-		        cout<<"funcB: "<<dem<<endl;
-		        delay(1000);
-		    }
-		}
-		
-		int main(int argc, char const *argv[]) {
-		    thread t1(funcA);
-		    thread t2(funcB);
-		
-		    t1.join();
-		    t2.join();
-		    
-		    return 0;
-		}
+```c
+#include <iostream>
+#include <thread>
+#include <mutex>
+
+int dem = 0;
+
+using namespace std;
+
+mutex mtx;
+
+void delay(int s) {
+    for (size_t i = 0; i < 0xffff; i++) {
+	for (size_t j = 0; j < 5*s; j++) { }
+    }  
+}
+
+void funcA() {
+    while (1) {
+	mtx.lock();
+	dem++;
+	mtx.unlock();
+	cout<<"funcA: "<<dem<<endl;
+	delay(4000);
+    }
+}
+
+void funcB(){
+    while (1) {
+	mtx.lock();
+	dem++;
+	mtx.unlock();
+	cout<<"funcB: "<<dem<<endl;
+	delay(1000);
+    }
+}
+
+int main(int argc, char const *argv[]) {
+    thread t1(funcA);
+    thread t2(funcB);
+
+    t1.join();
+    t2.join();
+    
+    return 0;
+}
+```
 
 **Ex 4:**
 
-		// C++ program to illustrate the thread synchronization using mutex 
-		#include <iostream> 
-		#include <thread> 
-  		#include <mutex> 
-		
-		using namespace std; 
-		
-		// Create object for mutex 
-		mutex mtx; 
-		
-		// Shared resource 
-		int number = 0; 
-		
-		// function to increment the number 
-		void increment(){ 
-			// Lock the thread using lock 
-			mtx.lock(); 
-			
-			// increment number by 1 for 1000000 times 
-			for(int i=0; i<1000000; i++){ 
-				number++; 
-			} 
-			
-			// Release the lock using unlock() 
-			mtx.unlock(); 
-		} 
-		
-		int main() { 
-			thread t1(increment); 
-			thread t2(increment); 
-		
-			t1.join(); 
-			t2.join(); 
-			
-			// Print the number after the execution of both threads 
-			std::cout<<"Number after execution of t1 and t2 is "<<number; 
-			
-			return 0; 
-		} 
+```c
+// C++ program to illustrate the thread synchronization using mutex 
+#include <iostream> 
+#include <thread> 
+#include <mutex> 
+
+using namespace std; 
+
+// Create object for mutex 
+mutex mtx; 
+
+// Shared resource 
+int number = 0; 
+
+// function to increment the number 
+void increment(){ 
+	// Lock the thread using lock 
+	mtx.lock(); 
+	
+	// increment number by 1 for 1000000 times 
+	for(int i=0; i<1000000; i++){ 
+		number++; 
+	} 
+	
+	// Release the lock using unlock() 
+	mtx.unlock(); 
+} 
+
+int main() { 
+	thread t1(increment); 
+	thread t2(increment); 
+
+	t1.join(); 
+	t2.join(); 
+	
+	// Print the number after the execution of both threads 
+	std::cout<<"Number after execution of t1 and t2 is "<<number; 
+	
+	return 0; 
+} 
+```
 
 + Tuy nhiên, vì các thread khác phải chờ đến khi unlock được gọi mới có quyền truy cập nên sẽ dẫn tới một vấn đề được gọi là deadlock. Ngoài ra, việc này khiến chúng ta phải luôn ghi nhớ phải gọi unlock mỗi khi kết thúc một hàm, hay thậm khi cả có lỗi xảy ra. Do đó, C++ Standard có hỗ trợ việc gọi unlock() một cách tự động.
   
@@ -4418,76 +4449,80 @@ Do vậy để tránh trường hợp này chúng ta sẽ sử dụng các cách
 
 **Ex 1**
 
-		#include <iostream>
-		#include <thread>
-		#include <mutex>
-		
-		std::mutex mtx; // Mutex được chia sẻ
-		
-		void reader() {
-			std::shared_lock<std::mutex> lock(mtx);
-			std::cout << "Luồng đọc..." << std::endl;
-		}
-		
-		void writer() {
-			std::unique_lock<std::mutex> lock(mtx);
-			std::cout << "Luồng ghi..." << std::endl;
-		}
-		
-		int main() {
-			std::thread t1(reader);
-			std::thread t2(writer);
-			std::thread t3(reader);
-			
-			t1.join();
-			t2.join();
-			t3.join();
-			
-			return 0;
-		}
+```c
+#include <iostream>
+#include <thread>
+#include <mutex>
+
+std::mutex mtx; // Mutex được chia sẻ
+
+void reader() {
+	std::shared_lock<std::mutex> lock(mtx);
+	std::cout << "Luồng đọc..." << std::endl;
+}
+
+void writer() {
+	std::unique_lock<std::mutex> lock(mtx);
+	std::cout << "Luồng ghi..." << std::endl;
+}
+
+int main() {
+	std::thread t1(reader);
+	std::thread t2(writer);
+	std::thread t3(reader);
+	
+	t1.join();
+	t2.join();
+	t3.join();
+	
+	return 0;
+}
+```
 
 + Trong ví dụ này, reader() sử dụng std::shared_lock để cho phép nhiều luồng đọc cùng một lúc, trong khi writer() sử dụng std::unique_lock để đảm bảo rằng chỉ có một luồng được phép ghi vào tài nguyên tại một thời điểm.
 
 **Ex 2**
-		
-		#include <iostream> 
-		#include <shared_mutex> 
-		#include <mutex> 
-		#include <thread> 
-		using namespace std; 
-		
-		// creating a shared_mutex object 
-		shared_mutex mutx; 
-		int shared_data = 11; 
-		
-		// callable with shared lock 
-		void readData() { 
-			shared_lock<shared_mutex> lock(mutx); 
-			cout << "Thread " << this_thread::get_id() << ": "; 
-			cout << shared_data << endl; 
-		} 
-		
-		// callable with unique_lock 
-		void writeData(int n) { 
-			unique_lock<shared_mutex> lock(mutx); 
-			shared_data = n; 
-			cout << "Thread" << this_thread::get_id() << ": \n"; 
-		} 
-		
-		int main() { 
-			thread t1(readData); 
-			thread t2(writeData, 128); 
-			thread t3(writeData, 10); 
-			thread t4(readData); 
-			
-			t1.join(); 
-			t2.join(); 
-			t3.join(); 
-			t4.join(); 
-   
-			return 0; 
-		}
-  
+
+```c	
+#include <iostream> 
+#include <shared_mutex> 
+#include <mutex> 
+#include <thread> 
+using namespace std; 
+
+// creating a shared_mutex object 
+shared_mutex mutx; 
+int shared_data = 11; 
+
+// callable with shared lock 
+void readData() { 
+	shared_lock<shared_mutex> lock(mutx); 
+	cout << "Thread " << this_thread::get_id() << ": "; 
+	cout << shared_data << endl; 
+} 
+
+// callable with unique_lock 
+void writeData(int n) { 
+	unique_lock<shared_mutex> lock(mutx); 
+	shared_data = n; 
+	cout << "Thread" << this_thread::get_id() << ": \n"; 
+} 
+
+int main() { 
+	thread t1(readData); 
+	thread t2(writeData, 128); 
+	thread t3(writeData, 10); 
+	thread t4(readData); 
+	
+	t1.join(); 
+	t2.join(); 
+	t3.join(); 
+	t4.join(); 
+
+	return 0; 
+}
+```
+
 ### IV. Deadlock
 #### 1. Deadlock là gì?
 + Deadlock là trạng thái mà 2 hay nhiều thread sẽ chờ đợi lẫn nhau vì mỗi thread (vd là A) giữ một tài nguyên và chờ đợi tài nguyên từ thread khác (vd là B) – trong khi thread B này cũng đang cần tài nguyên từ A để mở khoá mutex.
@@ -4513,135 +4548,140 @@ Do vậy để tránh trường hợp này chúng ta sẽ sử dụng các cách
 
 **Ex 1:**
 
-		#include <iostream>
-		#include <thread>
-		#include <mutex>
-		#include <condition_variable>
-		#include <chrono>
-		
-		std::mutex mtx;
-		std::condition_variable cv;
-		bool ready = false;
-		
-		void threadFunction1() {
-			for (int i = 0; i < 5; ++i) {
-				std::this_thread::sleep_for(std::chrono::seconds(1));
-				{
-				std::unique_lock<std::mutex> lock(mtx);
-				ready = true;
-				}
-				cv.notify_one();
-			}
+```c
+#include <iostream>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+#include <chrono>
+
+std::mutex mtx;
+std::condition_variable cv;
+bool ready = false;
+
+void threadFunction1() {
+	for (int i = 0; i < 5; ++i) {
+		std::this_thread::sleep_for(std::chrono::seconds(1));
+		{
+		std::unique_lock<std::mutex> lock(mtx);
+		ready = true;
 		}
-		
-		void threadFunction2() {
-			for (int i = 0; i < 5; ++i) {
-				std::unique_lock<std::mutex> lock(mtx);
-				cv.wait(lock, [] { return ready; });
-				ready = false; // Đặt lại cờ trạng thái
-				std::cout << "Luồng 2 nhận được thông báo và tiếp tục thực hiện công việc." << std::endl;
-			}
-		}
-		
-		int main() {
-			std::thread t1(threadFunction1);
-			std::thread t2(threadFunction2);
-			
-			t1.join();
-			t2.join();
-			
-			return 0;
-		}
+		cv.notify_one();
+	}
+}
+
+void threadFunction2() {
+	for (int i = 0; i < 5; ++i) {
+		std::unique_lock<std::mutex> lock(mtx);
+		cv.wait(lock, [] { return ready; });
+		ready = false; // Đặt lại cờ trạng thái
+		std::cout << "Luồng 2 nhận được thông báo và tiếp tục thực hiện công việc." << std::endl;
+	}
+}
+
+int main() {
+	std::thread t1(threadFunction1);
+	std::thread t2(threadFunction2);
+	
+	t1.join();
+	t2.join();
+	
+	return 0;
+}
+```
 
 + Trong ví dụ này, threadFunction1 sẽ chạy một vòng lặp trong đó nó sẽ thực hiện việc chuẩn bị dữ liệu và gửi thông báo cho threadFunction2 sau mỗi giây. Trong khi threadFunction2 sẽ chờ đợi thông báo và sau đó tiếp tục thực hiện công việc của nó. Điều này sẽ diễn ra trong 5 lần lặp, mỗi lần đợi một thông báo mới từ threadFunction1.
 
 **Ex 2:**
+```c
+// C++ program to illustrate the use of shared_mutex 
+#include <iostream> 
+#include <shared_mutex> 
+#include <mutex> 
+#include <thread> 
+#include <condition_variable>
+using namespace std; 
 
-		// C++ program to illustrate the use of shared_mutex 
-		#include <iostream> 
-		#include <shared_mutex> 
-		#include <mutex> 
-		#include <thread> 
-		#include <condition_variable>
-		using namespace std; 
-		
-		// creating a shared_mutex object 
-		mutex mutx; 
-		condition_variable cv;
-		int data_test = 0;
-		
-		
-		void delay(int s){
-		    for (size_t i = 0; i < 0xffff; i++) {
-		        for (size_t j = 0; j < 5*s; j++) { }
-	  	    } 
-		}
-		
-		void writeData(){
-		    for (int i = 0; i < 5; i++) {
-		        delay(5000);
-		        unique_lock<mutex> lock(mutx);
-		        data_test = data_test+i;
-		       
-		        cv.notify_one(); 
-		    }
-		}
-		
-		void readData(){
-		    for (size_t i = 0; i < 5; i++) {
-		       unique_lock<mutex> lock(mutx);
-		       cv.wait(lock);
-		       cout<<"data: "<<data_test<<endl;
-		    }
-		}
-		
-		// driver code 
-		int main() { 
-			thread t1(writeData); 
-			thread t2(readData); 
-			
-			t1.join(); 
-			t2.join(); 
-		
-			return 0; 
-		}
+// creating a shared_mutex object 
+mutex mutx; 
+condition_variable cv;
+int data_test = 0;
+
+
+void delay(int s){
+    for (size_t i = 0; i < 0xffff; i++) {
+	for (size_t j = 0; j < 5*s; j++) { }
+    } 
+}
+
+void writeData(){
+    for (int i = 0; i < 5; i++) {
+	delay(5000);
+	unique_lock<mutex> lock(mutx);
+	data_test = data_test+i;
+       
+	cv.notify_one(); 
+    }
+}
+
+void readData(){
+    for (size_t i = 0; i < 5; i++) {
+       unique_lock<mutex> lock(mutx);
+       cv.wait(lock);
+       cout<<"data: "<<data_test<<endl;
+    }
+}
+
+// driver code 
+int main() { 
+	thread t1(writeData); 
+	thread t2(readData); 
+	
+	t1.join(); 
+	t2.join(); 
+
+	return 0; 
+}
+```
 
 **Ex 3:**
 
-		#include <iostream>
-		#include <thread>
-		#include <condition_variable>
-		#include <mutex>
-		#include <chrono>
-		#include <queue>
-  
-		using namespace std;
-		
-		condition_variable cond_var;
-		mutex m;
-		
-		int main() {
-		    int value = 100;
-		    bool notified = false;
-      
-		    thread reporter([&]() {
-		        unique_lock<mutex> lock(m);
-		        while (!notified) {
-		            cond_var.wait(lock);
-		        }
-		        cout << "The value is " << value << endl;
-		    });
-		
-		    thread assigner([&]() {
-		        value = 20;
-		        notified = true;
-		        cond_var.notify_one();
-		    });
-		
-		    reporter.join();
-		    assigner.join();
-		    return 0;
-		}
+```c
+#include <iostream>
+#include <thread>
+#include <condition_variable>
+#include <mutex>
+#include <chrono>
+#include <queue>
+
+using namespace std;
+
+condition_variable cond_var;
+mutex m;
+
+int main() {
+    int value = 100;
+    bool notified = false;
+
+    thread reporter([&]() {
+	unique_lock<mutex> lock(m);
+	while (!notified) {
+	    cond_var.wait(lock);
+	}
+	cout << "The value is " << value << endl;
+    });
+
+    thread assigner([&]() {
+	value = 20;
+	notified = true;
+	cond_var.notify_one();
+    });
+
+    reporter.join();
+    assigner.join();
+    return 0;
+}
+```
 
 **Ex 4:**
 
@@ -4673,59 +4713,63 @@ Do vậy để tránh trường hợp này chúng ta sẽ sử dụng các cách
 
 **Ex 2:**
 
-		#include <iostream>
-		#include <thread>
-		#include <chrono>
-		
-		// Hàm thực hiện công việc bất đồng bộ
-		void asynchronousTask() {
-			std::this_thread::sleep_for(std::chrono::seconds(2));
-			std::cout << "Công việc bất đồng bộ đã hoàn thành!" << std::endl;
-		}
-		
-		int main() {
-			// Tạo một luồng để thực hiện công việc bất đồng bộ
-			std::thread asyncThread(asynchronousTask);
-			
-			std::cout << "Chương trình đang tiếp tục thực hiện công việc khác..." << std::endl;
-			
-			// Đợi cho luồng kết thúc
-			asyncThread.join();
-			
-			std::cout << "Chương trình đã hoàn thành!" << std::endl;
-			
-			return 0;
-		}
+```c
+#include <iostream>
+#include <thread>
+#include <chrono>
+
+// Hàm thực hiện công việc bất đồng bộ
+void asynchronousTask() {
+	std::this_thread::sleep_for(std::chrono::seconds(2));
+	std::cout << "Công việc bất đồng bộ đã hoàn thành!" << std::endl;
+}
+
+int main() {
+	// Tạo một luồng để thực hiện công việc bất đồng bộ
+	std::thread asyncThread(asynchronousTask);
+	
+	std::cout << "Chương trình đang tiếp tục thực hiện công việc khác..." << std::endl;
+	
+	// Đợi cho luồng kết thúc
+	asyncThread.join();
+	
+	std::cout << "Chương trình đã hoàn thành!" << std::endl;
+	
+	return 0;
+}
+```
 
 + Trong ví dụ này, hàm asynchronousTask được gọi trong một luồng riêng biệt bằng cách sử dụng std::thread. Hàm này thực hiện một công việc bất đồng bộ bằng cách chờ 2 giây và sau đó in ra một thông báo. Trong khi đó, chương trình tiếp tục thực hiện các công việc khác mà không cần chờ đợi luồng bất đồng bộ hoàn thành.
 + Điều này chứng minh rằng công việc bất đồng bộ đã tiếp tục thực hiện mà không cần chờ đợi luồng hoàn thành, và chương trình tiếp tục thực hiện các công việc khác.
 
 **Ex 3:**
 
-		#include <iostream>
-		#include <thread>
-		#include <future>
-		#include <chrono>
-		
-		// Hàm thực hiện công việc bất đồng bộ và trả về một kết quả
-		int asynchronousTask() {
-			std::this_thread::sleep_for(std::chrono::seconds(2));
-			return 42;
-		}
-		
-		int main() {
-			// Tạo một tác vụ bất đồng bộ và lấy kết quả bằng future
-			std::future<int> resultFuture = std::async(std::launch::async, asynchronousTask);
-			
-			// Thực hiện một số công việc khác
-			std::cout << "Chương trình đang tiếp tục thực hiện công việc khác..." << std::endl;
-			
-			// Chờ và lấy kết quả từ tác vụ bất đồng bộ
-			int result = resultFuture.get(); // Đợi và lấy kết quả từ tác vụ
-			
-			std::cout << "Kết quả từ tác vụ bất đồng bộ là: " << result << std::endl;
-			
-			return 0;
-		}
+```c
+#include <iostream>
+#include <thread>
+#include <future>
+#include <chrono>
+
+// Hàm thực hiện công việc bất đồng bộ và trả về một kết quả
+int asynchronousTask() {
+	std::this_thread::sleep_for(std::chrono::seconds(2));
+	return 42;
+}
+
+int main() {
+	// Tạo một tác vụ bất đồng bộ và lấy kết quả bằng future
+	std::future<int> resultFuture = std::async(std::launch::async, asynchronousTask);
+	
+	// Thực hiện một số công việc khác
+	std::cout << "Chương trình đang tiếp tục thực hiện công việc khác..." << std::endl;
+	
+	// Chờ và lấy kết quả từ tác vụ bất đồng bộ
+	int result = resultFuture.get(); // Đợi và lấy kết quả từ tác vụ
+	
+	std::cout << "Kết quả từ tác vụ bất đồng bộ là: " << result << std::endl;
+	
+	return 0;
+}
+```
 
 + Trong ví dụ này, chúng ta sử dụng std::async để tạo một tác vụ bất đồng bộ và std::future để lấy kết quả từ tác vụ đó. Phương thức get() được sử dụng để đợi và lấy kết quả từ tác vụ. Khi tác vụ hoàn thành, kết quả được trả về và được gán cho biến result.
