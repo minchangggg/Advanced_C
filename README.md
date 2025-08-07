@@ -236,26 +236,30 @@ Ex:
 
 Ex1: 
 
-		#include <assert.h>
-		#define ASSERT_IN_RANGE(val, min, max) assert((val) >= (min) && (val) <= (max))
-		
-		void setLevel(int level) {
-		    ASSERT_IN_RANGE(level, 1, 10);
-		    // Thiết lập cấp độ
-		}
+```c
+#include <assert.h>
+#define ASSERT_IN_RANGE(val, min, max) assert((val) >= (min) && (val) <= (max))
+
+void setLevel(int level) {
+	ASSERT_IN_RANGE(level, 1, 10);
+	// Thiết lập cấp độ
+}
+```
 
 Ex2:  
 
-		#include <assert.h>
-		#include <stdint.h>
-		
-		#define ASSERT_SIZE(type, size) assert(sizeof(type) == (size))
-		
-		void checkTypeSizes() {
-		    ASSERT_SIZE(uint32_t, 4);
-		    ASSERT_SIZE(uint16_t, 2);
-		    // Kiểm tra các kích thước kiểu dữ liệu khác
-		}
+```c
+#include <assert.h>
+#include <stdint.h>
+
+#define ASSERT_SIZE(type, size) assert(sizeof(type) == (size))
+
+void checkTypeSizes() {
+	ASSERT_SIZE(uint32_t, 4);
+	ASSERT_SIZE(uint16_t, 2);
+	// Kiểm tra các kích thước kiểu dữ liệu khác
+}
+```
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 3: POINTER
 ### A. Void Pointer
@@ -461,6 +465,7 @@ int main() {
 Ex 4: 
 
 > Input
+
 ```c	
 #include <stdio.h>
 #include <string.h>
@@ -563,52 +568,53 @@ int main() {
 
 Ex 5: 
 
-		#include <stdio.h>
-		
-		typedef struct {
-		   void (*start)(int gpio);
-		   void (*stop)(int gpio);
-		   void (*changeSpeed)(int gpio, int speed);
-		} MotorController;
-		
-		typedef int PIN;
-		
-		// Các hàm chung
-		void startMotor(PIN pin) {
-		   printf("Start motor at PIN %d\n", pin);
-		}
-		
-		void stopMotor(PIN pin) {
-		   printf("Stop motor at PIN %d\n", pin);
-		}
-		
-		void changeSpeedMotor(PIN pin, int speed) {
-		   printf("Change speed at PIN %d: %d\n", pin, speed);
-		}
-		
-		// Macro để khởi tạo GPIO và MotorController
-		#define INIT_MOTOR(motorName, pinNumber) \
-		   PIN PIN_##motorName = pinNumber; \
-		   MotorController motorName = {startMotor, stopMotor, changeSpeedMotor};
-		
-		int main() {
-		   // Sử dụng macro để khởi tạo
-		   INIT_MOTOR(motorA, 1);
-		   INIT_MOTOR(motorB, 2);
-		
-		   // Sử dụng motorA
-		   motorA.start(g_motorA);
-		   motorA.changeSpeed(g_motorA, 50);
-		   motorA.stop(g_motorA);
-		
-		   // Sử dụng motorB
-		   motorB.start(g_motorB);
-		   motorB.changeSpeed(g_motorB, 75);
-		   motorB.stop(g_motorB);
-		
-		   return 0;
-		}
+```c
+#include <stdio.h>
 
+typedef struct {
+   void (*start)(int gpio);
+   void (*stop)(int gpio);
+   void (*changeSpeed)(int gpio, int speed);
+} MotorController;
+
+typedef int PIN;
+
+// Các hàm chung
+void startMotor(PIN pin) {
+   printf("Start motor at PIN %d\n", pin);
+}
+
+void stopMotor(PIN pin) {
+   printf("Stop motor at PIN %d\n", pin);
+}
+
+void changeSpeedMotor(PIN pin, int speed) {
+   printf("Change speed at PIN %d: %d\n", pin, speed);
+}
+
+// Macro để khởi tạo GPIO và MotorController
+#define INIT_MOTOR(motorName, pinNumber) \
+   PIN PIN_##motorName = pinNumber; \
+   MotorController motorName = {startMotor, stopMotor, changeSpeedMotor};
+
+int main() {
+   // Sử dụng macro để khởi tạo
+   INIT_MOTOR(motorA, 1);
+   INIT_MOTOR(motorB, 2);
+
+   // Sử dụng motorA
+   motorA.start(g_motorA);
+   motorA.changeSpeed(g_motorA, 50);
+   motorA.stop(g_motorA);
+
+   // Sử dụng motorB
+   motorB.start(g_motorB);
+   motorB.changeSpeed(g_motorB, 75);
+   motorB.stop(g_motorB);
+
+   return 0;
+}
+```
 
 ### C. Pointer to Constant
 #### Syntax: int const *ptr_const; 
@@ -616,104 +622,110 @@ Ex 5:
 
 Ex: 
 
-		#include <stdio.h>
-		#include <stdlib.h>
-		
-		int main() {
-		    
-		    int value = 5;
-		    int const *ptr_const = &value;
-		
-		    //*ptr_const = 7; // wrong
-		    //ptr_const++; // right
-		    
-		    printf("value: %d\n", *ptr_const);
-		
-		    value = 9;
-		    printf("value: %d\n", *ptr_const);
-		
-		    return 0;
-		}
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+	
+	int value = 5;
+	int const *ptr_const = &value;
+
+	//*ptr_const = 7; // wrong
+	//ptr_const++; // right
+	
+	printf("value: %d\n", *ptr_const);
+
+	value = 9;
+	printf("value: %d\n", *ptr_const);
+
+	return 0;
+}
+```
 
 ### D. Constant Pointer
 #### Syntax: int *const const_ptr = &value;
 Ex:
 
-		#include <stdio.h>
-		#include <stdlib.h>
-		
-		
-		int main() {
-		    
-		    int value = 5;
-		    int test = 15;
-		    int *const const_ptr = &value;
-		
-		    printf("value: %d\n", *const_ptr);
-		
-		    *const_ptr = 7;
-		    printf("value: %d\n", *const_ptr);
-		
-		    //const_ptr = &test; // wrong
-		    
-		    return 0;
-		}
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int main() {
+	
+	int value = 5;
+	int test = 15;
+	int *const const_ptr = &value;
+
+	printf("value: %d\n", *const_ptr);
+
+	*const_ptr = 7;
+	printf("value: %d\n", *const_ptr);
+
+	//const_ptr = &test; // wrong
+	
+	return 0;
+}
+```
 
 ### E. Pointer to Pointer
-
 Ex:
 
-		#include <stdio.h>
-		
-		int main() {
-		    int value = 42;
-		    int *ptr1 = &value;  // Con trỏ thường trỏ đến một biến
-		
-		    int **ptr2 = &ptr1;  // Con trỏ đến con trỏ
-		
-		    /*
-		        **ptr2 = &ptr1
-		        ptr2 = &ptr1;
-		        *ptr2 = ptr1 = &value;
-		        **ptr2 = *ptr1 = value
-		    */
-		
-		    printf("address of value: %p\n", &value);
-		    printf("value of ptr1: %p\n", ptr1);
-		
-		    printf("address of ptr1: %p\n", &ptr1);
-		    printf("value of ptr2: %p\n", ptr2);
-		
-		    printf("dereference ptr2 first time: %p\n", *ptr2);
-		
-		    printf("dereference ptr2 second time: %d\n", **ptr2);
-		
-		    return 0;
-		}
+```c
+#include <stdio.h>
+
+int main() {
+	int value = 42;
+	int *ptr1 = &value;  // Con trỏ thường trỏ đến một biến
+
+	int **ptr2 = &ptr1;  // Con trỏ đến con trỏ
+
+	/*
+		**ptr2 = &ptr1
+		ptr2 = &ptr1;
+		*ptr2 = ptr1 = &value;
+		**ptr2 = *ptr1 = value
+	*/
+
+	printf("address of value: %p\n", &value);
+	printf("value of ptr1: %p\n", ptr1);
+
+	printf("address of ptr1: %p\n", &ptr1);
+	printf("value of ptr2: %p\n", ptr2);
+
+	printf("dereference ptr2 first time: %p\n", *ptr2);
+
+	printf("dereference ptr2 second time: %d\n", **ptr2);
+
+	return 0;
+}
+```
 
 ### F. NULL Pointer
-
 Ex:
 
-		#include <stdio.h>
-		
-		int main() {
-		    int *ptr = NULL;  // Gán giá trị NULL cho con trỏ 0x0000000
-		
-		    if (ptr == NULL) {
-		        printf("Pointer is NULL\n");
-		    } else {
-		        printf("Pointer is not NULL\n");
-		    }
-		
-		    int score_game = 5;
-		    if (ptr == NULL) {
-		        ptr = &score_game;
-		        *ptr = 30;
-		        ptr = NULL;
-		    }
-		    return 0;
-		}
+```c
+#include <stdio.h>
+
+int main() {
+	int *ptr = NULL;  // Gán giá trị NULL cho con trỏ 0x0000000
+
+	if (ptr == NULL) {
+		printf("Pointer is NULL\n");
+	} else {
+		printf("Pointer is not NULL\n");
+	}
+
+	int score_game = 5;
+	if (ptr == NULL) {
+		ptr = &score_game;
+		*ptr = 30;
+		ptr = NULL;
+	}
+	return 0;
+}
+```
 ________________________________________________________________________________________________________________________________________________________________________
 # Lesson 4: EXTERN - STATIC - VOLATILE - REGISTER
 ### A. Extern
@@ -724,21 +736,22 @@ ________________________________________________________________________________
 
 Ex: 
 
-		#include <stdio.h>
-		
-		void exampleFunction() {
-		    static int count = 0;  // Biến static giữ giá trị qua các lần gọi hàm
-		    count++;
-		    printf("Count: %d\n", count);
-		}
-		
-		int main() {
-		    exampleFunction();  // In ra "Count: 1"
-		    exampleFunction();  // In ra "Count: 2"
-		    exampleFunction();  // In ra "Count: 3"
-		    return 0;
-		}
+```c
+#include <stdio.h>
 
+void exampleFunction() {
+	static int count = 0;  // Biến static giữ giá trị qua các lần gọi hàm
+	count++;
+	printf("Count: %d\n", count);
+}
+
+int main() {
+	exampleFunction();  // In ra "Count: 1"
+	exampleFunction();  // In ra "Count: 2"
+	exampleFunction();  // In ra "Count: 3"
+	return 0;
+}
+```
 
 **2. Static global variables**
 
@@ -746,140 +759,148 @@ Ex:
 
 > File motor.c
 
-		#include <stdio.h>
-		#include "motor.h"
-		
-		void startMotor(PIN pin) {
-		   printf("Start motor at PIN %d\n", pin);
-		}
-		
-		void stopMotor(PIN pin) {
-		   printf("Stop motor at PIN %d\n", pin);
-		}
-		
-		void changeSpeedMotor(PIN pin, int speed) {
-		   printf("Change speed at PIN %d: %d\n", pin, speed);
-		}
-		
-			 
-		void init_motor(MotorController *motorName) {
-			motorName->start = startMotor;
-			motorName->stop = stopMotor;
-			motorName->changeSpeed = changeSpeedMotor;
-		}
+```c
+#include <stdio.h>
+#include "motor.h"
+
+void startMotor(PIN pin) {
+   printf("Start motor at PIN %d\n", pin);
+}
+
+void stopMotor(PIN pin) {
+   printf("Stop motor at PIN %d\n", pin);
+}
+
+void changeSpeedMotor(PIN pin, int speed) {
+   printf("Change speed at PIN %d: %d\n", pin, speed);
+}
+
+	 
+void init_motor(MotorController *motorName) {
+	motorName->start = startMotor;
+	motorName->stop = stopMotor;
+	motorName->changeSpeed = changeSpeedMotor;
+}
+```
 
 > File motor.h
 
-		#ifndef __MOTOR_H
-		#define __MOTOR_H
-		
-		typedef struct {
-			 void (*start)(int gpio);
-		   void (*stop)(int gpio);
-		   void (*changeSpeed)(int gpio, int speed);
-		} MotorController;
-		
-		typedef int PIN;
-		
-		static void startMotor(PIN pin);
-		static void stopMotor(PIN pin);
-		static void changeSpeedMotor(PIN pin, int speed);
-			 
-		void init_motor(MotorController *motorName); 
-		
-		#endif
+```c
+#ifndef __MOTOR_H
+#define __MOTOR_H
+
+typedef struct {
+	 void (*start)(int gpio);
+   void (*stop)(int gpio);
+   void (*changeSpeed)(int gpio, int speed);
+} MotorController;
+
+typedef int PIN;
+
+static void startMotor(PIN pin);
+static void stopMotor(PIN pin);
+static void changeSpeedMotor(PIN pin, int speed);
+	 
+void init_motor(MotorController *motorName); 
+
+#endif
+```
 
 **3. Static in class**
 
-		#include <iostream>
+```c
+#include <iostream>
+
+typedef enum {
+	red = 0,
+	blue,
+	green,
+	purple,
+	black,
+	yellow
+} Pen_Color;
+
+void print_color_pen(Pen_Color color) {
+	switch (color) {
+		case red:
+			std::cout << "Red\n";
+			break;
+		case blue:
+			std::cout << "Blue\n";
+			break;
+		case green:
+			std::cout << "Green\n";
+			break;
 		
-		typedef enum {
-		    red = 0,
-		    blue,
-		    green,
-		    purple,
-		    black,
-		    yellow
-		} Pen_Color;
-		
-		void print_color_pen(Pen_Color color) {
-			switch (color) {
-			    case red:
-			        std::cout << "Red\n";
-			        break;
-			    case blue:
-			        std::cout << "Blue\n";
-			        break;
-			    case green:
-			        std::cout << "Green\n";
-			        break;
-			    
-			    default:
-			        break;
-			    }
-			}
-		
-		
-		class PEN {
-			public:
-			    Pen_Color pen_color;
-			    static int pen_length;
-			
-			    PEN(Pen_Color color);
-			    Pen_Color get_color()
-			    {
-			        return pen_color;
-			    }
-			    void set_length(int length)
-			    {
-			        pen_length = length;
-			    }
-			};
-		
-		int PEN::pen_length;
-		
-		PEN::PEN(Pen_Color color) {
-		    pen_color = color;
-		    pen_length = 10;
+		default:
+			break;
 		}
-		
-		int main(int argc, char const *argv[]) {
-		    PEN blue_pen(blue);
-		    PEN red_pen(red);
-		    PEN green_pen(green);
-		
-		    blue_pen.set_length(9);
-		
-		    std::cout << "Color: ";
-		    print_color_pen(blue_pen.get_color());
-		    std::cout << "Length: " << blue_pen.pen_length << '\n';
-		
-		    std::cout << "Color: ";
-		    print_color_pen(red_pen.get_color());
-		    std::cout << "Length: " << red_pen.pen_length << '\n';
-		
-		    std::cout << "Color: ";
-		    print_color_pen(green_pen.get_color());
-		    std::cout << "Length: " << green_pen.pen_length << '\n';
-		
-		    return 0;
+	}
+
+
+class PEN {
+	public:
+		Pen_Color pen_color;
+		static int pen_length;
+	
+		PEN(Pen_Color color);
+		Pen_Color get_color()
+		{
+			return pen_color;
 		}
+		void set_length(int length)
+		{
+			pen_length = length;
+		}
+	};
+
+int PEN::pen_length;
+
+PEN::PEN(Pen_Color color) {
+	pen_color = color;
+	pen_length = 10;
+}
+
+int main(int argc, char const *argv[]) {
+	PEN blue_pen(blue);
+	PEN red_pen(red);
+	PEN green_pen(green);
+
+	blue_pen.set_length(9);
+
+	std::cout << "Color: ";
+	print_color_pen(blue_pen.get_color());
+	std::cout << "Length: " << blue_pen.pen_length << '\n';
+
+	std::cout << "Color: ";
+	print_color_pen(red_pen.get_color());
+	std::cout << "Length: " << red_pen.pen_length << '\n';
+
+	std::cout << "Color: ";
+	print_color_pen(green_pen.get_color());
+	std::cout << "Length: " << green_pen.pen_length << '\n';
+
+	return 0;
+}
+```
 
 ### C. Volatile
 Ex:
 
-		#include "stm32f10x.h"
-		
-		volatile int i = 0;
-		int a = 100;
-		
-		int main() {
-			while(1) {
-				i = *((int*) 0x20000000);
-				if (i > 0) break;	
-			}
-			a = 200;
-		}
+```c
+#include "stm32f10x.h"
+
+volatile int i = 0;
+int a = 100;
+
+int main() {
+	while(1) {
+		i = *((int*) 0x20000000);
+		if (i > 0) break;	
+	}
+	a = 200;
+}
+```
 
 ### D. Register
 
@@ -887,29 +908,31 @@ Ex:
 
 Ex:
 
-		#include <stdio.h>
-		#include <time.h>
-		
-		int main() {
-		    // Lưu thời điểm bắt đầu
-		    clock_t start_time = clock();
-		    int i;
-		
-		    // Đoạn mã của chương trình
-		    for (i = 0; i < 2000000; ++i) {
-		        // Thực hiện một số công việc bất kỳ
-		    }
-		
-		    // Lưu thời điểm kết thúc
-		    clock_t end_time = clock();
-		
-		    // Tính thời gian chạy bằng miligiây
-		    double time_taken = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
-		
-		    printf("Thoi gian chay cua chuong trinh: %f giay\n", time_taken);
-		
-		    return 0;
-		}
+```c
+#include <stdio.h>
+#include <time.h>
+
+int main() {
+	// Lưu thời điểm bắt đầu
+	clock_t start_time = clock();
+	int i;
+
+	// Đoạn mã của chương trình
+	for (i = 0; i < 2000000; ++i) {
+		// Thực hiện một số công việc bất kỳ
+	}
+
+	// Lưu thời điểm kết thúc
+	clock_t end_time = clock();
+
+	// Tính thời gian chạy bằng miligiây
+	double time_taken = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
+
+	printf("Thoi gian chay cua chuong trinh: %f giay\n", time_taken);
+
+	return 0;
+}
+```
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 5: GOTO - setjmp.h
 ## A. Goto
@@ -918,149 +941,148 @@ ________________________________________________________________________________
 <img width="700" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/6fcf16fd-b6a3-4a34-b1ab-e45f070bf5ad">
 
 ### Ex2
-
 <img width="700" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/a4a25f0f-f5c9-4816-bba3-a9f5896e5817">
 
 ### Ex3
-
 <img width="600" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/80e7ef78-3e98-4e04-b7d8-012615790033">
 
+```c
+#include <stdio.h>
 
-		#include <stdio.h>
-		
-		void delay() {
-		    double start;
-		    while (start < 60000000) start++;
+void delay() {
+	double start;
+	while (start < 60000000) start++;
+}
+
+char letter = 'A';
+char first_sentence[] = "HELLO";
+char second_sentence[] = "FASHION COTHES";
+char third_sentence[] = "SUITABLE PRICE";
+
+int letter_A[8][8] = {  {0,0,1,0,0,0,0,0},
+						{0,1,0,1,0,0,0,0},
+						{1,0,0,0,1,0,0,0},
+						{1,1,1,1,1,0,0,0},
+						{1,0,0,0,1,0,0,0},
+						{1,0,0,0,1,0,0,0},
+						{1,0,0,0,1,0,0,0},
+						{1,0,0,0,1,0,0,0},  };
+
+int letter_H[8][8] = {  {1,0,0,0,1,0,0,0},
+						{1,0,0,0,1,0,0,0},
+						{1,0,0,0,1,0,0,0},
+						{1,1,1,1,1,0,0,0},
+						{1,0,0,0,1,0,0,0},
+						{1,0,0,0,1,0,0,0},
+						{1,0,0,0,1,0,0,0},
+						{1,0,0,0,1,0,0,0},  };
+
+int letter_L[8][8] = {  {1,0,0,0,0,0,0,0},
+						{1,0,0,0,0,0,0,0},
+						{1,0,0,0,0,0,0,0},
+						{1,0,0,0,0,0,0,0},
+						{1,0,0,0,0,0,0,0},
+						{1,0,0,0,0,0,0,0},
+						{1,0,0,0,0,0,0,0},
+						{1,1,1,1,1,0,0,0},  };
+
+
+// H, e, l,o, F, a, ....
+
+int button = 0;
+
+typedef enum {
+	FIRST,
+	SECOND,
+	THIRD
+}   Sentence;
+
+int main() {
+	Sentence sentence = FIRST;
+
+	while(1) {
+		switch (sentence) {
+			case FIRST:
+				for (int index = 0; index < sizeof(first_sentence); index++) {
+					if (first_sentence[index] == 'H') {
+						for (int i = 0; i < 8; i++) {    
+							for (int j = 0; j < 8; j++) {
+								if (letter_H[i][j] == 1) {
+									printf("Turn on led at [%d][%d]\n", i,j);
+									if (button == 1) { goto exit_loops; }
+								}
+							}
+							// tat den
+						}
+					}
+					if (first_sentence[index] == 'e') {
+						// in ra chu e
+					}
+				}
+				printf("first sentence is done\n");
+				delay();
+				goto logic;
+
+			case SECOND:
+				for (int index = 0; index < sizeof(second_sentence); index++) {
+					if (second_sentence[index] == 'A') {
+						for (int i = 0; i < 8; i++) {    
+							for (int j = 0; j < 8; j++) {
+								if (letter_A[i][j] == 1) {
+									printf("Turn on led at [%d][%d]\n", i,j);
+									if (button == 1) { goto exit_loops; }
+								}
+							}
+							// tat den led
+						}
+					}
+					if (second_sentence[index] == 'F') {
+						// in ra chu F
+					}
+				}
+				printf("second sentence is done\n");
+				delay();
+				goto logic;
+
+			case THIRD:
+				for (int index = 0; index < sizeof(third_sentence); index++) {
+					if (third_sentence[index] == 'L') {
+						for (int i = 0; i < 8; i++) {    
+							for (int j = 0; j < 8; j++) {
+								if (letter_L[i][j] == 1) {
+									printf("Turn on led at [%d][%d]\n", i,j);
+									if (button == 1) { goto exit_loops; }   
+								}
+							}
+							// tat den led
+						}
+					}
+					if (third_sentence[index] == 'E') {
+						// in ra chu H
+					}
+				}
+				printf("third sentence is done\n");
+				delay();
+				//button = 1; 
+				goto logic;
 		}
+
+		logic:
+			if (sentence == FIRST) { sentence = SECOND; }
+			else if (sentence == SECOND) { sentence = THIRD; }
+			else if (sentence == THIRD) { sentence = FIRST; }
+			goto exit;
+			
+		exit_loops:
+			printf("Stop!\n");
+			break;
 		
-		char letter = 'A';
-		char first_sentence[] = "HELLO";
-		char second_sentence[] = "FASHION COTHES";
-		char third_sentence[] = "SUITABLE PRICE";
+		exit:;
 		
-		int letter_A[8][8] = {  {0,0,1,0,0,0,0,0},
-		                        {0,1,0,1,0,0,0,0},
-		                        {1,0,0,0,1,0,0,0},
-		                        {1,1,1,1,1,0,0,0},
-		                        {1,0,0,0,1,0,0,0},
-		                        {1,0,0,0,1,0,0,0},
-		                        {1,0,0,0,1,0,0,0},
-		                        {1,0,0,0,1,0,0,0},  };
-		
-		int letter_H[8][8] = {  {1,0,0,0,1,0,0,0},
-		                        {1,0,0,0,1,0,0,0},
-		                        {1,0,0,0,1,0,0,0},
-		                        {1,1,1,1,1,0,0,0},
-		                        {1,0,0,0,1,0,0,0},
-		                        {1,0,0,0,1,0,0,0},
-		                        {1,0,0,0,1,0,0,0},
-		                        {1,0,0,0,1,0,0,0},  };
-		
-		int letter_L[8][8] = {  {1,0,0,0,0,0,0,0},
-		                        {1,0,0,0,0,0,0,0},
-		                        {1,0,0,0,0,0,0,0},
-		                        {1,0,0,0,0,0,0,0},
-		                        {1,0,0,0,0,0,0,0},
-		                        {1,0,0,0,0,0,0,0},
-		                        {1,0,0,0,0,0,0,0},
-		                        {1,1,1,1,1,0,0,0},  };
-		
-		
-		// H, e, l,o, F, a, ....
-		
-		int button = 0;
-		
-		typedef enum {
-		    FIRST,
-		    SECOND,
-		    THIRD
-		}   Sentence;
-		
-		int main() {
-		    Sentence sentence = FIRST;
-		
-		    while(1) {
-		        switch (sentence) {
-		            case FIRST:
-		                for (int index = 0; index < sizeof(first_sentence); index++) {
-		                    if (first_sentence[index] == 'H') {
-		                        for (int i = 0; i < 8; i++) {    
-		                            for (int j = 0; j < 8; j++) {
-		                                if (letter_H[i][j] == 1) {
-		                                    printf("Turn on led at [%d][%d]\n", i,j);
-		                                    if (button == 1) { goto exit_loops; }
-		                                }
-		                            }
-		                            // tat den
-		                        }
-		                    }
-		                    if (first_sentence[index] == 'e') {
-		                        // in ra chu e
-		                    }
-		                }
-		                printf("first sentence is done\n");
-		                delay();
-		                goto logic;
-		
-		            case SECOND:
-		                for (int index = 0; index < sizeof(second_sentence); index++) {
-		                    if (second_sentence[index] == 'A') {
-		                        for (int i = 0; i < 8; i++) {    
-		                            for (int j = 0; j < 8; j++) {
-		                                if (letter_A[i][j] == 1) {
-		                                    printf("Turn on led at [%d][%d]\n", i,j);
-		                                    if (button == 1) { goto exit_loops; }
-		                                }
-		                            }
-		                            // tat den led
-		                        }
-		                    }
-		                    if (second_sentence[index] == 'F') {
-		                        // in ra chu F
-		                    }
-		                }
-		                printf("second sentence is done\n");
-		                delay();
-		                goto logic;
-		
-		            case THIRD:
-		                for (int index = 0; index < sizeof(third_sentence); index++) {
-		                    if (third_sentence[index] == 'L') {
-		                        for (int i = 0; i < 8; i++) {    
-		                            for (int j = 0; j < 8; j++) {
-		                                if (letter_L[i][j] == 1) {
-		                                    printf("Turn on led at [%d][%d]\n", i,j);
-		                                    if (button == 1) { goto exit_loops; }   
-		                                }
-		                            }
-		                            // tat den led
-		                        }
-		                    }
-		                    if (third_sentence[index] == 'E') {
-		                        // in ra chu H
-		                    }
-		                }
-		                printf("third sentence is done\n");
-		                delay();
-		                //button = 1; 
-		                goto logic;
-		        }
-		
-		        logic:
-		            if (sentence == FIRST) { sentence = SECOND; }
-		            else if (sentence == SECOND) { sentence = THIRD; }
-		            else if (sentence == THIRD) { sentence = FIRST; }
-		            goto exit;
-		            
-		        exit_loops:
-		            printf("Stop!\n");
-		            break;
-		        
-		        exit:;
-		        
-		    }
-		    return 0;
-		}
+	}
+	return 0;
+}
+```
 
 ## B. C Library - <setjmp.h>
  
@@ -1132,26 +1154,28 @@ A structure in C is a collection of variables, possibly of different types, unde
 #### Example
 > Input
 
-	#include <stdio.h>
+```c
+#include <stdio.h>
 
-	struct Student {
-	    char name[50];
-	    int age;
-    	    float grade;
-	};
+struct Student {
+	char name[50];
+	int age;
+		float grade;
+};
 
-	int main() {
-	    // Create a structure variable
-	    struct Student s1 = {"Geek", 20, 85.5};
-	
-	    // Access structure members
-	    printf("%s\n", s1.name);
-	    printf("%d\n", s1.age);
-	    printf("%.2f\n", s1.grade);
-	    printf("Size: %d bytes", sizeof(s1));
-	
-	    return 0;
-	}
+int main() {
+	// Create a structure variable
+	struct Student s1 = {"Geek", 20, 85.5};
+
+	// Access structure members
+	printf("%s\n", s1.name);
+	printf("%d\n", s1.age);
+	printf("%.2f\n", s1.grade);
+	printf("Size: %d bytes", sizeof(s1));
+
+	return 0;
+}
+```
 
 > Output
 
@@ -1163,12 +1187,14 @@ A structure in C is a collection of variables, possibly of different types, unde
 ### B. Union
 A union in C is similar to a structure, but with a key difference: all members of a union share the same memory location. This means only one member of the union can store a value at any given time. The size of a union is determined by the size of its largest member.
 #### Syntax
-	union name {
-	       member1 definition;
-	       member2 definition;
-	       …
-	       memberN definition;
-	};
+```c
+union name {
+	   member1 definition;
+	   member2 definition;
+	   …
+	   memberN definition;
+};
+```
 
 <img width="550" alt="image" src="https://github.com/user-attachments/assets/e8a05336-f0a8-4066-b493-8d4529f23e4c">
 
@@ -1181,57 +1207,61 @@ A union in C is similar to a structure, but with a key difference: all members o
 #### Example
 > Input
 
-	#include <stdio.h>
-	#include <stdint.h>
+```c
+#include <stdio.h>
+#include <stdint.h>
 
-	typedef union Data {
-	    uint8_t arr1[5];
-	    uint8_t arr2[3];
-	    uint8_t arr3[6];
-	}Data;
-	
-	
-	void display(uint8_t arr[], int size)
+typedef union Data {
+	uint8_t arr1[5];
+	uint8_t arr2[3];
+	uint8_t arr3[6];
+}Data;
+
+
+void display(uint8_t arr[], int size)
+{
+	for (int i = 0; i < size; i++)
 	{
-	    for (int i = 0; i < size; i++)
-	    {
-	        printf("arr[%d]: %d\n",i, arr[i]);
-	    }
-	    printf("----------\n");
+		printf("arr[%d]: %d\n",i, arr[i]);
 	}
+	printf("----------\n");
+}
+```
 
 #### Example
 > Input
 
-	#include <stdio.h>
-	
-	union Data {
-	    int i;
-	    double d;
-	    char c;
-	};
-	
-	int main() {
-	    // Create a union variable
-	    union Data data;
-	
-	    // Store an integer in the union
-	    data.i = 100;
-	    printf("%d", data.i);
-	
-	    // Store a double in the union (this will
-	  	// overwrite the integer value)
-	    data.d = 99.99;
-	    printf("%.2f", data.d);
-	
-	    // Store a character in the union (this will
-	  	// overwrite the double value)
-	    data.c = 'A';
-	    printf("%c", data.c);
-	    printf("Size: %d", sizeof(data));
-	
-	    return 0;
-	}
+```c
+#include <stdio.h>
+
+union Data {
+	int i;
+	double d;
+	char c;
+};
+
+int main() {
+	// Create a union variable
+	union Data data;
+
+	// Store an integer in the union
+	data.i = 100;
+	printf("%d", data.i);
+
+	// Store a double in the union (this will
+	// overwrite the integer value)
+	data.d = 99.99;
+	printf("%.2f", data.d);
+
+	// Store a character in the union (this will
+	// overwrite the double value)
+	data.c = 'A';
+	printf("%c", data.c);
+	printf("Size: %d", sizeof(data));
+
+	return 0;
+}
+```
 
 > Output
 
@@ -1243,38 +1273,39 @@ A union in C is similar to a structure, but with a key difference: all members o
 ### C. Combine Struct and Union
 <img width="550" alt="image" src="https://github.com/user-attachments/assets/d5855923-753c-4ae0-bbc8-6f9c873df8a4">
 
-	#include <stdio.h>
-	#include <stdint.h>
-	#include <string.h>
-	
-	
-	typedef union {
-	    struct {
-	        uint8_t id[2];
-	        uint8_t data[4];
-	        uint8_t check_sum[2];
-	    } data;
-	
-	    uint8_t frame[8];
-	
-	} Data_Frame;
-	
-	
-	int main(int argc, char const *argv[])
-	{
-	    Data_Frame transmitter_data;
-	    
-	    strcpy(transmitter_data.data.id, "10");
-	    strcpy(transmitter_data.data.data, "1234");
-	    strcpy(transmitter_data.data.check_sum, "70");
-	
-			Data_Frame receiver_data;
-	    strcpy(receiver_data.frame, transmitter_data.frame);
-		
-	    
-	    return 0;
-	}
+```c
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
 
+
+typedef union {
+	struct {
+		uint8_t id[2];
+		uint8_t data[4];
+		uint8_t check_sum[2];
+	} data;
+
+	uint8_t frame[8];
+
+} Data_Frame;
+
+
+int main(int argc, char const *argv[])
+{
+	Data_Frame transmitter_data;
+	
+	strcpy(transmitter_data.data.id, "10");
+	strcpy(transmitter_data.data.data, "1234");
+	strcpy(transmitter_data.data.check_sum, "70");
+
+		Data_Frame receiver_data;
+	strcpy(receiver_data.frame, transmitter_data.frame);
+	
+	
+	return 0;
+}
+```
 _________________________________________________________________________________________________________________________________________________________________________
 # Lesson 8: Memory layout
 
@@ -1313,69 +1344,75 @@ Ex:
 
 Ex 1
 
-		#include <stdlib.h>
-		int main() {
-		    int *arr_malloc, *arr_calloc;
-		    size_t size = 5;
-		
-		    arr_malloc = (int*)malloc(size * sizeof(int)); // Sử dụng malloc
-		    arr_calloc = (int*)calloc(size, sizeof(int)); // Sử dụng calloc
-		    // ...
-		
-		    // Giải phóng bộ nhớ
-		    free(arr_malloc);
-		    free(arr_calloc);
-		    return 0;
-		}
+```c
+#include <stdlib.h>
+int main() {
+	int *arr_malloc, *arr_calloc;
+	size_t size = 5;
+
+	arr_malloc = (int*)malloc(size * sizeof(int)); // Sử dụng malloc
+	arr_calloc = (int*)calloc(size, sizeof(int)); // Sử dụng calloc
+	// ...
+
+	// Giải phóng bộ nhớ
+	free(arr_malloc);
+	free(arr_calloc);
+	return 0;
+}
+```
   
 Ex 2
 
-		#include <stdio.h>
-		#include <stdlib.h>
-		
-		int main(int argc, char const *argv[]) {  
-		    int soluongkytu = 0;
-		    char* ten = (char*) malloc(sizeof(char) * soluongkytu);
-		
-		    for (int i = 0; i < 3; i++) {
-		        printf("Nhap so luong ky tu trong ten: \n");
-		        scanf("%d", &soluongkytu);
-		        ten = realloc(ten, sizeof(char) * soluongkytu);
-		        printf("Nhap ten cua ban: \n");
-		        scanf("%s", ten);
-		
-		        printf("Hello %s\n", ten);
-		    }
-		    return 0;
-		}
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char const *argv[]) {  
+	int soluongkytu = 0;
+	char* ten = (char*) malloc(sizeof(char) * soluongkytu);
+
+	for (int i = 0; i < 3; i++) {
+		printf("Nhap so luong ky tu trong ten: \n");
+		scanf("%d", &soluongkytu);
+		ten = realloc(ten, sizeof(char) * soluongkytu);
+		printf("Nhap ten cua ban: \n");
+		scanf("%s", ten);
+
+		printf("Hello %s\n", ten);
+	}
+	return 0;
+}
+```
 
 Ex 3
 
-		#include <stdio.h>
-		#include <stdlib.h>
-		
-		void test1() {
-		    int array[3];
-		    for (int i = 0; i < 3; i++) {
-		        printf("address of array[%d]: %p\n", i, (array+i));
-		    }
-		    printf("----------------------\n");
-		}
-		
-		void test2() {
-		    int *array = (int*)malloc(3*sizeof(int));
-		    for (int i = 0; i < 3; i++) {
-		        printf("address of array[%d]: %p\n", i, (array+i));
-		    }
-		    printf("----------------------\n");
-		    //free(array);
-		}
-		
-		int main(int argc, char const *argv[]) {  
-		    test1(); test1();
-		    test2(); test2();
-		    return 0;
-		}
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+void test1() {
+	int array[3];
+	for (int i = 0; i < 3; i++) {
+		printf("address of array[%d]: %p\n", i, (array+i));
+	}
+	printf("----------------------\n");
+}
+
+void test2() {
+	int *array = (int*)malloc(3*sizeof(int));
+	for (int i = 0; i < 3; i++) {
+		printf("address of array[%d]: %p\n", i, (array+i));
+	}
+	printf("----------------------\n");
+	//free(array);
+}
+
+int main(int argc, char const *argv[]) {  
+	test1(); test1();
+	test2(); test2();
+	return 0;
+}
+```
 
 <img width="275" alt="image" src="https://github.com/minchangggg/Basic_C/assets/125820144/dfab2f7c-6509-497c-939f-5e68f43566af"> ***-> Automatic Variable Storage***
 
@@ -1415,413 +1452,418 @@ a, JSON Values
 
 b, JSON Objects
 
-		{ "name": "Bob Johnson", "age": 35, "city": "Chicago" },
-		{ "name": "John Doe", "age": 30, "city": "New York", "occupation": "Software Engineer", "isStudent": false },
-		{
-		    "name": "Jane Smith",
-		    "age": null,
-		    "city": "Los Angeles",
-		    "contact": { "email": "jane.smith@example.com", "phone": "555-1234" }
-		}
+```c
+{ "name": "Bob Johnson", "age": 35, "city": "Chicago" },
+{ "name": "John Doe", "age": 30, "city": "New York", "occupation": "Software Engineer", "isStudent": false },
+{
+	"name": "Jane Smith",
+	"age": null,
+	"city": "Los Angeles",
+	"contact": { "email": "jane.smith@example.com", "phone": "555-1234" }
+}
+```
 
 Ex: 
 
-		#include <stdio.h> 
-		#include <cjson/cJSON.h> 
-		
-		int main() { 
-		// create a cJSON object 
-		cJSON *json = cJSON_CreateObject(); 
-		cJSON_AddStringToObject(json, "name", "John Doe"); 
-		cJSON_AddNumberToObject(json, "age", 30); 
-		cJSON_AddStringToObject(json, "email", "john.doe@example.com"); 
-		
-		// convert the cJSON object to a JSON string 
-		char *json_str = cJSON_Print(json); 
-		
-		// write the JSON string to a file 
-		FILE *fp = fopen("data.json", "w"); 
-		if (fp == NULL) { 
-			printf("Error: Unable to open the file.\n"); 
-			return 1; 
-		} 
-		printf("%s\n", json_str); 
-		fputs(json_str, fp); 
-		fclose
-		// free the JSON string and cJSON object 
-		cJSON_free(json_str); 
-		cJSON_Delete(json); 
-		return 0; 
-		}
+```c
+#include <stdio.h> 
+#include <cjson/cJSON.h> 
 
- ### II, How does it work? 
- 
-		#include <stdio.h>
-		#include <string.h>
-		#include <stdlib.h>
-		#include <stddef.h>
-		#include <ctype.h>
-		#include <stdbool.h>
-		
-		typedef enum {
-		    JSON_NULL,
-		    JSON_BOOLEAN,
-		    JSON_NUMBER,
-		    JSON_STRING,
-		    JSON_ARRAY,
-		    JSON_OBJECT
-		} JsonType;
-		
-		typedef struct JsonValue {
-		    JsonType type;
-		    union {
-		        int boolean; double number; char *string;
-		        struct {
-		            struct JsonValue *values;
-		            size_t count; // số lượng element
-		        } array;
-		        struct {
-		            char **keys;
-		            struct JsonValue *values;
-		            size_t count; // số cặp key-value
-		        } object;
-		    } value;
-		} JsonValue;
-		
-		JsonValue *parse_json(const char **json);
-		
-		void free_json_value(JsonValue *json_value);
-		
-		static void skip_whitespace(const char **json) {
-		    while (isspace(**json)) {
-		        (*json)++;
-		    }
+int main() { 
+	// create a cJSON object 
+	cJSON *json = cJSON_CreateObject(); 
+	cJSON_AddStringToObject(json, "name", "John Doe"); 
+	cJSON_AddNumberToObject(json, "age", 30); 
+	cJSON_AddStringToObject(json, "email", "john.doe@example.com"); 
+	
+	// convert the cJSON object to a JSON string 
+	char *json_str = cJSON_Print(json); 
+	
+	// write the JSON string to a file 
+	FILE *fp = fopen("data.json", "w"); 
+	if (fp == NULL) { 
+		printf("Error: Unable to open the file.\n"); 
+		return 1; 
+	} 
+	printf("%s\n", json_str); 
+	fputs(json_str, fp); 
+	fclose
+	// free the JSON string and cJSON object 
+	cJSON_free(json_str); 
+	cJSON_Delete(json); 
+	return 0; 
+}
+```
+
+### II, How does it work? 
+```c
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stddef.h>
+#include <ctype.h>
+#include <stdbool.h>
+
+typedef enum {
+	JSON_NULL,
+	JSON_BOOLEAN,
+	JSON_NUMBER,
+	JSON_STRING,
+	JSON_ARRAY,
+	JSON_OBJECT
+} JsonType;
+
+typedef struct JsonValue {
+	JsonType type;
+	union {
+		int boolean; double number; char *string;
+		struct {
+			struct JsonValue *values;
+			size_t count; // số lượng element
+		} array;
+		struct {
+			char **keys;
+			struct JsonValue *values;
+			size_t count; // số cặp key-value
+		} object;
+	} value;
+} JsonValue;
+
+JsonValue *parse_json(const char **json);
+
+void free_json_value(JsonValue *json_value);
+
+static void skip_whitespace(const char **json) {
+	while (isspace(**json)) {
+		(*json)++;
+	}
+}
+
+JsonValue *parse_null(const char **json) {
+	skip_whitespace(json);
+	if (strncmp(*json, "null", 4) == 0) { // khi bắt gặp đc chữ n -> nó lấy thêm 3 phần tử tiếp theo -> so sánh với null
+		JsonValue *value = (JsonValue *) malloc(sizeof(JsonValue));
+		value->type = JSON_NULL; 
+		*json += 4;
+		return value;
+	}
+	return NULL;
+}
+
+JsonValue *parse_boolean(const char **json) {
+	skip_whitespace(json);
+	JsonValue *value = (JsonValue *) malloc(sizeof(JsonValue));
+	if (strncmp(*json, "true", 4) == 0) {
+		value->type = JSON_BOOLEAN;
+		value->value.boolean = true;
+		*json += 4;
+	} else if (strncmp(*json, "false", 5) == 0) {
+		value->type = JSON_BOOLEAN;
+		value->value.boolean = false;
+		*json += 5;
+	} else {
+		free(value);
+		return NULL;
+	}
+	return value;
+}
+
+JsonValue *parse_number(const char **json) {
+	skip_whitespace(json);
+	char *end; //:') 
+
+	double num = strtod(*json, &end);
+	if (end != *json) {
+		JsonValue *value = (JsonValue *) malloc(sizeof(JsonValue));
+		value->type = JSON_NUMBER;
+		value->value.number = num;
+		*json = end;
+		return value;
+	}
+	return NULL;
+}
+
+JsonValue *parse_string(const char **json) {
+	skip_whitespace(json);
+
+	if (**json == '\"') {
+		(*json)++;
+		const char *start = *json;
+		while (**json != '\"' && **json != '\0') {
+			(*json)++;
 		}
-		
-		JsonValue *parse_null(const char **json) {
-		    skip_whitespace(json);
-		    if (strncmp(*json, "null", 4) == 0) { // khi bắt gặp đc chữ n -> nó lấy thêm 3 phần tử tiếp theo -> so sánh với null
-		        JsonValue *value = (JsonValue *) malloc(sizeof(JsonValue));
-		        value->type = JSON_NULL; 
-		        *json += 4;
-		        return value;
-		    }
-		    return NULL;
+		if (**json == '\"') {
+			size_t length = *json - start; // 3
+			char *str = (char *) malloc((length + 1) * sizeof(char));
+			strncpy(str, start, length);
+			str[length] = '\0';
+
+			JsonValue *value = (JsonValue *) malloc(sizeof(JsonValue));
+			value->type = JSON_STRING;
+			value->value.string = str;
+			(*json)++;
+			return value;
 		}
-		
-		JsonValue *parse_boolean(const char **json) {
-		    skip_whitespace(json);
-		    JsonValue *value = (JsonValue *) malloc(sizeof(JsonValue));
-		    if (strncmp(*json, "true", 4) == 0) {
-		        value->type = JSON_BOOLEAN;
-		        value->value.boolean = true;
-		        *json += 4;
-		    } else if (strncmp(*json, "false", 5) == 0) {
-		        value->type = JSON_BOOLEAN;
-		        value->value.boolean = false;
-		        *json += 5;
-		    } else {
-		        free(value);
-		        return NULL;
-		    }
-		    return value;
+	}
+	return NULL;
+}
+
+JsonValue *parse_array(const char **json) {
+	skip_whitespace(json);
+	if (**json == '[') {
+		(*json)++;
+		skip_whitespace(json);
+
+		JsonValue *array_value = (JsonValue *)malloc(sizeof(JsonValue));
+		array_value->type = JSON_ARRAY;
+		array_value->value.array.count = 0;
+		array_value->value.array.values = NULL;
+
+		/*
+		double arr[2] = {};
+		arr[0] = 30;
+		arr[1] = 70;
+		*/
+
+		while (**json != ']' && **json != '\0') {
+			JsonValue *element = parse_json(json); // 70
+			if (element) {
+				array_value->value.array.count++;
+				array_value->value.array.values = (JsonValue *)realloc(array_value->value.array.values, array_value->value.array.count * sizeof(JsonValue));
+				array_value->value.array.values[array_value->value.array.count - 1] = *element;
+				free(element);
+			} else {
+				break;
+			}
+			skip_whitespace(json);
+			if (**json == ',') {
+				(*json)++;
+			}
 		}
-		
-		JsonValue *parse_number(const char **json) {
-		    skip_whitespace(json);
-		    char *end; //:') 
-		
-		    double num = strtod(*json, &end);
-		    if (end != *json) {
-		        JsonValue *value = (JsonValue *) malloc(sizeof(JsonValue));
-		        value->type = JSON_NUMBER;
-		        value->value.number = num;
-		        *json = end;
-		        return value;
-		    }
-		    return NULL;
+		if (**json == ']') {
+			(*json)++;
+			return array_value;
+		} else {
+			free_json_value(array_value);
+			return NULL;
 		}
-		
-		JsonValue *parse_string(const char **json) {
-		    skip_whitespace(json);
-		
-		    if (**json == '\"') {
-		        (*json)++;
-		        const char *start = *json;
-		        while (**json != '\"' && **json != '\0') {
-		            (*json)++;
-		        }
-		        if (**json == '\"') {
-		            size_t length = *json - start; // 3
-		            char *str = (char *) malloc((length + 1) * sizeof(char));
-		            strncpy(str, start, length);
-		            str[length] = '\0';
-		
-		            JsonValue *value = (JsonValue *) malloc(sizeof(JsonValue));
-		            value->type = JSON_STRING;
-		            value->value.string = str;
-		            (*json)++;
-		            return value;
-		        }
-		    }
-		    return NULL;
+	}
+	return NULL;
+}
+
+JsonValue *parse_object(const char **json) {
+	skip_whitespace(json);
+	if (**json == '{') {
+		(*json)++;
+		skip_whitespace(json);
+
+		JsonValue *object_value = (JsonValue *)malloc(sizeof(JsonValue));
+		object_value->type = JSON_OBJECT;
+		object_value->value.object.count = 0;
+		object_value->value.object.keys = NULL;
+		object_value->value.object.values = NULL;
+
+		while (**json != '}' && **json != '\0') {
+			JsonValue *key = parse_string(json);
+			if (key) {
+				skip_whitespace(json);
+				if (**json == ':') {
+					(*json)++;
+					JsonValue *value = parse_json(json);
+					if (value) {
+						object_value->value.object.count++;
+						object_value->value.object.keys = (char **)realloc(object_value->value.object.keys, object_value->value.object.count * sizeof(char *));
+						object_value->value.object.keys[object_value->value.object.count - 1] = key->value.string;
+
+						object_value->value.object.values = (JsonValue *)realloc(object_value->value.object.values, object_value->value.object.count * sizeof(JsonValue));
+						object_value->value.object.values[object_value->value.object.count - 1] = *value;
+						free(value);
+					} else {
+						free_json_value(key);
+						break;
+					}
+				} else {
+					free_json_value(key);
+					break;
+				}
+			} else {
+				break;
+			}
+			skip_whitespace(json);
+			if (**json == ',') {
+				(*json)++;
+			}
 		}
-		
-		JsonValue *parse_array(const char **json) {
-		    skip_whitespace(json);
-		    if (**json == '[') {
-		        (*json)++;
-		        skip_whitespace(json);
-		
-		        JsonValue *array_value = (JsonValue *)malloc(sizeof(JsonValue));
-		        array_value->type = JSON_ARRAY;
-		        array_value->value.array.count = 0;
-		        array_value->value.array.values = NULL;
-		
-		        /*
-		        double arr[2] = {};
-		        arr[0] = 30;
-		        arr[1] = 70;
-		        */
-		
-		        while (**json != ']' && **json != '\0') {
-		            JsonValue *element = parse_json(json); // 70
-		            if (element) {
-		                array_value->value.array.count++;
-		                array_value->value.array.values = (JsonValue *)realloc(array_value->value.array.values, array_value->value.array.count * sizeof(JsonValue));
-		                array_value->value.array.values[array_value->value.array.count - 1] = *element;
-		                free(element);
-		            } else {
-		                break;
-		            }
-		            skip_whitespace(json);
-		            if (**json == ',') {
-		                (*json)++;
-		            }
-		        }
-		        if (**json == ']') {
-		            (*json)++;
-		            return array_value;
-		        } else {
-		            free_json_value(array_value);
-		            return NULL;
-		        }
-		    }
-		    return NULL;
+		if (**json == '}') {
+			(*json)++;
+			return object_value;
+		} else {
+			free_json_value(object_value);
+			return NULL;
 		}
+	}
+	return NULL;
+}
+
+JsonValue *parse_json(const char **json) { // làm việc với giá trị json_str_value 
+	while (isspace(**json)) {
+		(*json)++;
+	}
+
+	switch (**json) {
+		case 'n':
+			return parse_null(json);
+		case 't':
+		case 'f':
+			return parse_boolean(json);
+		case '\"':
+			return parse_string(json);
+		case '[':
+			return parse_array(json);
+		case '{':
+			return parse_object(json);
+		default:
+			if (isdigit(**json) || **json == '-') return parse_number(json);
+			else return NULL; // Lỗi phân tích cú pháp
+	}
+}
+
+void free_json_value(JsonValue *json_value) {
+	if (json_value == NULL) return;
+	
+	switch (json_value->type) {
+		case JSON_STRING:
+			free(json_value->value.string);
+			break;
+		case JSON_ARRAY:
+			for (size_t i = 0; i < json_value->value.array.count; i++) {
+				free_json_value(&json_value->value.array.values[i]);
+			}
+			free(json_value->value.array.values);
+			break;
+		case JSON_OBJECT:
+			for (size_t i = 0; i < json_value->value.object.count; i++) {
+				free(json_value->value.object.keys[i]);
+				free_json_value(&json_value->value.object.values[i]);
+			}
+			free(json_value->value.object.keys);
+			free(json_value->value.object.values);
+			break;
+		default:
+			break;
+	}
+}
+
+void test(JsonValue* json_value){
+	if (json_value != NULL && json_value->type == JSON_OBJECT) {
+		// Truy cập giá trị của các trường trong đối tượng JSON
+		size_t num_fields = json_value->value.object.count;
+		size_t num_fields2 = json_value->value.object.values->value.object.count;
+		for (size_t i = 0; i < num_fields; ++i) {
+
+			char* key = json_value->value.object.keys[i];
+			JsonValue* value = &json_value->value.object.values[i];
+
+			JsonType type = (int)(json_value->value.object.values[i].type);
+
+			if(type == JSON_STRING) printf("%s: %s\n", key, value->value.string);
 		
-		JsonValue *parse_object(const char **json) {
-		    skip_whitespace(json);
-		    if (**json == '{') {
-		        (*json)++;
-		        skip_whitespace(json);
+			if(type == JSON_NUMBER) printf("%s: %f\n", key, value->value.number);
 		
-		        JsonValue *object_value = (JsonValue *)malloc(sizeof(JsonValue));
-		        object_value->type = JSON_OBJECT;
-		        object_value->value.object.count = 0;
-		        object_value->value.object.keys = NULL;
-		        object_value->value.object.values = NULL;
-		
-		        while (**json != '}' && **json != '\0') {
-		            JsonValue *key = parse_string(json);
-		            if (key) {
-		                skip_whitespace(json);
-		                if (**json == ':') {
-		                    (*json)++;
-		                    JsonValue *value = parse_json(json);
-		                    if (value) {
-		                        object_value->value.object.count++;
-		                        object_value->value.object.keys = (char **)realloc(object_value->value.object.keys, object_value->value.object.count * sizeof(char *));
-		                        object_value->value.object.keys[object_value->value.object.count - 1] = key->value.string;
-		
-		                        object_value->value.object.values = (JsonValue *)realloc(object_value->value.object.values, object_value->value.object.count * sizeof(JsonValue));
-		                        object_value->value.object.values[object_value->value.object.count - 1] = *value;
-		                        free(value);
-		                    } else {
-		                        free_json_value(key);
-		                        break;
-		                    }
-		                } else {
-		                    free_json_value(key);
-		                    break;
-		                }
-		            } else {
-		                break;
-		            }
-		            skip_whitespace(json);
-		            if (**json == ',') {
-		                (*json)++;
-		            }
-		        }
-		        if (**json == '}') {
-		            (*json)++;
-		            return object_value;
-		        } else {
-		            free_json_value(object_value);
-		            return NULL;
-		        }
-		    }
-		    return NULL;
+			if(type == JSON_BOOLEAN) printf("%s: %s\n", key, value->value.boolean ? "True":"False");
+
+			if(type == JSON_OBJECT){
+				printf("%s: \n", key);
+				test(value);
+			}
+
+			if(type == JSON_ARRAY){
+				printf("%s: ", key);
+				for (int i = 0; i < value->value.array.count; i++) {
+				   test(value->value.array.values + i);
+				} 
+				printf("\n");
+			}
 		}
+	} else {
+		if(json_value->type == JSON_STRING) printf("%s ", json_value->value.string);
 		
-		JsonValue *parse_json(const char **json) { // làm việc với giá trị json_str_value 
-		    while (isspace(**json)) {
-		        (*json)++;
-		    }
-		
-		    switch (**json) {
-		        case 'n':
-		            return parse_null(json);
-		        case 't':
-		        case 'f':
-		            return parse_boolean(json);
-		        case '\"':
-		            return parse_string(json);
-		        case '[':
-		            return parse_array(json);
-		        case '{':
-		            return parse_object(json);
-		        default:
-		            if (isdigit(**json) || **json == '-') return parse_number(json);
-		            else return NULL; // Lỗi phân tích cú pháp
-		    }
-		}
-		
-		void free_json_value(JsonValue *json_value) {
-		    if (json_value == NULL) return;
-		    
-		    switch (json_value->type) {
-		        case JSON_STRING:
-		            free(json_value->value.string);
-		            break;
-		        case JSON_ARRAY:
-		            for (size_t i = 0; i < json_value->value.array.count; i++) {
-		                free_json_value(&json_value->value.array.values[i]);
-		            }
-		            free(json_value->value.array.values);
-		            break;
-		        case JSON_OBJECT:
-		            for (size_t i = 0; i < json_value->value.object.count; i++) {
-		                free(json_value->value.object.keys[i]);
-		                free_json_value(&json_value->value.object.values[i]);
-		            }
-		            free(json_value->value.object.keys);
-		            free(json_value->value.object.values);
-		            break;
-		        default:
-		            break;
-		    }
-		}
-		
-		void test(JsonValue* json_value){
-		    if (json_value != NULL && json_value->type == JSON_OBJECT) {
-		        // Truy cập giá trị của các trường trong đối tượng JSON
-		        size_t num_fields = json_value->value.object.count;
-		        size_t num_fields2 = json_value->value.object.values->value.object.count;
-		        for (size_t i = 0; i < num_fields; ++i) {
-		
-		            char* key = json_value->value.object.keys[i];
-		            JsonValue* value = &json_value->value.object.values[i];
-		
-		            JsonType type = (int)(json_value->value.object.values[i].type);
-		
-		            if(type == JSON_STRING) printf("%s: %s\n", key, value->value.string);
-		        
-		            if(type == JSON_NUMBER) printf("%s: %f\n", key, value->value.number);
-		        
-		            if(type == JSON_BOOLEAN) printf("%s: %s\n", key, value->value.boolean ? "True":"False");
-		
-		            if(type == JSON_OBJECT){
-		                printf("%s: \n", key);
-		                test(value);
-		            }
-		
-		            if(type == JSON_ARRAY){
-		                printf("%s: ", key);
-		                for (int i = 0; i < value->value.array.count; i++) {
-		                   test(value->value.array.values + i);
-		                } 
-		                printf("\n");
-		            }
-		        }
-		    } else {
-			    if(json_value->type == JSON_STRING) printf("%s ", json_value->value.string);
-			    
-			    if(json_value->type == JSON_NUMBER) printf("%f ", json_value->value.number);
-			
-			    if(json_value->type == JSON_BOOLEAN) printf("%s ", json_value->value.boolean ? "True":"False");
-			
-			    if(json_value->type == JSON_OBJECT){
-				printf("%s: \n", json_value->value.object.keys);
-				test(json_value->value.object.values);          
-		            }
-		      }
-		}
-		
-		int main(int argc, char const *argv[]) {
-		     
-		     // Chuỗi JSON đầu vào
-		    const char* json_str = "{"
-		                        "\"1001\":{"
-		                          "\"SoPhong\":3,"
-		                          "\"NguoiThue\":{"
-		                            "\"Ten\":\"Nguyen Van A\","
-		                            "\"CCCD\":\"1920517781\","
-		                            "\"Tuoi\":26,"
-		                            "\"ThuongTru\":{"
-		                              "\"Duong\":\"73 Ba Huyen Thanh Quan\","
-		                              "\"Phuong_Xa\":\"Phuong 6\","
-		                              "\"Tinh_TP\":\"Ho Chi Minh\""
-		                            "}"
-		                          "},"
-		                          "\"SoNguoiO\":{"
-		                            "\"1\":\"Nguyen Van A\","
-		                            "\"2\":\"Nguyen Van B\","
-		                            "\"3\":\"Nguyen Van C\""
-		                          "},"
-		                          "\"TienDien\": [24, 56, 98],"
-		                          "\"TienNuoc\":30.000"
-		                        "},"
-		                        "\"1002\":{"
-		                          "\"SoPhong\":5,"
-		                          "\"NguoiThue\":{"
-		                            "\"Ten\":\"Phan Hoang Trung\","
-		                            "\"CCCD\":\"012345678912\","
-		                            "\"Tuoi\":24,"
-		                            "\"ThuongTru\":{"
-		                              "\"Duong\":\"53 Le Dai Hanh\","
-		                              "\"Phuong_Xa\":\"Phuong 11\","
-		                              "\"Tinh_TP\":\"Ho Chi Minh\""
-		                            "}"
-		                          "},"
-		                          "\"SoNguoiO\":{"
-		                            "\"1\":\"Phan Van Nhat\","
-		                            "\"2\":\"Phan Van Nhi\","
-		                            "\"2\":\"Phan Van Tam\","
-		                            "\"3\":\"Phan Van Tu\""
-		                          "},"
-		                          "\"TienDien\":23.000,"
-		                          "\"TienNuoc\":40.000"
-		                        "}"
-		                      "}";
-		    
-		
-		    // Phân tích cú pháp chuỗi JSON
-		    JsonValue* json_value = parse_json(&json_str);
-		
-		   test(json_value);
-		
-		    // Kiểm tra kết quả phân tích cú pháp
-		
-		       // Giải phóng bộ nhớ được cấp phát cho JsonValue
-		    free_json_value(json_value);
-		    
-		        //printf("test = %x", '\"');
-		
-		       // hienthi(5);
-		    
-		    return 0;
-		}
+		if(json_value->type == JSON_NUMBER) printf("%f ", json_value->value.number);
+	
+		if(json_value->type == JSON_BOOLEAN) printf("%s ", json_value->value.boolean ? "True":"False");
+	
+		if(json_value->type == JSON_OBJECT){
+		printf("%s: \n", json_value->value.object.keys);
+		test(json_value->value.object.values);          
+			}
+	  }
+}
+
+int main(int argc, char const *argv[]) {
+	 
+	 // Chuỗi JSON đầu vào
+	const char* json_str = "{"
+						"\"1001\":{"
+						  "\"SoPhong\":3,"
+						  "\"NguoiThue\":{"
+							"\"Ten\":\"Nguyen Van A\","
+							"\"CCCD\":\"1920517781\","
+							"\"Tuoi\":26,"
+							"\"ThuongTru\":{"
+							  "\"Duong\":\"73 Ba Huyen Thanh Quan\","
+							  "\"Phuong_Xa\":\"Phuong 6\","
+							  "\"Tinh_TP\":\"Ho Chi Minh\""
+							"}"
+						  "},"
+						  "\"SoNguoiO\":{"
+							"\"1\":\"Nguyen Van A\","
+							"\"2\":\"Nguyen Van B\","
+							"\"3\":\"Nguyen Van C\""
+						  "},"
+						  "\"TienDien\": [24, 56, 98],"
+						  "\"TienNuoc\":30.000"
+						"},"
+						"\"1002\":{"
+						  "\"SoPhong\":5,"
+						  "\"NguoiThue\":{"
+							"\"Ten\":\"Phan Hoang Trung\","
+							"\"CCCD\":\"012345678912\","
+							"\"Tuoi\":24,"
+							"\"ThuongTru\":{"
+							  "\"Duong\":\"53 Le Dai Hanh\","
+							  "\"Phuong_Xa\":\"Phuong 11\","
+							  "\"Tinh_TP\":\"Ho Chi Minh\""
+							"}"
+						  "},"
+						  "\"SoNguoiO\":{"
+							"\"1\":\"Phan Van Nhat\","
+							"\"2\":\"Phan Van Nhi\","
+							"\"2\":\"Phan Van Tam\","
+							"\"3\":\"Phan Van Tu\""
+						  "},"
+						  "\"TienDien\":23.000,"
+						  "\"TienNuoc\":40.000"
+						"}"
+					  "}";
+	
+
+	// Phân tích cú pháp chuỗi JSON
+	JsonValue* json_value = parse_json(&json_str);
+
+   test(json_value);
+
+	// Kiểm tra kết quả phân tích cú pháp
+
+	   // Giải phóng bộ nhớ được cấp phát cho JsonValue
+	free_json_value(json_value);
+	
+		//printf("test = %x", '\"');
+
+	   // hienthi(5);
+	
+	return 0;
+}
+```
 
   **II, Complete Example**
 __________________________________________________________________________________________________________________________________________________________________________
