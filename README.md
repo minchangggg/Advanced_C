@@ -1,8 +1,3 @@
-## [___________ MODULE CONTENT ❤ ___________]()
-<img width="100" alt="image" src="https://github.com/user-attachments/assets/b68c7534-22de-40f3-aaba-b0b6893f5414">
-
-## [_________________________________________________]()
-
 # Lesson 1: COMPILER and MACRO
 ## A. COMPILER
 > https://www.geeksforgeeks.org/compiling-a-c-program-behind-the-scenes/
