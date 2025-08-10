@@ -1,5 +1,5 @@
 # `___________ MODULE CONTENT ❤ ___________`
-<img width="200" alt="image" src="https://github.com/user-attachments/assets/b5e9e1c7-5152-43ff-824a-df15728802d8">
+<img width="170" alt="image" src="https://github.com/user-attachments/assets/b5e9e1c7-5152-43ff-824a-df15728802d8">
 
 # Lesson 1: COMPILER and MACRO
 ## A. COMPILER
