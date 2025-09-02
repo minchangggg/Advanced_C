@@ -2,10 +2,13 @@
 <img width="170" alt="image" src="https://github.com/user-attachments/assets/39e9379b-16e0-4db5-b19f-6f48df3869b5">
 
 # Lesson 1: Program Execution Flow and MACRO
-## A. Program Execution Flow [Create → Build → Run]
+
+## A. C Program Execution Flow [Create → Build → Run]
 > https://www.geeksforgeeks.org/compiling-a-c-program-behind-the-scenes/
 >
 > https://www.scaler.com/topics/execution-of-c-program/
+
+<img width="750" alt="image" src="https://github.com/user-attachments/assets/0cac01bb-5295-438d-a288-08efd48d5a20">
 
 #### What is the compilation process ?
 - The compilation is the process of converting the source code of the C language into machine code. 
@@ -79,7 +82,7 @@
 
   <img width="330" alt="image" src="https://github.com/user-attachments/assets/ba2eb6b4-2ede-45e7-9ceb-1950d2d7b55c">
 
-### 1. Create (Source Code Creation) = [Creating a C Source File]
+### 1. Create (Source Code Creation = Creating a C Source File)
 > _C code: When you first write the code in the C language, that source code is sent to the Preprocessing section._
 
 - We first create a C program using an editor and save the file as filename.c.
@@ -96,7 +99,7 @@ int main() {
 }
 ```
 
-### 2.Build (Compilation Process) = [Preprocessor → Compiler → Assembler → Linker → Executable file]
+### 2.Build (Compilation Process = Preprocessor → Compiler → Assembler → Linker → Executable file)
 ### 2.1. Manually handling each step (do not use GCC compiler)
 ```c
 gcc -E main.c -o main.i      # Preprocessing → produces .i
@@ -234,23 +237,24 @@ gcc main.c -o main
 
   <img width="500" alt="image" src="https://github.com/user-attachments/assets/3960cd64-85bb-48e8-b6ab-0330a0d2db6b">
 
-### 3. Run (Execution Process) = [Loader → Load into RAM → CPU executes]
+### 3. Run (Execution Process = Loader → Memory Loading into RAM → CPU Execution)
 > https://stackoverflow.com/questions/69212665/how-computer-cpu-executes-a-software-application
 >
 > https://www.reddit.com/r/computerscience/comments/1g68ijl/how_exactly_does_a_cpu_run_code/
 
-		- Before diving into how programs are executed in a CPU, it’s essential to understand the different types of registers that play a crucial role in this process. These registers are small, high-speed storage locations within the CPU that store data temporarily. Each type of register has a specific function, and they help manage various tasks in program execution.
-		- Registers Used in Program Execution
+		- Before diving into how programs are loaded and executed, it is essential to examine the CPU’s fundamental components—registers and buses—that enable and coordinate the execution cycle.
+		- [Registers Used in Program Execution] 
+          Registers are small, high-speed storage locations within the CPU that temporarily hold data and instructions. Each register has a specific role in managing program execution:
 		  i. Instruction Register (IR): This register holds the instruction that the CPU is currently executing. It stores the instruction fetched from memory and passes it to the control unit to carry out the required operation.
 		  ii. Program Counter (PC): This register keeps track of the memory address of the next instruction to be executed. It automatically updates to the next instruction after the current one is executed, ensuring the program runs sequentially.
 		  iii. Accumulator (AC): The accumulator temporarily holds the results of arithmetic and logic operations performed by the CPU. It’s often used for intermediate calculations.
 		  iv. Memory Address Register (MAR): The MAR holds the address in memory where data is to be fetched from or written to. When the CPU needs to read or write data, the MAR is used to point to the correct location in memory.
 		  v. Memory Buffer Register (MBR): This register temporarily stores the data being transferred to or from memory. When data is fetched from memory, it's placed in the MBR before being passed to the appropriate part of the CPU.
 		  vi. Status Register (SR): The status register contains flags that represent the state of the CPU after performing an operation, such as zero (if the result is zero) or carry (if there was a carry in the operation).
-		- Data Buses Used in Program Execution
-		  1. Address Bus: Transmits the address from the MAR to the Memory Unit to fetch or store data.
-		  2. Data Bus: Transfers the data between memory and the MBR or between the MBR and other registers like the AC. 
-		  3. Control Bus: Sends signals to control memory operations, including Read and Write operations, allowing the CPU to interact with memory.
+		- [Data Buses Used in Program Execution]
+		  i. Address Bus: Transmits the address from the MAR to the Memory Unit to fetch or store data.
+		  ii. Data Bus: Transfers the data between memory and the MBR or between the MBR and other registers like the AC. 
+		  iii. Control Bus: Sends signals to control memory operations, including Read and Write operations, allowing the CPU to interact with memory.
 
 #### 3.1. Program Invocation
 - After compilation executable is generated and we run the generated executable using the below command.
@@ -261,16 +265,16 @@ gcc main.c -o main
     + The linker produces hello.exe.
     + Windows recognizes .exe as an executable, so you can simply type: **`hello`** or double-click the file to run it.
       > No ./ is needed because Windows automatically looks for .exe in the current folder or in the system PATH.
-- When the **user runs** the **program**, the **Operating System (OS) takes control** => The OS loader is activated.
-- The **OS loader** is responsible for **preparing** the **program** in memory so the CPU can execute it.
+- When the user invokes the program, control is transferred to the Operating System (OS).
+- The OS activates the loader, which prepares the program for execution in memory.
 
 #### 3.2. Loading (OS Loader prepares the program)
 > _Loader: Whenever the command is given for the execution of a particular program, The loader plays an important role. With the help of the loader, the .exe file is loaded in the RAM and the CPU is informed of the starting point of the address of the program where it is loaded._
 
-- i. The loader copies the executable file from disk → RAM 
+- **i. The loader copies the executable file from disk → RAM:** 
   + The **loader** **reads** the **executable file** from **secondary storage** (disk).
   + It **loads** the program’s **code** and data **sections** **into** **RAM**.
-- ii. Allocate memory regions into standard segments:
+- **ii. Allocate memory regions into standard segments:**
   - Memory Layout of a Process in RAM
     - **Text Segment (Code Segment)**
       + Contains machine code instructions (compiled program code).
@@ -287,10 +291,10 @@ gcc main.c -o main
       + Each function call creates a stack frame that gets destroyed when the function exits.
 	- Libraries (Shared Objects / DLLs)
 	  + If the program uses external libraries, the loader maps them into memory.
-  - If the program depends on shared libraries (.so on Linux or .dll on Windows), the loader maps them into memory.
-- iii. Set the entry point: The OS initializes the Program Counter (PC) with the address of the program’s entry point (usually the main function).
+    > This memory segmentation provides isolation and efficient management of program execution
+- **iii. Set the entry point:** The OS initializes the Program Counter (PC) with the address of the program’s entry point (usually the main function).
 
-=> At this point, the program is ready to run, and control is handed over to the CPU.
+=> At this stage, the program is ready, and execution control is passed to the CPU.
 
 #### 3.3. Execution (by the CPU)
 <img width="1042" height="745" alt="image" src="https://github.com/user-attachments/assets/bce5589c-c9e0-4130-b186-57235fcfca23" />
@@ -298,27 +302,27 @@ gcc main.c -o main
 > - Once the **program** is **loaded into memory**, the **CPU** starts **executing** **instructions** **sequentially**.
 > - The execution follows the **fetch–decode–execute** cycle, where each instruction is fetched from RAM, decoded, and executed.
 > - During execution, the program may request services from the OS (via system calls), such as file I/O or memory allocation.
-- i. Fetch the First Instruction
+- **i. Fetch the First Instruction**
   + PC (Program Counter) holds the address of the next instruction.
   + MAR (Memory Address Register) loads that address.
   + The Address Bus sends the address to memory, and the Control Bus triggers a Read operation.
   + The instruction is fetched into the MBR (Memory Buffer Register) via the Data Bus and then moved to the IR (Instruction Register).
   + PC is incremented to point to the next instruction.
-- ii. Decode
+- **ii. Decode**
   + The Control Unit decodes the instruction in the IR, determining what needs to be done.
-- iii. Execute
+- **iii. Execute**
   - Depending on the instruction type:
     + Arithmetic/Logic → The ALU performs the operation (e.g., add, subtract, AND, OR).
     + Memory operations → The CPU uses MAR and MBR to read/write data in RAM.
     + I/O operations → The CPU communicates with devices via system buses.
     + Results may be stored in registers (e.g., the Accumulator, AC) or written back to memory.
-- iv. Repeat
+- **iv. Repeat**
   + The CPU loops back to Fetch.
   + This cycle repeats billions of times per second (depending on the clock speed), enabling complex tasks like file deletion, graphics rendering, or web browsing—everything still boils down to math and logic at the hardware level.
 
 #### 3.4. Program Termination
-- When the program finishes (e.g., after return 0; in main), control is returned to the operating system.
-- The OS frees the program’s allocated memory and resources.
+- When the program finishes (e.g., after return 0; in main), control is returned to the operating system. For example, in C programs, this happens after the return statement in main (e.g., return 0;)
+- The OS deallocates memory and releases system resources.
 
 ## B. MACRO
 > https://www.programiz.com/c-programming/c-preprocessor-macros
