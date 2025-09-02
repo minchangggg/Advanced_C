@@ -1,13 +1,13 @@
 # `___________ MODULE CONTENT ❤ ___________`
 <img width="170" alt="image" src="https://github.com/user-attachments/assets/39e9379b-16e0-4db5-b19f-6f48df3869b5">
 
-# Lesson 1: COMPILER and MACRO
-## A. COMPILER
+# Lesson 1: Program Execution Flow and MACRO
+## A. Program Execution Flow [Create → Build → Run]
 > https://www.geeksforgeeks.org/compiling-a-c-program-behind-the-scenes/
 >
 > https://www.scaler.com/topics/execution-of-c-program/
 
-#### What is the compilation?
+#### What is the compilation process ?
 - The compilation is the process of converting the source code of the C language into machine code. 
 - C is a mid-level language, it needs a compiler to convert it into an executable code so that the program can be run on our machine.
 
@@ -72,7 +72,7 @@
   + **`filename`** // for windows
 - The program will be executed, and the output will be shown in the terminal.
 
-![c-source-file-compliled-and-executed](https://github.com/user-attachments/assets/2298ae2d-a306-4523-9668-b7da171c9a4e)
+  <img width="500" alt="image" src="https://github.com/user-attachments/assets/edb1770a-1eab-4600-9031-e92526effacf">
 
 #### A Detailed Look at Lifecycle of a C Program: Create, Build, and Run (with Basic Example)
 - The C program goes through the following phases during compilation
