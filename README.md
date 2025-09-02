@@ -99,7 +99,7 @@ int main() {
 }
 ```
 
-### 2.Build (Compilation Process = Preprocessor → Compiler → Assembler → Linker → Executable file)
+### 2. Build (Compilation Process = Preprocessor → Compiler → Assembler → Linker → Executable file)
 ### 2.1. Manually handling each step (do not use GCC compiler)
 ```c
 gcc -E main.c -o main.i      # Preprocessing → produces .i
