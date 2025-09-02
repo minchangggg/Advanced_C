@@ -240,6 +240,8 @@ gcc main.c -o main
 ### 3. Run (Execution Process = Loader → Memory Loading into RAM → CPU Execution)
 > https://stackoverflow.com/questions/69212665/how-computer-cpu-executes-a-software-application
 >
+> https://www.tutorchase.com/answers/ib/computer-science/how-does-the-cpu-execute-instructions-in-a-computer-system
+> 
 > https://www.reddit.com/r/computerscience/comments/1g68ijl/how_exactly_does_a_cpu_run_code/
 
 		- Before diving into how programs are loaded and executed, it is essential to examine the CPU’s fundamental components—registers and buses—that enable and coordinate the execution cycle.
@@ -299,24 +301,28 @@ gcc main.c -o main
 #### 3.3. Execution (by the CPU)
 <img width="1042" height="745" alt="image" src="https://github.com/user-attachments/assets/bce5589c-c9e0-4130-b186-57235fcfca23" />
 
-> - Once the **program** is **loaded into memory**, the **CPU** starts **executing** **instructions** **sequentially**.
-> - The execution follows the **fetch–decode–execute** cycle, where each instruction is fetched from RAM, decoded, and executed.
-> - During execution, the program may request services from the OS (via system calls), such as file I/O or memory allocation.
+- Once the **program** is **loaded into memory**, the **CPU** starts **executing** **instructions** **sequentially**.
+- The Central Processing Unit (CPU) is the brain of the computer, responsible for executing instructions of a computer program. This process is carried out through a cycle known as the fetch-decode-execute cycle, also referred to as the instruction cycle. This cycle is a set of operations that the CPU performs to execute each machine language instruction of a program.
+
 - **i. Fetch the First Instruction**
+  > The first step in this cycle is the fetch operation. The CPU fetches the instruction from the main memory (RAM) into its own internal memory, the Instruction Register (IR). The Program Counter (PC) keeps track of the memory address of the next instruction to be fetched. After fetching, the PC is incremented to point to the next instruction.
   + PC (Program Counter) holds the address of the next instruction.
   + MAR (Memory Address Register) loads that address.
   + The Address Bus sends the address to memory, and the Control Bus triggers a Read operation.
   + The instruction is fetched into the MBR (Memory Buffer Register) via the Data Bus and then moved to the IR (Instruction Register).
   + PC is incremented to point to the next instruction.
 - **ii. Decode**
+  > The second step is the decode operation. The Control Unit (CU) of the CPU decodes the fetched instruction to determine what operation needs to be performed. This could be an arithmetic operation, a data movement operation, or a control operation. The CU uses the opcode (operation code) of the instruction to determine the type of operation.
   + The Control Unit decodes the instruction in the IR, determining what needs to be done.
 - **iii. Execute**
+  > The final step is the execute operation. The CPU performs the operation as determined by the decode step. This could involve the Arithmetic Logic Unit (ALU) if it's an arithmetic or logical operation, or it could involve moving data from one register to another, or from memory to a register. If the operation is a control operation, it could involve changing the sequence of execution of the program, such as in the case of a jump instruction.
   - Depending on the instruction type:
     + Arithmetic/Logic → The ALU performs the operation (e.g., add, subtract, AND, OR).
     + Memory operations → The CPU uses MAR and MBR to read/write data in RAM.
     + I/O operations → The CPU communicates with devices via system buses.
     + Results may be stored in registers (e.g., the Accumulator, AC) or written back to memory.
 - **iv. Repeat**
+  > This cycle repeats for each instruction in the program until the program ends. The speed at which the CPU can complete this cycle, often measured in cycles per second or hertz, is a key factor in the overall performance of a computer system. The CPU's ability to execute multiple instructions simultaneously, known as parallel processing, can also significantly enhance performance.
   + The CPU loops back to Fetch.
   + This cycle repeats billions of times per second (depending on the clock speed), enabling complex tasks like file deletion, graphics rendering, or web browsing—everything still boils down to math and logic at the hardware level.
 
