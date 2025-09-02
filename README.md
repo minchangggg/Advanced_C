@@ -234,15 +234,6 @@ gcc main.c -o main
 
   <img width="500" alt="image" src="https://github.com/user-attachments/assets/3960cd64-85bb-48e8-b6ab-0330a0d2db6b">
 
-
-#### Pre-processing
-#### Compiling
-![c-compilation-assembly-code](https://github.com/user-attachments/assets/7ba4e7be-096d-4aa4-916a-57a6e5abfbb8)
-
-#### Assembling
-
-#### Linking
-
 ### 3. Run (Execution Process) = [Loader → Load into RAM → CPU executes]
 #### 3.1. Program Invocation
 - After compilation executable is generated and we run the generated executable using the below command.
