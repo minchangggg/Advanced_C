@@ -145,3 +145,7 @@ của console.
   
         + Một cột địa chỉ (address): địa chỉ là một số cho phép máy tính có thể xác đinh vị trí trong RAM. Nó bắt đầu từ địa chỉ 0 và kết thúc ở địa chỉ 3 448 765 900 126... Hic, tôi không hề biết rõ số lượng địa chỉ chứa trong RAM, tôi chỉ biêt rằng nó có rất nhiều. Bởi vì nó phụ thuộc vào dung lượng bộ nhớ mà bạn có. Chỉ có thể nói là, bạn có RAM, bạn có thể để vào đó nhiều thứ.
         + Và mỗi địa chỉ chứa một giá trị (một số, value): Máy tính của bạn đưa vào RAM những số này để có thể nhớ ngay lập tức. Và người ta chỉ có thể đưa vào một số cho một địa chỉ trong RAM!
+
+# How a computer executes instructions
+> https://www.cs.emory.edu/~cheung/Courses/170/Syllabus/01/intro-computer2.html
+
