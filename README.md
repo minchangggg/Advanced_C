@@ -14,6 +14,50 @@
 The compilation is the process of converting the source code of the C language into machine code. 
 
 C is a mid-level language, it needs a compiler to convert it into an executable code so that the program can be run on our machine.
+
+			1. Low-level languages 
+			* Very close to hardware, hard for humans to read.
+			- Machine Language:
+			  + Pure binary (`0` and `1`).
+			  + Example: `10110000 01100001`
+			- Assembly Language:
+			  + Uses mnemonics instead of binary.
+			  + Example:
+				MOV AX, 5
+				ADD AX, 3
+			
+			* Characteristics:
+			  Very fast, directly controls hardware.
+			  Difficult to write, maintain, and highly dependent on CPU architecture.
+			
+			2. High-level languages
+			* Closer to human language, abstracted from hardware.
+			- Examples: Python, Java, C#, Ruby, JavaScript…
+			- Provide abstractions (OOP, data structures, libraries).
+			- Automatic memory management (garbage collection).
+			- Portable across platforms.
+			- Example (Python):
+				for i in range(5):
+				    print(i + 1)
+			* Easy to learn and use, but usually slower than low-level languages because of interpreters/VMs.
+			
+			3. Mid-level language → Ex: C
+			* Sits between high-level and low-level
+			  High-level side: has functions, loops, conditions, structured programming.
+			  Low-level side: allows direct memory access, pointers, bitwise operations, system-level programming.
+			* Can be used for both system programming (OS, drivers, compilers) and application programming.
+			- Example (C):
+				int main() {
+				    int a = 5, b = 3;
+				    int sum = a + b;
+				    return 0;
+				}
+			
+			4. Summary 
+			* Low-level  | Close to machine, fast but hard to write (Machine code, Assembly).
+			* High-level | Close to humans, easy to write but slower (Python, Java, JS).
+			* Mid-level  | Balance between both → efficient and flexible (C).
+
 ### 3, What goes inside the compilation process?
 <img width="600" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/bce15492-bcab-4c06-aae9-b77140e00075">
 
