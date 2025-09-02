@@ -62,7 +62,7 @@
 
 - The C program goes through the following phases during compilation
 
-  <img width="593" height="752" alt="image" src="https://github.com/user-attachments/assets/ba2eb6b4-2ede-45e7-9ceb-1950d2d7b55c" />
+  <img width="330" alt="image" src="https://github.com/user-attachments/assets/ba2eb6b4-2ede-45e7-9ceb-1950d2d7b55c">
 
 ### 1. Development time
 #### Creating a C Source File
