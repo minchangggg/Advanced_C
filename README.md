@@ -11,10 +11,10 @@
 
 [Step 3] `Executing the program`
 ### 2, What is the compilation?
-The compilation is the process of converting the source code of the C language into machine code. 
+- The compilation is the process of converting the source code of the C language into machine code. 
+- C is a mid-level language, it needs a compiler to convert it into an executable code so that the program can be run on our machine.
 
-C is a mid-level language, it needs a compiler to convert it into an executable code so that the program can be run on our machine.
-
+			[NOTE]
 			1. Low-level languages 
 			* Very close to hardware, hard for humans to read.
 			- Machine Language:
@@ -58,18 +58,28 @@ C is a mid-level language, it needs a compiler to convert it into an executable 
 			* High-level | Close to humans, easy to write but slower (Python, Java, JS).
 			* Mid-level  | Balance between both → efficient and flexible (C).
 
-### 3, What goes inside the compilation process?
+- The C program goes through the following phases during compilation:
+
+  <img width="370" alt="image" src="https://github.com/user-attachments/assets/1ec23f0b-893a-4036-8e0b-1f568eee07d7">
+
+### 3, How do we compile and run a C program?
 <img width="600" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/bce15492-bcab-4c06-aae9-b77140e00075">
 
-#### a, Preprocessor
+#### Step 0: Creating a C Source File
+- We first create a C program using an editor and save the file as filename.c In linux, we can use vi to create a file from the terminal using the command:
+```c
+vi filename.c
+```
+- In windows, we can use the Notepad to do the same. Then write a simple hello world program and save it.
+#### Step 1: Preprocessor
 <img width="200" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/7f77b474-8ea0-43d6-875a-65d38ccfc701">
 
 <img width="500" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/0e3464b8-1928-46bb-87ef-f719093c721d">
 
 <img width="700" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/c4392f1b-c42e-4fb6-ad13-514f92181ba2">
 
-#### b, Compiler
-The compiler takes the preprocessed file and uses it to generate corresponding assembly code. 
+#### Step 2: Compiler
+- The compiler takes the preprocessed file and uses it to generate corresponding assembly code. 
 
 <img width="200" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/cba3c714-7fb1-4289-bf20-b31dedd5950d">
 
@@ -77,8 +87,8 @@ The compiler takes the preprocessed file and uses it to generate corresponding a
 
 => This file is in assembly-level instructions.
 
-#### c, Assembler
-Assembles the code into object code 
+#### Step 3: Assembler
+- Assembles the code into object code 
 
 < Where assembly code represents a correspondence between program and machine code, object code represents pure machine code (ie. binary) >
 
@@ -86,10 +96,18 @@ Assembles the code into object code
 
 <img width="700" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/d3b1bed3-c128-4302-98ca-402b2cf02bbf">
 
-#### d, Linker
+#### Step 4: Linker 
 <img width="200" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/7d3880db-b0b7-46e9-8c31-21035966c67e">
 
 <img width="250" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/973c3ae7-18ae-4786-939b-11fa524098ec">
+
+#### Step 5: Executing the program 
+- After compilation executable is generated and we run the generated executable using the below command.
+
+```c
+./filename // for linux
+ filename // for windows
+```
 
 ## B. MACRO
 > https://www.programiz.com/c-programming/c-preprocessor-macros
