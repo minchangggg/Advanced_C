@@ -29,24 +29,25 @@ Bạn được yêu cầu viết một chương trình mô phỏng hệ thống 
 > Sử dụng switch case để xử lý các loại thiết bị và lệnh khác nhau.
 > Sử dụng stdarg.h để xử lý số lượng và loại tham số đầu vào không xác định.
 + Kiểu dữ liệu các bạn có thể sử dụng
-  
-      typedef enum {
-          LIGHT,
-          AIR_CONDITIONER,
-          FINGERPRINT_LOCK,
-          MUSIC_PLAYER
-      } DeviceType;
-      
-      typedef enum {
-          ON,
-          OFF,
-          SET_TEMPERATURE,
-          SET_MODE,
-          UNLOCK,
-          LOCK,
-          INCREASE_VOLUME,
-          DECREASE_VOLUME,
-          CHANGE_TRACK
-      } CommandType;
+```c
+typedef enum {
+  LIGHT,
+  AIR_CONDITIONER,
+  FINGERPRINT_LOCK,
+  MUSIC_PLAYER
+} DeviceType;
+
+typedef enum {
+  ON,
+  OFF,
+  SET_TEMPERATURE,
+  SET_MODE,
+  UNLOCK,
+  LOCK,
+  INCREASE_VOLUME,
+  DECREASE_VOLUME,
+  CHANGE_TRACK
+} CommandType;
+```
 
 
