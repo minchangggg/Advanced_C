@@ -4,6 +4,8 @@
 # Lesson 1: COMPILER and MACRO
 ## A. COMPILER
 > https://www.geeksforgeeks.org/compiling-a-c-program-behind-the-scenes/
+>
+> https://www.scaler.com/topics/execution-of-c-program/
 ### 1, How do we compile and run a C program?
 [Step 1] `Creating a C Source File`
 
@@ -60,17 +62,17 @@
 
 - The C program goes through the following phases during compilation:
 
-  <img width="350" alt="image" src="https://github.com/user-attachments/assets/1ec23f0b-893a-4036-8e0b-1f568eee07d7">
+  <img width="426" height="555" alt="image" src="https://github.com/user-attachments/assets/b47066ec-462a-48bb-8386-d369dae2c619" />
 
 ### 3, How do we compile and run a C program?
 <img width="600" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/bce15492-bcab-4c06-aae9-b77140e00075">
 
 #### Step 0: Creating a C Source File
-- We first create a C program using an editor and save the file as filename.c In linux, we can use vi to create a file from the terminal using the command:
-```c
-vi filename.c
-```
-- In windows, we can use the Notepad to do the same. Then write a simple hello world program and save it.
+> _C code: When you first write the code in the C language, that source code is sent to the Preprocessing section._
+
+- We first create a C program using an editor and save the file as filename.c.
+  + In linux, we can use vi to create a file from the terminal using the command: `vi filename.c`
+  + In windows, we can use the Notepad to do the same. Then write a simple hello world program and save it.
 
 - Example code (main.c)
 ```c
@@ -82,6 +84,8 @@ int main() {
 }
 ```
 #### Step 1: Preprocessor
+> _Preprocessing: In this section our source code is attached to the preprocessor file. Different types of header files are used like the studio.h, math.h, etc. Our C source code is attached to these types of files and the final C Source generates. (some of the preprocessor directives are #include,#define). After generating the preprocessed C source code, the C source code is sent to the compiler section._
+
 - Handles #include, #define, macros.
 
 <img width="200" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/7f77b474-8ea0-43d6-875a-65d38ccfc701">
