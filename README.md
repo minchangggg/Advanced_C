@@ -60,7 +60,7 @@
 
 - The C program goes through the following phases during compilation:
 
-  <img width="370" alt="image" src="https://github.com/user-attachments/assets/1ec23f0b-893a-4036-8e0b-1f568eee07d7">
+  <img width="350" alt="image" src="https://github.com/user-attachments/assets/1ec23f0b-893a-4036-8e0b-1f568eee07d7">
 
 ### 3, How do we compile and run a C program?
 <img width="600" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/bce15492-bcab-4c06-aae9-b77140e00075">
@@ -71,43 +71,119 @@
 vi filename.c
 ```
 - In windows, we can use the Notepad to do the same. Then write a simple hello world program and save it.
+
+- Example code (main.c)
+```c
+#include <stdio.h>
+
+int main() {
+    printf("hello");
+    return 0;
+}
+```
 #### Step 1: Preprocessor
+- Handles #include, #define, macros.
+
 <img width="200" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/7f77b474-8ea0-43d6-875a-65d38ccfc701">
 
 <img width="500" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/0e3464b8-1928-46bb-87ef-f719093c721d">
 
 <img width="700" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/c4392f1b-c42e-4fb6-ad13-514f92181ba2">
 
+- Command: **`gcc -E main.c -o main.i`**
+  + Input: main.c
+  + Output: main.i (**preprocessed C code**)
+- main.i contains expanded code:
+  + #include <stdio.h> → replaced with the full content of stdio.h.
+  + Macros expanded.
+
 #### Step 2: Compiler
-- The compiler takes the preprocessed file and uses it to generate corresponding assembly code. 
+- The compiler Converts **preprocessed C code** into **assembly code**.
+
+=> This file is in assembly-level instructions.
+
+		- What is Assembly code ? [assembly code represents a correspondence between program and machine code]
+		  + Is a human-readable representation of machine instructions.
+		  + Each instruction in assembly corresponds 1-to-1 with a CPU instruction (almost direct mapping).
+		  + Example:
+			MOV AX, 5
+			ADD AX, 3
+			=> This means: move value 5 into register AX, then add 3.
+		  + So assembly = "English-like" symbolic form of machine code. It’s easier for humans to read but not executable yet.
+          => Assembly code: readable by humans, acts as a "bridge" between C code and machine code. 
 
 <img width="200" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/cba3c714-7fb1-4289-bf20-b31dedd5950d">
 
 <img width="700" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/572bbb3e-4c88-46aa-87b0-b83096c05db3">
 
-=> This file is in assembly-level instructions.
+- Command: **`gcc -S main.i -o main.s`**
+  + Input: main.i
+  + Output: main.s (**assembly code**)
 
 #### Step 3: Assembler
-- Assembles the code into object code 
+- Translates assembly code into **object code** (.o or .obj file) in **machine language**.
 
-< Where assembly code represents a correspondence between program and machine code, object code represents pure machine code (ie. binary) >
+		- What is Object code ? [object code represents pure machine code (ie. binary)]
+		  + Is pure machine code (binary format: 0s and 1s).
+		  + Directly understandable by the CPU.
+		  + Stored in .o or .obj files.
+		  + Example (hex view of object file):
+			B8 05 00   ; machine code for MOV AX, 5
+			83 C0 03   ; machine code for ADD AX, 3
+		  + Not human-readable.
+          => Object code: unreadable binary, directly executable by the processor (after linking).
+
+- Object file ≠ Executable file
+  + It contains machine code, but it is incomplete because many symbols are still undefined (e.g., printf from the C standard library).
+  + You can think of an object file as an “unfinished puzzle piece.”
+  + Example:
+    + main.o contains the machine code for the function main().
+    + But it only calls printf as a reference, without including the actual code for printf.
 
 <img width="200" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/d5cc0269-704f-47e2-8836-8be945268cd6"> => This file contains machine-level instructions.
 
 <img width="700" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/d3b1bed3-c128-4302-98ca-402b2cf02bbf">
 
+- Command: **`gcc -c main.s -o main.o`**
+  + Input: main.s
+  + Output: main.o (object file, **machine code** but **incomplete**)
+- main.o:
+  + Binary file, not human-readable.
+  + Contains compiled machine code for main, but still needs printf resolved.
+
 #### Step 4: Linker 
+> Linker step = build time (creating the executable).
+- The linker combines all object files and libraries to create a complete executable file.
+- It resolves all undefined symbols (external references). E.g., printf() comes from the standard C library
+  + Example: when it finds printf in main.o, the linker looks up the actual code for printf in the C standard library (libc) and links it in.
+- The output of the linker is the executable file (e.g., a.out on Linux, program.exe on Windows).
+> This is still not running the program, just building the final binary.
+
 <img width="200" alt="image" src="https://github.com/minchangggg/AdvancedC/assets/125820144/7d3880db-b0b7-46e9-8c31-21035966c67e">
 
 <img width="250" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/973c3ae7-18ae-4786-939b-11fa524098ec">
 
-#### Step 5: Executing the program 
-- After compilation executable is generated and we run the generated executable using the below command.
+- Command: **`gcc main.o -o main`**
+  + Input: main.o
+  + Output: main (**executable**)
+- main:
+  + Fully linked binary.
+  + Linker pulls in printf() from the C standard library (libc).
+  + This is the file you can run.
 
-```c
-./filename // for linux
- filename // for windows
-```
+#### Step 5: Execution
+> Execution step = run time (when the program actually runs on the CPU).
+- After compilation executable is generated and we run the generated executable using the below command.
+- On Linux/Unix:
+  + After linking, the output is an executable named hello (by default it has no .exe extension).
+  + To run it, you must type ./ to specify the current directory: **`./hello`**
+- On Windows:
+  + The linker produces hello.exe.
+  + Windows recognizes .exe as an executable, so you can simply type: **`hello`** or double-click the file to run it.
+    > No ./ is needed because Windows automatically looks for .exe in the current folder or in the system PATH.
+
+- Command: **`hello`**
+  + Output on terminal: Hello, world!
 
 ## B. MACRO
 > https://www.programiz.com/c-programming/c-preprocessor-macros
