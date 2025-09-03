@@ -10,53 +10,32 @@
 
 <img width="750" alt="image" src="https://github.com/user-attachments/assets/0cac01bb-5295-438d-a288-08efd48d5a20">
 
-#### What is the compilation process ?
-- The compilation is the process of converting the source code of the C language into machine code. 
-- C is a mid-level language, it needs a compiler to convert it into an executable code so that the program can be run on our machine.
+- What is the compilation process ?
+  + The compilation is the process of converting the source code of the C language into machine code. 
+  + C is a mid-level language, it needs a compiler to convert it into an executable code so that the program can be run on our machine.
+#### What is a compiler ?
+- Computers understand only one language and that language consists of **sets of instructions** made of **ones** and **zeros**. This computer language is appropriately called **machine language**.
+- A single instruction to a computer could look like this:
 
-			[NOTE]
-			1. Low-level languages 
-			* Very close to hardware, hard for humans to read.
-			- Machine Language:
-			  + Pure binary (`0` and `1`).
-			  + Example: `10110000 01100001`
-			- Assembly Language:
-			  + Uses mnemonics instead of binary.
-			  + Example:
-				MOV AX, 5
-				ADD AX, 3
-			
-			* Characteristics:
-			  Very fast, directly controls hardware.
-			  Difficult to write, maintain, and highly dependent on CPU architecture.
-			
-			2. High-level languages
-			* Closer to human language, abstracted from hardware.
-			- Examples: Python, Java, C#, Ruby, JavaScript…
-			- Provide abstractions (OOP, data structures, libraries).
-			- Automatic memory management (garbage collection).
-			- Portable across platforms.
-			- Example (Python):
-				for i in range(5):
-				    print(i + 1)
-			* Easy to learn and use, but usually slower than low-level languages because of interpreters/VMs.
-			
-			3. Mid-level language → Ex: C
-			* Sits between high-level and low-level
-			  High-level side: has functions, loops, conditions, structured programming.
-			  Low-level side: allows direct memory access, pointers, bitwise operations, system-level programming.
-			* Can be used for both system programming (OS, drivers, compilers) and application programming.
-			- Example (C):
-				int main() {
-				    int a = 5, b = 3;
-				    int sum = a + b;
-				    return 0;
-				}
-			
-			4. Summary 
-			* Low-level  | Close to machine, fast but hard to write (Machine code, Assembly).
-			* High-level | Close to humans, easy to write but slower (Python, Java, JS).
-			* Mid-level  | Balance between both → efficient and flexible (C).
+  <img width="188" height="45" alt="image" src="https://github.com/user-attachments/assets/268d84ec-3f25-4311-b240-32d65152d71f" />
+
+- A particular computer's machine language program that allows a user to input two numbers, adds the two numbers together, and displays the total could include these machine code instructions:
+
+  <img width="194" height="236" alt="image" src="https://github.com/user-attachments/assets/86d3c1a7-461c-4a9c-a8cc-d127f4398523" />
+
+- As you can imagine, programming a computer directly in machine language using only ones and zeros is very tedious and error prone. To make programming easier, high level languages have been developed. High level programs also make it easier for programmers to inspect and understand each other's programs easier.
+- This is a portion of code written in C++ that accomplishes the exact same purpose:
+```cpp
+int a, b, sum;
+     
+cin >> a;
+cin >> b;
+             
+sum = a + b;
+cout << sum << endl;
+```
+- Because a computer can only understand machine language and humans wish to write in high level languages high level languages have to be re-written (translated) into machine language at some point. This is done by special programs called compilers, interpreters, or assemblers that are built into the various programming applications.
+- C++ is designed to be a compiled language, meaning that it is generally translated into machine language that can be understood directly by the system, making the generated program highly efficient. For that, a set of tools are needed, known as the development toolchain, whose core are a compiler and its linker.
 
 #### How do we compile and run a C program? (using GCC compiler)
 > We first need a compiler and a code editor to compile and run a C Program. The below example is of an Ubuntu machine with GCC compiler.
@@ -523,11 +502,10 @@ ________________________________________________________________________________
 # Lesson 3: POINTER
 ## A. Void Pointer
 > https://www.scaler.com/topics/void-pointer/
-#### `Syntax: void *ptr_void;`
-
-Ex:
-
-> Input
+#### Syntax
+`void *ptr_void;`
+#### Ex
+> **Input**
 
 ```c
 #include <stdio.h>
@@ -563,7 +541,7 @@ int main() {
 }
 ```
 
-> Output
+> **Output**
 
 		value is: 5
 		value is: 15.700000
@@ -976,6 +954,7 @@ int main() {
 ```
 ________________________________________________________________________________________________________________________________________________________________________
 # Lesson 4: EXTERN - STATIC - VOLATILE - REGISTER
+> https://www.geeksforgeeks.org/c/storage-classes-in-c/
 ## A. Extern
 - Syntax: **`extern data_type variable_name;`**
 
@@ -2828,13 +2807,227 @@ int main() {
 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 13: Class
-### 1. Declaring Object
-### 2. Constructor
-### 3. Destructor
-### 4. Static keyword
+> https://cplusplus.com/doc/tutorial/classes/
+
+- Classes are an expanded concept of data structures: like data structures, they can contain data members, but they can also contain functions as members.
+- An object is an instantiation of a class. In terms of variables, a class would be the type, and an object would be the variable.
+- Classes are defined using either keyword class or keyword struct, with the following syntax:
+	```cpp
+	class class_name {
+	  access_specifier_1:
+	    member1;
+	  access_specifier_2:
+	    member2;
+	  ...
+	} object_names;
+	```
+- Where class_name is a valid identifier for the class, object_names is an optional list of names for objects of this class. The body of the declaration can contain members, which can either be data or function declarations, and optionally access specifiers.
+- Classes have the same format as plain data structures, except that they can also include functions and have these new things called access specifiers. An access specifier is one of the following three keywords: private, public or protected. These specifiers modify the access rights for the members that follow them:
+  + private members of a class are accessible only from within other members of the same class (or from their "friends").
+  + protected members are accessible from other members of the same class (or from their "friends"), but also from members of their derived classes.
+  + public members are accessible from anywhere where the object is visible.
+- By default, all members of a class declared with the class keyword have private access for all its members. Therefore, any member that is declared before any other access specifier has private access automatically.
+## 1. Declaring Object
+- Ex:
+	```cpp
+	class Rectangle {
+	    int width, height;
+	  public:
+	    void set_values (int,int);
+	    int area (void);
+	} rect;
+	```
+- Declares a **class** (i.e., a type) called **Rectangle** and an **object** (i.e., a variable) of this class, called **rect**.
+- This class contains four members:
+  + two data members of type int (member width and member height) with private access (because private is the default access level)
+  + two member functions with public access: the functions set_values and area, of which for now we have only included their declaration, but not their definition.
+- Notice the difference between the class name and the object name:
+  + Rectangle was the class name (i.e., the type)
+  + rect was an object of type Rectangle. 
+- After the declarations of Rectangle and rect, any of the public members of object rect can be accessed as if they were normal functions or normal variables, by simply inserting a dot (.) between object name and member name. This follows the same syntax as accessing the members of plain data structures. For example:
+	```cpp
+	rect.set_values (3,4);
+	myarea = rect.area();
+	```
+- The only members of rect that cannot be accessed from outside the class are width and height, since they have private access and they can only be referred to from within other members of that same class.
+- Here is the complete example of class Rectangle:
+> **Input**
+```cpp
+// classes example
+#include <iostream>
+using namespace std;
+
+class Rectangle {
+    int width, height;
+  public:
+    void set_values (int,int);
+    int area() {return width*height;}
+};
+
+void Rectangle::set_values (int x, int y) {
+  width = x;
+  height = y;
+}
+
+int main () {
+  Rectangle rect;
+  rect.set_values (3,4);
+  cout << "area: " << rect.area();
+  return 0;
+}
+```
+> **Output** area: 12
+
+- This example reintroduces the scope operator (::, two colons), seen in earlier chapters in relation to namespaces. Here it is used in the definition of function set_values to define a member of a class outside the class itself.
+- Notice that the definition of the member function area has been included directly within the definition of class Rectangle given its extreme simplicity. Conversely, set_values it is merely declared with its prototype within the class, but its definition is outside it. In this outside definition, the operator of scope (::) is used to specify that the function being defined is a member of the class Rectangle and not a regular non-member function.
+- The scope operator (::) specifies the class to which the member being defined belongs, granting exactly the same scope properties as if this function definition was directly included within the class definition. For example, the function set_values in the previous example has access to the variables width and height, which are private members of class Rectangle, and thus only accessible from other members of the class, such as this.
+- The only difference between defining a member function completely within the class definition or to just include its declaration in the function and define it later outside the class, is that in the first case the function is automatically considered an inline member function by the compiler, while in the second it is a normal (not-inline) class member function. This causes no differences in behavior, but only on possible compiler optimizations.
+- Members width and height have private access (remember that if nothing else is specified, all members of a class defined with keyword class have private access). By declaring them private, access from outside the class is not allowed. This makes sense, since we have already defined a member function to set values for those members within the object: the member function set_values. Therefore, the rest of the program does not need to have direct access to them. Perhaps in a so simple example as this, it is difficult to see how restricting access to these variables may be useful, but in greater projects it may be very important that values cannot be modified in an unexpected way (unexpected from the point of view of the object).
+- The most important property of a class is that it is a type, and as such, we can declare multiple objects of it. For example, following with the previous example of class Rectangle, we could have declared the object rectb in addition to object rect:
+
+> **Input**
+```cpp
+// example: one class, two objects
+#include <iostream>
+using namespace std;
+
+class Rectangle {
+    int width, height;
+  public:
+    void set_values (int,int);
+    int area () {return width*height;}
+};
+
+void Rectangle::set_values (int x, int y) {
+  width = x;
+  height = y;
+}
+
+int main () {
+  Rectangle rect, rectb;
+  rect.set_values (3,4);
+  rectb.set_values (5,6);
+  cout << "rect area: " << rect.area() << endl;
+  cout << "rectb area: " << rectb.area() << endl;
+  return 0;
+}
+```
+> **Output**
+
+			rect area: 12
+			rectb area: 30 
+
+- In this particular case, the class (type of the objects) is Rectangle, of which there are two instances (i.e., objects): rect and rectb. Each one of them has its own member variables and member functions.
+- Notice that the call to rect.area() does not give the same result as the call to rectb.area(). This is because each object of class Rectangle has its own variables width and height, as they -in some way- have also their own function members set_value and area that operate on the object's own member variables.
+- Classes allow programming using object-oriented paradigms: Data and functions are both members of the object, reducing the need to pass and carry handlers or other state variables as arguments to functions, because they are part of the object whose member is called. Notice that no arguments were passed on the calls to rect.area or rectb.area. Those member functions directly used the data members of their respective objects rect and rectb.
+
+## 2. Constructor and Overloading constructors
+> https://www.w3schools.com/cpp/cpp_constructors.asp
+>
+> https://www.w3schools.com/cpp/cpp_constructors_overloading.asp
+
+### 2.1. Constructor
+- What would happen in the previous example if we called the member function area before having called set_values? An undetermined result, since the members width and height had never been assigned a value.
+- In order to avoid that, a class can include a special function called its constructor, which is automatically called whenever a new object of this class is created, allowing the class to initialize member variables or allocate storage.
+- This constructor function is declared just like a regular member function, but with a name that matches the class name and without any return type; not even void.
+- The Rectangle class above can easily be improved by implementing a constructor:
+
+> **Input**
+```cpp
+// example: class constructor
+#include <iostream>
+using namespace std;
+
+class Rectangle {
+    int width, height;
+  public:
+    Rectangle (int,int);
+    int area () {return (width*height);}
+};
+
+Rectangle::Rectangle (int a, int b) {
+  width = a;
+  height = b;
+}
+
+int main () {
+  Rectangle rect (3,4);
+  Rectangle rectb (5,6);
+  cout << "rect area: " << rect.area() << endl;
+  cout << "rectb area: " << rectb.area() << endl;
+  return 0;
+}
+```
+> **Output**
+
+			rect area: 12
+			rectb area: 30 
+
+- The results of this example are identical to those of the previous example. But now, class Rectangle has no member function set_values, and has instead a constructor that performs a similar action: it initializes the values of width and height with the arguments passed to it.
+- Notice how these arguments are passed to the constructor at the moment at which the objects of this class are created:
+			
+			Rectangle rect (3,4);
+			Rectangle rectb (5,6);
+
+- Constructors cannot be called explicitly as if they were regular member functions. They are only executed once, when a new object of that class is created.
+- Notice how neither the constructor prototype declaration (within the class) nor the latter constructor definition, have return values; not even void: Constructors never return values, they simply initialize the object.
+
+### 2.2. Overloading constructors
+- Like any other function, a constructor can also be overloaded with different versions taking different parameters: with a different number of parameters and/or parameters of different types. The compiler will automatically call the one whose parameters match the arguments:
+
+> **Input**
+```cpp
+// overloading class constructors
+#include <iostream>
+using namespace std;
+
+class Rectangle {
+    int width, height;
+  public:
+    Rectangle ();
+    Rectangle (int,int);
+    int area (void) {return (width*height);}
+};
+
+Rectangle::Rectangle () {
+  width = 5;
+  height = 5;
+}
+
+Rectangle::Rectangle (int a, int b) {
+  width = a;
+  height = b;
+}
+
+int main () {
+  Rectangle rect (3,4);
+  Rectangle rectb;
+  cout << "rect area: " << rect.area() << endl;
+  cout << "rectb area: " << rectb.area() << endl;
+  return 0;
+}
+```
+> **Output**
+
+			rect area: 12
+			rectb area: 25 
+
+- In the above example, two objects of class Rectangle are constructed: rect and rectb. rect is constructed with two arguments, like in the example before.
+- But this example also introduces a special kind constructor: the default constructor. The default constructor is the constructor that takes no parameters, and it is special because it is called when an object is declared but is not initialized with any arguments. In the example above, the default constructor is called for rectb. Note how rectb is not even constructed with an empty set of parentheses - in fact, empty parentheses cannot be used to call the default constructor:
+
+			Rectangle rectb;   // ok, default constructor called
+			Rectangle rectc(); // oops, default constructor NOT called 
+
+- This is because the empty set of parentheses would make of rectc a function declaration instead of an object declaration: It would be a function that takes no arguments and returns a value of type Rectangle.
+
+## 3. Destructor
+
+## 4. Static keyword
+
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 14: OOP
-## 1. Encapsulation // tính đóng gói
+## 1. Encapsulation 
+> https://www.w3schools.com/cpp/cpp_encapsulation.asp
 #### Ex 
 ```c
 #include <iostream>
@@ -4130,6 +4323,8 @@ ________________________________________________________________________________
 > https://toilangthangit.wordpress.com/
 > 
 > https://websitehcm.com/c-multithreading/
+>
+> https://www.geeksforgeeks.org/c/multithreading-in-c/
 
 ## A, Tổng quan về các mô hình lập trình: tuần tự, đồng thời và song song
 > https://zalopay-oss.github.io/go-advanced/ch1-basic/ch1-05-concurrency-parallelism.html
