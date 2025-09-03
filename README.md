@@ -241,6 +241,8 @@ gcc main.c -o main
 > https://stackoverflow.com/questions/69212665/how-computer-cpu-executes-a-software-application
 >
 > https://www.tutorchase.com/answers/ib/computer-science/how-does-the-cpu-execute-instructions-in-a-computer-system
+>
+> https://cs.stackexchange.com/questions/47410/how-is-a-program-executed-at-the-cpu-level
 > 
 > https://www.reddit.com/r/computerscience/comments/1g68ijl/how_exactly_does_a_cpu_run_code/
 
