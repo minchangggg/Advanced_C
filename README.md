@@ -1,6 +1,12 @@
 # `___________ MODULE CONTENT ❤ ___________`
 <img width="170" alt="image" src="https://github.com/user-attachments/assets/39e9379b-16e0-4db5-b19f-6f48df3869b5">
 
+#### Ref
+> https://cplusplus.com/doc/tutorial/introduction/
+> 
+> https://www.geeksforgeeks.org/cpp/c-plus-plus/
+
+----------------------------
 # Lesson 1: Program Execution Flow and MACRO
 
 ## A. C Program Execution Flow [Create → Build → Run]
@@ -2435,240 +2441,242 @@ ________________________________________________________________________________
 + isfull() Check if the stack is full.
 + size() returns the size of stack.
 
-**How does it work?**
-
+> How does it work?
 - The operations work as follows:
-
-		+ A pointer called TOP is used to keep track of the top element in the stack.
-		+ When initializing the stack, we set its value to -1 so that we can check if the stack is empty by comparing TOP == -1.
-		+ On pushing an element, we increase the value of TOP and place the new element in the position pointed to by TOP.
-		+ On popping an element, we return the element pointed to by TOP and reduce its value.
-		+ Before pushing, we check if the stack is already full
-		+ Before popping, we check if the stack is already empty
+	+ A pointer called TOP is used to keep track of the top element in the stack.
+	+ When initializing the stack, we set its value to -1 so that we can check if the stack is empty by comparing TOP == -1.
+	+ On pushing an element, we increase the value of TOP and place the new element in the position pointed to by TOP.
+	+ On popping an element, we return the element pointed to by TOP and reduce its value.
+	+ Before pushing, we check if the stack is already full
+	+ Before popping, we check if the stack is already empty
 
 <img width="500" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/d462b229-251d-47f8-aff5-04c5ce8c892a">
 
-**1, peek()**
+#### 1, peek()
+```cpp
+int peek() {
+   return stack[top];
+}
+```
+#### 2, isempty() and isfull()
+```cpp
+bool isempty() {
+   if(top == -1)
+	  return true;
+   else
+	  return false;
+}
 
-		int peek() {
-		   return stack[top];
-		}
-  
-**2, isempty() and isfull()**
-
-		bool isempty() {
-		   if(top == -1)
-		      return true;
-		   else
-		      return false;
-		}
-		
-		bool isfull() {
-		   if(top == MAXSIZE)
-		      return true;
-		   else
-		      return false;
-		}
-
-**3, push()**
-
+bool isfull() {
+   if(top == MAXSIZE)
+	  return true;
+   else
+	  return false;
+}
+```
+#### 3, push()
 ![image](https://github.com/minchangggg/Advanced_C/assets/125820144/e9f2b080-6a10-40c0-a328-86d260fc36eb)
 
 ![image](https://github.com/minchangggg/Advanced_C/assets/125820144/cb6720f7-56a7-4fc2-8e89-26bc6251b2d9)
 
-		void push(int data) {
-		   if(!isFull()) {
-		      top = top + 1;   
-		      stack[top] = data;
-		   } else {
-		      printf("Stack overflow\n");
-		   }
-		}
-
-**3, pop()**
+```cpp
+void push(int data) {
+   if(!isFull()) {
+	  top = top + 1;   
+	  stack[top] = data;
+   } else {
+	  printf("Stack overflow\n");
+   }
+}
+```
+#### 4, pop()
 ![image](https://github.com/minchangggg/Advanced_C/assets/125820144/74b92116-7d5d-4cb3-9821-1e2125aa4f6a)
 
-		int pop(int data) {
-		   if(!isempty()) {
-		      data = stack[top];
-		      top = top - 1;   
-		      return data;
-		   } else {
-		      printf("Stack underflow\n");
-		   }
-		}
+```cpp
+int pop(int data) {
+   if(!isempty()) {
+	  data = stack[top];
+	  top = top - 1;   
+	  return data;
+   } else {
+	  printf("Stack underflow\n");
+   }
+}
+```
 
 ### III, Complete Example
-EX1:
+#### EX1:
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
 
-		#include <stdio.h>
-		#include <stdlib.h>
-		
-		typedef struct Stack {
-		    int* items; // mảng để lưu giá trị của từng ô
-		    int size;
-		    int top;
-		} Stack;
-		
-		void initialize( Stack *stack, int size) {
-		    stack->items = (int*) malloc(sizeof(int) * size);
-		    stack->size = size;
-		    stack->top = -1;
-		}
-		
-		int is_empty( Stack stack) {
-		    return stack.top == -1;
-		}
-		
-		int is_full( Stack stack) {
-		    return stack.top == stack.size - 1;
-		}
-		
-		void push( Stack *stack, int value) {
-		    if (!is_full(*stack)) {
-		        stack->items[++stack->top] = value;
-		    } else {
-		        printf("Stack overflow\n");
-		    }
-		}
-		
-		int pop( Stack *stack) {
-		    if (!is_empty(*stack)) {
-		        return stack->items[stack->top--];
-		    } else {
-		        printf("Stack underflow\n");
-		        return -1;
-		    }
-		}
-		
-		int top( Stack stack) {
-		    if (!is_empty(stack)) {
-		        return stack.items[stack.top];
-		    } else {
-		        printf("Stack is empty\n");
-		        return -1;
-		    }
-		}
-		
-		int main() {
-		    Stack stack1;
-		    initialize(&stack1, 5);
-		
-		
-		    push(&stack1, 10);
-		    push(&stack1, 20);
-		    push(&stack1, 30);
-		    push(&stack1, 40);
-		    push(&stack1, 50);
-		    push(&stack1, 60);
-		
-		    printf("Top element: %d\n", top(stack1)); // 50
-		
-		    printf("Pop element: %d\n", pop(&stack1)); // 50
-		    printf("Pop element: %d\n", pop(&stack1)); // 40
-		
-		    printf("Top element: %d\n", top(stack1)); // 30
-		
-		    return 0;
-		}
+typedef struct Stack {
+	int* items; // mảng để lưu giá trị của từng ô
+	int size;
+	int top;
+} Stack;
 
-EX2:
+void initialize( Stack *stack, int size) {
+	stack->items = (int*) malloc(sizeof(int) * size);
+	stack->size = size;
+	stack->top = -1;
+}
 
-		#include <stdio.h>
-		#include <stdlib.h>
+int is_empty( Stack stack) {
+	return stack.top == -1;
+}
 
-		void push();
-		void pop();
-		void display();
+int is_full( Stack stack) {
+	return stack.top == stack.size - 1;
+}
 
-		struct node {
-		    int data;
-		    struct node* next;
-		};
+void push( Stack *stack, int value) {
+	if (!is_full(*stack)) {
+		stack->items[++stack->top] = value;
+	} else {
+		printf("Stack overflow\n");
+	}
+}
+
+int pop( Stack *stack) {
+	if (!is_empty(*stack)) {
+		return stack->items[stack->top--];
+	} else {
+		printf("Stack underflow\n");
+		return -1;
+	}
+}
+
+int top( Stack stack) {
+	if (!is_empty(stack)) {
+		return stack.items[stack.top];
+	} else {
+		printf("Stack is empty\n");
+		return -1;
+	}
+}
+
+int main() {
+	Stack stack1;
+	initialize(&stack1, 5);
+
+
+	push(&stack1, 10);
+	push(&stack1, 20);
+	push(&stack1, 30);
+	push(&stack1, 40);
+	push(&stack1, 50);
+	push(&stack1, 60);
+
+	printf("Top element: %d\n", top(stack1)); // 50
+
+	printf("Pop element: %d\n", pop(&stack1)); // 50
+	printf("Pop element: %d\n", pop(&stack1)); // 40
+
+	printf("Top element: %d\n", top(stack1)); // 30
+
+	return 0;
+}
+```
+
+#### EX2:
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+void push();
+void pop();
+void display();
+
+struct node {
+	int data;
+	struct node* next;
+};
+
+struct node* temp; // Variable to store the top of the stack
+
+int main() {
+	printf("LINKED LIST IMPLEMENTATION USING STACKS\n\n");
+	do {
+		printf("1. Insert\n2. Delete\n3. Display\n4. Exit\n\n");
+		printf("Enter your choice:");
+		int choice; scanf("%d", &choice);
 		
-		struct node* temp; // Variable to store the top of the stack
-		
-		int main() {
-		    printf("LINKED LIST IMPLEMENTATION USING STACKS\n\n");
-		    do {
-		        printf("1. Insert\n2. Delete\n3. Display\n4. Exit\n\n");
-		        printf("Enter your choice:");
-		        int choice; scanf("%d", &choice);
-		        
-		        switch (choice) {
-		            case 1:
-		                push();
-		                break;
-		            case 2:
-		                pop();
-		                break;
-		            case 3:
-		                display();
-		                break;
-		            case 4:
-		                exit(0);
-		                break;
-		            default:
-		                printf("Please re-enter!\n");
-		                break;
-		        }
-		    } while (choice != 4);
-		    return 0;
+		switch (choice) {
+			case 1:
+				push();
+				break;
+			case 2:
+				pop();
+				break;
+			case 3:
+				display();
+				break;
+			case 4:
+				exit(0);
+				break;
+			default:
+				printf("Please re-enter!\n");
+				break;
 		}
+	} while (choice != 4);
+	return 0;
+}
+
+void push() {
+	int data;
+	struct node* pointer = (struct node*)malloc(sizeof(struct node));
+	
+	if (pointer == NULL) printf("Stack overflow\n");
+	else {
+		printf("Enter the element to be inserted: ");
+		scanf("%d", &data);
 		
-		void push() {
-		    int data;
-		    struct node* pointer = (struct node*)malloc(sizeof(struct node));
-		    
-		    if (pointer == NULL) printf("Stack overflow\n");
-		    else {
-		        printf("Enter the element to be inserted: ");
-		        scanf("%d", &data);
-		        
-		        if (temp == NULL) {
-		            pointer->data = data;
-		            pointer->next = NULL;
-		            temp = pointer;
-		        } else {
-		            pointer->data = data;
-		            pointer->next = temp;
-		            temp = pointer;
-		        }
-		    }
+		if (temp == NULL) {
+			pointer->data = data;
+			pointer->next = NULL;
+			temp = pointer;
+		} else {
+			pointer->data = data;
+			pointer->next = temp;
+			temp = pointer;
 		}
+	}
+}
+
+void pop() {
+	int item;
+	struct node* pointer;
+	
+	if (temp == NULL) {
+		printf("Stack underflow\n");
+	}
+	else {
+		item = temp->data;
+		pointer = temp;
+		temp = temp->next;
+		free(pointer);
+		printf("The deleted item is %d\n", item);
+	}
+}
+
+void display() {
+	struct node* pointer;
+	pointer = temp;
+	
+	if (pointer == NULL) {
+		printf("Stack underflow\n");
+	}
+	else {
+		printf("The elements of the stack are:\n");
 		
-		void pop() {
-		    int item;
-		    struct node* pointer;
-		    
-		    if (temp == NULL) {
-		        printf("Stack underflow\n");
-		    }
-		    else {
-		        item = temp->data;
-		        pointer = temp;
-		        temp = temp->next;
-		        free(pointer);
-		        printf("The deleted item is %d\n", item);
-		    }
+		while (pointer != NULL) {
+			printf("%d\n", pointer->data);
+			pointer = pointer->next;
 		}
-		
-		void display() {
-		    struct node* pointer;
-		    pointer = temp;
-		    
-		    if (pointer == NULL) {
-		        printf("Stack underflow\n");
-		    }
-		    else {
-		        printf("The elements of the stack are:\n");
-		        
-		        while (pointer != NULL) {
-		            printf("%d\n", pointer->data);
-		            pointer = pointer->next;
-		        }
-		    }
-		}
+	}
+}
+```
 
 ## B. Queue
 > https://www.programiz.com/dsa/queue
@@ -2688,104 +2696,105 @@ EX2:
 + IsFull: Check if the queue is full
 + Peek: Get the value of the front of the queue without removing it
 
-**How does it work?**
+> How does it work?
 
 - Queue operations work as follows:
-
-		+ two pointers FRONT and REAR
-		+ FRONT track the first element of the queue
-		+ REAR track the last element of the queue
-		+ initially, set value of FRONT and REAR to -1
+	+ two pointers FRONT and REAR
+	+ FRONT track the first element of the queue
+	+ REAR track the last element of the queue
+	+ initially, set value of FRONT and REAR to -1
 
   <img width="450" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/b505dc7b-f5b8-4c3d-91b9-e9baef1e969f">
 
 ### III, Complete Example
-Ex:
+#### Ex:
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
 
-		#include <stdio.h>
-		#include <stdlib.h>
-		
-		
-		typedef struct Queue {
-		    int* items; // mảng để lưu giá trị của từng ô
-		    int size;
-		    int front, rear; // để xác định phần tử nào đứng đầu, phần tử nào đứng cuối hàng
-		} Queue;
-		
-		void initialize(Queue *queue, int size) {
-		    queue->items = (int*) malloc(sizeof(int)* size);
-		    queue->front = -1;
-		    queue->rear = -1;
-		    queue->size = size;
+
+typedef struct Queue {
+	int* items; // mảng để lưu giá trị của từng ô
+	int size;
+	int front, rear; // để xác định phần tử nào đứng đầu, phần tử nào đứng cuối hàng
+} Queue;
+
+void initialize(Queue *queue, int size) {
+	queue->items = (int*) malloc(sizeof(int)* size);
+	queue->front = -1;
+	queue->rear = -1;
+	queue->size = size;
+}
+
+int is_empty(Queue queue) {
+	return queue.front == -1;
+}
+
+int is_full(Queue queue) {
+	return (queue.rear + 1) % queue.size == queue.front;
+}
+
+void enqueue(Queue *queue, int value) {
+	if (!is_full(*queue)) {
+		if (is_empty(*queue)) {
+			queue->front = queue->rear = 0;
+		} else {
+			queue->rear = (queue->rear + 1) % queue->size;
 		}
-		
-		int is_empty(Queue queue) {
-		    return queue.front == -1;
+		queue->items[queue->rear] = value;
+	} else {
+		printf("Queue overflow\n");
+	}
+}
+
+int dequeue(Queue *queue) {
+	if (!is_empty(*queue)) {
+		int dequeued_value = queue->items[queue->front];
+		if (queue->front == queue->rear) {
+			queue->front = queue->rear = -1;
+		} else {
+			queue->front = (queue->front + 1) % queue->size;
 		}
-		
-		int is_full(Queue queue) {
-		    return (queue.rear + 1) % queue.size == queue.front;
-		}
-		
-		void enqueue(Queue *queue, int value) {
-		    if (!is_full(*queue)) {
-		        if (is_empty(*queue)) {
-		            queue->front = queue->rear = 0;
-		        } else {
-		            queue->rear = (queue->rear + 1) % queue->size;
-		        }
-		        queue->items[queue->rear] = value;
-		    } else {
-		        printf("Queue overflow\n");
-		    }
-		}
-		
-		int dequeue(Queue *queue) {
-		    if (!is_empty(*queue)) {
-		        int dequeued_value = queue->items[queue->front];
-		        if (queue->front == queue->rear) {
-		            queue->front = queue->rear = -1;
-		        } else {
-		            queue->front = (queue->front + 1) % queue->size;
-		        }
-		        return dequeued_value;
-		    } else {
-		        printf("Queue underflow\n");
-		        return -1;
-		    }
-		}
-		
-		int front(Queue queue) {
-		    if (!is_empty(queue)) {
-		        return queue.items[queue.front];
-		    } else {
-		        printf("Queue is empty\n");
-		        return -1;
-		    }
-		}
-		
-		int main() {
-		    Queue queue;
-		    initialize(&queue, 3);
-		
-		    enqueue(&queue, 10);
-		    enqueue(&queue, 20);
-		    enqueue(&queue, 30);
-		
-		    printf("Front element: %d\n", front(queue));
-		
-		    printf("Dequeue element: %d\n", dequeue(&queue));
-		    printf("Dequeue element: %d\n", dequeue(&queue));
-		
-		    printf("Front element: %d\n", front(queue));
-		
-		    enqueue(&queue, 40);
-		    enqueue(&queue, 50);
-		    printf("Dequeue element: %d\n", dequeue(&queue));
-		    printf("Front element: %d\n", front(queue));
-		
-		    return 0;
-		}
+		return dequeued_value;
+	} else {
+		printf("Queue underflow\n");
+		return -1;
+	}
+}
+
+int front(Queue queue) {
+	if (!is_empty(queue)) {
+		return queue.items[queue.front];
+	} else {
+		printf("Queue is empty\n");
+		return -1;
+	}
+}
+
+int main() {
+	Queue queue;
+	initialize(&queue, 3);
+
+	enqueue(&queue, 10);
+	enqueue(&queue, 20);
+	enqueue(&queue, 30);
+
+	printf("Front element: %d\n", front(queue));
+
+	printf("Dequeue element: %d\n", dequeue(&queue));
+	printf("Dequeue element: %d\n", dequeue(&queue));
+
+	printf("Front element: %d\n", front(queue));
+
+	enqueue(&queue, 40);
+	enqueue(&queue, 50);
+	printf("Dequeue element: %d\n", dequeue(&queue));
+	printf("Front element: %d\n", front(queue));
+
+	return 0;
+}
+```
+
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 12: Binary search - File operations - Code standards
 > https://www.geeksforgeeks.org/binary-search/
@@ -2903,8 +2912,10 @@ int main() {
 <img width="500" alt="image" src="https://github.com/minchangggg/Advanced_C/assets/125820144/120c94d0-fddd-40f4-bbcc-b85de5967903">
 
 __________________________________________________________________________________________________________________________________________________________________________
-# Lesson 13: Class
+# Lesson 13: OOP - Classes and Objects
 > https://cplusplus.com/doc/tutorial/classes/
+>
+> https://www.geeksforgeeks.org/cpp/c-classes-and-objects/
 
 - Classes are an expanded concept of data structures: like data structures, they can contain data members, but they can also contain functions as members.
 - An object is an instantiation of a class. In terms of variables, a class would be the type, and an object would be the variable.
@@ -3123,6 +3134,7 @@ int main () {
 
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 14: OOP
+> https://www.geeksforgeeks.org/cpp/object-oriented-programming-in-cpp/
 ## 1. Encapsulation 
 > https://www.w3schools.com/cpp/cpp_encapsulation.asp
 #### Ex 
@@ -3169,6 +3181,7 @@ int main() {
 ```
 
 ## 2. Inheritance // tính kế thừa 
+> https://www.geeksforgeeks.org/cpp/inheritance-in-c/
 #### Ex
 ```c
 #include <iostream>
@@ -3243,6 +3256,7 @@ int main() {
 ```
 
 ## 3. Polymorphism
+> https://www.geeksforgeeks.org/cpp/cpp-polymorphism/
 ### a, Function overriding
 #### Ex
 > **Input**
@@ -3403,6 +3417,7 @@ int main() {
 		Hello Young Buffalo
 
 ## 4. Abstraction // Tính trừu tượng 
+> https://www.geeksforgeeks.org/cpp/abstraction-in-cpp/
 #### Ex 
 > Input
 ```c
