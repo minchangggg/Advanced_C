@@ -232,20 +232,20 @@ gcc main.c -o main
 >
 > https://www.cs.emory.edu/~cheung/Courses/170/Syllabus/01/intro-computer2.html
 
-		- Before diving into how programs are loaded and executed, it is essential to examine the CPU’s fundamental components—registers and buses—that enable and coordinate the execution cycle.
-		- [Registers Used in Program Execution] 
-          Registers are small, high-speed storage locations within the CPU that temporarily hold data and instructions. Each register has a specific role in managing program execution:
-		  i. Instruction Register (IR): This register holds the instruction that the CPU is currently executing. It stores the instruction fetched from memory and passes it to the control unit to carry out the required operation.
-		  ii. Program Counter (PC): This register keeps track of the memory address of the next instruction to be executed. It automatically updates to the next instruction after the current one is executed, ensuring the program runs sequentially.
-		  iii. Accumulator (AC): The accumulator temporarily holds the results of arithmetic and logic operations performed by the CPU. It’s often used for intermediate calculations.
-		  iv. Memory Address Register (MAR): The MAR holds the address in memory where data is to be fetched from or written to. When the CPU needs to read or write data, the MAR is used to point to the correct location in memory.
-		  v. Memory Buffer Register (MBR): This register temporarily stores the data being transferred to or from memory. When data is fetched from memory, it's placed in the MBR before being passed to the appropriate part of the CPU.
-		  vi. Status Register (SR): The status register contains flags that represent the state of the CPU after performing an operation, such as zero (if the result is zero) or carry (if there was a carry in the operation).
-		- [Data Buses Used in Program Execution]
-		  i. Address Bus: Transmits the address from the MAR to the Memory Unit to fetch or store data.
-		  ii. Data Bus: Transfers the data between memory and the MBR or between the MBR and other registers like the AC. 
-		  iii. Control Bus: Sends signals to control memory operations, including Read and Write operations, allowing the CPU to interact with memory.
-
+- _Before diving into how programs are loaded and executed, it is essential to examine the CPU’s fundamental components—registers and buses—that enable and coordinate the execution cycle._
+- **_[Registers Used in Program Execution]_** 
+  > _Registers are small, high-speed storage locations within the CPU that temporarily hold data and instructions. Each register has a specific role in managing program execution:_
+  + _i. Instruction Register (**IR**): This register holds the instruction that the CPU is currently executing. It stores the instruction fetched from memory and passes it to the control unit to carry out the required operation._
+  + _ii. Program Counter (**PC**): This register keeps track of the memory address of the next instruction to be executed. It automatically updates to the next instruction after the current one is executed, ensuring the program runs sequentially._
+  + _iii. Accumulator (**AC**): The accumulator temporarily holds the results of arithmetic and logic operations performed by the CPU. It’s often used for intermediate calculations._
+  + _iv. Memory Address Register (**MAR**): The MAR holds the address in memory where data is to be fetched from or written to. When the CPU needs to read or write data, the MAR is used to point to the correct location in memory._
+  + _v. Memory Buffer Register (**MBR**): This register temporarily stores the data being transferred to or from memory. When data is fetched from memory, it's placed in the MBR before being passed to the appropriate part of the CPU._
+  + _vi. Status Register (**SR**): The status register contains flags that represent the state of the CPU after performing an operation, such as zero (if the result is zero) or carry (if there was a carry in the operation)._
+- **_[Data Buses Used in Program Execution]_**
+  + _i. Address Bus: Transmits the address from the MAR to the Memory Unit to fetch or store data._
+  + _ii. Data Bus: Transfers the data between memory and the MBR or between the MBR and other registers like the AC._
+  + _iii. Control Bus: Sends signals to control memory operations, including Read and Write operations, allowing the CPU to interact with memory.
+_
 #### 3.1. Program Invocation
 - After compilation executable is generated and we run the generated executable using the below command.
   - On Linux/Unix:
