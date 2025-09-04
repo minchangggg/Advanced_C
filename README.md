@@ -221,6 +221,16 @@ gcc main.c -o main
 > https://cs.stackexchange.com/questions/47410/how-is-a-program-executed-at-the-cpu-level
 > 
 > https://www.reddit.com/r/computerscience/comments/1g68ijl/how_exactly_does_a_cpu_run_code/
+>
+> https://superuser.com/questions/307116/how-does-a-cpu-know-what-commands-and-instructions-actually-mean
+>
+> https://levelup.gitconnected.com/how-your-program-actually-runs-from-c-to-cpu-86e7d7ba299a
+>
+> https://protect.bju.edu/cps/docs/cps110/textbook/ch01s01.html
+>
+> https://cs.stackexchange.com/questions/47410/how-is-a-program-executed-at-the-cpu-level
+>
+> https://www.cs.emory.edu/~cheung/Courses/170/Syllabus/01/intro-computer2.html
 
 		- Before diving into how programs are loaded and executed, it is essential to examine the CPU’s fundamental components—registers and buses—that enable and coordinate the execution cycle.
 		- [Registers Used in Program Execution] 
