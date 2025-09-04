@@ -18,8 +18,8 @@
 
   <img width="130" alt="image" src="https://github.com/user-attachments/assets/86d3c1a7-461c-4a9c-a8cc-d127f4398523">
 
-- Programming directly in machine language using only 0s and 1s is tedious and error-prone. To make programming easier, middle-level (C...) and high level (C++) languages have been developed, allowing programmers to write code in a more human-readable form.
-- Since computers can only understand machine language, high-level code must be translated before execution. This translation is done by compilers, interpreters, or assemblers.
+- Programming directly in machine language using only 0s and 1s is tedious and error-prone. To make programming easier, middle-level languages (like C) and high-level languages (like C++) have been developed, allowing programmers to write code in a more human-readable form.
+- Since computers can only understand machine language, such code must be translated before execution. This translation is done by compilers, interpreters, or assemblers.
 - C is designed as a compiled language, meaning its source code is converted into machine code for efficient execution. This requires a development toolchain, with the compiler and linker at its core.
 
 => What is the compilation process ?
