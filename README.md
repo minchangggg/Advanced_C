@@ -10,33 +10,22 @@
 
 <img width="750" alt="image" src="https://github.com/user-attachments/assets/0cac01bb-5295-438d-a288-08efd48d5a20">
 
-- What is the compilation process ?
-  + The compilation is the process of converting the source code of the C language into machine code. 
-  + C is a mid-level language, it needs a compiler to convert it into an executable code so that the program can be run on our machine.
 #### What is a compiler ?
-- Computers understand only one language and that language consists of **sets of instructions** made of **ones** and **zeros**. This computer language is appropriately called **machine language**.
-- A single instruction to a computer could look like this:
-
-  <img width="188" height="45" alt="image" src="https://github.com/user-attachments/assets/268d84ec-3f25-4311-b240-32d65152d71f" />
+- Computers understand only one language and that language consists of **sets of instructions** made of **ones** and **zeros**. This **computer language** is appropriately called **machine language**.
+- A single instruction to a computer could look like this: <img width="130" alt="image" src="https://github.com/user-attachments/assets/268d84ec-3f25-4311-b240-32d65152d71f">
 
 - A particular computer's machine language program that allows a user to input two numbers, adds the two numbers together, and displays the total could include these machine code instructions:
 
-  <img width="194" height="236" alt="image" src="https://github.com/user-attachments/assets/86d3c1a7-461c-4a9c-a8cc-d127f4398523" />
+  <img width="130" alt="image" src="https://github.com/user-attachments/assets/86d3c1a7-461c-4a9c-a8cc-d127f4398523">
 
-- As you can imagine, programming a computer directly in machine language using only ones and zeros is very tedious and error prone. To make programming easier, high level languages have been developed. High level programs also make it easier for programmers to inspect and understand each other's programs easier.
-- This is a portion of code written in C++ that accomplishes the exact same purpose:
-```cpp
-int a, b, sum;
-     
-cin >> a;
-cin >> b;
-             
-sum = a + b;
-cout << sum << endl;
-```
-- Because a computer can only understand machine language and humans wish to write in high level languages high level languages have to be re-written (translated) into machine language at some point. This is done by special programs called compilers, interpreters, or assemblers that are built into the various programming applications.
-- C++ is designed to be a compiled language, meaning that it is generally translated into machine language that can be understood directly by the system, making the generated program highly efficient. For that, a set of tools are needed, known as the development toolchain, whose core are a compiler and its linker.
+- Programming directly in machine language using only 0s and 1s is tedious and error-prone. To make programming easier, middle-level (C...) and high level (C++) languages have been developed, allowing programmers to write code in a more human-readable form.
+- Since computers can only understand machine language, high-level code must be translated before execution. This translation is done by compilers, interpreters, or assemblers.
+- C is designed as a compiled language, meaning its source code is converted into machine code for efficient execution. This requires a development toolchain, with the compiler and linker at its core.
 
+=> What is the compilation process ?
+
+ - The compilation is the process of converting the source code of the C language into machine code. 
+ - C is a mid-level language, it needs a compiler to convert it into an executable code so that the program can be run on our machine.
 #### How do we compile and run a C program? (using GCC compiler)
 > We first need a compiler and a code editor to compile and run a C Program. The below example is of an Ubuntu machine with GCC compiler.
 - [Step 1] **Create** => **`Source Code Creation`**
