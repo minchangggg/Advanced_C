@@ -313,23 +313,44 @@ gcc main.c -o main
 
 ## B. MACRO
 > https://www.programiz.com/c-programming/c-preprocessor-macros
+>
+> https://www.geeksforgeeks.org/cpp/cpp-macros/
+>
+> https://cplusplus.com/doc/tutorial/preprocessor/
 
-- There are devided into 3 main groups: 
-  + **Including Header Files: `#include`**
-  + **Macros using `#define`** (Function like Macros...)
-  + **Conditional Compilation: `#ifdef, #if, #defined, #else and #elif`**
+- Macros are shortcuts or placeholders that the preprocessor replaces before the code is compiled. They are defined using #define and can be used to create constants or code snippets.
 
-### 1, How to include files with the #include directive
-```c
-#include <stdio.h>
-#include "myfile.h"
+- Macros can be classified into four types in C++:
+  + Object-Like Macros
+  + Function-Like Macros
+  + Conditional Macros
+  + Predefined Macros
+### 1. Object-Like Macros
+- EX1
+```cpp
+// C++ program to illustrate the object like macros
+#include <iostream>
+using namespace std;
 
-int main() {
-	printf(message);
+// Define a constant for the value of PI
+#define PI 3.14159
+
+int main()
+{
+	double radius = 4.0;
+
+	// Calculate the area of the circle
+	double area = PI * radius * radius;
+
+	cout << "Area of circle with radius " << radius
+		 << " is " << area;
+
 	return 0;
 }
 ```
-### 2, How to define a macro with #define
+> Output: Area of circle with radius 4 is 50.2654
+
+-EX2
 ```c
 #include <stdio.h>
 
@@ -346,10 +367,64 @@ int main() {
 	return 0;
 }
 ```
-### 3, How to undefine a macro with #undef
-We can remove, or redefine, a macro that we set up previously with the #undef directive.
 
-Macro definition is typically done at the top of the document, but macro undefining and redefining is done inside the rest of the document.
+### 2. Function-Like Macros
+> These macros look like functions, but they are just text replacements.
+```cpp
+// C++ program to illustrate the function like macros
+#include <iostream>
+using namespace std;
+
+// Define a macro to print a value
+#define PRINT(x) cout << "Value is: " << x
+
+int main()
+{
+int value = 42;
+
+// Print the value using the PRINT macro
+PRINT(value);
+return 0;
+}
+```
+> Output: Value is: 42
+### 3. Conditional Macros (for Conditional Compilation): `#ifdef, #if, #defined, #else and #elif`
+> These are used to control which parts of the code should be compiled, based on whether something is defined or not.
+#### EX1
+```cpp
+#include <iostream>
+
+// Define a macro named DEBUG
+#define DEBUG
+
+int main() {
+	int x = 5, y = 10;
+	int sum = x + y;
+
+	// This block will only be compiled if DEBUG is defined
+	#ifdef DEBUG
+		std::cout << "[DEBUG] x = " << x << std::endl;
+		std::cout << "[DEBUG] y = " << y << std::endl;
+		std::cout << "[DEBUG] sum = " << sum << std::endl;
+	#endif
+
+	// Always compiled
+	std::cout << "Sum: " << sum << std::endl;
+
+	return 0;
+}
+```
+> Output:
+
+		[DEBUG] x = 5
+		[DEBUG] y = 10
+		[DEBUG] sum = 15
+		Sum: 15
+
+#### EX2: How to undefine a macro with #undef
+> We can remove, or redefine, a macro that we set up previously with the #undef directive.
+> 
+> Macro definition is typically done at the top of the document, but macro undefining and redefining is done inside the rest of the document.
 
 ```c
 #include <stdio.h>
@@ -364,6 +439,39 @@ int main() {
 	return 0;
 }
 ```
+### 4. Predefined Macros
+> Predefined macros are special macros that are already built into the C++ compiler. You don't need to define them — they are automatically available in your program.
+- The following are some commonly used predefined macros in C++:
+  + `__LINE__`: This macro expands to the current line number in the source code.
+  + `__FILE__`: This macro expands to the name of the current source file.
+  + `__DATE__`: This macro expands to a string that represents the date of compilation.
+  + `__TIME__`: This macro expands to a string that represents the time of compilation.
+
+```cpp
+// C++ program to illustrate the predefined macros
+#include <iostream>
+using namespace std;
+
+int main()
+{
+
+    // Display the current line number and the source file
+    // name
+    cout << "This is line " << __LINE__ << " in file "
+         << __FILE__ << "\n";
+
+    // Display the compilation date
+    cout << "Compiled on " << __DATE__;
+
+    return 0;
+}
+```
+
+> Output:
+
+		This is line 10 in file ./Solution.cpp
+		Compiled on Nov  7 2023
+
 __________________________________________________________________________________________________________________________________________________________________________
 # Lesson 2: STDARG and ASSERT
 ## A. C Library - <stdarg.h>
