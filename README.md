@@ -13,6 +13,8 @@
 > https://www.geeksforgeeks.org/compiling-a-c-program-behind-the-scenes/
 >
 > https://www.scaler.com/topics/execution-of-c-program/
+>
+> https://www.cs.odu.edu/~zeil/cs252/s22/Public/compilation/index.html
 
 <img width="750" alt="image" src="https://github.com/user-attachments/assets/0cac01bb-5295-438d-a288-08efd48d5a20">
 
